@@ -36,13 +36,13 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		SimpleCrawlerSample crawler = new SimpleCrawlerSample();
-		try {
-			crawler.run();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		SimpleCrawlerSample crawler = new SimpleCrawlerSample();
+//		try {
+//			crawler.run();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return "home";
 	}
 	

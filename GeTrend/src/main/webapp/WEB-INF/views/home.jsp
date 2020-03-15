@@ -9,6 +9,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>[ Home | GeTrend ]</title>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@api['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
+
+
 </head>
 <body>
 	<div id="map" style="width: 850px; height: 350px;">
@@ -27,9 +35,30 @@
    	
    	</div>
 
-
-<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@api['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script type="text/javascript">
+		$(function() {
+			function search(points) {
+
+				$.ajax({
+					url: "<c:url value='/search' />",
+					type: "post",
+					contentType: "application/json; charset=utf-8",
+					data: JSON.stringify(points),
+					success: function() {
+						alert("성공");
+			        },
+			        error: function(request, status, error){
+			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
+			        }
+				});
+			}
+			searchFunc = search;
+		});
+
+		function search(points) {
+			searchFunc(points);
+		};
+		
 		const mapContainer = document.getElementById("map");
 		mapOption = {
 				center: new kakao.maps.LatLng(35.15113, 126.924584),
@@ -80,15 +109,15 @@
 	        let row = "";
 	        for(let i in data.polygon[0].points) {
 				const point = {
-			        	latitude: data.polygon[0].points[i]["x"],
-			        	longitude: data.polygon[0].points[i]["y"]
+			        	xPos: data.polygon[0].points[i]["x"],
+			        	yPos: data.polygon[0].points[i]["y"]
 			    };
 				points.push(point);
-				row += "<p>위도 : " + point["latitude"] + " 경도 : " + point["longitude"] + "</p>";
+				row += "<p>위도 : " + point["xPos"] + " 경도 : " + point["yPos"] + "</p>";
 			}
 	        const printContainer = document.getElementById("print");
 	        printContainer.innerHTML = row;
-			console.log(points);
+			search(points);
 	   };
 		
 </script>

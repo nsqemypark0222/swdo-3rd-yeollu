@@ -1,8 +1,8 @@
-package com.yeollu.getrend.map.service;
+package com.yeollu.getrend.map.core;
 
 import java.util.ArrayList;
 
-import com.yeollu.getrend.map.service.Point;
+import com.yeollu.getrend.map.core.Point;
 
 public class Polygon {
     private ArrayList<Point> pointList = null;

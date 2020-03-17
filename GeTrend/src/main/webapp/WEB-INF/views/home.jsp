@@ -34,6 +34,22 @@
    	<div id="print">
    	
    	</div>
+   	
+   	<div>
+	   	<p>Test1</p>
+		<p>hi</p>
+		<c:choose>
+			<c:when test="${sessionScope.loginId != null}">
+				${sessionScope.loginId}님 환영합니다!<br/>
+				<a href="users/userUpdate">회원정보 수정</a>
+				<a href="users/logout">로그아웃</a>
+			</c:when>
+			<c:otherwise>
+				<a href="users/userJoin">회원가입</a>
+				<a href="users/userLogin">로그인</a>
+			</c:otherwise>
+		</c:choose>	
+	</div>
 
 <script type="text/javascript">
 		$(function() {

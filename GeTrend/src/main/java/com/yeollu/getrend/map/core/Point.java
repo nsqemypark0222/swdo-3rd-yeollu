@@ -1,4 +1,4 @@
-package com.yeollu.getrend.map.service;
+package com.yeollu.getrend.map.core;
 
 public class Point {
     private double x;

@@ -109,11 +109,11 @@
 	        let row = "";
 	        for(let i in data.polygon[0].points) {
 				const point = {
-			        	xPos: data.polygon[0].points[i]["x"],
-			        	yPos: data.polygon[0].points[i]["y"]
+			        	x: data.polygon[0].points[i]["x"],
+			        	y: data.polygon[0].points[i]["y"]
 			    };
 				points.push(point);
-				row += "<p>위도 : " + point["xPos"] + " 경도 : " + point["yPos"] + "</p>";
+				row += "<p>위도 : " + point["x"] + " 경도 : " + point["y"] + "</p>";
 			}
 	        const printContainer = document.getElementById("print");
 	        printContainer.innerHTML = row;

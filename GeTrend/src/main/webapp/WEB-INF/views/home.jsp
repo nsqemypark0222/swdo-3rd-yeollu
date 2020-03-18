@@ -19,16 +19,21 @@
 
 </head>
 <body>
+
+	<header>
+		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	</header>
+	
 	<div id="map" style="width: 850px; height: 350px;">
 
 	</div>
 	
 	<p>
-		<button onclick="selectOverlay('POLYGON')">다각형</button>
+		<button onclick="selectOverlay('POLYGON')">범위 선택</button>
 	</p>
 	
 	<p class="getdata">
-   		<button onclick="getDataFromDrawingMap()">가져오기</button>
+   		<button onclick="getDataFromDrawingMap()">조회</button>
    	</p>
    	
    	<div id="print">
@@ -36,8 +41,6 @@
    	</div>
    	
    	<div>
-	   	<p>Test1</p>
-		<p>hi</p>
 		<c:choose>
 			<c:when test="${sessionScope.loginId != null}">
 				${sessionScope.loginId}님 환영합니다!<br/>
@@ -50,6 +53,10 @@
 			</c:otherwise>
 		</c:choose>	
 	</div>
+	
+	<footer>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	</footer>
 
 <script type="text/javascript">
 		$(function() {

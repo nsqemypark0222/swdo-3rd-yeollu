@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yeollu.getrend.crawler.core.InstagramSeleniumCrawler;
 import com.yeollu.getrend.map.core.Point;
 import com.yeollu.getrend.map.core.Polygon;
 import com.yeollu.getrend.store.dao.StoreDAO;
@@ -71,6 +72,10 @@ public class HomeController {
 			logger.info("{}", selectedList.get(i).getStore_name());
 
 		}
+		
+		InstagramSeleniumCrawler crawler = new InstagramSeleniumCrawler();
+		crawler.crawl();
+	
 		
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;

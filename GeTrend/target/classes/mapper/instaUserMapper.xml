@@ -11,8 +11,22 @@ insert into
 		, store_no
 	) values(
 		#{insta_id}
-		,#{store_no}
+		, #{store_no}
 	)
+</insert>
+
+<insert id="insertInstaUserList" parameterType="java.util.List">
+insert into 
+	insta_users (
+		insta_id
+		, store_no
+	) values
+	<foreach collection="list" item="item" separator=",">
+			 (
+		#{item.insta_id}
+		, #{item.store_no}
+	)
+	</foreach>
 </insert>
 
 <select id="isExistedInstaUserId" parameterType="string" resultType="string">
@@ -22,6 +36,16 @@ from
 	insta_users
 where
 	store_no = #{store_no}
+</select>
+
+<select id="selectInstaUserById" parameterType="string" resultType="instaUser">
+select
+	insta_id
+	, store_no
+from
+	insta_users
+where
+	insta_id = #{insta_id}
 </select>
 
 </mapper>

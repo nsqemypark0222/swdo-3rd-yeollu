@@ -1,4 +1,4 @@
-package com.yeollu.getrend.dataPreprocessing.core;
+package com.yeollu.getrend.dataPreprocess.model;
 
 public class Morpheme {
 	private String text;

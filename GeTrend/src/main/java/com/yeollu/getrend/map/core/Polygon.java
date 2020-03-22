@@ -2,7 +2,7 @@ package com.yeollu.getrend.map.core;
 
 import java.util.ArrayList;
 
-import com.yeollu.getrend.map.core.Point;
+import com.yeollu.getrend.map.vo.Point;
 
 public class Polygon {
     private ArrayList<Point> pointList = null;

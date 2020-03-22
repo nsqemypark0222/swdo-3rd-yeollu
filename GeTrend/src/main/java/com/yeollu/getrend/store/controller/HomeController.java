@@ -21,18 +21,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.yeollu.getrend.dataPreprocessing.core.Preprocessor;
-import com.yeollu.getrend.json.core.JsonLocationVO;
+import com.yeollu.getrend.dataPreprocess.core.Preprocessor;
 import com.yeollu.getrend.json.core.JsonReader;
-import com.yeollu.getrend.json.core.JsonUserVO;
-import com.yeollu.getrend.map.core.Point;
+import com.yeollu.getrend.json.vo.JsonLocationVO;
+import com.yeollu.getrend.json.vo.JsonUserVO;
+import com.yeollu.getrend.map.core.LocationDistance;
 import com.yeollu.getrend.map.core.Polygon;
+import com.yeollu.getrend.map.vo.Point;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
+import com.yeollu.getrend.store.dao.InstaLocationInfoDAO;
 import com.yeollu.getrend.store.dao.InstaUserDAO;
+import com.yeollu.getrend.store.dao.InstaUserInfoDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
-import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.InstaLocationInfoVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
+import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.InstaUserInfoVO;
 import com.yeollu.getrend.store.vo.InstaUserVO;
 import com.yeollu.getrend.store.vo.StoreVO;
@@ -50,7 +53,13 @@ public class HomeController {
 	private InstaUserDAO instaUserDAO;
 	
 	@Autowired
+	private InstaUserInfoDAO instaUserInfoDAO;
+	
+	@Autowired
 	private InstaLocationDAO instaLocationDAO; 
+	
+	@Autowired
+	private InstaLocationInfoDAO instaLocationInfoDAO;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -106,13 +115,24 @@ public class HomeController {
 			
 			if(instaStore != null) {
 				String store_no = instaStore.getStore_no();
+				
 				ArrayList<InstaUserInfoVO> instaUserInfoList = instaStore.getInsta_users().get(store.getStore_name());
 				for(int i = 0; i < instaUserInfoList.size(); i++) {
+					if(instaUserDAO.selectInstaUserById(instaUserInfoList.get(i).getInsta_id()) != null) {
+						continue;
+					}
 					InstaUserVO instaUser = new InstaUserVO();
 					instaUser.setStore_no(store_no);
 					instaUser.setInsta_id(instaUserInfoList.get(i).getInsta_id());
 					if(instaUserDAO.insertInstaUser(instaUser) > 0) {
 						logger.info("insert insta user success");
+						InstaUserInfoVO instaUserInfo = new InstaUserInfoVO();
+						instaUserInfo.setStore_no(store_no);
+						instaUserInfo.setInsta_id(instaUserInfoList.get(i).getInsta_id());
+						instaUserInfo.setProfile_pic_url(instaUserInfoList.get(i).getProfile_pic_url());
+						if(instaUserInfoDAO.insertInstaUserInfo(instaUserInfo) > 0) {
+							logger.info("insert insta user info success");
+						}
 					} else {
 						logger.info("insert insta user fail");
 					}
@@ -120,12 +140,23 @@ public class HomeController {
 				
 				ArrayList<InstaLocationInfoVO> instaLocationInfoList = instaStore.getInsta_locations().get(store.getStore_name());
 				for(int i = 0; i < instaLocationInfoList.size(); i++) {
+					if(instaLocationDAO.selectInstaLocationById(instaLocationInfoList.get(i).getLocation_id()) != null) {
+						continue;
+					}
 					InstaLocationVO instaLocation = new InstaLocationVO();
 					instaLocation.setStore_no(store_no);
 					instaLocation.setLocation_id(instaLocationInfoList.get(i).getLocation_id());
 					
 					if(instaLocationDAO.insertInstaLocation(instaLocation) > 0) {
 						logger.info("insert insta location success");
+						InstaLocationInfoVO instaLocationInfo = new InstaLocationInfoVO();
+						instaLocationInfo.setStore_no(store_no);
+						instaLocationInfo.setLocation_id(instaLocationInfoList.get(i).getLocation_id());
+						instaLocationInfo.setLocation_x(instaLocationInfoList.get(i).getLocation_x());
+						instaLocationInfo.setLocation_y(instaLocationInfoList.get(i).getLocation_y());
+						if(instaLocationInfoDAO.insertInstaLocationInfo(instaLocationInfo) > 0) {
+							logger.info("insert insta location info success");
+						}
 					} else {
 						logger.info("insert insta location fail");
 					}
@@ -136,15 +167,7 @@ public class HomeController {
 		}
 		
 
-		
-		
 
-
-//		InstagramSeleniumCrawler crawler = new InstagramSeleniumCrawler();
-//		crawler.crawl();
-//		
-//		InstagramSeleniumCrawler ajaxCrawler = new InstagramSeleniumCrawler();
-//		ajaxCrawler.ajaxCrawl();
 		
 //		Preprocessor preprocessor = new Preprocessor();
 		
@@ -197,10 +220,12 @@ public class HomeController {
 			if(!places.isEmpty()) {
 				for(int i = 0; i < places.length(); i++) {
 					JSONObject location = places.getJSONObject(i).getJSONObject("place").getJSONObject("location");
-//					if(location.getString("name").trim().startsWith(store.getStore_name())			
+					if(location.isNull("lng") || location.isNull("lat")) {
+						continue;
+					}
+//					if(location.getString("name").trim().startsWith(store.getStore_name())		
 					if(location.getString("name").trim().equals(store.getStore_name())
-							&& (Math.abs(store.getStore_x() - location.getDouble("lng")) < 0.001)
-							&& (Math.abs(store.getStore_y() - location.getDouble("lat")) < 0.001)) {
+							&& (LocationDistance.haversine(store.getStore_x(), store.getStore_y(), location.getDouble("lng"), location.getDouble("lat"))) < 0.5) {
 						String key = Preprocessor.stringReplace(location.getString("name").trim());
 						ArrayList<JsonLocationVO> locationList = new ArrayList<JsonLocationVO>();
 						if(locationMap.containsKey(key)) {

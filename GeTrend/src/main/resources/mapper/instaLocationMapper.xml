@@ -11,7 +11,7 @@ insert into
 		, store_no
 	) values(
 		#{location_id}
-		,#{store_no}
+		, #{store_no}
 	)
 </insert>
 
@@ -22,6 +22,16 @@ from
 	insta_locations
 where
 	store_no = #{store_no}
+</select>
+
+<select id="selectInstaLocationById" parameterType="string" resultType="instaLocation">
+select
+	location_id
+	, store_no
+from
+	insta_locations
+where
+	location_id = #{location_id}
 </select>
 
 </mapper>

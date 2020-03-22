@@ -1,4 +1,4 @@
-package com.yeollu.getrend.dataPreprocessing.core;
+package com.yeollu.getrend.dataPreprocess.core;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -17,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
+import com.yeollu.getrend.dataPreprocess.model.Morpheme;
+import com.yeollu.getrend.dataPreprocess.model.NameEntity;
 
 public class Preprocessor {
 	private final String openApiURL = "http://aiopen.etri.re.kr:8000/WiseNLU";

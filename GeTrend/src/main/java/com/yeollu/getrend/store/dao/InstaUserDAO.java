@@ -1,5 +1,7 @@
 package com.yeollu.getrend.store.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,6 +26,19 @@ public class InstaUserDAO {
 		return cnt;
 	}
 	
+	public int insertInstaUserList(ArrayList<InstaUserVO> instaUserList) {
+		int cnt = 0;
+		
+		try {
+			InstaUserMapper mapper = session.getMapper(InstaUserMapper.class);
+			cnt = mapper.insertInstaUserList(instaUserList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cnt;
+	}
+	
 	public boolean isExistedInstaUserId(String store_no) {
 		boolean result = false;
 		
@@ -37,5 +52,17 @@ public class InstaUserDAO {
 		}
 		
 		return result;
+	}
+	
+	public InstaUserVO selectInstaUserById(String insta_id) {
+		InstaUserVO instaUser = null;
+		try {
+			InstaUserMapper mapper = session.getMapper(InstaUserMapper.class);
+			instaUser = mapper.selectInstaUserById(insta_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return instaUser;
 	}
 }

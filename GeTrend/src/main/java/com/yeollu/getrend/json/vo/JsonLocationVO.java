@@ -1,4 +1,4 @@
-package com.yeollu.getrend.json.core;
+package com.yeollu.getrend.json.vo;
 
 import lombok.Data;
 

@@ -8,42 +8,42 @@
 	insert into 
 		users(
 			user_id
-			,user_pw
-			,user_name
-			,user_email
+			, user_pw
+			, user_name
+			, user_email
 		)values(
-			#{user_id}
-			,#{user_pw}
-			,#{user_name}
-			,#{user_email}
+			# {user_id}
+			, #{user_pw}
+			, #{user_name}
+			, #{user_email}
 		)
 </insert>
 <select id="selectOne" parameterType="string" resultType="user">
 select
 	user_id
-	,user_pw
-	,user_name
-	,user_email
+	, user_pw
+	, user_name
+	, user_email
 from
 	users
 where
-	user_id =#{user_id}
+	user_id = #{user_id}
 </select>
 <update id="updateUser" parameterType="user">
 update
 	users
 set
-	user_pw =#{user_pw}
-	,user_name =#{user_name}
-	,user_email =#{user_email}
+	user_pw = #{user_pw}
+	, user_name = #{user_name}
+	, user_email = #{user_email}
 where
-	user_id =#{user_id}
+	user_id = #{user_id}
 </update>
 <delete id="deleteUser" parameterType="string">
 delete from
 	users
 where
-	user_id =#{user_id}
+	user_id = #{user_id}
 </delete>
 </mapper>
 

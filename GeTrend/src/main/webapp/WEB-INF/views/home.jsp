@@ -40,6 +40,8 @@
    	
    	</div>
    	
+
+   	
    	<div>
 		<c:choose>
 			<c:when test="${sessionScope.loginId != null}">
@@ -85,7 +87,7 @@
 		const mapContainer = document.getElementById("map");
 		mapOption = {
 				center: new kakao.maps.LatLng(35.15113, 126.924584),
-				level: 3 // 지도의 확대 레벨
+				level: 1 // 지도의 확대 레벨
 		};
 
 		const map = new kakao.maps.Map(mapContainer, mapOption);

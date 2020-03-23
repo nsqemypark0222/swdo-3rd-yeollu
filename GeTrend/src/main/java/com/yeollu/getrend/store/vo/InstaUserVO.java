@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class InstaUserVO {
-	private String store_no;
 	private String insta_id;
+	private String store_no;
+	private String profile_pic_url;
+	private String indate;
 }

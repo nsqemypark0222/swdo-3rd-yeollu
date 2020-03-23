@@ -4,14 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yeollu.getrend.store.dao.InstaUserMapper">
+
 <insert id="insertInstaUser" parameterType="instaUser">
 insert into 
 	insta_users (
 		insta_id
 		, store_no
+		, profile_pic_url
 	) values(
 		#{insta_id}
 		, #{store_no}
+		, #{profile_pic_url}
 	)
 </insert>
 
@@ -20,11 +23,13 @@ insert into
 	insta_users (
 		insta_id
 		, store_no
+		, profile_pic_url
 	) values
 	<foreach collection="list" item="item" separator=",">
 			 (
 		#{item.insta_id}
 		, #{item.store_no}
+		, #{item.profile_pic_url}
 	)
 	</foreach>
 </insert>
@@ -42,6 +47,7 @@ where
 select
 	insta_id
 	, store_no
+	, profile_pic_url
 from
 	insta_users
 where

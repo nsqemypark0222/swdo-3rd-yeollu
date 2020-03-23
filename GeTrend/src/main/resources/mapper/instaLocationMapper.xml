@@ -4,15 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yeollu.getrend.store.dao.InstaLocationMapper">
+
 <insert id="insertInstaLocation" parameterType="instaLocation">
 insert into 
 	insta_locations (
 		location_id
 		, store_no
+		, location_x
+		, location_y
 	) values(
 		#{location_id}
 		, #{store_no}
+		, #{location_x}
+		, #{location_y}
 	)
+</insert>
+
+<insert id="insertInstaLocationList" parameterType="java.util.List">
+insert into 
+	insta_locations (
+		location_id
+		, store_no
+		, location_x
+		, location_y
+	) values
+	<foreach collection="list" item="item" separator=",">
+			 (
+		#{item.location_id}
+		, #{item.store_no}
+		, #{item.location_x}
+		, #{item.location_y}
+	)
+	</foreach>
 </insert>
 
 <select id="isExistedInstaLocationId" parameterType="string" resultType="string">
@@ -28,6 +51,8 @@ where
 select
 	location_id
 	, store_no
+	, location_x
+	, location_y
 from
 	insta_locations
 where

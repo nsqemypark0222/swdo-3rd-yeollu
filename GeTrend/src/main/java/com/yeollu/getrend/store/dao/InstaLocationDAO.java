@@ -1,5 +1,7 @@
 package com.yeollu.getrend.store.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +20,19 @@ public class InstaLocationDAO {
 		try {
 			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);
 			cnt = mapper.insertInstaLocation(instaLocation);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cnt;
+	}
+	
+	public int insertInstaLocationList(ArrayList<InstaLocationVO> instaLocationList) {
+		int cnt = 0;
+		
+		try {
+			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);
+			cnt = mapper.insertInstaLocationList(instaLocationList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

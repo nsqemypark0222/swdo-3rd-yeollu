@@ -40,6 +40,10 @@
    	
    	</div>
    	
+   	<div>
+   		<input type="button" value="자연어 처리 테스트" id="naturalLanguageProcessing">	
+   	</div>
+   	
 
    	
    	<div>
@@ -78,6 +82,10 @@
 				});
 			}
 			searchFunc = search;
+
+			$("#naturalLanguageProcessing").click(function(){
+				location.href="<c:url value='/naturalLanguageProcessing'/>";
+			});
 		});
 
 		function search(points) {

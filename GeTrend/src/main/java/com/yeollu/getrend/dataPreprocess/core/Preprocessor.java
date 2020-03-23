@@ -15,14 +15,17 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.google.gson.Gson;
 import com.yeollu.getrend.dataPreprocess.model.Morpheme;
 import com.yeollu.getrend.dataPreprocess.model.NameEntity;
 
 public class Preprocessor {
-	private final String openApiURL = "http://aiopen.etri.re.kr:8000/WiseNLU";
 	private final String accessKey = "38f662c4-55a1-4b09-a3f2-405184f6a908";
+	
+	private final String openApiURL = "http://aiopen.etri.re.kr:8000/WiseNLU";
+	
 	private final String analysisCode = "ner";
 	
 	private static final Logger logger = LoggerFactory.getLogger(Preprocessor.class);
@@ -116,7 +119,7 @@ public class Preprocessor {
 				
 				// 개체명 분석 결과 수집 및 정렬
 				List<Map<String, Object>> nameEntityRecognitionResult = (List<Map<String, Object>>) sentence.get("NE");
-				logger.info("{}", nameEntityRecognitionResult);
+//				logger.info("{}", nameEntityRecognitionResult);
 				for(Map<String, Object> nameEntityInfo : nameEntityRecognitionResult) {
 					String name = (String) nameEntityInfo.get("text");
 					NameEntity nameEntity = nameEntitiesMap.get(name);
@@ -174,7 +177,7 @@ public class Preprocessor {
 				.stream()
 				.limit(100)
 				.forEach(nameEntity -> {
-					System.out.println("[개체명] " + nameEntity.getText() + " ("+nameEntity.getCount()+")" );
+					System.out.println("[개체명] " + nameEntity.getText() + " ("+nameEntity.getCount()+") " + nameEntity.getType() );
 				});
 			
 		} catch (MalformedURLException e) {

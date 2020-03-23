@@ -68,6 +68,106 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/naturalLanguageProcessing", method = RequestMethod.GET)
+	public String naturalLanguageProcessing() {
+		logger.info("naturalLanguageProcessing");
+		
+		String str1 = "압구정김밥\n" + 
+				"070-4319-1500\n" + 
+				"2•4째주 화요일 휴무";
+		String str2 = "시바카레\n" + 
+				"🐕🐾 내 이름은 카레\n" + 
+				"광주 동구 장동 71-1번지 1층 시바카레\n" + 
+				"점심 am 11:30 ~ pm 3:30\n" + 
+				"저녁 pm 5:00 ~ pm 9:00\n" + 
+				"쉬는시간 pm 3:30 ~ 5:00\n" + 
+				"마지막주문 pm 8:30\n" + 
+				"☎️ Tel. 070-8864-1818";
+		String str3 = "힙샵\n" + 
+				"⚠️최고급 레플리카 신발 전문샵⚠️\n" + 
+				"▪️최고퀄, 최상급 제품\n" + 
+				"▪️합리적인 가격\n" + 
+				"▪️해외배송\n" + 
+				"▪️피드에 없는 브랜드 및 상품 구매 가능\n" + 
+				"🕐실시간 1:1 오픈카톡 문의";
+		String str4 = "동명버거\n" + 
+				"❌월요일 정기휴무❌\n" + 
+				"🍔OPEN 화-금17:00- 22:00 🍔🍔🍔🍔🍔🍔주말 공휴일 11:30-22:00🍔🍔🍔🍔🍔🍔🍔LAST ORDER 21:00\n" + 
+				"광주광역시 동구 장동로 7 (장동 67-14) 2층\n" + 
+				"📞062.413.7111";
+		String str5 = "동명라운지\n" + 
+				"동명동야경\n" + 
+				"칵테일🍸\n" + 
+				"다트🎯\n" + 
+				"클럽🎧\n" + 
+				"pm 06:00 ~ am 04:00\n" + 
+				"————-단골손님너였으면좋겠다ㅡㅡㅡㅡ";
+		String str6 = "동명라운지\n" + 
+				"⭐️동명동 분위기 좋은 라운지바⭐️\n" + 
+				"🍹ᴄᴏᴄᴋᴛᴀɪʟ\n" + 
+				"🍺ʙᴇᴇʀ\n" + 
+				"🎯ᴅᴀʀᴛ\n" + 
+				"🎧ᴍᴜsɪᴄ\n" + 
+				"📍 광주 동구 장동 67-14 3층\n" + 
+				"🕕ᴏᴘᴇɴ - ᴘᴍ 18:00 ~ ᴀᴍ 04:00";
+		String str7 = "동명라운지\n" + 
+				"동명동 분위기좋은 파티홀\n" + 
+				"야경과 일식\n" + 
+				"칵테일에 신선한조화";
+		String str8 = "@오랜만의 공지입니다.@당분간 "
+				+ "평일은 런치를 운영하지 않고 17시부터 오픈합니다. "
+				+ "주말과 공휴일은 기존과 동일하게 브레이크타임 없이 "
+				+ "11시30분부터 22시(주방마감21:00)까지입니다. "
+				+ "이용에 불편함을 드려 죄송합니다. "
+				+ "앞으로 더욱 맛있는 버거로 보답할게요~";
+		
+		Preprocessor preprocessor = new Preprocessor();
+		preprocessor.run(str1);
+		preprocessor.run(str2);
+		preprocessor.run(str3);
+		preprocessor.run(str4);
+		preprocessor.run(str5);
+		preprocessor.run(str6);
+		preprocessor.run(str7);
+		preprocessor.run(str8);
+		
+//		[개체명] 2•4째주 화요일 (1) DT_OTHERS
+//
+//		[개체명] 8:30 (1) TI_OTHERS
+//		[개체명] 3:30 ~ 5:00 (1) TI_DURATION
+//		[개체명] 저녁 (1) TI_DURATION
+//		[개체명] 9:00 (1) TI_HOUR
+//		[개체명] 3:30 (1) TI_OTHERS
+//		[개체명] 5:00 (1) TI_HOUR
+//		[개체명] 11:30 (1) TI_OTHERS
+//
+//		[개체명] 📞062.413.7111 (1) DT_OTHERS
+//
+//		[개체명] 17:00- 22:00 (1) TI_DURATION
+//		[개체명] 21:00 (1) TI_HOUR
+//
+//		[개체명] 11:30-22:00🍔🍔🍔🍔🍔🍔🍔LAST ORDER (1) TI_DURATION
+//		[개체명] ❌월요일 (1) DT_OTHERS
+//
+//		[개체명] 🍔🍔🍔🍔🍔🍔주말 공휴일 (1) DT_OTHERS
+//
+//		[개체명] 06:00 (1) TI_HOUR
+//		[개체명] 04:00 (1) TI_HOUR
+//
+//		[개체명] 04:00 (1) TI_HOUR
+//		[개체명] ᴀᴍ (1) TI_HOUR
+//		[개체명] 18:00 (1) TI_HOUR
+//
+//		[개체명] 17시부터 (1) TI_OTHERS
+//		[개체명] 평일 (1) DT_OTHERS
+//		[개체명] 11시30분부터 22시 (1) TI_DURATION
+//		[개체명] 21:00 (1) TI_HOUR
+//		[개체명] 주말 (1) DT_OTHERS
+
+		
+		return "home";
+	}
+	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
 	public void search(@RequestBody ArrayList<Point> points) {
@@ -157,10 +257,6 @@ public class HomeController {
 				logger.info("instaStore is null");
 			}
 		}
-		
-
-		
-//		Preprocessor preprocessor = new Preprocessor();
 		
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;

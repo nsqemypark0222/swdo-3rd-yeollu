@@ -173,6 +173,7 @@ public class HomeController {
 			}
 		}
 		
+		logger.info("end");
 
 		
 //		Preprocessor preprocessor = new Preprocessor();

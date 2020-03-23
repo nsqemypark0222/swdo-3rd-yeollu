@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeollu.getrend.store.dao.SearchedMapper">
+
+<insert id="insertSearchedTerm" parameterType="searchedTerm">
+insert into 
+	searched (
+		searched_no
+		, store_name
+	) values(
+		seq_searched.nextval
+		, #{store_name}
+	)
+</insert>
+
+<select id="isExistedSearchedTerm" parameterType="string" resultType="string">
+select
+	decode(count(*), 0, 'false', 'true') as result
+from
+	searched
+where
+	store_name = #{store_name}
+</select>
+
+</mapper>
+

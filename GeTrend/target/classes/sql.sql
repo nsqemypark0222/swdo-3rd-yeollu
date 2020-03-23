@@ -1,3 +1,5 @@
+drop sequence seq_searched;
+drop table searched;
 drop table insta_users;
 drop table insta_locations;
 drop table users;
@@ -31,6 +33,14 @@ create table stores(
     , store_y number
 );
 
+create table insta_users (
+    insta_id varchar2(200) primary key
+    , store_no varchar2(200)
+    , profile_pic_url varchar2(2000)
+    , indate date default sysdate
+    , constraint fk1_insta_users foreign key (store_no) references stores(store_no)
+);
+
 create table insta_locations (
     location_id varchar2(200) primary key
     , store_no varchar2(200)
@@ -40,17 +50,18 @@ create table insta_locations (
     , constraint fk1_insta_locations foreign key (store_no) references stores(store_no)
 );
 
-create table insta_users (
-    insta_id varchar2(200) primary key
-    , store_no varchar2(200)
-    , profile_pic_url varchar2(2000)
+create table searched (
+    searched_no number primary key
+    , store_name varchar2(200)
     , indate date default sysdate
-    , constraint fk1_insta_users foreign key (store_no) references stores(store_no)
 );
+
+create sequence seq_searched;
 
 select * from users;
 select * from stores;
 select * from insta_users;
 select * from insta_locations;
+select * from searched;
 
 commit;

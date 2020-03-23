@@ -21,21 +21,19 @@ insert into
 </insert>
 
 <insert id="insertInstaLocationList" parameterType="java.util.List">
-insert into 
-	insta_locations (
+<foreach collection="list" item="item" open="insert all" close="select * from dual" separator=" ">
+	into insta_locations (
 		location_id
 		, store_no
 		, location_x
 		, location_y
-	) values
-	<foreach collection="list" item="item" separator=",">
-			 (
+	) values (
 		#{item.location_id}
 		, #{item.store_no}
 		, #{item.location_x}
 		, #{item.location_y}
 	)
-	</foreach>
+</foreach>
 </insert>
 
 <select id="isExistedInstaLocationId" parameterType="string" resultType="string">

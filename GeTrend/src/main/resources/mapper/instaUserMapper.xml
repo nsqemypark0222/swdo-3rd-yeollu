@@ -19,19 +19,17 @@ insert into
 </insert>
 
 <insert id="insertInstaUserList" parameterType="java.util.List">
-insert into 
-	insta_users (
+<foreach collection="list" item="item" open="insert all" close="select * from dual" separator=" ">
+	into insta_users (
 		insta_id
 		, store_no
 		, profile_pic_url
-	) values
-	<foreach collection="list" item="item" separator=",">
-			 (
+	) values (
 		#{item.insta_id}
 		, #{item.store_no}
 		, #{item.profile_pic_url}
 	)
-	</foreach>
+</foreach>
 </insert>
 
 <select id="isExistedInstaUserId" parameterType="string" resultType="string">

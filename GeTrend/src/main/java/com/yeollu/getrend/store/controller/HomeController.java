@@ -30,10 +30,12 @@ import com.yeollu.getrend.map.core.Polygon;
 import com.yeollu.getrend.map.vo.Point;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.InstaUserDAO;
+import com.yeollu.getrend.store.dao.SearchedDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.InstaUserVO;
+import com.yeollu.getrend.store.vo.SearchedVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
 @Controller
@@ -48,7 +50,10 @@ public class HomeController {
 	private InstaUserDAO instaUserDAO;
 	
 	@Autowired
-	private InstaLocationDAO instaLocationDAO; 
+	private InstaLocationDAO instaLocationDAO;
+	
+	@Autowired
+	private SearchedDAO searchedDAO;
 		
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -58,7 +63,7 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("serverTime", formattedDate);
 		
 		return "home";
 	}
@@ -72,6 +77,7 @@ public class HomeController {
 //		logger.info("{}", points);
 		ArrayList<StoreVO> list = storeDAO.selectAllStores();
 		
+		
 		Polygon polygon = new Polygon();
 		for(int i = 0; i < points.size(); i++) {
 			polygon.addPoint(points.get(i));
@@ -79,31 +85,40 @@ public class HomeController {
 		
 		ArrayList<StoreVO> selectedList = new ArrayList<StoreVO>();
 		
-		
-		for(int i = 0 ; i < list.size(); i++) {
+		for(int i = 0; i < list.size(); i++) {
 			if(polygon.isContains(list.get(i).getStore_x(), list.get(i).getStore_y())) {
 				selectedList.add(list.get(i));
 			}	
 		}
-		
-		logger.info("{}", selectedList.size());
-
+		logger.info("1 : {}", selectedList.size());
 		
 		for(Iterator<StoreVO> iterator = selectedList.iterator(); iterator.hasNext(); ) {
 			if(instaUserDAO.isExistedInstaUserId(iterator.next().getStore_no())) {
 				iterator.remove();
 			}
 		}
+		logger.info("2 : {}", selectedList.size());
 		
 		for(Iterator<StoreVO> iterator = selectedList.iterator(); iterator.hasNext(); ) {
 			if(instaLocationDAO.isExistedInstaLocationId(iterator.next().getStore_no())) {
 				iterator.remove();
 			}
 		}
+		logger.info("3 : {}", selectedList.size());
 		
-		logger.info("{}", selectedList.size());
+//		for(Iterator<StoreVO> iterator = selectedList.iterator(); iterator.hasNext(); ) {
+//			StoreVO store = iterator.next();
+//			if(!searchedDAO.isExistedSearchedTerm(store.getStore_name())) {
+//				SearchedVO searchedTerm = new SearchedVO();
+//				searchedTerm.setStore_name(store.getStore_name());
+//				if(searchedDAO.insertSearchedTerm(searchedTerm) > 0) {
+//					iterator.remove();
+//				}
+//			}
+//		}
+		
+		logger.info("4 : {}", selectedList.size());
 
-		
 		for(StoreVO store : selectedList) {
 			InstaStoreVO instaStore = sendQueryString(store);
 			
@@ -121,7 +136,25 @@ public class HomeController {
 				} else {
 					logger.info("insert insta location list fail");
 				}
+				
+////				for(int i = 0; i < instaUserList.size(); i++) {
+////					if(instaUserDAO.insertInstaUser(instaUserList.get(i)) > 0) {
+////						logger.info("insert insta user success");
+////					} else {
+////						logger.info("insert insta user fail");
+////					}
+////				}
+//				
+////				for(int i = 0; i < instaLocationList.size(); i++) {
+////					if(instaLocationDAO.insertInstaLocation(instaLocationList.get(i)) > 0) {
+////						logger.info("insert insta location success");
+////					} else {
+////						logger.info("insert insta location fail");
+////					}
+////				}
 				logger.info("{}", instaStore);
+			} else {
+				logger.info("instaStore is null");
 			}
 		}
 		
@@ -136,14 +169,13 @@ public class HomeController {
 	}
 	
 	public InstaStoreVO sendQueryString(StoreVO store) {
-		
 		Gson gson = new Gson();
 		String storeName = "";
 		String url = "";
 		HashMap<String, ArrayList<JsonUserVO>> userMap = new HashMap<String, ArrayList<JsonUserVO>>();
 		HashMap<String, ArrayList<JsonLocationVO>> locationMap = new HashMap<String, ArrayList<JsonLocationVO>>();
 	
-		try {
+		try {			
 			storeName = URLEncoder.encode(store.getStore_name(), "UTF-8");
 			url = "https://www.instagram.com/web/search/topsearch/?context=blended&query=%24" + storeName + "%20%40" + storeName + "%20%23" + storeName;
 			JSONObject json = JsonReader.readJsonFromUrl(url);
@@ -170,7 +202,7 @@ public class HomeController {
 //					logger.info("{}", key);
 //				}
 			} else {
-//				logger.info("users is empty!!");
+				logger.info("users is empty!!");
 				return null;
 			}
 			
@@ -199,7 +231,7 @@ public class HomeController {
 //					logger.info("{}", key);
 //				}
 			} else {
-//				logger.info("places is empty!!");
+				logger.info("places is empty!!");
 				return null;
 			}
 			

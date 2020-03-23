@@ -91,11 +91,14 @@ public class HomeController {
 		
 		ArrayList<StoreVO> selectedList = new ArrayList<StoreVO>();
 		
+		
 		for(int i = 0 ; i < list.size(); i++) {
 			if(polygon.isContains(list.get(i).getStore_x(), list.get(i).getStore_y())) {
 				selectedList.add(list.get(i));
 			}	
 		}
+		
+		
 		for(Iterator<StoreVO> iterator = selectedList.iterator(); iterator.hasNext(); ) {
 			if(instaUserDAO.isExistedInstaUserId(iterator.next().getStore_no())) {
 				iterator.remove();
@@ -106,7 +109,7 @@ public class HomeController {
 				iterator.remove();
 			}
 		}
-		logger.info("{}", selectedList.size());
+		
 
 		
 		for(StoreVO store : selectedList) {
@@ -131,6 +134,8 @@ public class HomeController {
 						instaUserInfo.setProfile_pic_url(instaUserInfoList.get(i).getProfile_pic_url());
 						if(instaUserInfoDAO.insertInstaUserInfo(instaUserInfo) > 0) {
 							logger.info("insert insta user info success");
+						} else {
+							logger.info("insert insta user info fail");
 						}
 					} else {
 						logger.info("insert insta user fail");
@@ -155,7 +160,10 @@ public class HomeController {
 						instaLocationInfo.setLocation_y(instaLocationInfoList.get(i).getLocation_y());
 						if(instaLocationInfoDAO.insertInstaLocationInfo(instaLocationInfo) > 0) {
 							logger.info("insert insta location info success");
+						} else {
+							logger.info("insert insta location info fail");
 						}
+						
 					} else {
 						logger.info("insert insta location fail");
 					}
@@ -165,7 +173,6 @@ public class HomeController {
 			}
 		}
 		
-
 
 		
 //		Preprocessor preprocessor = new Preprocessor();
@@ -207,9 +214,9 @@ public class HomeController {
 						userMap.put(key, userList);
 					}
 				}			
-	//			for(String key : userMap.keySet()) {
-	//				logger.info("{}", key);
-	//			}
+//				for(String key : userMap.keySet()) {
+//					logger.info("{}", key);
+//				}
 			} else {
 //				logger.info("users is empty!!");
 				return null;
@@ -236,9 +243,9 @@ public class HomeController {
 						locationMap.put(key, locationList);
 					}
 				}
-	//			for(String key : locationMap.keySet()) {
-	//				logger.info("{}", key);
-	//			}
+//				for(String key : locationMap.keySet()) {
+//					logger.info("{}", key);
+//				}
 			} else {
 //				logger.info("places is empty!!");
 				return null;

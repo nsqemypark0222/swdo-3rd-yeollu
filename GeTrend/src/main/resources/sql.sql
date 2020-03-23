@@ -8,16 +8,19 @@ drop table users;
 drop table stores;
 
 create table users(
-    user_id varchar2(30) primary key,
-    user_pw varchar2(50) not null,
+    user_email varchar2(50) primary key,
+    user_pw varchar2(200) not null,
     user_name varchar2(30) not null,
-    user_email varchar2(50) not null,
-    user_kakaoId varchar2(50),
-    user_facebookId varchar2(50),
-    user_naverId varchar2(50) 
+    user_type varchar2(10),
+    user_profile varchar2(1000)
 );
 
 -- sqlldr userid=hr/hr control='C:\Users\user\Desktop\stores_control.ctl'
+-- sqlplus sys as sysdba
+-- alter system set processes=500 scope=spfile;
+-- shutdown immediate
+-- startup
+-- show parameter processes
 create table stores(
     store_no varchar2(200) primary key,
     store_name varchar2(200),

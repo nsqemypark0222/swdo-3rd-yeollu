@@ -20,8 +20,8 @@ insert into
 	)
 </insert>
 
-<insert id="insertInstaLocationList" parameterType="java.util.List">
-<foreach collection="list" item="item" open="insert all" close="select * from dual" separator=" ">
+<insert id="insertInstaLocationList" parameterType="list">
+<foreach collection="list" item="item" index="index" separator=" " open="insert all" close="select * from dual">
 	into insta_locations (
 		location_id
 		, store_no

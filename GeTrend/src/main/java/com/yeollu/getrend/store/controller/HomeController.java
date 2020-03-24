@@ -201,21 +201,18 @@ public class HomeController {
 		selectedList = list;
 		
 
-		logger.info("1 : {}", selectedList.size());
 		
-		for(Iterator<StoreVO> iterator = selectedList.iterator(); iterator.hasNext(); ) {
-			if(instaUserDAO.isExistedInstaUserId(iterator.next().getStore_no())) {
-				iterator.remove();
-			}
-		}
-		logger.info("2 : {}", selectedList.size());
+//		for(Iterator<StoreVO> iterator = selectedList.iterator(); iterator.hasNext(); ) {
+//			if(instaUserDAO.isExistedInstaUserId(iterator.next().getStore_no())) {
+//				iterator.remove();
+//			}
+//		}
 		
 		for(Iterator<StoreVO> iterator = selectedList.iterator(); iterator.hasNext(); ) {
 			if(instaLocationDAO.isExistedInstaLocationId(iterator.next().getStore_no())) {
 				iterator.remove();
 			}
 		}
-		logger.info("3 : {}", selectedList.size());
 		
 //		for(Iterator<StoreVO> iterator = selectedList.iterator(); iterator.hasNext(); ) {
 //			StoreVO store = iterator.next();
@@ -228,21 +225,21 @@ public class HomeController {
 //			}
 //		}
 		
-		logger.info("4 : {}", selectedList.size());
 
 		for(StoreVO store : selectedList) {
 			InstaStoreVO instaStore = sendQueryString(store);
 			
 			if(instaStore != null) {
-				ArrayList<InstaUserVO> instaUserList = instaStore.getInsta_users().get(store.getStore_name());
-				if(instaUserDAO.insertInstaUserList(instaUserList) > 0) {
-					logger.info("insert insta user list success");
-				} else {
-					logger.info("insert insta user list fail");
-				}
+//				ArrayList<InstaUserVO> instaUserList = instaStore.getInsta_users().get(store.getStore_name());
+//				if(instaUserDAO.insertInstaUserList(instaUserList) > 0) {
+//					logger.info("insert insta user list success");
+//				} else {
+//					logger.info("insert insta user list fail");
+//				}
 				
 				ArrayList<InstaLocationVO> instaLocationList = instaStore.getInsta_locations().get(store.getStore_name());
-				if(instaLocationDAO.insertInstaLocationList(instaLocationList) > 0) {
+				if(instaLocationList != null
+						&& instaLocationDAO.insertInstaLocationList(instaLocationList) > 0) {
 					logger.info("insert insta location list success");
 				} else {
 					logger.info("insert insta location list fail");
@@ -279,7 +276,7 @@ public class HomeController {
 		Gson gson = new Gson();
 		String storeName = "";
 		String url = "";
-		HashMap<String, ArrayList<JsonUserVO>> userMap = new HashMap<String, ArrayList<JsonUserVO>>();
+//		HashMap<String, ArrayList<JsonUserVO>> userMap = new HashMap<String, ArrayList<JsonUserVO>>();
 		HashMap<String, ArrayList<JsonLocationVO>> locationMap = new HashMap<String, ArrayList<JsonLocationVO>>();
 	
 		try {			
@@ -287,31 +284,31 @@ public class HomeController {
 			url = "https://www.instagram.com/web/search/topsearch/?context=blended&query=%24" + storeName + "%20%40" + storeName + "%20%23" + storeName;
 			JSONObject json = JsonReader.readJsonFromUrl(url);
 						
-			JSONArray users = json.getJSONArray("users");
-			if(!users.isEmpty()) {
-				for(int i = 0; i < users.length(); i++) {
-					JSONObject user = users.getJSONObject(i).getJSONObject("user");
-					if(user.getBoolean("is_private") == false
-//							&& user.getString("full_name").trim().startsWith(store.getStore_name())) {
-							&& user.getString("full_name").trim().equals(store.getStore_name())) {
-						String key = Preprocessor.stringReplace(user.getString("full_name").trim());
-						ArrayList<JsonUserVO> userList = new ArrayList<JsonUserVO>();
-						if(userMap.containsKey(key)) {
-							userList = userMap.get(key);
-							userList.add(gson.fromJson(user.toString(), JsonUserVO.class));
-						} else {
-							userList.add(gson.fromJson(user.toString(), JsonUserVO.class));
-						}
-						userMap.put(key, userList);
-					}
-				}			
-//				for(String key : userMap.keySet()) {
-//					logger.info("{}", key);
-//				}
-			} else {
-				logger.info("users is empty!!");
-				return null;
-			}
+//			JSONArray users = json.getJSONArray("users");
+//			if(!users.isEmpty()) {
+//				for(int i = 0; i < users.length(); i++) {
+//					JSONObject user = users.getJSONObject(i).getJSONObject("user");
+//					if(user.getBoolean("is_private") == false
+////							&& user.getString("full_name").trim().startsWith(store.getStore_name())) {
+//							&& user.getString("full_name").trim().equals(store.getStore_name())) {
+//						String key = Preprocessor.stringReplace(user.getString("full_name").trim());
+//						ArrayList<JsonUserVO> userList = new ArrayList<JsonUserVO>();
+//						if(userMap.containsKey(key)) {
+//							userList = userMap.get(key);
+//							userList.add(gson.fromJson(user.toString(), JsonUserVO.class));
+//						} else {
+//							userList.add(gson.fromJson(user.toString(), JsonUserVO.class));
+//						}
+//						userMap.put(key, userList);
+//					}
+//				}			
+////				for(String key : userMap.keySet()) {
+////					logger.info("{}", key);
+////				}
+//			} else {
+//				logger.info("users is empty!!");
+//				return null;
+//			}
 			
 			JSONArray places = json.getJSONArray("places");
 			if(!places.isEmpty()) {
@@ -321,7 +318,8 @@ public class HomeController {
 						continue;
 					}
 //					if(location.getString("name").trim().startsWith(store.getStore_name())		
-					if(location.getString("name").trim().equals(store.getStore_name())
+//					if(location.getString("name").trim().equals(store.getStore_name())
+					if(location.getString("name").trim().contains(store.getStore_name())
 							&& (LocationDistance.haversine(store.getStore_x(), store.getStore_y(), location.getDouble("lng"), location.getDouble("lat"))) < 0.5) {
 						String key = Preprocessor.stringReplace(location.getString("name").trim());
 						ArrayList<JsonLocationVO> locationList = new ArrayList<JsonLocationVO>();
@@ -347,32 +345,32 @@ public class HomeController {
 		}
 		
 		InstaStoreVO instaStore = new InstaStoreVO();
-		ArrayList<InstaUserVO> instaUserList = new ArrayList<InstaUserVO>();
-		HashMap<String, ArrayList<InstaUserVO>> instaUserMap = new HashMap<String, ArrayList<InstaUserVO>>();
+//		ArrayList<InstaUserVO> instaUserList = new ArrayList<InstaUserVO>();
+//		HashMap<String, ArrayList<InstaUserVO>> instaUserMap = new HashMap<String, ArrayList<InstaUserVO>>();
 		ArrayList<InstaLocationVO> instaLocationList = new ArrayList<InstaLocationVO>();
 		HashMap<String, ArrayList<InstaLocationVO>> instaLocationMap = new HashMap<String, ArrayList<InstaLocationVO>>();
 		
 		try {
 			instaStore.setStore_no(store.getStore_no());
 			
-			for(String key : userMap.keySet()) {
-				ArrayList<JsonUserVO> uList = userMap.get(key);
-				
-				for(JsonUserVO u : uList) {
-					InstaUserVO iUser = new InstaUserVO();
-					iUser.setInsta_id(u.getUsername());
-					iUser.setStore_no(store.getStore_no());
-					iUser.setProfile_pic_url(u.getProfile_pic_url());
-					if(instaUserMap.containsKey(key)) {
-						instaUserList = instaUserMap.get(key);
-						instaUserList.add(iUser);
-					} else {
-						instaUserList.add(iUser);
-					}
-				}
-				instaUserMap.put(key, instaUserList);
-			}
-			instaStore.setInsta_users(instaUserMap);
+//			for(String key : userMap.keySet()) {
+//				ArrayList<JsonUserVO> uList = userMap.get(key);
+//				
+//				for(JsonUserVO u : uList) {
+//					InstaUserVO iUser = new InstaUserVO();
+//					iUser.setInsta_id(u.getUsername());
+//					iUser.setStore_no(store.getStore_no());
+//					iUser.setProfile_pic_url(u.getProfile_pic_url());
+//					if(instaUserMap.containsKey(key)) {
+//						instaUserList = instaUserMap.get(key);
+//						instaUserList.add(iUser);
+//					} else {
+//						instaUserList.add(iUser);
+//					}
+//				}
+//				instaUserMap.put(key, instaUserList);
+//			}
+//			instaStore.setInsta_users(instaUserMap);
 			
 			for(String key : locationMap.keySet()) {
 				ArrayList<JsonLocationVO> lList = locationMap.get(key);
@@ -397,9 +395,9 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		
-		if(instaStore.getInsta_users() == null || instaStore.getInsta_users().size() == 0) {
-			return null;
-		}
+//		if(instaStore.getInsta_users() == null || instaStore.getInsta_users().size() == 0) {
+//			return null;
+//		}
 		if(instaStore.getInsta_locations() == null || instaStore.getInsta_locations().size() == 0) {
 			return null;
 		}

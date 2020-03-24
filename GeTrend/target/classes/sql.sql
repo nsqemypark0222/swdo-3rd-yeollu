@@ -64,4 +64,12 @@ select * from insta_users;
 select * from insta_locations;
 select * from searched;
 
+select u.insta_id, s.store_no, s.store_name
+from insta_users u, stores s
+where u.store_no = s.store_no;
+
+select * 
+from insta_locations i, stores s
+where i.store_no = s.store_no;
+
 commit;

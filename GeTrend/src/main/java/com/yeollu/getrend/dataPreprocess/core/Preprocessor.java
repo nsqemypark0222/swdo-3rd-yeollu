@@ -36,7 +36,7 @@ public class Preprocessor {
         return str;
 	}
 	
-	public void run(String text) {
+	public ArrayList<NameEntity> run(String text) {
 		Gson gson = new Gson();
 		
 		Map<String, Object> request = new HashMap<String, Object>();
@@ -52,6 +52,11 @@ public class Preprocessor {
 		Integer responseCode = null;
 		String responBodyJson = null;
 		Map<String, Object> responeBody = null;
+		
+		Map<String, Morpheme> morphemesMap = new HashMap<String, Morpheme>();
+		Map<String, NameEntity> nameEntitiesMap = new HashMap<String, NameEntity>();
+		List<Morpheme> morphemes = null;
+		List<NameEntity> nameEntities = null;
 		
 		try {
 			url = new URL(openApiURL);
@@ -80,7 +85,7 @@ public class Preprocessor {
 			if ( responseCode != 200 ) {
 				// 오류 내용 출력
 				System.out.println("[error] " + responBodyJson);
-				return ;
+				return null;
 			}
 			
 			responeBody = gson.fromJson(responBodyJson, Map.class);
@@ -92,16 +97,13 @@ public class Preprocessor {
 			if ( result != 0 ) {
 				// 오류 내용 출력
 				System.out.println("[error] " + responeBody.get("result"));
-				return ;
+				return null;
 			}
 			
 			returnObject = (Map<String, Object>) responeBody.get("return_object");
 			sentences = (List<Map<String, Object>>) returnObject.get("sentence");
 			
-			Map<String, Morpheme> morphemesMap = new HashMap<String, Morpheme>();
-			Map<String, NameEntity> nameEntitiesMap = new HashMap<String, NameEntity>();
-			List<Morpheme> morphemes = null;
-			List<NameEntity> nameEntities = null;
+			
 			
 			for(Map<String, Object> sentence : sentences) {
 				// 형태소 분석기 결과 수집 및 정렬
@@ -170,20 +172,22 @@ public class Preprocessor {
 //				.forEach(morpheme -> {
 //					System.out.println("[동사] " + morpheme.getText() + " ("+morpheme.getCount()+")" );
 //				});
-			
-			// 인식된 개채명들 많이 노출된 순으로 출력 ( 최대 5개 )
-			System.out.println("");
-			nameEntities
-				.stream()
-				.limit(100)
-				.forEach(nameEntity -> {
-					System.out.println("[개체명] " + nameEntity.getText() + " ("+nameEntity.getCount()+") " + nameEntity.getType() );
-				});
+//			
+//			// 인식된 개채명들 많이 노출된 순으로 출력 ( 최대 5개 )
+//			System.out.println("");
+//			nameEntities
+//				.stream()
+//				.limit(100)
+//				.forEach(nameEntity -> {
+//					System.out.println("[개체명] " + nameEntity.getText() + " ("+nameEntity.getCount()+") " + nameEntity.getType() );
+//				});
 			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		return (ArrayList<NameEntity>) nameEntities;
 	}
 }

@@ -10,11 +10,12 @@ import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jsoup.nodes.Entities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.Model;import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.yeollu.getrend.dataPreprocess.core.Preprocessor;
+import com.yeollu.getrend.dataPreprocess.core.TimeWordPreprocessor;
+import com.yeollu.getrend.dataPreprocess.model.NameEntity;
 import com.yeollu.getrend.json.core.JsonReader;
 import com.yeollu.getrend.json.vo.JsonLocationVO;
 import com.yeollu.getrend.json.vo.JsonUserVO;
@@ -64,6 +67,15 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate);
+		
+		return "home";
+	}
+	
+	@RequestMapping(value = "/naverTest", method = RequestMethod.GET)
+	public String naverTest() {
+		logger.info("naverTest");
+		
+		
 		
 		return "home";
 	}
@@ -120,50 +132,50 @@ public class HomeController {
 				+ "11시30분부터 22시(주방마감21:00)까지입니다. "
 				+ "이용에 불편함을 드려 죄송합니다. "
 				+ "앞으로 더욱 맛있는 버거로 보답할게요~";
+		String str9 = "동명동 란도리\r\n" + 
+				"텐동전문점\r\n" + 
+				"오래된 세탁소가 있던 자리에\r\n" + 
+				"‘란도리’라는 이름으로 만들어진 작은 일식당입니다.\r\n" + 
+				"-\r\n" + 
+				"점심11:30~2:45\r\n" + 
+				"브레이크타임 3:00~5:00\r\n" + 
+				"-\r\n" + 
+				"저녁5:00~8:30\r\n" + 
+				"062-232-1513";
 		
 		Preprocessor preprocessor = new Preprocessor();
-		preprocessor.run(str1);
-		preprocessor.run(str2);
-		preprocessor.run(str3);
-		preprocessor.run(str4);
-		preprocessor.run(str5);
-		preprocessor.run(str6);
-		preprocessor.run(str7);
-		preprocessor.run(str8);
-		
-//		[개체명] 2•4째주 화요일 (1) DT_OTHERS
-//
-//		[개체명] 8:30 (1) TI_OTHERS
-//		[개체명] 3:30 ~ 5:00 (1) TI_DURATION
-//		[개체명] 저녁 (1) TI_DURATION
-//		[개체명] 9:00 (1) TI_HOUR
-//		[개체명] 3:30 (1) TI_OTHERS
-//		[개체명] 5:00 (1) TI_HOUR
-//		[개체명] 11:30 (1) TI_OTHERS
-//
-//		[개체명] 📞062.413.7111 (1) DT_OTHERS
-//
-//		[개체명] 17:00- 22:00 (1) TI_DURATION
-//		[개체명] 21:00 (1) TI_HOUR
-//
-//		[개체명] 11:30-22:00🍔🍔🍔🍔🍔🍔🍔LAST ORDER (1) TI_DURATION
-//		[개체명] ❌월요일 (1) DT_OTHERS
-//
-//		[개체명] 🍔🍔🍔🍔🍔🍔주말 공휴일 (1) DT_OTHERS
-//
-//		[개체명] 06:00 (1) TI_HOUR
-//		[개체명] 04:00 (1) TI_HOUR
-//
-//		[개체명] 04:00 (1) TI_HOUR
-//		[개체명] ᴀᴍ (1) TI_HOUR
-//		[개체명] 18:00 (1) TI_HOUR
-//
-//		[개체명] 17시부터 (1) TI_OTHERS
-//		[개체명] 평일 (1) DT_OTHERS
-//		[개체명] 11시30분부터 22시 (1) TI_DURATION
-//		[개체명] 21:00 (1) TI_HOUR
-//		[개체명] 주말 (1) DT_OTHERS
 
+		TimeWordPreprocessor timeWordPreprocessor = new TimeWordPreprocessor();
+		ArrayList<NameEntity> entities = new ArrayList<NameEntity>();
+		
+		entities = preprocessor.run(str1);
+		timeWordPreprocessor.run(entities);
+		
+		entities = preprocessor.run(str2);
+		timeWordPreprocessor.run(entities);
+		
+		entities = preprocessor.run(str3);
+		timeWordPreprocessor.run(entities);
+		
+		entities = preprocessor.run(str4);
+		timeWordPreprocessor.run(entities);
+		
+		entities = preprocessor.run(str5);
+		timeWordPreprocessor.run(entities);
+		
+		entities = preprocessor.run(str6);
+		timeWordPreprocessor.run(entities);
+		
+		entities = preprocessor.run(str7);
+		timeWordPreprocessor.run(entities);
+		
+		entities = preprocessor.run(str8);
+		timeWordPreprocessor.run(entities);
+		
+		entities = preprocessor.run(str9);
+		timeWordPreprocessor.run(entities);
+
+	
 		
 		return "home";
 	}
@@ -185,11 +197,15 @@ public class HomeController {
 		
 		ArrayList<StoreVO> selectedList = new ArrayList<StoreVO>();
 		
-		for(int i = 0; i < list.size(); i++) {
-			if(polygon.isContains(list.get(i).getStore_x(), list.get(i).getStore_y())) {
-				selectedList.add(list.get(i));
-			}	
-		}
+//		for(int i = 0; i < list.size(); i++) {
+//			if(polygon.isContains(list.get(i).getStore_x(), list.get(i).getStore_y())) {
+//				selectedList.add(list.get(i));
+//			}	
+//		}
+		
+		selectedList = list;
+		
+
 		logger.info("1 : {}", selectedList.size());
 		
 		for(Iterator<StoreVO> iterator = selectedList.iterator(); iterator.hasNext(); ) {

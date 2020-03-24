@@ -12,6 +12,7 @@ public class TimeWordPreprocessor {
 	private static final Logger logger = LoggerFactory.getLogger(TimeWordPreprocessor.class);
 
 	public void run(ArrayList<NameEntity> entities) {
+		logger.info("전처리 시작");
 		if(entities != null) {
 			entities
 			.stream()

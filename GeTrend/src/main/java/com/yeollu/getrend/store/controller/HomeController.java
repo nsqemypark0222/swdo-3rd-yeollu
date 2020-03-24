@@ -52,9 +52,6 @@ public class HomeController {
 	
 	@Autowired
 	private InstaLocationDAO instaLocationDAO;
-	
-	@Autowired
-	private SearchedDAO searchedDAO;
 		
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {

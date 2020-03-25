@@ -20,6 +20,10 @@ import com.yeollu.getrend.store.vo.StoreVO;
 public class QueryStringSender {
 	
 	private static final Logger logger = LoggerFactory.getLogger(QueryStringSender.class);
+	
+	public static InstaStoreVO sendQueryStringTest(StoreVO store) {
+		return null;
+	}
 
 	public static InstaStoreVO sendQueryString(StoreVO store) {
 		Gson gson = new Gson();

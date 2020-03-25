@@ -8,6 +8,6 @@ public interface InstaLocationMapper {
 	public int insertInstaLocation(InstaLocationVO instaLocation);
 	public int insertInstaLocationList(ArrayList<InstaLocationVO> instaLocationList);
 	public int countInstaLocations();
-	public String isExistedInstaLocation(String store_no);
+	public String isExistedInstaLocation(String location_pk);
 	public InstaLocationVO selectInstaLocationByPk(String location_pk);
 }

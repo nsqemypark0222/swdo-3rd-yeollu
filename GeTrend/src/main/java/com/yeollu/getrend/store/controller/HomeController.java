@@ -1,15 +1,11 @@
 package com.yeollu.getrend.store.controller;
 
-import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
-import com.yeollu.getrend.store.util.json.core.JsonReader;
-import com.yeollu.getrend.store.util.json.vo.JsonLocationVO;
-import com.yeollu.getrend.store.util.map.core.LocationDistance;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
 import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
-import com.yeollu.getrend.store.util.preprocess.core.StringPreprocessor;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
+import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.SearchedStoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
@@ -73,10 +65,12 @@ public class HomeController {
 		ArrayList<StoreVO> list = storeDAO.selectAllStores();
 		
 		ArrayList<StoreVO> selectedList = new ArrayList<StoreVO>();
+		ArrayList<StoreVO> resultList = new ArrayList<StoreVO>();
 				
 		if(instaLocationDAO.countInstaLocations() == 0) {
 			logger.info("set DB initial datas");
 			selectedList = list;
+			resultList = selectedList;
 		} else {
 			Polygon polygon = new Polygon();
 			for(int i = 0; i < points.size(); i++) {
@@ -88,6 +82,8 @@ public class HomeController {
 					selectedList.add(list.get(i));
 				}	
 			}
+			
+			resultList = selectedList;
 			
 			for(Iterator<StoreVO> iterator = selectedList.iterator(); iterator.hasNext(); ) {
 				StoreVO store = iterator.next();
@@ -107,46 +103,40 @@ public class HomeController {
 			}
 		}
 		
-
 		for(StoreVO store : selectedList) {
-			if(!searchedDAO.isExistedSearchedStore(store.getStore_name())) {
-				InstaStoreVO instaStore = QueryStringSender.sendQueryString(store);
-				if(instaStore != null) {
-					ArrayList<InstaLocationVO> instaLocationList = instaStore.getInsta_locations().get(store.getStore_name());
-					logger.info("{}", store.getStore_name());
-					if(instaLocationList != null && instaLocationList.size() != 0) {
-//						if(instaLocationDAO.insertInstaLocationList(instaLocationList) > 0) {
-//							logger.info("insert insta location list success");
-//						} else {
-//							logger.info("insert insta location list fail");
-//						}
-						logger.info("{}", instaLocationList.size());
-						for(int i = 0; i < instaLocationList.size(); i++) {
-							InstaLocationVO instaLocation = instaLocationList.get(i);
-							if(!instaLocationDAO.isExistedInstaLocation(instaLocation.getStore_no())) {
-								if(instaLocationDAO.insertInstaLocation(instaLocation) > 0) {
-									logger.info("insert insta location success");
-								} else {
-									logger.info("insert insta location fail");
-								}
-							} else {
-								logger.info("insta location is existed");
-							}
+			InstaStoreVO instaStore = QueryStringSender.send(store);
+			if(instaStore != null) {
+				ArrayList<InstaLocationVO> instaLocationList = instaStore.getInsta_locations().get(store.getStore_no());
+				logger.info("{}", store.getStore_name());
+				for(int i = 0; i < instaLocationList.size(); i++) {
+					InstaLocationVO instaLocation = instaLocationList.get(i);
+					if(!instaLocationDAO.isExistedInstaLocation(instaLocation.getLocation_pk())) {
+						if(instaLocationDAO.insertInstaLocation(instaLocation) > 0) {
+//							logger.info("insert insta location success");
+						} else {
+//							logger.info("insert insta location fail");
 						}
-						logger.info("{}", instaLocationList.size());
 					} else {
-						logger.info("instaLocationList is null");
+//						logger.info("insta location is existed");
 					}
-					logger.info("{}", instaStore);
-				} else {
-//					logger.info("instaStore is null");
 				}
+			} else {
+//				logger.info("instaStore is null");
 			}
 		}
-		
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;
 		logger.info("걸린 시간 : {}", diff);
 		
+		for(int i = 0; i < resultList.size(); i++) {
+			ArrayList<InstaStoreInfoVO> instaLocationInfoList = storeDAO.selectInstaStoreInfo(resultList.get(i).getStore_no());
+			if(instaLocationInfoList == null || instaLocationInfoList.size() == 0) {
+				
+			} else {
+				for(int j = 0; j < instaLocationInfoList.size(); j++) {
+					logger.info("go to crawling location id: {}", instaLocationInfoList.get(j).getLocation_id());
+				}
+			}
+		}
 	}
 }

@@ -1,9 +1,6 @@
 drop sequence seq_searched_stores;
 drop sequence seq_insta_locations;
 drop table searched_stores;
-
-
-
 drop table insta_locations;
 drop table users;
 drop table stores;
@@ -36,9 +33,9 @@ create table stores(
     , store_y number
 );
 
+-- sqlldr userid=hr/hr control='C:\Users\user\Desktop\insta_locations_control.ctl'
 create table insta_locations (
-    location_no number primary key
-    , location_pk varchar2(200)
+    location_pk varchar2(200) primary key
     , location_id varchar2(200)
     , store_no varchar2(200)
     , location_x number
@@ -48,13 +45,14 @@ create table insta_locations (
 );
 
 create table searched_stores (
-    searched_no number primary key
-    , store_name varchar2(200)
+    store_name varchar2(200) primary key
     , indate date default sysdate
 );
 
-create sequence seq_insta_locations;
+
 create sequence seq_searched_stores;
+
+commit;
 
 select * from users;
 select * from stores;
@@ -63,11 +61,10 @@ select count(*) from insta_locations;
 select * from searched_stores;
 
 
-select * 
+select s.store_no
 from insta_locations i, stores s
-where i.store_no = s.store_no;
-
-commit;
+where i.store_no = s.store_no
+group by s.store_no;
 
 select location_id, count(location_id)
 from insta_locations

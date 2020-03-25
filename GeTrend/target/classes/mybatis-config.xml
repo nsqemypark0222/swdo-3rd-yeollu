@@ -8,6 +8,7 @@
 		<typeAlias type="com.yeollu.getrend.store.vo.StoreVO" alias="store"/>
 		<typeAlias type="com.yeollu.getrend.store.vo.InstaLocationVO" alias="instaLocation"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.SearchedStoreVO" alias="searchedStore"/>	
+		<typeAlias type="com.yeollu.getrend.store.vo.InstaStoreInfoVO" alias="instaStoreInfo"/>	
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml"/>

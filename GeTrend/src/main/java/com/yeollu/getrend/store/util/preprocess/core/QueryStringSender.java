@@ -20,12 +20,8 @@ import com.yeollu.getrend.store.vo.StoreVO;
 public class QueryStringSender {
 	
 	private static final Logger logger = LoggerFactory.getLogger(QueryStringSender.class);
-	
-	public static InstaStoreVO sendQueryStringTest(StoreVO store) {
-		return null;
-	}
 
-	public static InstaStoreVO sendQueryString(StoreVO store) {
+	public static InstaStoreVO send(StoreVO store) {
 		Gson gson = new Gson();
 		String storeName = "";
 		String url = "";
@@ -48,11 +44,9 @@ public class QueryStringSender {
 					if(location.isNull("lng") || location.isNull("lat")) {
 						continue;
 					}
-//					if(location.getString("name").trim().startsWith(store.getStore_name())		
-//					if(location.getString("name").trim().equals(store.getStore_name())
 					if(location.getString("name").trim().contains(store.getStore_name())
 							&& (LocationDistance.haversine(store.getStore_x(), store.getStore_y(), location.getDouble("lng"), location.getDouble("lat"))) < 0.1) {
-						String key = StringPreprocessor.stringReplace(location.getString("name").trim());
+						String key = store.getStore_no();
 						ArrayList<JsonLocationVO> locationList = new ArrayList<JsonLocationVO>();
 						if(locationMap.containsKey(key)) {
 							locationList = locationMap.get(key);

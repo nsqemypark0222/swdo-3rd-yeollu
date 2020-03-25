@@ -8,15 +8,13 @@
 <insert id="insertInstaLocation" parameterType="instaLocation">
 insert into 
 	insta_locations (
-		location_no
-		, location_pk
+		location_pk
 		, location_id
 		, store_no
 		, location_x
 		, location_y
 	) values(
-		seq_insta_locations.nextval
-		, #{location_pk}
+		#{location_pk}
 		, #{location_id}
 		, #{store_no}
 		, #{location_x}
@@ -27,15 +25,13 @@ insert into
 <insert id="insertInstaLocationList" parameterType="list">
 <foreach collection="list" item="item" index="index" separator=" " open="insert all" close="select * from dual">
 	into insta_locations (
-		location_no
-		, location_pk
+		location_pk
 		, location_id
 		, store_no
 		, location_x
 		, location_y
 	) values (
-		seq_insta_locations.nextval
-		, #{item.location_pk}
+		#{item.location_pk}
 		, #{item.location_id}
 		, #{item.store_no}
 		, #{item.location_x}
@@ -57,7 +53,7 @@ select
 from
 	insta_locations
 where
-	store_no = #{store_no}
+	location_pk = #{location_pk}
 </select>
 
 <select id="selectInstaLocationByPk" parameterType="string" resultType="instaLocation">

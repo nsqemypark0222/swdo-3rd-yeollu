@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class InstaLocationVO {
-	private int location_no;
 	private String location_pk;
 	private String location_id;
 	private String store_no;

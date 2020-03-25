@@ -8,11 +8,9 @@
 <insert id="insertSearchedStore" parameterType="searchedStore">
 insert into 
 	searched_stores (
-		searched_no
-		, store_name
+		store_name
 	) values(
-		seq_searched_stores.nextval
-		, #{store_name}
+		#{store_name}
 	)
 </insert>
 

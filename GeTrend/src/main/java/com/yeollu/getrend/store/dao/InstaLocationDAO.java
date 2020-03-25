@@ -53,12 +53,12 @@ public class InstaLocationDAO {
 		return count;
 	}
 	
-	public boolean isExistedInstaLocation(String store_no) {
+	public boolean isExistedInstaLocation(String location_pk) {
 		boolean result = false;
 		
 		try {
 			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);
-			if(mapper.isExistedInstaLocation(store_no).equals("true")) {
+			if(mapper.isExistedInstaLocation(location_pk).equals("true")) {
 				result = true;
 			}
 		} catch (Exception e) {

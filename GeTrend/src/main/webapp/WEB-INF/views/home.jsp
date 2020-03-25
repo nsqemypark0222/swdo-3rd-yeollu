@@ -40,14 +40,6 @@
    	
    	</div>
    	
-   	<div>
-   		<input type="button" value="자연어 처리 테스트" id="naturalLanguageProcessing">	
-   	</div>
-   	
-   	<div>
-   		<input type="button" value="네이버 테스트" id="naverTest">	
-   	</div>
-   	
 
    	
    	<div>

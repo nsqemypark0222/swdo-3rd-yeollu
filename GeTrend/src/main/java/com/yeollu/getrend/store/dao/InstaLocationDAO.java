@@ -40,12 +40,25 @@ public class InstaLocationDAO {
 		return cnt;
 	}
 	
-	public boolean isExistedInstaLocationId(String store_no) {
+	public int countInstaLocations() {
+		int count = 0;
+		
+		try {
+			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);
+			count = mapper.countInstaLocations();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
+	
+	public boolean isExistedInstaLocation(String store_no) {
 		boolean result = false;
 		
 		try {
 			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);
-			if(mapper.isExistedInstaLocationId(store_no).equals("true")) {
+			if(mapper.isExistedInstaLocation(store_no).equals("true")) {
 				result = true;
 			}
 		} catch (Exception e) {
@@ -55,12 +68,12 @@ public class InstaLocationDAO {
 		return result;
 	}
 	
-	public InstaLocationVO selectInstaLocationById(String location_id) {
+	public InstaLocationVO selectInstaLocationByPk(String location_pk) {
 		InstaLocationVO instaLocation = null;
 		
 		try {
 			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);
-			instaLocation = mapper.selectInstaLocationById(location_id);
+			instaLocation = mapper.selectInstaLocationByPk(location_pk);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,6 +1,9 @@
-drop sequence seq_searched;
-drop table searched;
-drop table insta_users;
+drop sequence seq_searched_stores;
+drop sequence seq_insta_locations;
+drop table searched_stores;
+
+
+
 drop table insta_locations;
 drop table users;
 drop table stores;
@@ -33,43 +36,40 @@ create table stores(
     , store_y number
 );
 
-create table insta_users (
-    insta_id varchar2(200) primary key
-    , store_no varchar2(200)
-    , profile_pic_url varchar2(2000)
-    , indate date default sysdate
-    , constraint fk1_insta_users foreign key (store_no) references stores(store_no)
-);
-
 create table insta_locations (
-    location_id varchar2(200) primary key
+    location_no number primary key
+    , location_pk varchar2(200)
+    , location_id varchar2(200)
     , store_no varchar2(200)
     , location_x number
     , location_y number
-    , indate date default sysdate
+    , location_indate date default sysdate
     , constraint fk1_insta_locations foreign key (store_no) references stores(store_no)
 );
 
-create table searched (
+create table searched_stores (
     searched_no number primary key
     , store_name varchar2(200)
     , indate date default sysdate
 );
 
-create sequence seq_searched;
+create sequence seq_insta_locations;
+create sequence seq_searched_stores;
 
 select * from users;
 select * from stores;
-select * from insta_users;
 select * from insta_locations;
-select * from searched;
+select count(*) from insta_locations;
+select * from searched_stores;
 
-select u.insta_id, s.store_no, s.store_name
-from insta_users u, stores s
-where u.store_no = s.store_no;
 
 select * 
 from insta_locations i, stores s
 where i.store_no = s.store_no;
 
 commit;
+
+select location_id, count(location_id)
+from insta_locations
+group by location_id
+order by count(location_id) desc;

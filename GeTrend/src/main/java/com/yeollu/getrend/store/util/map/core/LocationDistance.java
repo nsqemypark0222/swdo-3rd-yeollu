@@ -1,4 +1,4 @@
-package com.yeollu.getrend.map.core;
+package com.yeollu.getrend.store.util.map.core;
 
 public class LocationDistance {
 	public static final double R = 6372.8;

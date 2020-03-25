@@ -4,19 +4,19 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.yeollu.getrend.store.vo.SearchedVO;
+import com.yeollu.getrend.store.vo.SearchedStoreVO;
 
 @Repository
-public class SearchedDAO {
+public class SearchedStoreDAO {
 	@Autowired
 	private SqlSession session;
 	
-	public boolean isExistedSearchedTerm(String store_name) {
+	public boolean isExistedSearchedStore(String store_name) {
 		boolean result = false;
 		
 		try {
-			SearchedMapper mapper = session.getMapper(SearchedMapper.class);
-			if(mapper.isExistedSearchedTerm(store_name).equals("true")) {
+			SearchedStoreMapper mapper = session.getMapper(SearchedStoreMapper.class);
+			if(mapper.isExistedSearchedStore(store_name).equals("true")) {
 				result = true;
 			}
 		} catch (Exception e) {
@@ -26,12 +26,12 @@ public class SearchedDAO {
 		return result;
 	}
 	
-	public int insertSearchedTerm(SearchedVO searchedTerm) {
+	public int insertSearchedStore(SearchedStoreVO searchedStore) {
 		int cnt = 0;
 		
 		try {
-			SearchedMapper mapper = session.getMapper(SearchedMapper.class);
-			cnt = mapper.insertSearchedTerm(searchedTerm);
+			SearchedStoreMapper mapper = session.getMapper(SearchedStoreMapper.class);
+			cnt = mapper.insertSearchedStore(searchedStore);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

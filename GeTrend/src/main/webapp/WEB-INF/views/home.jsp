@@ -33,7 +33,7 @@
 	</p>
 	
 	<p class="getdata">
-   		<button onclick="getDataFromDrawingMap()">조회</button>
+   		<button onclick="getDataFromDrawingMap()">조회 하기</button>
    	</p>
    	
    	<div id="print">

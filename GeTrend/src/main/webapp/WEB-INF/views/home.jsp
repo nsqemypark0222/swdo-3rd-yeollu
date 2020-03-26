@@ -40,8 +40,16 @@
    	
    	</div>
    	
-   	<div id="desc">
-   	
+   	<div>
+   		<table id="table" border="1">
+   			<tr>
+   				<th>STORE_NO</th>
+   				<th>STORE_X</th>
+   				<th>STORE_Y</th>
+   				<th>STORE_NAME</th>
+   				<th>PROFILE_URL</th>
+   			</tr>
+   		</table>
    	</div>
    	
 
@@ -74,8 +82,17 @@
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify(points),
 					success: function(result) {
-						alert("성공");
-						$("#desc").text(result);
+						alert($(result));
+						$(result).each(function(index, item) {
+							$("#table").append(
+								"<tr>" + "<td>" + item.store_no + "</td>"
+										+ "<td>" + item.store_x + "</td>"
+										+ "<td>" + item.store_y + "</td>"
+										+ "<td>" + item.store_name + "</td>"
+										+ '<td><img src=' + item.profile_url + ' /></td>'
+							);
+						});
+						
 			        },
 			        error: function(request, status, error){
 			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);

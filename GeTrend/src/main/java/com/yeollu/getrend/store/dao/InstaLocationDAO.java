@@ -14,25 +14,12 @@ public class InstaLocationDAO {
 	@Autowired
 	private SqlSession session;
 	
-	public int insertInstaLocation(InstaLocationVO instaLocation) {
+	public int insertInstaLocation(InstaLocationVO location_id) {
 		int cnt = 0;
 		
 		try {
 			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);
-			cnt = mapper.insertInstaLocation(instaLocation);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return cnt;
-	}
-	
-	public int insertInstaLocationList(ArrayList<InstaLocationVO> instaLocationList) {
-		int cnt = 0;
-		
-		try {
-			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);
-			cnt = mapper.insertInstaLocationList(instaLocationList);
+			cnt = mapper.insertInstaLocation(location_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -53,12 +40,12 @@ public class InstaLocationDAO {
 		return count;
 	}
 	
-	public boolean isExistedInstaLocation(String location_pk) {
+	public boolean isExistedInstaLocation(String location_id) {
 		boolean result = false;
 		
 		try {
 			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);
-			if(mapper.isExistedInstaLocation(location_pk).equals("true")) {
+			if(mapper.isExistedInstaLocation(location_id).equals("true")) {
 				result = true;
 			}
 		} catch (Exception e) {
@@ -66,18 +53,5 @@ public class InstaLocationDAO {
 		}
 		
 		return result;
-	}
-	
-	public InstaLocationVO selectInstaLocationByPk(String location_pk) {
-		InstaLocationVO instaLocation = null;
-		
-		try {
-			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);
-			instaLocation = mapper.selectInstaLocationByPk(location_pk);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return instaLocation;
 	}
 }

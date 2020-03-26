@@ -22,7 +22,7 @@ from
 	stores
 </select>
 
-<select id="selectInstaStoreInfo" parameterType="store" resultType="instaStoreInfo">
+<select id="selectInstaStore" parameterType="string" resultType="instaStore">
 select
 	s.store_no
 	, s.store_name

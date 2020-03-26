@@ -1,5 +1,4 @@
 drop sequence seq_searched_stores;
-drop sequence seq_insta_locations;
 drop table searched_stores;
 drop table insta_locations;
 drop table users;
@@ -35,18 +34,16 @@ create table stores(
 
 -- sqlldr userid=hr/hr control='C:\Users\user\Desktop\insta_locations_control.ctl'
 create table insta_locations (
-    location_pk varchar2(200) primary key
-    , location_id varchar2(200)
+    location_id varchar2(200) primary key
     , store_no varchar2(200)
-    , location_x number
-    , location_y number
     , location_indate date default sysdate
     , constraint fk1_insta_locations foreign key (store_no) references stores(store_no)
 );
 
 create table searched_stores (
-    store_name varchar2(200) primary key
-    , indate date default sysdate
+    searched_no number primary key
+    , store_name varchar2(200)
+    , searched_indate date default sysdate
 );
 
 
@@ -54,12 +51,31 @@ create sequence seq_searched_stores;
 
 commit;
 
+
+
+
+
+
+
+
+
+
+
+
+
 select * from users;
 select * from stores;
 select * from insta_locations;
 select count(*) from insta_locations;
 select * from searched_stores;
 
+select
+	decode(count(*), 0, 'false', 'true') as result
+from
+	searched_stores
+where
+	store_name = '¸ð¶õ½ÄÅ¹'
+	and to_char(searched_indate, 'HH24') = to_char(sysdate, 'HH24');
 
 select s.store_no
 from insta_locations i, stores s
@@ -70,3 +86,12 @@ select location_id, count(location_id)
 from insta_locations
 group by location_id
 order by count(location_id) desc;
+
+select
+	s.store_no, count(s.store_no)
+from
+	stores s, insta_locations l
+where
+	s.store_no = l.store_no
+group by s.store_no
+order by count(s.store_no) desc;

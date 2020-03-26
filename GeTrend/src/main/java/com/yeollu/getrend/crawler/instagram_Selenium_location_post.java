@@ -78,14 +78,14 @@ public class instagram_Selenium_location_post {
 			 JavascriptExecutor js =(JavascriptExecutor)driver;    
 			 Document doc = Jsoup.parse(driver.getPageSource()); 
 			 
-			 System.out.println("======================================================");
-			 System.out.println("가게 :  " + driver.getTitle());
+//			 System.out.println("======================================================");
+//			 System.out.println("가게 :  " + driver.getTitle());
 			 
 			 //대표 썸네일 
 			 Thread.sleep(1000);
 			 wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ECCnW")));
 	         String thum = doc.selectFirst(".ECCnW").attr("src");
-	         System.out.println("대표 사진 : " + thum);
+//	         System.out.println("대표 사진 : " + thum);
 	         list.add(thum);
 	         
 	         //인기 포스트 - 10개
@@ -93,10 +93,10 @@ public class instagram_Selenium_location_post {
 	         for(int j = 0; j < 10; j++) {
 	        	 Element div = doc.select(".v1Nh3.kIKUG._bz0w").get(j);
 	        	 String img = div.selectFirst("img").attr("srcset").split(" ")[0];
-	        	 System.out.println(j + 1 + "번 째 사진 : " + img);
+//	        	 System.out.println(j + 1 + "번 째 사진 : " + img);
 	        	 list.add(img);
 	         }   	           
-			  System.out.println("======================================================");
+//			  System.out.println("======================================================");
 		 
 		  } catch(Exception e) {
 		 	e.printStackTrace();

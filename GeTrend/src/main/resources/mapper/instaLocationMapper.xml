@@ -8,36 +8,12 @@
 <insert id="insertInstaLocation" parameterType="instaLocation">
 insert into 
 	insta_locations (
-		location_pk
-		, location_id
+		location_id
 		, store_no
-		, location_x
-		, location_y
 	) values(
-		#{location_pk}
-		, #{location_id}
+		#{location_id}
 		, #{store_no}
-		, #{location_x}
-		, #{location_y}
 	)
-</insert>
-
-<insert id="insertInstaLocationList" parameterType="list">
-<foreach collection="list" item="item" index="index" separator=" " open="insert all" close="select * from dual">
-	into insta_locations (
-		location_pk
-		, location_id
-		, store_no
-		, location_x
-		, location_y
-	) values (
-		#{item.location_pk}
-		, #{item.location_id}
-		, #{item.store_no}
-		, #{item.location_x}
-		, #{item.location_y}
-	)
-</foreach>
 </insert>
 
 <select id="countInstaLocations" resultType="int">
@@ -53,21 +29,7 @@ select
 from
 	insta_locations
 where
-	location_pk = #{location_pk}
-</select>
-
-<select id="selectInstaLocationByPk" parameterType="string" resultType="instaLocation">
-select
-	location_pk
-	, location_id
-	, store_no
-	, location_x
-	, location_y
-	, location_indate
-from
-	insta_locations
-where
-	location_pk = #{location_pk}
+	location_id = #{location_id}
 </select>
 
 </mapper>

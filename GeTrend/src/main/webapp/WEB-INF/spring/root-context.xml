@@ -35,5 +35,23 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	
+	<!-- 이메일 관련 -->
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+			<property name="port" value="587" />
+			<property name="username" value="GeTrendd@gmail.com" />
+			<property name="password" value="yeollu0727" />
+			<property name="javaMailProperties">
+				<props>
+					<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+					<prop key="mail.smtp.starttls.enable">true</prop>
+					<prop key="mail.smtp.auth">true</prop>
+	</props>
+		</property>
+	</bean>
+	<bean id="mailService" class="com.yeollu.getrend.user.util.MailServiceImpl">
+		<property name="javaMailSender" ref="javaMailSender" />
+	</bean>
 		
 </beans>

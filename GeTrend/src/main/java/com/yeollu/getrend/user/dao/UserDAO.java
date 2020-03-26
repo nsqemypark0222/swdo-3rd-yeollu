@@ -20,15 +20,6 @@ public class UserDAO {
 			e.printStackTrace();
 		}return cnt;
 	}
-	public UserVO selectOne(String user_id) {
-		UserVO user = null;
-		try {
-			UserMapper mapper = session.getMapper(UserMapper.class);
-			user = mapper.selectOne(user_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}return user;
-	}
 	public int updateUser(UserVO user) {
 		int cnt = 0;
 		try {
@@ -39,13 +30,22 @@ public class UserDAO {
 		}return cnt;
 	}
 	
-	public int deleteUser(String user_id) {
+	public int deleteUser(String user_email) {
 		int cnt = 0;
 		try {
 			UserMapper mapper = session.getMapper(UserMapper.class);
-			cnt = mapper.deleteUser(user_id);
+			cnt = mapper.deleteUser(user_email);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}return cnt;
+	}
+	public UserVO selectEmail(String user_email) {
+		UserVO user = null;
+		try {
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			user = mapper.selectEmail(user_email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return user;
 	}
 }

@@ -3,9 +3,18 @@ package com.yeollu.getrend.store.controller;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yeollu.getrend.crawler.instagram_Selenium_location_post;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
@@ -44,20 +54,14 @@ public class HomeController {
 		
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime", formattedDate);
 		
 		return "home";
 	}
 	
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	@RequestMapping(value = "/search", method = RequestMethod.POST, produces = "application/text; charset=UTF-8")
 	@ResponseBody
-	public void search(@RequestBody ArrayList<Point> points) {
+	public String search(@RequestBody ArrayList<Point> points) {
 		logger.info("search");
 		long startTime = System.currentTimeMillis();
 		
@@ -121,22 +125,80 @@ public class HomeController {
 					}
 				}
 			} else {
-//				logger.info("instaStore is null");
+				logger.info("instaStore is null");
 			}
 		}
-		long endTime = System.currentTimeMillis();
-		long diff = (endTime - startTime) / 1000;
-		logger.info("걸린 시간 : {}", diff);
+		
+		
+		
+		String str = "";
+	
 		
 		for(int i = 0; i < resultList.size(); i++) {
 			ArrayList<InstaStoreInfoVO> instaLocationInfoList = storeDAO.selectInstaStoreInfo(resultList.get(i).getStore_no());
+			logger.info("{}", instaLocationInfoList);
 			if(instaLocationInfoList == null || instaLocationInfoList.size() == 0) {
 				
 			} else {
 				for(int j = 0; j < instaLocationInfoList.size(); j++) {
-					logger.info("go to crawling location id: {}", instaLocationInfoList.get(j).getLocation_id());
+					try {
+						boolean flag = true;
+						logger.info("location id: {}", instaLocationInfoList.get(j).getLocation_id());
+						
+						logger.info("로케이션 검색 시 최신 포스트에서 음식 사진 정보 얻기");
+						instagram_Selenium_location_post ins = new instagram_Selenium_location_post();
+						
+						//썸네일  + 인기 포스트 10개
+						ArrayList<String> _list = ins.location_post("https://www.instagram.com/explore/locations/" + instaLocationInfoList.get(j).getLocation_id());
+						
+						str += _list.stream()
+								.map(n -> String.valueOf(n))
+								.collect(Collectors.joining());
+
+						
+						logger.info("mango_store ");
+						ArrayList<String> mango_store = new ArrayList<String>();
+						System.setProperty("webdriver.chrome.driver", "C:/sts/sts-4.5.0.RELEASE/chromedriver.exe");    	 			 
+						WebDriver driver = new ChromeDriver();  
+						WebDriverWait wait = new WebDriverWait(driver, 3);
+						
+						logger.info("{}", instaLocationInfoList.get(j).getStore_name());
+						driver.get("https://www.mangoplate.com/search/" + instaLocationInfoList.get(j).getStore_name());
+						 
+						//첫 시도에서 팝업창 있으면 닫기
+						if(flag && By.cssSelector(".dfp_ad_front_banner_wrap iframe") != null) {
+							WebElement iframe = driver.findElement(By.cssSelector(".dfp_ad_front_banner_wrap iframe"));
+							driver.switchTo().frame(iframe).findElement(By.cssSelector(".ad_block_btn")).click();
+							//driver.switchTo().defaultContent();
+							driver.switchTo().parentFrame();
+							flag = false;
+						}
+						 
+						//게시물 중 첫번째 선택
+						wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".center-croping.lazy")));
+						driver.findElements(By.cssSelector(".center-croping.lazy")).get(0).click();		 
+						 
+						//가게 설명 가져오기
+						wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".info.no_menu")));
+						List<WebElement> text =driver.findElements(By.cssSelector(".info.no_menu td"));
+						for (WebElement ele : text) {
+							System.out.println(ele.getText());		
+							str += ele.getText();
+						}
+						driver.close();
+					} catch (Exception e) {
+						logger.info("Exception");
+						continue;
+					}
 				}
 			}
 		}
+		
+		long endTime = System.currentTimeMillis();
+		long diff = (endTime - startTime) / 1000;
+		logger.info("걸린 시간 : {}", diff);
+		
+		logger.info("{}", str);
+		return str;
 	}
 }

@@ -32,7 +32,6 @@ create table stores(
     , store_y number
 );
 
--- sqlldr userid=hr/hr control='C:\Users\user\Desktop\insta_locations_control.ctl'
 create table insta_locations (
     location_id varchar2(200) primary key
     , store_no varchar2(200)

@@ -1,5 +1,8 @@
 package com.yeollu.getrend.user.controller;
 
+import java.util.Random;
+
+import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,9 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yeollu.getrend.user.dao.UserDAO;
+import com.yeollu.getrend.user.util.MailService;
 import com.yeollu.getrend.user.vo.UserVO;
 
 @Controller
@@ -26,26 +31,84 @@ public class UserController {
 	@Autowired
 	private UserDAO dao;
 	
+	@Inject
+	private MailService mailService;
+	
+	public void setMailService(MailService mailService) {
+		this.mailService = mailService;
+	}
+	
 	@RequestMapping(value="/userJoin", method=RequestMethod.GET)
 	public String userJoin() {
 		logger.info("회원가입페이지");
 		return "/users/userJoin";
 	}
 	
+	@RequestMapping(value="/emailCheck",method=RequestMethod.GET)
+	@ResponseBody
+	public String emailCheck(String user_email) {
+		String result = "1";
+		if(dao.selectEmail(user_email) == null) {
+			logger.info("email is null");
+			result = "0";
+		}
+		logger.info(result+"");
+		return result;
+	}
+	
+	// 회원가입 이메일 인증
+    @RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
+    @ResponseBody
+    public String sendMailAuth(HttpSession session, @RequestParam String user_email) {
+        logger.info("dd");
+    	int ran = new Random().nextInt(100000) + 10000; // 10000 ~ 99999
+        String joinCode = String.valueOf(ran);
+        session.setAttribute("joinCode", joinCode);
+ 
+        String subject = "회원가입 인증 코드 발급 안내 입니다.";
+        StringBuilder sb = new StringBuilder();
+        sb.append("귀하의 인증 코드는 " + joinCode + " 입니다.");
+        boolean result = mailService.send(subject, sb.toString(), "getrendd@gmail.com", user_email, null);
+        if(result) {
+        	return "success";
+        }
+        else {
+        	return "fail";
+        }
+    }
+    
+    @RequestMapping(value = "/joinCodeCheck", method = RequestMethod.POST)
+    @ResponseBody
+    public String joinCodeCheck(HttpSession session, @RequestParam String joinCode) {
+    	logger.info("authNumCheck");
+    	String _joinCode = session.getAttribute("joinCode").toString();
+    	
+    	logger.info("_joinCode : {}", _joinCode);
+    	logger.info("joinCode : {}", joinCode);
+    	
+    	if(_joinCode.equals(joinCode)) {
+    		
+        	return "success";
+        }
+        else {
+        	return "fail";
+        }
+    }
+    
 	@RequestMapping(value="/userLogin", method=RequestMethod.GET)
 	public String userLogin(HttpServletRequest request,Model model) {
 		logger.info("로그인페이지");
 		Cookie[] cookies = request.getCookies();
-		String rememberId = null;
+		String rememberemail = null;
 		if(cookies != null) {
 			for(Cookie c : cookies) {
 				String name = c.getName(); 
-				if(name.equals("rId")) {
-					rememberId = c.getValue();
+				if(name.equals("remail")) {
+					rememberemail = c.getValue();
 				}
 			}
 		}
-		model.addAttribute("rememberId",rememberId);
+		model.addAttribute("rememberemail",rememberemail);
 		return "/users/userLogin";
 	}
 	
@@ -53,6 +116,8 @@ public class UserController {
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(UserVO user) {
+		logger.info("회원가입");
+		user.setUser_type("local");
 		int cnt = dao.join(user);
 		if(cnt>0) logger.info("가입 성공");
 		else logger.info("가입 실패");
@@ -63,14 +128,14 @@ public class UserController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(UserVO user, String remember, 
 			HttpSession session, HttpServletResponse response, Model model) {
-		UserVO newUser = dao.selectOne(user.getUser_id());
+		UserVO newUser = dao.selectEmail(user.getUser_email());
 		String errMsg1 = "";
 		String errMsg2 = "";
 		if(newUser != null) {
 			if(user.getUser_pw().equals(newUser.getUser_pw())) {
-				session.setAttribute("loginId", user.getUser_id());
+				session.setAttribute("loginemail", user.getUser_email());
 				if(remember != null && remember.equals("1")) {
-					Cookie cookie = new Cookie("rId", user.getUser_id());
+					Cookie cookie = new Cookie("remail", user.getUser_email());
 					cookie.setMaxAge(60*60*24*7);
 					response.addCookie(cookie);
 				}
@@ -84,24 +149,24 @@ public class UserController {
 			model.addAttribute("errMsg1", errMsg1);
 			return "/users/userLogin";
 		}
-		logger.info("{}",session.getAttribute("loginId"));
+		logger.info("{}",session.getAttribute("loginemail"));
 		logger.info("로그인 성공");
 		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public String logout(HttpSession session) {
-		session.removeAttribute("loginId");
+		session.removeAttribute("loginemail");
 		logger.info("로그아웃");
 		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/userUpdate", method=RequestMethod.GET)
 	public String userUpdate(HttpSession session, Model model) {
-		String user_id = (String)session.getAttribute("loginId");
-		UserVO user = dao.selectOne(user_id);
+		String user_email = (String)session.getAttribute("loginemail");
+		UserVO user = dao.selectEmail(user_email);
 		model.addAttribute("user", user);
-		logger.info("user_id {}",user_id);
+		logger.info("user_email {}",user_email);
 		return "/users/userUpdate";
 	}
 	
@@ -119,9 +184,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="deleteUser", method=RequestMethod.GET)
-	public String deleteUser(String user_id, HttpSession session) {
-		session.removeAttribute("loginId");
-		int cnt = dao.deleteUser(user_id);
+	public String deleteUser(String user_email, HttpSession session) {
+		session.removeAttribute("loginemail");
+		int cnt = dao.deleteUser(user_email);
 	
 		if(cnt> 0) {
 			logger.info("삭제 성공");

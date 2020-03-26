@@ -61,7 +61,7 @@ public class QueryStringSender {
 //					logger.info("{}", key);
 //				}
 			} else {
-				logger.info("places is empty!!");
+//				logger.info("places is empty!!");
 				return null;
 			}
 			

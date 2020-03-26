@@ -40,6 +40,10 @@
    	
    	</div>
    	
+   	<div id="desc">
+   	
+   	</div>
+   	
 
    	
    	<div>
@@ -69,8 +73,9 @@
 					type: "post",
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify(points),
-					success: function() {
+					success: function(result) {
 						alert("성공");
+						$("#desc").text(result);
 			        },
 			        error: function(request, status, error){
 			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);

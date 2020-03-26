@@ -8,9 +8,11 @@
 <insert id="insertSearchedStore" parameterType="searchedStore">
 insert into 
 	searched_stores (
-		store_name
+		searched_no
+		, store_name
 	) values(
-		#{store_name}
+		seq_searched_stores.nextval
+		, #{store_name}
 	)
 </insert>
 
@@ -21,6 +23,7 @@ from
 	searched_stores
 where
 	store_name = #{store_name}
+	and to_char(searched_indate, 'HH24') = to_char(sysdate, 'HH24')
 </select>
 
 </mapper>

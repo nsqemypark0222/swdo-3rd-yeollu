@@ -51,8 +51,8 @@
    	
    	<div>
 		<c:choose>
-			<c:when test="${sessionScope.loginId != null}">
-				${sessionScope.loginId}님 환영합니다!<br/>
+			<c:when test="${sessionScope.loginemail != null}">
+				${sessionScope.loginname}님 환영합니다!<br/>
 				<a href="users/userUpdate">회원정보 수정</a>
 				<a href="users/logout">로그아웃</a>
 			</c:when>

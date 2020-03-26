@@ -23,8 +23,8 @@ $(function(){
 	<form action="login" method="post">
 		<table>
 		<tr>
-			<td><label>ID</label></td>
-			<td><input type="text" id="user_id" name="user_id" value="${rememberId}"></td>
+			<td><label>E-MAIL</label></td>
+			<td><input type="email" id="user_email" name="user_email" value="${rememberemail}"></td>
 			<td><input type="checkbox" name="remember" value="1"> 아이디 기억하기</td>
 		</tr>
 		<c:if test='${!errMsg1.equals("")}'>
@@ -48,56 +48,70 @@ $(function(){
 		 </tr>
 		</table>
 	</form>
-		
-		<a id="kakao-login-btn"></a>
-		<a href="http://developers.kakao.com/logout"></a>
-		<script type='text/javascript'>
-			//<![CDATA[
-			// 사용할 앱의 JavaScript 키를 설정해 주세요.
-			Kakao.init('<spring:eval expression="@api['KAKAOLOGIN_APPKEY']" />');
-			
-			// 카카오 로그인 버튼을 생성합니다.
-			Kakao.Auth.createLoginButton({
-			  container: '#kakao-login-btn',
-			  success: function(authObj) {
-				Kakao.API.request({
-					url:'/v2/user/me',
-					success:function(res){
-				  		//alert(JSON.stringify(res));
-				  			var userId = res.id;
-				  			var userEmail = res.kakao_account.email;
-				  			var kakaonickname = res.properties.nickname;
-				  			console.log(userId);
-				  			console.log(userEmail);
-				  			console.log(res.properties['nickname']);
-				  			console.log(authObj.access_token);
-			    		//alert(JSON.stringify(authObj));
-				  			 document.write(res.properties.nickname+"님 환영합니다.");
-						}	
-					})	
-			  },
-			  fail: function(err) {
-			     alert(JSON.stringify(err));
-			  }
-			});
-			//]]>
-		</script>
-		
-		<div id="naverIdLogin"></div>  <!-- 버튼이 들어갈 위치 선언. ID는 반드시 지정된 값으로 설정하여야 합니다.-->
-
+		<div id="socialbtn">
+	               <div id="kakaoIdLogin"><a id="kakao-login-btn"></a></div>
+	               <div id="naverIdLogin"></div>  <!-- 버튼이 들어갈 위치 선언. ID는 반드시 지정된 값으로 설정하여야 합니다.-->
+	               <div style="clear:both;"></div>
+	    </div>
+	           
 		<script type="text/javascript">
-			var naverLogin = new naver.LoginWithNaverId(
-				{
-					clientId: '{<spring:eval expression="@api['NAVERLOGIN_APPKEY']" />}',
-					callbackUrl: "{http://localhost:8880}",
-					loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
-				}
-			);
-			
-		   /* 설정정보를 초기화하고 연동을 준비 */
-			naverLogin.init();
-		</script>
+					var naverLogin = new naver.LoginWithNaverId(
+						{
+							clientId: 'mhTruKtoEj6RAeMJZQfY',
+							callbackUrl: "http://localhost:8880/getrend/users/callback",
+							loginButton: {color: "green", type: 3, height: 49} /* 로그인 버튼의 타입을 지정 */
+						}
+					);
+					
+				   /* 설정정보를 초기화하고 연동을 준비 */
+					naverLogin.init();
+				</script>
 		
+				<form action="kakaoLogin" id="kakao" method="post">
+				<input type="hidden" name="user_pw">
+				<input type="hidden" name="user_name">
+				<input type="hidden" name="user_email">
+				</form>
+				
+				
+				<a href="http://developers.kakao.com/logout"></a>
+				<script type='text/javascript'>
+					//<![CDATA[
+					// 사용할 앱의 JavaScript 키를 설정해 주세요.
+					Kakao.init('<spring:eval expression="@api['KAKAOLOGIN_APPKEY']" />');
+					// 카카오 로그인 버튼을 생성합니다.
+					Kakao.Auth.createLoginButton({
+					  container: '#kakao-login-btn',
+					  success: function(authObj) {
+						Kakao.API.request({
+							url:'/v2/user/me',
+							success:function(res){
+									
+						  			var kakaoLogin = document.getElementById("kakao");
+						  			console.log(kakaoLogin.childNodes);
+						  			var kakaoId = kakaoLogin.childNodes[1];
+						  			var kakaonickname = kakaoLogin.childNodes[3];
+						  			var kakaoemail = kakaoLogin.childNodes[5];
+						  			kakaoId.value = res.id;
+		 				  			kakaonickname.value = res.properties.nickname;
+						  			kakaoemail.value =res.kakao_account.email;
+						  			console.log(kakaoId.value);
+						  			console.log(kakaonickname.value);
+						  			console.log(kakaoemail.value);
+						  			console.log(authObj.access_token);
+		
+						  			kakaoLogin.submit();
+								}	
+							})	
+					  },
+					  fail: function(err) {
+					     alert(JSON.stringify(err));
+					  }
+					
+					});
+					//]]>
+				</script>
+                
 	
 
 </body>

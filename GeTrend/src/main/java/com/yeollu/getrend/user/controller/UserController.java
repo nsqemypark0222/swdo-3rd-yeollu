@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,9 @@ public class UserController {
 	
 	@Autowired
 	private UserDAO dao;
+	
+	@Autowired
+	BCryptPasswordEncoder passEncoder;
 	
 	@Inject
 	private MailService mailService;
@@ -117,10 +121,90 @@ public class UserController {
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(UserVO user) {
 		logger.info("회원가입");
+		
+		String inputPw = user.getUser_pw();
+		String pw = passEncoder.encode(inputPw);
+		user.setUser_pw(pw);
+		logger.info(inputPw);
+		logger.info(pw);
+		
 		user.setUser_type("local");
 		int cnt = dao.join(user);
 		if(cnt>0) logger.info("가입 성공");
 		else logger.info("가입 실패");
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/kakaoLogin", method=RequestMethod.POST)
+	public String kakaoLogin(UserVO user, HttpSession session) {
+		String Kakaoemail = user.getUser_email();
+		UserVO Kakaouser = dao.selectEmail(Kakaoemail);
+		logger.info("{}",user);
+		logger.info("{}",Kakaouser);
+		if(Kakaouser == null) {
+			user.setUser_type("KAKAO");
+			
+			String inputPw = user.getUser_pw();
+			String pw = passEncoder.encode(inputPw);
+			user.setUser_pw(pw);
+			logger.info(inputPw);
+			logger.info(pw);
+			
+			int cnt = dao.join(user);
+			if(cnt>0) {
+				logger.info("가입 성공");
+				UserVO joineduser = dao.selectEmail(Kakaoemail);
+				session.setAttribute("loginemail",joineduser.getUser_email());
+				session.setAttribute("loginname",joineduser.getUser_name());
+			}
+			else {
+				logger.info("가입 실패");
+				return "redirect:/users/userLogin";
+			}
+		} else {
+			session.setAttribute("loginemail",Kakaouser.getUser_email());
+			session.setAttribute("loginname",Kakaouser.getUser_name());
+		}
+		
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/callback", method = RequestMethod.GET)
+	public String callback() {
+		logger.info("callback가는거");
+		return "/users/callback";
+	}
+	
+	@RequestMapping(value="/naverLogin", method=RequestMethod.POST)
+	public String naverLogin(UserVO user, HttpSession session) {
+		String Naveremail = user.getUser_email();
+		UserVO Naveruser = dao.selectEmail(Naveremail);
+		if(Naveruser == null) {
+			user.setUser_type("NAVER");
+			
+			String inputPw = user.getUser_pw();
+			String pw = passEncoder.encode(inputPw);
+			user.setUser_pw(pw);
+			logger.info(inputPw);
+			logger.info(pw);
+			
+			int cnt = dao.join(user);
+			if(cnt>0) {
+				logger.info("가입 성공");
+				UserVO joineduser = dao.selectEmail(Naveremail);
+				session.setAttribute("loginemail",joineduser.getUser_email());
+				session.setAttribute("loginname",joineduser.getUser_name());
+			}
+			else {
+				logger.info("가입 실패");
+				return "redirect:/users/userLogin";
+			}
+		}else {
+			session.setAttribute("loginemail", Naveruser.getUser_email());
+			session.setAttribute("loginname",Naveruser.getUser_name());
+		}
 		
 		return "redirect:/";
 	}
@@ -132,7 +216,7 @@ public class UserController {
 		String errMsg1 = "";
 		String errMsg2 = "";
 		if(newUser != null) {
-			if(user.getUser_pw().equals(newUser.getUser_pw())) {
+			if(passEncoder.matches(user.getUser_pw(), newUser.getUser_pw())) {
 				session.setAttribute("loginemail", user.getUser_email());
 				if(remember != null && remember.equals("1")) {
 					Cookie cookie = new Cookie("remail", user.getUser_email());

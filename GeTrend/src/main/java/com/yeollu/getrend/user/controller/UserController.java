@@ -48,6 +48,12 @@ public class UserController {
 		return "/users/userJoin";
 	}
 	
+	@RequestMapping(value="/kakaoshare", method=RequestMethod.GET)
+	public String kakaoshare() {
+		logger.info("카카오 공유하기");
+		return "/users/kakaoshare";
+	}
+	
 	@RequestMapping(value="/emailCheck",method=RequestMethod.GET)
 	@ResponseBody
 	public String emailCheck(String user_email) {

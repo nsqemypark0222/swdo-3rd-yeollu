@@ -55,6 +55,8 @@
 				${sessionScope.loginname}님 환영합니다!<br/>
 				<a href="users/userUpdate">회원정보 수정</a>
 				<a href="users/logout">로그아웃</a>
+				<a href="users/kakaoshare">공유하기</a>
+				
 			</c:when>
 			<c:otherwise>
 				<a href="users/userJoin">회원가입</a>

@@ -46,6 +46,12 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/likeForm", method = RequestMethod.GET)
+	public String likeForm() {
+		return "like_test";
+	}
+	
+	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<InstaStoreInfoVO> search(@RequestBody ArrayList<Point> points) {

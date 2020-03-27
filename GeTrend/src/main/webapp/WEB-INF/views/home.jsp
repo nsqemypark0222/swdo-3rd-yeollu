@@ -84,6 +84,14 @@ test
 		</c:choose>	
 	</div>
 	
+	
+	<div>
+	
+		<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
+	
+	</div>
+	
+	
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>

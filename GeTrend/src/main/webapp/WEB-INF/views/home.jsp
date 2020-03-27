@@ -15,7 +15,7 @@
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@api['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
-
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 </head>
 <body>
@@ -41,6 +41,7 @@ test
    	
    	</div>
    	
+
    	<div>
    		<table id="table" border="1">
    			<tr>
@@ -75,6 +76,11 @@ test
 		</c:choose>	
 	</div>
 	
+	
+	<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
+	<a href="<c:url value='/crawlForm'/>">크롤링 테스트</a>
+	
+	
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
@@ -90,6 +96,7 @@ test
 					data: JSON.stringify(points),
 					success: function(result) {
 						alert("성공");
+
 						$(result).each(function(index, item) {
 							$("#table").append(
 								"<tr>" + "<td>" + item.store_no + "</td>"

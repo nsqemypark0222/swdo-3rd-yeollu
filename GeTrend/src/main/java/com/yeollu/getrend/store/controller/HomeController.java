@@ -1,7 +1,6 @@
 package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -47,6 +46,17 @@ public class HomeController {
 		
 		return "home";
 	}
+	
+	@RequestMapping(value = "/likeForm", method = RequestMethod.GET)
+	public String likeForm() {
+		return "like_test";
+	}
+	
+	@RequestMapping(value = "/crawlForm", method = RequestMethod.GET)
+	public String crawlForm() {
+		return "crawl_test";
+	}
+	
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
@@ -127,4 +137,16 @@ public class HomeController {
 		logger.info("{}", instaStoreInfoList.size());
 		return instaStoreInfoList;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }

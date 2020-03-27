@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yeollu.getrend.crawler.instagram_Selenium_location_post;
+import com.yeollu.getrend.crawler.instagram_location_post;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
@@ -49,6 +49,11 @@ public class HomeController {
 	@RequestMapping(value = "/likeForm", method = RequestMethod.GET)
 	public String likeForm() {
 		return "like_test";
+	}
+	
+	@RequestMapping(value = "/crawlForm", method = RequestMethod.GET)
+	public String crawlForm() {
+		return "crawl_test";
 	}
 	
 	
@@ -110,10 +115,10 @@ public class HomeController {
 				logger.info("location id: {}", instaStore.getLocation_id());
 				
 //				logger.info("로케이션 검색 시 최신 포스트에서 음식 사진 정보 얻기");
-				instagram_Selenium_location_post ins = new instagram_Selenium_location_post();
+				instagram_location_post ins = new instagram_location_post();
 				
 //				썸네일  + 인기 포스트 10개
-				ArrayList<String> urlList = ins.location_post("https://www.instagram.com/explore/locations/" + instaStore.getLocation_id());
+				ArrayList<String> urlList = ins.crawl("https://www.instagram.com/explore/locations/" + instaStore.getLocation_id());
 				
 				if(urlList != null && urlList.size() != 0) {
 //					logger.info("{}", urlList.get(0));
@@ -152,4 +157,16 @@ public class HomeController {
 		logger.info("{}", instaStoreInfoList.size());
 		return instaStoreInfoList;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }

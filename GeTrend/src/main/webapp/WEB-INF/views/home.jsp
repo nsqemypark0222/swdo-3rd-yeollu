@@ -85,11 +85,8 @@ test
 	</div>
 	
 	
-	<div>
-	
-		<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
-	
-	</div>
+	<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
+	<a href="<c:url value='/crawlForm'/>">크롤링 테스트</a>
 	
 	
 	<footer>

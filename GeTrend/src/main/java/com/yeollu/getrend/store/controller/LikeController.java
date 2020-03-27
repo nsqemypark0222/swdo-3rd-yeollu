@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yeollu.getrend.crawler.instagram_Selenium_location_post;
+import com.yeollu.getrend.crawler.instagram_location_post;
 import com.yeollu.getrend.store.dao.LikeDAO;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;

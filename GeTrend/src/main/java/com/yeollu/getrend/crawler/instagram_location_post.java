@@ -20,14 +20,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class instagram_Selenium_location_post {
+public class instagram_location_post {
 	
-private static final Logger logger = LoggerFactory.getLogger(instagram_Selenium_location_post.class);
+private static final Logger logger = LoggerFactory.getLogger(instagram_location_post.class);
 	
 	//WebDriver
 	private WebDriver driver;
 
-	public ArrayList<String> location_post(String locationPage) throws Exception {
+	public ArrayList<String> crawl(String locationPage) {
 		
 		 
 //		 System.setProperty("webdriver.chrome.driver", "C:/stsinstall/sts-4.5.0.RELEASE/chromedriver.exe");    	 	
@@ -121,7 +121,6 @@ private static final Logger logger = LoggerFactory.getLogger(instagram_Selenium_
 			 	e.printStackTrace();
 		    }
 		 driver.close();
-		 
 		 return list;
 	}
 

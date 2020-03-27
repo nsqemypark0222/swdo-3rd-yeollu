@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yeollu.getrend.crawler.instagram_Selenium_location_post;
+import com.yeollu.getrend.crawler.instagram_Selenium_location_post2;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
@@ -113,7 +113,7 @@ public class HomeController {
 		}
 		
 //		인스타그램 크롤링 요청
-		instagram_Selenium_location_post ins = instagram_Selenium_location_post.getInstance();
+		instagram_Selenium_location_post2 ins = instagram_Selenium_location_post2.getInstance();
 		
 		ArrayList<String> locationList = new ArrayList<String>();
 		for(int i = 0; i < instaStoreList.size(); i++) {
@@ -133,8 +133,8 @@ public class HomeController {
 		long diff = (endTime - startTime) / 1000;
 		logger.info("걸린 시간 : {}", diff);
 		
-		logger.info("{}", instaStoreInfoList);
-		logger.info("{}", instaStoreInfoList.size());
+
+		
 		return instaStoreInfoList;
 	}
 	

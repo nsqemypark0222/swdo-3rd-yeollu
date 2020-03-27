@@ -3,6 +3,8 @@ package com.yeollu.getrend.store.controller;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,8 +107,7 @@ public class HomeController {
 		}
 //		logger.info("{}", selectedList);
 		
-//		View로 보낼  최종 리스트
-		ArrayList<InstaStoreInfoVO> instaStoreInfoList = new ArrayList<InstaStoreInfoVO>();
+		
 		
 		if(instaStoreList.size() > 3) {
 			instaStoreList = new ArrayList<InstaStoreVO> (instaStoreList.subList(0, 3));
@@ -119,8 +120,9 @@ public class HomeController {
 		for(int i = 0; i < instaStoreList.size(); i++) {
 			locationList.add(instaStoreList.get(i).getLocation_id());
 		}
+		ArrayList<InstaImageVO> imgList = new ArrayList<InstaImageVO>();
 		try {
-			ArrayList<InstaImageVO> imgList = ins.location_post(locationList);
+			imgList = ins.location_post(locationList);
 			logger.info("{}", imgList.size());
 			
 			logger.info("{}", imgList);
@@ -128,6 +130,17 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+//		View로 보낼  최종 리스트
+		ArrayList<InstaStoreInfoVO> instaStoreInfoList = new ArrayList<InstaStoreInfoVO>();
+		for(int i = 0; i < instaStoreList.size(); i++) {
+			InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
+			instaStoreInfo.setInstaStore(instaStoreList.get(i));
+			instaStoreInfo.setInstaImage(imgList.get(i));
+			
+			instaStoreInfoList.add(instaStoreInfo);
+		}
+		
 			
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;

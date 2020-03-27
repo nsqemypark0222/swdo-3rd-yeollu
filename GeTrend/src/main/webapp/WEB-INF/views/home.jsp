@@ -99,23 +99,20 @@ test
 
 						$(result).each(function(index, item) {
 							$("#table").append(
-								"<tr>" + "<td>" + item.store_no + "</td>"
-										+ "<td>" + item.store_x + "</td>"
-										+ "<td>" + item.store_y + "</td>"
-										+ "<td>" + item.store_name + "</td>"
-										+ '<td><img src=' + item.profile_url + ' /></td>'
+								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
+										+ "<td>" + item.instaStore.store_x + "</td>"
+										+ "<td>" + item.instaStore.store_y + "</td>"
+										+ "<td>" + item.instaStore.store_name + "</td>"
+										+ '<td><img src=' + item.instaImage.repImg + ' /></td>'
 							);
-							$(item.imgList).each(function(idx, itm) {
-								$("#imageContainer").append(
-										"<div name='imgPanel'>"
-											+ '<img src=' + itm + ' />'
-								);
+							$(item.instaImage.likeAndImgList).each(function(idx, itm) {
+								if(idx % 2 == 0) {
+									$("#imageContainer").append(
+											"<div name='imgPanel'>"
+												+ '<img src=' + itm + ' />'
+									);
+								}
 							});
-							/* for(var i = 0 in item.imgList)
-							$("#imageContainer").append(
-								"<div name='imgPanel'>"
-									+ '<img src=' + 
-							); */
 						});
 						
 			        },

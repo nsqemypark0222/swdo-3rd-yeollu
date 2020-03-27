@@ -148,11 +148,13 @@ public class instagram_Selenium_location_post2 {
 		          	}
 		      	}
 		       	
-		       	HashMap<String, Integer> imgMap = new HashMap<String, Integer>();
+		       	ArrayList<String> likeAndImgList = new ArrayList<String>();
 		       	for(int j = 0; j < 10; j++) {
-		       		imgMap.put(srcsetList.get(j), Integer.parseInt(StringPreprocessor.stringReplace(likeList.get(j))));
+		       		likeAndImgList.add(srcsetList.get(j));
+		       		likeAndImgList.add(StringPreprocessor.stringReplace(likeList.get(j)));
 		       	}
-		       	img.setImgMap(imgMap);
+		       	
+		       	img.setLikeAndImgList(likeAndImgList);
 		       	 
 		       	System.out.println("======================================================");
 		       	 

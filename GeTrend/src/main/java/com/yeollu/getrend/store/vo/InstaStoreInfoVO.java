@@ -1,6 +1,7 @@
 package com.yeollu.getrend.store.vo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import lombok.Data;
 
@@ -19,5 +20,5 @@ public class InstaStoreInfoVO {
 	private String store_adr1;
 	private String store_adr2;
 	private String profile_url;
-	private ArrayList<String> imgList;
+	private ArrayList<HashMap<String, Integer>> imgList;
 }

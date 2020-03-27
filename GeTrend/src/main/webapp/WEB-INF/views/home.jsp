@@ -15,7 +15,7 @@
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@api['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
-
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 </head>
 <body>
@@ -40,18 +40,12 @@
    	
    	</div>
    	
-<<<<<<< HEAD
-   	<div>
-   		<table id="table" border="1">
-   			<tr>
-   				<th>STORE_NO</th>
-   				<th>STORE_X</th>
-   				<th>STORE_Y</th>
-   				<th>STORE_NAME</th>
-   				<th>PROFILE_URL</th>
-   			</tr>
-   		</table>
+    test
+   	<div id="desc">
+   	
    	</div>
+   	
+   	test
    	
 
    	
@@ -85,17 +79,8 @@
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify(points),
 					success: function(result) {
-						alert($(result));
-						$(result).each(function(index, item) {
-							$("#table").append(
-								"<tr>" + "<td>" + item.store_no + "</td>"
-										+ "<td>" + item.store_x + "</td>"
-										+ "<td>" + item.store_y + "</td>"
-										+ "<td>" + item.store_name + "</td>"
-										+ '<td><img src=' + item.profile_url + ' /></td>'
-							);
-						});
-						
+						alert("성공");
+						$("#desc").text(result);
 			        },
 			        error: function(request, status, error){
 			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);

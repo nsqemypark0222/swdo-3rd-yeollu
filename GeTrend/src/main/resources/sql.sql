@@ -94,3 +94,43 @@ where
 	s.store_no = l.store_no
 group by s.store_no
 order by count(s.store_no) desc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,22 +7,19 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link href='<c:url value="/resources/css/userJoin.css"/>' rel="stylesheet" media="all">
 <script>
-function formCheck() {
-	var user_pw = $('#user_pw').val();
-	var pwCheck = $('#pwCheck').val();
-	
-	if(user_pw.length <= 3 || user_pw.length > 10) {
-		alert("비밀번호는 4~10 글자를 입력하세요");
-		return false;
-	}
-	
-	if(user_pw !== pwCheck) {
-		alert("비밀번호가 일치하지 않습니다");
-		return false;
-	}
-	return true;
-}
 
 $(function(){
 	$("#cancel").click(function(){
@@ -90,23 +87,98 @@ $("#joinCodeCheck").click(function(){
 </script>
 </head>
 <body>
-	<h1>회원가입</h1>
-		<form action="join" method="post" name="joinFrm" id="joinFrm">
-			<label>이메일</label>
-			<input type="email" name="user_email" id="user_email" placeholder="이메일">
-			<input type="button" value="발송" name="emailSend" id="emailSend"><br/>
-			<input type="text" name="joinCode" id="joinCode" placeholder="인증번호 입력">
-			<input type="button" value="확인" name="joinCodeCheck" id="joinCodeCheck"><br/>
-			
-			<label>비밀번호</label>
-			<input type="password" name="user_pw" id="user_pw"><br/>
-			<input type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인" ><br/>
-			
-			<label>이름</label>
-			<input type="text" name="user_name" id="user_name"><br/>
-			
-			<input type="submit" value="가입"  id="signup" onclick="return formCheck()" >
-			<input type="reset" value="취소" id="cancel">	
-		</form>
+ <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+              <h2 class="card-title text-center">Sign In</h2>
+              <hr>
+				<div id="joinFrm">
+					<form action="Join" method="post" name="joinFrm" @submit="formCheck" id="joinFrm">
+					  <div class="form-label-group row">
+					   	 <div class="col-md-9">
+						 	<input type="email" class="form-control mb-2" name="user_email" id="user_email" v-model="user_email" placeholder="이메일" required autofocus>
+						  </div>
+					    <div class="col-md-3">
+						 <input type="button" class="btn btn-mg btn-warning mb-2" value="발송" name="emailSend" id="emailSend">
+					  	 </div>
+					  </div>
+					 <div class="form-label-group row">
+					 	<div class="col-md-9">
+						  <input type="text" class="form-control mb-2" name="joinCode" id="joinCode" placeholder="인증번호 입력" required autofocus>
+						 </div>
+						 <div class="col-md-3"> 
+						    <input type="button" class="btn btn-outline-warning mb-2" value="확인" name="joinCodeCheck" id="joinCodeCheck"><br/>
+						 </div> 
+					</div>	
+					<div class="form-label-group">
+						<input type="password" class="form-control mb-2" name="user_pw" id="user_pw" v-model="user_pw" placeholder="비밀번호 입력">
+					
+						<input type="password" class="form-control mb-2" name="pwCheck" id="pwCheck" v-model="pwCheck" placeholder="비밀번호 확인" >
+					</div>	
+				   <div class="form-label-group text-center">
+						<input type="text" class="form-control" name="user_name" id="user_name" v-model="user_name" placeholder="이름">
+					</div>
+					</form>
+					 <div class="form-label-group row">
+						<div class="col-md-6">
+						<input type="submit" class="btn btn-lg btn-warning mb-2" value="가입"  id="join" >
+						</div>
+						<div class="col-md-6">	
+						<input type="reset" class="btn btn-lg btn-outline-warning mb-2" value="취소" id="cancel" >
+						</div>		
+					</div>
+					</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+   </div>		
 </body>
+<script>
+const joinFrm = new Vue({
+	el:'#joinFrm',
+	data:{
+		joinFrm:false,
+		user_email:'',
+		user_pw:'',
+		pwCheck:'',
+		user_name:''	
+	},
+		methods:{
+			formCheck(e){
+			this.Join != this.Join;
+			if(!this.user_email){
+				alert("이메일을 확인해주세요");
+				user_email.focus();
+				return false;
+			}else if(!this.validEmail(this.user_email)){
+				alert("이메일을 확인해주세요");
+				return false;
+			}
+			if(!this.user_pw){
+				alert("비밀번호를 확인해주세요");
+				return false;
+			}else if(this.user_pw.length <= 3 || this.user_pw.length > 10){
+				alert("비밀번호는 4~10 글자를 입력하세요");
+				return false;
+			}
+			if(!this.user_pw != this.pwCheck){
+				alert("비밀번호를 확인해주세요.")
+				return false;
+			}
+			if(!this.user_name){
+				alert("이름을 확인해주세요.")
+				return false;
+			}
+			return true;
+		},
+		 validEmail: function(user_email){
+			var re =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(user_email);
+		 }	
+		}
+	})
+</script>
 </html>

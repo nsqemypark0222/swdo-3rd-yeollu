@@ -11,28 +11,32 @@ insert into
 		,store_no
 		,user_email
 		,reply_contents
+		,reply_star
 	)values(
 		seq_insta_replys.nextval
 		,#{store_no}
 		,#{user_email}
 		,#{reply_contents}
+		,#{reply_star}
 	)
 </insert>
+
+<delete id="replyRemove" parameterType="reply">
+delete
+	insta_replys
+where
+	reply_no = #{reply_no}
+</delete>
+
 <select id="replyList" parameterType="reply" resultType="reply">
 select
 	*
 from
 	insta_replys
 where
-	user_email = #{user_email}
+	store_no = #{store_no}
 </select>
 	
-<delete id="replyRemove" parameterType="reply">
-DELETE
-	insta_replys
-WHERE
-	user_email = #{user_email}
-</delete>
 
 </mapper>
 

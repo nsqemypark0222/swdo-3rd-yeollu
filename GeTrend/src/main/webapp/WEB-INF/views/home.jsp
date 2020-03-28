@@ -42,11 +42,14 @@ test
    	</div>
    	
 
+<<<<<<< HEAD
    	<div id="desc">
    	
    	</div>
    	
 
+=======
+>>>>>>> 6c7455908501bb017f19345b9a4b7878c862d460
    	<div>
    		<table id="table" border="1">
    			<tr>
@@ -104,7 +107,10 @@ test
 					data: JSON.stringify(points),
 					success: function(result) {
 						alert("성공");
+<<<<<<< HEAD
 						$("#desc").text(result);
+=======
+>>>>>>> 6c7455908501bb017f19345b9a4b7878c862d460
 
 						$(result).each(function(index, item) {
 							$("#table").append(

@@ -33,7 +33,8 @@ public class ReplyController {
 	@RequestMapping(value = "replyWrite", method = RequestMethod.GET)
 	@ResponseBody
 	public void replyWrite(InstaReplyVO reply, HttpSession session) {
-		String user_email = (String)session.getAttribute("user_email");
+		logger.info("{}", reply);
+		String user_email = (String)session.getAttribute("loginemail");
 		logger.info(user_email);
 		reply.setUser_email(user_email);
 		dao.replyWrite(reply);

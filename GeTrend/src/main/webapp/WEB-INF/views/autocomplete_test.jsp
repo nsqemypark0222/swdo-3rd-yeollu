@@ -82,7 +82,8 @@
 
 </head>
 <body>
-        <input id="searchInput" type="text">
+"김치 볶음밥", "신라면", "진라면", "라볶이", "팥빙수","너구리","삼양라면","안성탕면","불닭볶음면","짜왕","라면사리"<br>
+   <input id="searchInput" type="text">
 </body>
 
 

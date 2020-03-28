@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeollu.getrend.store.dao.InstaReplyMapper">
+<insert id="replyWrite" parameterType="reply">
+insert into
+	insta_replys(
+		reply_no
+		,store_no
+		,user_email
+		,reply_contents
+	)values(
+		seq_insta_replys.nextval
+		,#{store_no}
+		,#{user_email}
+		,#{reply_contents}
+	)
+</insert>
+<select id="replyList" parameterType="reply" resultType="reply">
+select
+	*
+from
+	insta_replys
+where
+	user_email = #{user_email}
+</select>
+	
+<delete id="replyRemove" parameterType="reply">
+DELETE
+	insta_replys
+WHERE
+	user_email = #{user_email}
+</delete>
+
+</mapper>
+

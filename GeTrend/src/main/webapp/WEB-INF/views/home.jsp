@@ -41,14 +41,12 @@ test
    	
    	</div>
    	
-<<<<<<< HEAD
-    test
+
    	<div id="desc">
    	
    	</div>
    	
-   	test
-=======
+
    	<div>
    		<table id="table" border="1">
    			<tr>
@@ -64,7 +62,7 @@ test
    	<div id="imageContainer">
    	
    	</div>
->>>>>>> 43e25f935d7a38248a5efac266caa048d3830227
+
    	
 
    	
@@ -75,6 +73,7 @@ test
 				<a href="users/userUpdate">회원정보 수정</a>
 				<a href="users/logout">로그아웃</a>
 				<a href="users/kakaoshare">공유하기</a>
+				<a href="reply/replyForm">댓글달기</a>
 				
 			</c:when>
 			<c:otherwise>
@@ -99,9 +98,7 @@ test
 					data: JSON.stringify(points),
 					success: function(result) {
 						alert("성공");
-<<<<<<< HEAD
 						$("#desc").text(result);
-=======
 						$(result).each(function(index, item) {
 							$("#table").append(
 								"<tr>" + "<td>" + item.store_no + "</td>"
@@ -123,7 +120,6 @@ test
 							); */
 						});
 						
->>>>>>> 43e25f935d7a38248a5efac266caa048d3830227
 			        },
 			        error: function(request, status, error){
 			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);

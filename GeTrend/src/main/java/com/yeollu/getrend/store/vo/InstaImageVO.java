@@ -6,7 +6,7 @@ import java.util.HashMap;
 import lombok.Data;
 
 @Data
-public class InstaStoreInfoVO {
-	private InstaStoreVO instaStore;
-	private InstaImageVO instaImage;
+public class InstaImageVO {
+	private String repImg;
+	private ArrayList<String> likeAndImgList;
 }

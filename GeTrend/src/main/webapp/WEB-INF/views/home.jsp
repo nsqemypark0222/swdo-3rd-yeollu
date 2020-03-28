@@ -42,11 +42,14 @@ test
    	</div>
    	
 
+<<<<<<< HEAD
    	<div id="desc">
    	
    	</div>
    	
 
+=======
+>>>>>>> 771710310d0b71bdc8a56969b64f3d75292f354b
    	<div>
    		<table id="table" border="1">
    			<tr>
@@ -62,7 +65,10 @@ test
    	<div id="imageContainer">
    	
    	</div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 771710310d0b71bdc8a56969b64f3d75292f354b
    	
 
    	
@@ -83,6 +89,11 @@ test
 		</c:choose>	
 	</div>
 	
+	
+	<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
+	<a href="<c:url value='/crawlForm'/>">크롤링 테스트</a>
+	
+	
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
@@ -98,26 +109,27 @@ test
 					data: JSON.stringify(points),
 					success: function(result) {
 						alert("성공");
+<<<<<<< HEAD
 						$("#desc").text(result);
+=======
+
+>>>>>>> 771710310d0b71bdc8a56969b64f3d75292f354b
 						$(result).each(function(index, item) {
 							$("#table").append(
-								"<tr>" + "<td>" + item.store_no + "</td>"
-										+ "<td>" + item.store_x + "</td>"
-										+ "<td>" + item.store_y + "</td>"
-										+ "<td>" + item.store_name + "</td>"
-										+ '<td><img src=' + item.profile_url + ' /></td>'
+								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
+										+ "<td>" + item.instaStore.store_x + "</td>"
+										+ "<td>" + item.instaStore.store_y + "</td>"
+										+ "<td>" + item.instaStore.store_name + "</td>"
+										+ '<td><img src=' + item.instaImage.repImg + ' /></td>'
 							);
-							$(item.imgList).each(function(idx, itm) {
-								$("#imageContainer").append(
-										"<div name='imgPanel'>"
-											+ '<img src=' + itm + ' />'
-								);
+							$(item.instaImage.likeAndImgList).each(function(idx, itm) {
+								if(idx % 2 == 0) {
+									$("#imageContainer").append(
+											"<div name='imgPanel'>"
+												+ '<img src=' + itm + ' />'
+									);
+								}
 							});
-							/* for(var i = 0 in item.imgList)
-							$("#imageContainer").append(
-								"<div name='imgPanel'>"
-									+ '<img src=' + 
-							); */
 						});
 						
 			        },

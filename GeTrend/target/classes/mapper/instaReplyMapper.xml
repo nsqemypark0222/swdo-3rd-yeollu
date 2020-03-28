@@ -17,7 +17,7 @@ insert into
 		,#{store_no}
 		,#{user_email}
 		,#{reply_contents}
-		,#{reply_star}
+		,to_number(#{reply_star})
 	)
 </insert>
 
@@ -28,13 +28,20 @@ where
 	reply_no = #{reply_no}
 </delete>
 
-<select id="replyList" parameterType="reply" resultType="reply">
+<select id="replyList" parameterType="reply" resultType="hashmap">
 select
-	*
+	r.reply_no as reply_no
+	,r.store_no as store_no 
+	,r.user_email as user_email
+	,r.reply_contents as reply_contents
+	,r.reply_star as reply_star
+	,to_char(r.reply_indate,'yyyy-MM-dd') as reply_indate
+	,u.user_name as user_name
 from
-	insta_replys
+	insta_replys r, users u
 where
-	store_no = #{store_no}
+	r.user_email = u.user_email
+	and r.store_no = #{store_no}
 </select>
 	
 

@@ -1,6 +1,7 @@
 package com.yeollu.getrend.store.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,6 @@ public class InstaReplyDAO {
 		}return cnt;
 	}
 	
-	public ArrayList<InstaReplyVO> replyList(InstaReplyVO reply) {
-		InstaReplyMapper mapper = session.getMapper(InstaReplyMapper.class);
-		return mapper.replyList(reply);
-	}
 
 	public int replyRemove(InstaReplyVO reply) {
 		int cnt = 0;
@@ -36,5 +33,16 @@ public class InstaReplyDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}return cnt;
+	}
+	
+	public ArrayList<HashMap<String,Object>> replyList(InstaReplyVO reply) {
+		ArrayList<HashMap<String,Object>> rlist = null;
+		try {
+			InstaReplyMapper mapper = session.getMapper(InstaReplyMapper.class);
+			rlist = mapper.replyList(reply);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rlist;
 	}
 }

@@ -1,6 +1,7 @@
 package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -37,6 +38,8 @@ public class ReplyController {
 		String user_email = (String)session.getAttribute("loginemail");
 		logger.info(user_email);
 		reply.setUser_email(user_email);
+		
+		reply.setStore_no("25523615");
 		dao.replyWrite(reply);
 	}
 	
@@ -52,8 +55,11 @@ public class ReplyController {
 	//리스트
 	@RequestMapping(value = "replyList", method = RequestMethod.GET)
 	@ResponseBody
-	public ArrayList<InstaReplyVO> list(InstaReplyVO reply, HttpSession session) {
-		ArrayList<InstaReplyVO> list = dao.replyList(reply);
-		return list;
+	public ArrayList<HashMap<String,Object>> list(InstaReplyVO reply, HttpSession session) {
+		reply.setStore_no("25523615");
+		ArrayList<HashMap<String,Object>> rlist = dao.replyList(reply);
+		
+		
+		return rlist;
 	}
 }

@@ -42,6 +42,11 @@ test
    	</div>
    	
 
+   	<div id="desc">
+   	
+   	</div>
+   	
+
    	<div>
    		<table id="table" border="1">
    			<tr>
@@ -99,7 +104,7 @@ test
 					data: JSON.stringify(points),
 					success: function(result) {
 						alert("성공");
-
+						$("#desc").text(result);
 						$(result).each(function(index, item) {
 							$("#table").append(
 								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"

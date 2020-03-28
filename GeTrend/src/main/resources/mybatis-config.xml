@@ -11,7 +11,6 @@
 		<typeAlias type="com.yeollu.getrend.store.vo.InstaStoreVO" alias="instaStore"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.InstaReplyVO" alias="reply"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.LikeVO" alias="like"/>	
-
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml"/>
@@ -20,6 +19,5 @@
 		<mapper resource="mapper/searchedStoreMapper.xml"/>
 		<mapper resource="mapper/instaReplyMapper.xml"/>
 		<mapper resource="mapper/likeMapper.xml"/>
-
 	</mappers>
 </configuration>

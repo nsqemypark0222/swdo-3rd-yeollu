@@ -41,14 +41,7 @@ test
    	
    	</div>
    	
-<<<<<<< HEAD
-    test
-   	<div id="desc">
-   	
-   	</div>
-   	
-   	test
-=======
+
    	<div>
    		<table id="table" border="1">
    			<tr>
@@ -64,7 +57,6 @@ test
    	<div id="imageContainer">
    	
    	</div>
->>>>>>> 43e25f935d7a38248a5efac266caa048d3830227
    	
 
    	
@@ -84,6 +76,11 @@ test
 		</c:choose>	
 	</div>
 	
+	
+	<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
+	<a href="<c:url value='/crawlForm'/>">크롤링 테스트</a>
+	
+	
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
@@ -99,31 +96,25 @@ test
 					data: JSON.stringify(points),
 					success: function(result) {
 						alert("성공");
-<<<<<<< HEAD
-						$("#desc").text(result);
-=======
+
 						$(result).each(function(index, item) {
 							$("#table").append(
-								"<tr>" + "<td>" + item.store_no + "</td>"
-										+ "<td>" + item.store_x + "</td>"
-										+ "<td>" + item.store_y + "</td>"
-										+ "<td>" + item.store_name + "</td>"
-										+ '<td><img src=' + item.profile_url + ' /></td>'
+								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
+										+ "<td>" + item.instaStore.store_x + "</td>"
+										+ "<td>" + item.instaStore.store_y + "</td>"
+										+ "<td>" + item.instaStore.store_name + "</td>"
+										+ '<td><img src=' + item.instaImage.repImg + ' /></td>'
 							);
-							$(item.imgList).each(function(idx, itm) {
-								$("#imageContainer").append(
-										"<div name='imgPanel'>"
-											+ '<img src=' + itm + ' />'
-								);
+							$(item.instaImage.likeAndImgList).each(function(idx, itm) {
+								if(idx % 2 == 0) {
+									$("#imageContainer").append(
+											"<div name='imgPanel'>"
+												+ '<img src=' + itm + ' />'
+									);
+								}
 							});
-							/* for(var i = 0 in item.imgList)
-							$("#imageContainer").append(
-								"<div name='imgPanel'>"
-									+ '<img src=' + 
-							); */
 						});
 						
->>>>>>> 43e25f935d7a38248a5efac266caa048d3830227
 			        },
 			        error: function(request, status, error){
 			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);

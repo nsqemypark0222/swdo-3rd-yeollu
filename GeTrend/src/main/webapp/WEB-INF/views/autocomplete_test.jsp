@@ -12,18 +12,21 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="<c:url value='/resources/js/hangul.js'/>"></script>
 <script>
 
-//서버에서 배열 가져오기
- $(function() {    //화면 다 뜨면 시작
+//기본 자동완성
+ $(function() {   
         $("#searchInput").autocomplete({
             source : function( request, response ) {
                  $.ajax({
                         type: 'get',
-                        url: "/getrend/autocomplete/json",
+                        url: "/getrend/autocomplete/json01",
                         dataType: "json",
                         data: {"param":$("#searchInput").val()},
                         success: function(data) {
+
+                                          
                             //서버에서 json 데이터 response 후 목록에 추가
                             response(
                                 $.map(data, function(item) {    
@@ -34,6 +37,8 @@
                                     }
                                 })//map
                             );//response
+
+               
                         }//success            
                    });//ajax
                 },    // source 는 자동 완성 대상
@@ -78,12 +83,106 @@
      });
 
 });
+
+
+
+
+//2. 초성 중성 종성 나눠서
+$(function() { 
+		//DB쿼리 조작 없이 초성 검색을 하기 위해서는 우선 DB에 있는 항목들을 다 가지고 와야한다.
+		//즉 너무 많은 수가 있으면 클라이언트 측이 느려질 수 있다는 점.
+		//하지만 DB쿼리를 조작해서 서버에서 초성검색을 하는 방식에 비해 서버에는 무리가 없다.
+		// ajax로 미리 검색어 목록을 다 가지고 온다.
+		$.ajax({
+			type : 'get',
+			url : "/getrend/autocomplete/json02",
+			dataType : "json",
+			success : function(data) {
+				
+				//이부분이 초성 검색이 가능하게 만들어 주는 부분
+				let source = $.map(data, function(item) { //json[i] 번째 에 있는게 item 임.
+					chosung = "";
+					full = Hangul.disassemble(item).join("").replace(/ /gi, "") ;	//공백제거된 ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ
+					
+					Hangul.d(item, true).forEach(function(strItem, index) {
+						
+						if(strItem[0] != " "){	//띄어 쓰기가 아니면
+							chosung += strItem[0];//초성 추가
+						}
+					});
+					
+					
+					return {
+						label : chosung + "|" + (item).replace(/ /gi, "") +"|" + full, //실제 검색어랑 비교 대상 ㄱㅊㅂㅇㅂ|김치볶음밥|ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ 이 저장된다.
+						value : item, //김치 볶음밥
+						chosung : chosung,	//ㄱㅊㅂㅇㅂ,
+						full : full//ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ
+					}
+				});
+				
+				
+				$("#searchInput02").autocomplete({
+					source : source,	// source 는 자동 완성 대상
+					select : function(event, ui) {	//아이템 선택시
+						console.log(ui.item.value + " 선택 완료");	
+						
+					},
+					focus : function(event, ui) {	//포커스 가면
+						return false;//한글 에러 잡기용도로 사용됨
+					},
+					
+				}).autocomplete( "instance" )._renderItem = function( ul, item ) {	
+			      return $( "<li>" )	//기본 tag가 li로 되어 있음 
+			        .append( "<div>" + item.value + "</div>" )	//여기에다가 원하는 모양의 HTML을 만들면 UI가 원하는 모양으로 변함.
+			        .appendTo( ul );	//웹 상으로 보이는 건 정상적인 "김치 볶음밥" 인데 내부에서는 ㄱㅊㅂㅇㅂ,김치 볶음밥 에서 검색을 함.
+			    };
+			},
+			
+		});
+ 
+	
+		//여기가 한글 초중종성 검색 방법
+		$("#searchInput02").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
+			input = $("#searchInput02").val();	//입력된 값 저장
+			$( "#searchInput02" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
+		})
+
+	     //검색어 엔터치면 컨트롤러로 이동
+	     $("#searchInput02").keydown(function (key) {
+	     	 
+	         if(key.keyCode == 13){//키가 13이면 실행 (엔터는 13)
+
+	         	$.ajax({
+	         		url : "/getrend/autocomplete/keyword",
+	         		type : "post",
+	         		data : {"keyword" : $("#searchInput02").val()},
+	         		success : function(){alert("성공");},
+	         		error : function(){alert("에러");}
+	         	})
+	         	            
+	         }
+	  
+	     });
+	});
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 </head>
 <body>
 "김치 볶음밥", "신라면", "진라면", "라볶이", "팥빙수","너구리","삼양라면","안성탕면","불닭볶음면","짜왕","라면사리"<br>
-   <input id="searchInput" type="text">
+자동완성01 ; 기본   <input id="searchInput" type="text"><br>
+자동완성02 ; 초중종성   <input id="searchInput02" type="text">
 </body>
 
 

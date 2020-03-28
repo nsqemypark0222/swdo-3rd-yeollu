@@ -1,23 +1,17 @@
 package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yeollu.getrend.crawler.instagram_location_post;
 import com.yeollu.getrend.store.dao.LikeDAO;
-import com.yeollu.getrend.store.util.map.core.Polygon;
-import com.yeollu.getrend.store.util.map.model.Point;
-import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
 import com.yeollu.getrend.store.vo.LikeVO;
 
 @Controller

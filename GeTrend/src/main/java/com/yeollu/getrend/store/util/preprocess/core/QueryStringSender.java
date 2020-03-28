@@ -1,12 +1,13 @@
 package com.yeollu.getrend.store.util.preprocess.core;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import com.yeollu.getrend.store.util.json.core.JsonReader;
 import com.yeollu.getrend.store.util.map.core.LocationDistance;
-import com.yeollu.getrend.store.util.preprocess.model.DistVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
 public class QueryStringSender {
@@ -25,7 +25,6 @@ public class QueryStringSender {
 	public static String send(StoreVO store) {
 		String storeName = "";
 		String url = "";
-		String location_id= "";
 		
 		try {
 			storeName = URLEncoder.encode(store.getStore_name(), "UTF-8");
@@ -40,7 +39,7 @@ public class QueryStringSender {
 			JSONArray places = json.getJSONArray("places");
 			if(!places.isEmpty()) {
 	
-//				HashMap<String, DistVO> distMap = new HashMap<String, DistVO>();
+				HashMap<String, Double> distMap = new HashMap<String, Double>();
 				for(int i = 0; i < places.length(); i++) {
 					JSONObject location = places
 											.getJSONObject(i)
@@ -50,33 +49,44 @@ public class QueryStringSender {
 						continue;
 					}
 					if(location.getString("name").trim().contains(store.getStore_name())) {
-						double d = LocationDistance
+						double dist = LocationDistance
 												.haversine(store.getStore_x(), store.getStore_y(), location.getDouble("lng"), location.getDouble("lat"));
-						if(d < 0.1) {
-							return location.getString("pk");
-//							DistVO dist = new DistVO();
-//							dist.setLocation_id(location.get("facebook_places_id") + "");
-//							dist.setDist(d);
-//							distMap.put(location.getString("pk"), dist);
+						if(dist < 0.1) {
+//							return location.getString("pk");
+							distMap.put(location.getString("pk"), new Double(dist));
 						}
 					}
 				}
 				
-//				if(!distMap.isEmpty()) {
-//					키값이 일정하지 않아서 반복문을 쓸 수 없는 상태임
-//				}
-//				location_id = places
-//								.getJSONObject(?????)
-//								.getJSONObject("place")
-//								.getJSONObject("location")
-//								.getString("pk");
+				if(!distMap.isEmpty()) {
+					Iterator<String> iterator = sortMap(distMap).iterator();
+					if(iterator.hasNext()) {
+						return iterator.next();
+					}
+				}
 			} else {
 				return null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return location_id;
+		return null;
+	}
+	
+	public static List<String> sortMap(final Map<String, Double> map) {
+		List<String> list = new ArrayList<String>();
+		list.addAll(map.keySet());
+		
+		Collections.sort(list, new Comparator<Object>() {
+			public int compare(Object o1, Object o2) {
+				Object v1 = map.get(o1);
+				Object v2 = map.get(o2);
+				
+				return ((Comparable<Object>) v2).compareTo(v1);
+			}
+		});
+//		Collections.reverse(list);
+		return list;
 	}
 }
 

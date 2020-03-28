@@ -41,14 +41,15 @@ test
    	
    	</div>
    	
+
 <<<<<<< HEAD
-    test
    	<div id="desc">
    	
    	</div>
    	
-   	test
+
 =======
+>>>>>>> 771710310d0b71bdc8a56969b64f3d75292f354b
    	<div>
    		<table id="table" border="1">
    			<tr>
@@ -64,7 +65,10 @@ test
    	<div id="imageContainer">
    	
    	</div>
->>>>>>> 43e25f935d7a38248a5efac266caa048d3830227
+<<<<<<< HEAD
+
+=======
+>>>>>>> 771710310d0b71bdc8a56969b64f3d75292f354b
    	
 
    	
@@ -75,6 +79,7 @@ test
 				<a href="users/userUpdate">회원정보 수정</a>
 				<a href="users/logout">로그아웃</a>
 				<a href="users/kakaoshare">공유하기</a>
+				<a href="reply/replyForm">댓글달기</a>
 				
 			</c:when>
 			<c:otherwise>
@@ -108,28 +113,26 @@ test
 <<<<<<< HEAD
 						$("#desc").text(result);
 =======
+
+>>>>>>> 771710310d0b71bdc8a56969b64f3d75292f354b
 						$(result).each(function(index, item) {
 							$("#table").append(
-								"<tr>" + "<td>" + item.store_no + "</td>"
-										+ "<td>" + item.store_x + "</td>"
-										+ "<td>" + item.store_y + "</td>"
-										+ "<td>" + item.store_name + "</td>"
-										+ '<td><img src=' + item.profile_url + ' /></td>'
+								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
+										+ "<td>" + item.instaStore.store_x + "</td>"
+										+ "<td>" + item.instaStore.store_y + "</td>"
+										+ "<td>" + item.instaStore.store_name + "</td>"
+										+ '<td><img src=' + item.instaImage.repImg + ' /></td>'
 							);
-							$(item.imgList).each(function(idx, itm) {
-								$("#imageContainer").append(
-										"<div name='imgPanel'>"
-											+ '<img src=' + itm + ' />'
-								);
+							$(item.instaImage.likeAndImgList).each(function(idx, itm) {
+								if(idx % 2 == 0) {
+									$("#imageContainer").append(
+											"<div name='imgPanel'>"
+												+ '<img src=' + itm + ' />'
+									);
+								}
 							});
-							/* for(var i = 0 in item.imgList)
-							$("#imageContainer").append(
-								"<div name='imgPanel'>"
-									+ '<img src=' + 
-							); */
 						});
 						
->>>>>>> 43e25f935d7a38248a5efac266caa048d3830227
 			        },
 			        error: function(request, status, error){
 			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);

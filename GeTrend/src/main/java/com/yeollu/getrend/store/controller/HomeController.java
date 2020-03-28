@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yeollu.getrend.crawler.instagram_location_post;
+import com.yeollu.getrend.crawler.instagram_Selenium_location_post2;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
 import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
+import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
@@ -108,57 +111,47 @@ public class HomeController {
 		}
 //		logger.info("{}", selectedList);
 		
-//		View로 보낼  최종 리스트
-		ArrayList<InstaStoreInfoVO> instaStoreInfoList = new ArrayList<InstaStoreInfoVO>();
+		
 		
 		if(instaStoreList.size() > 3) {
 			instaStoreList = new ArrayList<InstaStoreVO> (instaStoreList.subList(0, 3));
 		}
-		for(InstaStoreVO instaStore : instaStoreList) {
-			try {
-				logger.info("location id: {}", instaStore.getLocation_id());
-				
-//				logger.info("로케이션 검색 시 최신 포스트에서 음식 사진 정보 얻기");
-				instagram_location_post ins = new instagram_location_post();
-				
-//				썸네일  + 인기 포스트 10개
-				ArrayList<String> urlList = ins.crawl("https://www.instagram.com/explore/locations/" + instaStore.getLocation_id());
-				
-				if(urlList != null && urlList.size() != 0) {
-//					logger.info("{}", urlList.get(0));
-//					logger.info("{}", urlList.subList(0, urlList.size() - 1));
-					InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
-					instaStoreInfo.setStore_no(instaStore.getStore_no());
-					instaStoreInfo.setStore_name(instaStore.getStore_name());
-					instaStoreInfo.setStore_name2(instaStore.getStore_name2());
-					instaStoreInfo.setLocation_id(instaStore.getLocation_id());
-					instaStoreInfo.setStore_adr1(instaStore.getStore_adr1());
-					instaStoreInfo.setStore_adr2(instaStore.getStore_adr2());
-					instaStoreInfo.setStore_cate1(instaStore.getStore_cate1());
-					instaStoreInfo.setStore_cate2(instaStore.getStore_cate2());
-					instaStoreInfo.setStore_cate3(instaStore.getStore_cate3());
-					instaStoreInfo.setStore_dem(instaStore.getStore_dem());
-					instaStoreInfo.setStore_x(instaStore.getStore_x());
-					instaStoreInfo.setStore_y(instaStore.getStore_y());
-					instaStoreInfo.setProfile_url(urlList.get(0));
-					instaStoreInfo.setImgList(new ArrayList<String> (urlList.subList(1, urlList.size())));
-					instaStoreInfoList.add(instaStoreInfo);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		
+//		인스타그램 크롤링 요청
+		instagram_Selenium_location_post2 ins = instagram_Selenium_location_post2.getInstance();
+		
+		ArrayList<String> locationList = new ArrayList<String>();
+		for(int i = 0; i < instaStoreList.size(); i++) {
+			locationList.add(instaStoreList.get(i).getLocation_id());
+		}
+		ArrayList<InstaImageVO> imgList = new ArrayList<InstaImageVO>();
+		try {
+			imgList = ins.location_post(locationList);
+			logger.info("{}", imgList.size());
+			
+			logger.info("{}", imgList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		
+//		View로 보낼  최종 리스트
+		ArrayList<InstaStoreInfoVO> instaStoreInfoList = new ArrayList<InstaStoreInfoVO>();
+		for(int i = 0; i < instaStoreList.size(); i++) {
+			InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
+			instaStoreInfo.setInstaStore(instaStoreList.get(i));
+			instaStoreInfo.setInstaImage(imgList.get(i));
+			
+			instaStoreInfoList.add(instaStoreInfo);
+		}
 		
 			
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;
 		logger.info("걸린 시간 : {}", diff);
 		
-		logger.info("{}", instaStoreInfoList);
-		logger.info("{}", instaStoreInfoList.size());
+
+		
 		return instaStoreInfoList;
 	}
 	

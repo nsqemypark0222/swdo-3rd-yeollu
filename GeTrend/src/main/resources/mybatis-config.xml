@@ -9,21 +9,15 @@
 		<typeAlias type="com.yeollu.getrend.store.vo.InstaLocationVO" alias="instaLocation"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.SearchedStoreVO" alias="searchedStore"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.InstaStoreVO" alias="instaStore"/>	
-<<<<<<< HEAD
 		<typeAlias type="com.yeollu.getrend.store.vo.InstaReplyVO" alias="reply"/>	
-=======
 		<typeAlias type="com.yeollu.getrend.store.vo.LikeVO" alias="like"/>	
->>>>>>> 771710310d0b71bdc8a56969b64f3d75292f354b
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml"/>
 		<mapper resource="mapper/storeMapper.xml"/>
 		<mapper resource="mapper/instaLocationMapper.xml"/>
 		<mapper resource="mapper/searchedStoreMapper.xml"/>
-<<<<<<< HEAD
 		<mapper resource="mapper/instaReplyMapper.xml"/>
-=======
 		<mapper resource="mapper/likeMapper.xml"/>
->>>>>>> 771710310d0b71bdc8a56969b64f3d75292f354b
 	</mappers>
 </configuration>

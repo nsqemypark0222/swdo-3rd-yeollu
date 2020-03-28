@@ -45,16 +45,16 @@
 					output += "<th>닉네임</th>";
 					output += "<th>리뷰</th>";
 					output += "<th>날짜</th>";
-					output += "<th>추천</th>";
+					
 					output += "<th></th>";
 					output += "</tr>";
 					
 					$(result).each(function(index, item) {
 						output += "<tr>";
-						output += "<td>" + item.reply_star + "</td>";
-						output += "<td>" + item.user_email + "</td>";
-						output += "<td>" + item.reply_contents + "</td>";
-						output += "<td>" + item.reply_indate + "</td>";
+						output += "<td>" + item.REPLY_STAR + "</td>";
+						output += "<td>" + item.USER_NAME + "</td>";
+						output += "<td>" + item.REPLY_CONTENTS + "</td>";
+						output += "<td>" + item.REPLY_INDATE + "</td>";
 						
 						output += "</tr>";
 					});
@@ -64,15 +64,18 @@
 				error: function() { alert("에러 발생"); }
 			});
 		}
-		
 	$('.starRev span').on("click",function(){
+		console.log($(this));
 		$(this).parent().children('span').removeClass('on');
 		$(this).addClass('on').prevAll('span').addClass('on');
 		console.log($(this).attr("value"));
 		var re = $(this).attr("value");
+		$(".starRev").children('input').remove();
 		$(".starRev").append("<input type='hidden' name='reply_star' value="+ re + ">");
 		return false;
 	});
+
+	printList();
 });
 
 </script>
@@ -90,16 +93,16 @@
 						<td>${sessionScope.loginname}</td>
 						<td>
 							<div class="starRev">
-							  <span class="starR1" value="0.5" name="star">별1_왼쪽</span>
-							  <span class="starR2" value="1" name="star">별1_오른쪽</span>
-							  <span class="starR1" value="1.5" name="star">별2_왼쪽</span>
-							  <span class="starR2" value="2" name="star">별2_오른쪽</span>
-							  <span class="starR1" value="2.5" name="star">별3_왼쪽</span>
-							  <span class="starR2" value="3" name="star">별3_오른쪽</span>
-							  <span class="starR1" value="3.5" name="star">별4_왼쪽</span>
-							  <span class="starR2" value="4" name="star">별4_오른쪽</span>
-							  <span class="starR1" value="4.5" name="star">별5_왼쪽</span>
-							  <span class="starR2" value="5" name="star">별5_오른쪽</span>
+							  <span class="starR1" value="0.5">별1_왼쪽</span>
+							  <span class="starR2" value="1">별1_오른쪽</span>
+							  <span class="starR1" value="1.5">별2_왼쪽</span>
+							  <span class="starR2" value="2">별2_오른쪽</span>
+							  <span class="starR1" value="2.5">별3_왼쪽</span>
+							  <span class="starR2" value="3">별3_오른쪽</span>
+							  <span class="starR1" value="3.5">별4_왼쪽</span>
+							  <span class="starR2" value="4">별4_오른쪽</span>
+							  <span class="starR1" value="4.5">별5_왼쪽</span>
+							  <span class="starR2" value="5">별5_오른쪽</span>
 							</div>
 						
 						</td>

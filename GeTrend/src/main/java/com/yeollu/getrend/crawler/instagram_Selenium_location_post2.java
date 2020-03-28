@@ -35,7 +35,7 @@ public class instagram_Selenium_location_post2 {
 	
 	static {
 //		System.setProperty("webdriver.chrome.driver", "C:/stsinstall/sts-4.5.0.RELEASE/chromedriver.exe");
-		System.setProperty("webdriver.chrome.driver", "C:/sts/sts-4.5.0.RELEASE/chromedriver.exe");    	 	
+		System.setProperty("webdriver.chrome.driver", "C:/StsInstall/sts-4.5.0.RELEASE/chromedriver.exe");    	 	
 		options = new ChromeOptions();
 //		options.addArguments("headless");
 		options.addArguments("window-size=1920x1080");

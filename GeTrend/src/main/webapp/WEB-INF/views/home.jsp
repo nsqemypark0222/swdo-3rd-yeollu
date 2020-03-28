@@ -42,14 +42,6 @@ test
    	</div>
    	
 
-<<<<<<< HEAD
-   	<div id="desc">
-   	
-   	</div>
-   	
-
-=======
->>>>>>> 771710310d0b71bdc8a56969b64f3d75292f354b
    	<div>
    		<table id="table" border="1">
    			<tr>
@@ -65,10 +57,7 @@ test
    	<div id="imageContainer">
    	
    	</div>
-<<<<<<< HEAD
 
-=======
->>>>>>> 771710310d0b71bdc8a56969b64f3d75292f354b
    	
 
    	
@@ -109,11 +98,7 @@ test
 					data: JSON.stringify(points),
 					success: function(result) {
 						alert("성공");
-<<<<<<< HEAD
-						$("#desc").text(result);
-=======
 
->>>>>>> 771710310d0b71bdc8a56969b64f3d75292f354b
 						$(result).each(function(index, item) {
 							$("#table").append(
 								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"

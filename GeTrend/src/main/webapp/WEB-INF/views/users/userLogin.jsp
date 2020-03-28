@@ -19,8 +19,6 @@ $(function(){
 </script>
 </head>
 <body>
-	test
-	test2
 	<h1>LOGIN :)</h1>
 	<form action="login" method="post">
 		<table>

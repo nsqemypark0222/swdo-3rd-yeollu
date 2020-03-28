@@ -1,6 +1,7 @@
 package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import org.json.JSONArray;
@@ -58,7 +59,10 @@ public class HomeController {
 	public String crawlForm() {
 		return "crawl_test";
 	}
-	
+	@RequestMapping(value = "/autocompleteForm", method = RequestMethod.GET)
+	public String autocompleteForm() {
+		return "autocomplete_test";
+	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody

@@ -41,7 +41,7 @@ public class UserController {
 	public void setMailService(MailService mailService) {
 		this.mailService = mailService;
 	}
-	
+	//회원가입 페이지 이동
 	@RequestMapping(value="/userJoin", method=RequestMethod.GET)
 	public String userJoin() {
 		logger.info("회원가입페이지");
@@ -53,7 +53,7 @@ public class UserController {
 		logger.info("카카오 공유하기");
 		return "/users/kakaoshare";
 	}
-	
+	//회원가입 이메일 중복확인
 	@RequestMapping(value="/emailCheck",method=RequestMethod.GET)
 	@ResponseBody
 	public String emailCheck(String user_email) {
@@ -86,7 +86,7 @@ public class UserController {
         	return "fail";
         }
     }
-    
+    //회워가입 인증 코드 확인
     @RequestMapping(value = "/joinCodeCheck", method = RequestMethod.POST)
     @ResponseBody
     public String joinCodeCheck(HttpSession session, @RequestParam String joinCode) {
@@ -104,7 +104,7 @@ public class UserController {
         	return "fail";
         }
     }
-    
+    //로컬 로그인페이지 이동 쿠키저장
 	@RequestMapping(value="/userLogin", method=RequestMethod.GET)
 	public String userLogin(HttpServletRequest request,Model model) {
 		logger.info("로그인페이지");
@@ -123,7 +123,7 @@ public class UserController {
 	}
 	
 	
-	
+	//회원가입
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(UserVO user) {
 		logger.info("회원가입");
@@ -141,7 +141,7 @@ public class UserController {
 		
 		return "redirect:/";
 	}
-	
+	//카카오 로그인
 	@RequestMapping(value="/kakaoLogin", method=RequestMethod.POST)
 	public String kakaoLogin(UserVO user, HttpSession session) {
 		String Kakaoemail = user.getUser_email();
@@ -172,17 +172,16 @@ public class UserController {
 			session.setAttribute("loginemail",Kakaouser.getUser_email());
 			session.setAttribute("loginname",Kakaouser.getUser_name());
 		}
-		
-		
 		return "redirect:/";
 	}
 	
+	//네이버 콜백
 	@RequestMapping(value = "/callback", method = RequestMethod.GET)
 	public String callback() {
 		logger.info("callback가는거");
 		return "/users/callback";
 	}
-	
+	//네이버로그인
 	@RequestMapping(value="/naverLogin", method=RequestMethod.POST)
 	public String naverLogin(UserVO user, HttpSession session) {
 		String Naveremail = user.getUser_email();
@@ -214,16 +213,19 @@ public class UserController {
 		
 		return "redirect:/";
 	}
-	
+	//로컬 로그인 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(UserVO user, String remember, 
 			HttpSession session, HttpServletResponse response, Model model) {
 		UserVO newUser = dao.selectEmail(user.getUser_email());
 		String errMsg1 = "";
 		String errMsg2 = "";
+		logger.info("{}",user);
+		logger.info("{}",newUser);
 		if(newUser != null) {
 			if(passEncoder.matches(user.getUser_pw(), newUser.getUser_pw())) {
-				session.setAttribute("loginemail", user.getUser_email());
+				session.setAttribute("loginemail", newUser.getUser_email());
+				session.setAttribute("loginname",newUser.getUser_name());
 				if(remember != null && remember.equals("1")) {
 					Cookie cookie = new Cookie("remail", user.getUser_email());
 					cookie.setMaxAge(60*60*24*7);
@@ -240,17 +242,19 @@ public class UserController {
 			return "/users/userLogin";
 		}
 		logger.info("{}",session.getAttribute("loginemail"));
+		logger.info("{}",session.getAttribute("loginname"));
 		logger.info("로그인 성공");
 		return "redirect:/";
 	}
-	
+	//로그아웃
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginemail");
+		session.removeAttribute("loginname");
 		logger.info("로그아웃");
 		return "redirect:/";
 	}
-	
+	//회원정보 수정 페이지 이동
 	@RequestMapping(value="/userUpdate", method=RequestMethod.GET)
 	public String userUpdate(HttpSession session, Model model) {
 		String user_email = (String)session.getAttribute("loginemail");
@@ -259,7 +263,7 @@ public class UserController {
 		logger.info("user_email {}",user_email);
 		return "/users/userUpdate";
 	}
-	
+	//회원정보 수정
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(UserVO user){
 		logger.info("{}", user);
@@ -272,10 +276,11 @@ public class UserController {
 		}
 		return "redirect:/";
 	}
-	
+	//회원탈퇴 
 	@RequestMapping(value="deleteUser", method=RequestMethod.GET)
 	public String deleteUser(String user_email, HttpSession session) {
 		session.removeAttribute("loginemail");
+		session.removeAttribute("loginname");
 		int cnt = dao.deleteUser(user_email);
 	
 		if(cnt> 0) {

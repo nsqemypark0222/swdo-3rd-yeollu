@@ -10,6 +10,7 @@
 		<typeAlias type="com.yeollu.getrend.store.vo.SearchedStoreVO" alias="searchedStore"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.InstaStoreVO" alias="instaStore"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.LikeVO" alias="like"/>	
+		<typeAlias type="com.yeollu.getrend.store.vo.MangoStoreVO" alias="mangoStore"/>	
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml"/>
@@ -17,5 +18,6 @@
 		<mapper resource="mapper/instaLocationMapper.xml"/>
 		<mapper resource="mapper/searchedStoreMapper.xml"/>
 		<mapper resource="mapper/likeMapper.xml"/>
+		<mapper resource="mapper/mangoStoreMapper.xml"/>
 	</mappers>
 </configuration>

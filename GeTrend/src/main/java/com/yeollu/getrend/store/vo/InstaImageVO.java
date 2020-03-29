@@ -8,5 +8,5 @@ import lombok.Data;
 @Data
 public class InstaImageVO {
 	private String repImg;
-	private ArrayList<String> likeAndImgList;
+	private ArrayList<PostImageVO> postImgList;
 }

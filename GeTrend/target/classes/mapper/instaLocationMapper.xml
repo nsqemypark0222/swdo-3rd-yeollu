@@ -32,5 +32,15 @@ where
 	location_id = #{location_id}
 </select>
 
+<select id="selectLocationByStoreNo" parameterType="string" resultType="instaLocation">
+select
+	location_id
+	, store_no
+from
+	insta_locations
+where
+	store_no = #{store_no}
+</select>
+
 </mapper>
 

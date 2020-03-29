@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
@@ -37,11 +39,13 @@
 	</bean>
 	
 	<!-- 이메일 관련 -->
+	<util:properties id="mail" location="classpath:properties/mail.properties" />
+	
 	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
-			<property name="port" value="587" />
-			<property name="username" value="GeTrendd@gmail.com" />
-			<property name="password" value="yeollu0727" />
+		<property name="host" value="#{mail['mail_host']}" />
+			<property name="port" value="#{mail['mail_port']}" />
+			<property name="username" value="#{mail['mail_username']}" />
+			<property name="password" value="#{mail['mail_password']}" />
 			<property name="javaMailProperties">
 				<props>
 					<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>

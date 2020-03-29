@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yeollu.getrend.user.dao.UserDAO;
 import com.yeollu.getrend.user.util.MailService;
 import com.yeollu.getrend.user.vo.UserVO;
+import com.yeollu.getrend.util.PropertiesUtil;
 
 @Controller
 @RequestMapping(value = "/users")
@@ -78,7 +79,8 @@ public class UserController {
         String subject = "회원가입 인증 코드 발급 안내 입니다.";
         StringBuilder sb = new StringBuilder();
         sb.append("귀하의 인증 코드는 " + joinCode + " 입니다.");
-        boolean result = mailService.send(subject, sb.toString(), "getrendd@gmail.com", user_email, null);
+        String from = PropertiesUtil.get("mail", "mail_username");
+        boolean result = mailService.send(subject, sb.toString(), from, user_email, null);
         if(result) {
         	return "success";
         }

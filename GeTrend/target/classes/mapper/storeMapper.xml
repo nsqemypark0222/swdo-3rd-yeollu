@@ -20,6 +20,8 @@ select
 	, store_y
 from
 	stores
+order by
+	store_no asc
 </select>
 
 <select id="selectInstaStore" parameterType="string" resultType="instaStore">
@@ -42,5 +44,6 @@ where
 	s.store_no = l.store_no
 	and s.store_no = #{store_no}
 </select>
+
 </mapper>
 

@@ -16,6 +16,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.yeollu.getrend.util.PropertiesUtil;
+
 public class mango_store_info {
 	
 private static final Logger logger = LoggerFactory.getLogger(mango_store_info.class);
@@ -26,9 +28,10 @@ private static final Logger logger = LoggerFactory.getLogger(mango_store_info.cl
 	public void crawl(String store_name){
 		
 //		 System.setProperty("webdriver.chrome.driver", "C:/stsinstall/sts-4.5.0.RELEASE/chromedriver.exe");    	 	
-		 System.setProperty("webdriver.chrome.driver", "C:/sts/sts-4.5.0.RELEASE/chromedriver.exe");    	 	
+		String driverPath = PropertiesUtil.get("util", "CHROME_DRIVER");
+		System.setProperty("webdriver.chrome.driver", driverPath);  
 		 ChromeOptions options = new ChromeOptions();
-		 options.addArguments("headless");
+//		 options.addArguments("headless");
 		 options.addArguments("window-size=1920x1080");
          options.addArguments("disable-gpu");
          options.addArguments("disable-infobars");

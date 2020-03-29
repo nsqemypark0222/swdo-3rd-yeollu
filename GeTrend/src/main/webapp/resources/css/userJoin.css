@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: .75rem;
+}
+
+body {
+  background: #FF8A00;
+  background: linear-gradient(to right, #ff890a, #ffc933);
+}
+.btn-warning {
+    color: #ffffff;
+    background-color: #ffc107;
+    border-color: #ffc107;
+    border-radius:20px;
+    width: 100%;
+    
+}
+.btn-outline-warning{
+	border-radius: 20px;	
+	 width: 100%;
+}
+
+#joinFrm div {
+
+    margin-bottom:13px;
+
+}
+
+#joinFrm label {
+
+    display:inline-block; 
+    width:80%;
+    font-weight: bold;
+	border-radius:30px;
+}
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+  
+}
+
+
+#joinFrm input[type='text'], #joinFrm input[type='email'], #joinFrm input[type='password']{
+	margin-bottom:13px;
+    border:#ccc 1px solid;
+    border-radius:30px;
+    height: 80%;
+    width: 100%;
+
+}
+#joinFrm input[type='submit'], #joinFrm input[type='reset']{ 
+    padding: 12px ;
+    width: 100%;
+    
+}

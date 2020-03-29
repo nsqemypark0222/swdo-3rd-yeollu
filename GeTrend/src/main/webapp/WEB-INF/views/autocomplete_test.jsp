@@ -130,7 +130,10 @@ $(function() {
 					
 				}).autocomplete( "instance" )._renderItem = 
 					function( ul, item ) {
-			       		return $( "<li>" ).append( "<div>" + item.value + "</div>" ).appendTo( ul );	
+						var cnt = 0;
+						if (cnt > 5) return false;
+			       		return $( "<li>" ).append( "<div>" + item.value + "</div>" ).appendTo( ul );
+			       		cnt++;	
 			    	};
 			},
 			

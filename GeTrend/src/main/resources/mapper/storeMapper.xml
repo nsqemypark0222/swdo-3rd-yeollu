@@ -46,7 +46,7 @@ where
 
 <select id="autoStoreName" resultType="string">
 select
-	store_name
+	distinct store_name
 from
 	stores
 </select>

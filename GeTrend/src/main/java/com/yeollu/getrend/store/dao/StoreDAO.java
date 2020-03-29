@@ -39,4 +39,78 @@ public class StoreDAO {
 		
 		return instaStore;
 	}
+	
+	public ArrayList<String> autoStoreName(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.autoStoreName();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<String> autoStoreAdr1_01(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.autoStoreAdr1_01();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	public ArrayList<String> autoStoreAdr1_02(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.autoStoreAdr1_02();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	public ArrayList<String> autoStoreCate3_01(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.autoStoreCate3_01();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	public ArrayList<String> autoStoreCate3_02(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.autoStoreCate3_02();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	public ArrayList<String> autoStoreCate3_03(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.autoStoreCate3_03();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }

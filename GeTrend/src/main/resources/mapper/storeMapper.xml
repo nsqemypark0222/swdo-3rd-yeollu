@@ -42,5 +42,60 @@ where
 	s.store_no = l.store_no
 	and s.store_no = #{store_no}
 </select>
+
+
+<select id="autoStoreName" resultType="string">
+select
+	store_name
+from
+	stores
+</select>
+<select id="autoStoreAdr1_01" resultType="string">
+select 
+	distinct substr(store_adr1,7,2)
+from stores
+</select>
+<select id="autoStoreAdr1_02" resultType="string">
+select 
+	distinct substr(store_adr1,10,3)
+from stores
+</select>
+
+<select id="autoStoreCate3_01" resultType="string">
+select 
+	distinct store_cate3 
+from 
+	stores 
+where 
+	instr(store_cate3,'/') = 0
+</select>
+
+
+<select id="autoStoreCate3_02" resultType="string">
+select 
+	distinct substr(store_cate3,1,instr(store_cate3,'/',1)-1) 
+from 
+	stores 
+where 
+	instr(store_cate3,'/') != 0 
+and 
+	(instr(store_cate3,'/') = instr(store_cate3,'/',-1))
+</select>
+
+
+<select id="autoStoreCate3_03" resultType="string">
+select 
+	distinct substr(store_cate3,instr(store_cate3,'/',-1)+1)
+from 
+	stores 
+where 
+	instr(store_cate3,'/') != 0 
+and 
+	(instr(store_cate3,'/') = instr(store_cate3,'/',-1))
+</select>
+
+
+
+
 </mapper>
 

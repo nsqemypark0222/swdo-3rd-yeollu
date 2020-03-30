@@ -50,11 +50,15 @@ select
 from
 	stores
 </select>
+
+
 <select id="autoStoreAdr" resultType="string">
 select 
 	distinct store_adr
 from stores
 </select>
+
+
 <select id="autoStoreCate2_01" resultType="string">
 select 
 	distinct store_cate2 
@@ -67,7 +71,7 @@ where
 
 <select id="autoStoreCate2_02" resultType="string">
 select 
-	distinct substr(store_cate2,instr(store_cate2,'/',1)-1) 
+	distinct substr(store_cate2,1,instr(store_cate2,'/',1)-1)
 from 
 	stores 
 where 

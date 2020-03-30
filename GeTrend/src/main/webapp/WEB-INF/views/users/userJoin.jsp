@@ -93,7 +93,6 @@ $("#joinCodeCheck").click(function(){
         <div class="card card-signin my-5">
           <div class="card-body">
               <h2 class="card-title text-center">Sign In</h2>
-              <hr>
 				<div id="joinFrm">
 					<form action="Join" method="post" name="joinFrm" @submit="formCheck" id="joinFrm">
 					  <div class="form-label-group row">
@@ -128,6 +127,7 @@ $("#joinCodeCheck").click(function(){
 						<div class="col-md-6">	
 						<input type="reset" class="btn btn-lg btn-outline-warning mb-2" value="취소" id="cancel" >
 						</div>		
+						  <hr class="my-4">
 					</div>
 					</div> 
 				</div>

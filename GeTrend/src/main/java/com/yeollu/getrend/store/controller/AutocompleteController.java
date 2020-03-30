@@ -27,18 +27,32 @@ public class AutocompleteController {
 	
 	@RequestMapping(value = "/source", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String source() {    
-		ArrayList<String> array = new ArrayList<String>();
+	public String json01(String param) {    
+	    logger.info("param {}", param);
+	    ArrayList<String> array = new ArrayList<String>();
 		array.addAll(storeDAO.autoStoreName());
 		array.addAll(storeDAO.autoStoreAdr());
 		array.addAll(storeDAO.autoStoreCate2_01());
 		array.addAll(storeDAO.autoStoreCate2_02());
 		array.addAll(storeDAO.autoStoreCate2_03());
 		
+	    ArrayList<String> list = new ArrayList<String>();
+	    int j = 0;
+		for (int i = 0; i < array.size(); i++) {
+	    	if(array.get(i).contains(param)) {
+				list.add(array.get(i));
+				j++;
+				if(j > 10) {
+					logger.info("검색 수 {}", i);
+					break;
+				}
+			}
+		}
+		logger.info("list {}",list);
+		
 		Gson gson = new Gson();
-	    return gson.toJson(array);
+	    return gson.toJson(list);
 	}
-	
 		
 	@RequestMapping(value = "/keyword", method = RequestMethod.POST)
 	@ResponseBody

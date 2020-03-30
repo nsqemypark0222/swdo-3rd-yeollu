@@ -30,11 +30,10 @@ public class AutocompleteController {
 	public String source() {    
 		ArrayList<String> array = new ArrayList<String>();
 		array.addAll(storeDAO.autoStoreName());
-		array.addAll(storeDAO.autoStoreAdr1_01());	
-		array.addAll(storeDAO.autoStoreAdr1_02());	
-		array.addAll(storeDAO.autoStoreCate3_01());
-		array.addAll(storeDAO.autoStoreCate3_02());
-		array.addAll(storeDAO.autoStoreCate3_03());
+		array.addAll(storeDAO.autoStoreAdr());
+		array.addAll(storeDAO.autoStoreCate2_01());
+		array.addAll(storeDAO.autoStoreCate2_02());
+		array.addAll(storeDAO.autoStoreCate2_03());
 		
 		Gson gson = new Gson();
 	    return gson.toJson(array);

@@ -54,4 +54,17 @@ public class InstaLocationDAO {
 		
 		return result;
 	}
+	
+	public InstaLocationVO selectLocationByStoreNo(String store_no) {
+		InstaLocationVO instaLocation = new InstaLocationVO();
+		
+		try {
+			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);
+			instaLocation = mapper.selectLocationByStoreNo(store_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return instaLocation;
+	}
 }

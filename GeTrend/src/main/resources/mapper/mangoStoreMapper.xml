@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeollu.getrend.store.dao.MangoStoreMapper">
+
+<insert id="insertMangoStore" parameterType="mangoStore">
+insert into 
+	mango_stores (
+		store_no
+		, mango_tel
+		, mango_kind
+		, mango_price
+		, mango_parking
+		, mango_time
+		, mango_break_time
+		, mango_last_order
+		, mango_holiday
+	) values(
+		#{store_no}
+		, #{mango_tel}
+		, #{mango_kind}
+		, #{mango_price}
+		, #{mango_parking}
+		, #{mango_time}
+		, #{mango_break_time}
+		, #{mango_last_order}
+		, #{mango_holiday}
+	)
+</insert>
+
+</mapper>
+

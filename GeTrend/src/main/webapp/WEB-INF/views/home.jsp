@@ -113,14 +113,14 @@ test
 										+ "<td>" + item.instaStore.store_name + "</td>"
 										+ '<td><img src=' + item.instaImage.repImg + ' /></td>'
 							);
-							$(item.instaImage.likeAndImgList).each(function(idx, itm) {
-								if(idx % 2 == 0) {
-									$("#imageContainer").append(
-											"<div name='imgPanel'>"
-												+ '<img src=' + itm + ' />'
-									);
-								}
+							$(item.instaImage.postImgList).each(function(idx, itm) {
+								$("#imageContainer").append(
+										"<div name='imgPanel'>"
+											+ '<img src=' + itm.imgUrl + ' />'
+											+ '<b>' + itm.like + '</b>'
+								);
 							});
+							$('#imageContainer').append("<hr />");
 						});
 						
 			        },

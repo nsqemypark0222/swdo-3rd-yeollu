@@ -6,4 +6,5 @@ public interface InstaLocationMapper {
 	public int insertInstaLocation(InstaLocationVO location_id);
 	public int countInstaLocations();
 	public String isExistedInstaLocation(String location_id);
+	public InstaLocationVO selectLocationByStoreNo(String store_no);
 }

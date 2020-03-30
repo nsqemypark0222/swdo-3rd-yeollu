@@ -3,13 +3,15 @@ drop table searched_stores;
 drop table insta_locations;
 drop table users;
 drop table stores;
+drop table mango_stores;
+drop table follows;
 
 create table users(
-    user_email varchar2(50) primary key
-    , user_pw varchar2(200) not null
-    , user_name varchar2(30) not null
-    , user_type varchar2(10)
-    , user_profile varchar2(1000)
+    user_email              varchar2(50)            primary key
+    , user_pw               varchar2(200)           not null
+    , user_name             varchar2(30)            not null
+    , user_type             varchar2(10)
+    , user_profile          varchar2(1000)
 );
 
 -- sqlldr userid=hr/hr control='C:\Users\user\Desktop\stores_control.ctl'
@@ -19,34 +21,55 @@ create table users(
 -- startup
 -- show parameter processes
 create table stores(
-    store_no varchar2(200) primary key
-    , store_name varchar2(200)
-    , store_name2 varchar2(200)
-    , store_cate1 varchar2(200)
-    , store_cate2 varchar2(200)
-    , store_cate3 varchar2(200)
-    , store_dem varchar(200)
-    , store_adr1 varchar(300)
-    , store_adr2 varchar(300)
-    , store_x number
-    , store_y number
+    store_no                varchar2(200)           primary key
+    , store_name            varchar2(200)
+    , store_name2           varchar2(200)
+    , store_cate1           varchar2(200)
+    , store_cate2           varchar2(200)
+    , store_cate3           varchar2(200)
+    , store_dem             varchar(200)
+    , store_adr1            varchar(300)
+    , store_adr2            varchar(300)
+    , store_x               number
+    , store_y               number
 );
 
 create table insta_locations (
-    location_id varchar2(200) primary key
-    , store_no varchar2(200)
-    , location_indate date default sysdate
+    location_id             varchar2(200)           primary key
+    , store_no              varchar2(200)
+    , location_indate       date                    default sysdate
     , constraint fk1_insta_locations foreign key (store_no) references stores(store_no)
 );
 
 create table searched_stores (
-    searched_no number primary key
-    , store_name varchar2(200)
-    , searched_indate date default sysdate
+    searched_no             number                  primary key
+    , store_name            varchar2(200)
+    , searched_indate       date                    default sysdate
 );
 
-
 create sequence seq_searched_stores;
+
+create table mango_stores (
+    store_no                varchar2(200)           primary key
+    , mango_tel             varchar2(100)
+    , mango_kind            varchar2(100)
+    , mango_price           varchar2(100)
+    , mango_parking         varchar2(100)
+    , mango_time            varchar2(100)
+    , mango_break_time      varchar2(100)
+    , mango_last_order      varchar2(100)
+    , mango_holiday         varchar2(100)
+    , mango_indate          date                    default sysdate
+    , constraint fk1_mango_stores foreign key (store_no) references stores(store_no)
+);
+
+create table follows (
+    user_email              varchar2(50)            not null
+    , follows_following     varchar2(50)            not null
+    , follows_indate        date                    default sysdate
+    , constraint pk_follows primary key (user_email, follows_following)
+    , constraint fk1_follows foreign key (user_email) references users(user_email)
+);
 
 commit;
 
@@ -61,76 +84,54 @@ commit;
 
 
 
-
+--------------------------------------------------------------------------------------------------------------------------------
 select * from users;
 select * from stores;
 select * from insta_locations;
 select count(*) from insta_locations;
 select * from searched_stores;
-
+select * from mango_stores;
+--------------------------------------------------------------------------------------------------------------------------------
 select
-	decode(count(*), 0, 'false', 'true') as result
+    s.store_no
+    , s.store_name
+    , m.mango_kind
+    , m.mango_price
+    , m.mango_parking
+    , m.mango_time
+    , m.mango_break_time
+    , m.mango_last_order
+    , m.mango_holiday
 from
-	searched_stores
+    stores s, mango_stores m
 where
-	store_name = '¸ð¶õ½ÄÅ¹'
-	and to_char(searched_indate, 'HH24') = to_char(sysdate, 'HH24');
-
-select s.store_no
-from insta_locations i, stores s
-where i.store_no = s.store_no
-group by s.store_no;
-
-select location_id, count(location_id)
-from insta_locations
-group by location_id
-order by count(location_id) desc;
-
+    s.store_no = m.store_no
+order by s.store_no;
+--------------------------------------------------------------------------------------------------------------------------------
 select
-	s.store_no, count(s.store_no)
+	store_no
+	, store_name
+	, store_name2
+	, store_cate1
+	, store_cate2
+	, store_cate3
+	, store_dem
+	, store_adr1
+	, store_adr2
+	, store_x
+	, store_y
 from
-	stores s, insta_locations l
+	stores
+order by
+	store_no asc;
+--------------------------------------------------------------------------------------------------------------------------------
+select
+    s.store_no
+from
+    insta_locations i, stores s
 where
-	s.store_no = l.store_no
-group by s.store_no
-order by count(s.store_no) desc;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    i.store_no = s.store_no
+group by
+    s.store_no;
+--------------------------------------------------------------------------------------------------------------------------------
 

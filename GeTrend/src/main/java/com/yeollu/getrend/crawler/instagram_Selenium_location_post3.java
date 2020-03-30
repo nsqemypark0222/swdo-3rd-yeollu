@@ -7,7 +7,6 @@ import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,16 +24,16 @@ import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.PostImageVO;
 import com.yeollu.getrend.util.PropertiesUtil;
 
-public class instagram_Selenium_location_post2 {
+public class instagram_Selenium_location_post3 {
 	
-	private static final Logger logger = LoggerFactory.getLogger(instagram_Selenium_location_post2.class);
-	
-	//WebDriver
-	private static WebDriver driver;
+	private static final Logger logger = LoggerFactory.getLogger(instagram_Selenium_location_post3.class);
 	
 	private static ChromeOptions options;
 	
-	private static WebDriverWait wait;
+	//WebDriver
+	private WebDriver driver;
+	
+	private WebDriverWait wait;
 	
 	static {
 //		System.setProperty("webdriver.chrome.driver", "C:/stsinstall/sts-4.5.0.RELEASE/chromedriver.exe");
@@ -80,38 +79,19 @@ public class instagram_Selenium_location_post2 {
 		capabilities.setCapability("pageLoadStrategy", "none");
 	}
 	
-	private instagram_Selenium_location_post2() {
-		
-	}
-	
-	private static class InnerInstance_instagram_Selenium_location_post2 {
-		private static final instagram_Selenium_location_post2 instance = new instagram_Selenium_location_post2();
-	}
-	
-	public static instagram_Selenium_location_post2 getInstance() {
-		return InnerInstance_instagram_Selenium_location_post2.instance;
+	public instagram_Selenium_location_post3() {
+
 	}
 		
-	public ArrayList<InstaImageVO> location_post(ArrayList<String> locationList) {
+	public InstaImageVO location_post(String location) {
 		driver = new ChromeDriver(options);
+		logger.info("드라이버 실행 : {}", location);
 		wait = new WebDriverWait(driver, 4);
 		
-		ArrayList<InstaImageVO> instaImageList = new ArrayList<InstaImageVO>();
-		for (int i = 0; i < locationList.size(); i++) {
-			try {
-				
-			} catch (Exception e) {
-				continue;
-			}
-			InstaImageVO img = new InstaImageVO();
+		InstaImageVO instaImage = new InstaImageVO();
+		try {
 			
-			if(i > 0) {
-				((JavascriptExecutor) driver).executeScript("window.open()");
-			}
-			
-			ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-			driver.switchTo().window(tabs.get(i));
-			driver.get("https://www.instagram.com/explore/locations/" + locationList.get(i));
+			driver.get("https://www.instagram.com/explore/locations/" + location);
 			
 			Document doc = Jsoup.parse(driver.getPageSource());
 			
@@ -120,20 +100,12 @@ public class instagram_Selenium_location_post2 {
 			
 			//대표 썸네일
 //			Thread.sleep(1000);
-			try {
-				Thread.sleep(100);
-				wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".ECCnW")));
-				String thum = doc.selectFirst(".ECCnW").attr("src");
-//				System.out.println("대표 사진 : " + thum);
-				if(thum != null && !thum.equals("")) {
-					img.setRepImg(thum);
-				}
-			} catch (TimeoutException e) {
-				logger.info("TimeoutException");
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
+			Thread.sleep(50);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".ECCnW")));
+			String thum = doc.selectFirst(".ECCnW").attr("src");
+//			System.out.println("대표 사진 : " + thum);
+			if(thum != null && !thum.equals("")) {
+				instaImage.setRepImg(thum);
 			}
 			
 			Actions action = new Actions(driver);
@@ -145,7 +117,7 @@ public class instagram_Selenium_location_post2 {
 			for (int j = 0; j < 10 ; j++) {
 	        	try {
 //		      		Thread.sleep(2000);
-		        	Thread.sleep(100);
+		        	Thread.sleep(50);
 		        	action.moveToElement(list_01.get(j)).perform();
 	        		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".qn-0x")));
 	        		String like = driver.findElement(By.cssSelector(".qn-0x")).getText().split("\n")[0];
@@ -187,14 +159,21 @@ public class instagram_Selenium_location_post2 {
 	       		postImgList.add(postImage);
 	       	}
 	       	
-	       	img.setPostImgList(postImgList);
+	       	instaImage.setPostImgList(postImgList);
 	       	 
 	       	System.out.println("======================================================");
 	       	 
-	       	instaImageList.add(img);
+		} catch (TimeoutException e) {
+			logger.info("TimeoutException");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			driver.close();
+//			driver.quit();
 		}
-//		driver.close();
-		driver.quit();
-		return instaImageList;
+		
+		return instaImage;
 	}
 }

@@ -89,10 +89,6 @@
 
 //2. 초성 중성 종성 나눠서
 $(function() { 
-		//DB쿼리 조작 없이 초성 검색을 하기 위해서는 우선 DB에 있는 항목들을 다 가지고 와야한다.
-		//즉 너무 많은 수가 있으면 클라이언트 측이 느려질 수 있다는 점.
-		//하지만 DB쿼리를 조작해서 서버에서 초성검색을 하는 방식에 비해 서버에는 무리가 없다.
-		// ajax로 미리 검색어 목록을 다 가지고 온다.
 		$.ajax({
 			type : 'get',
 			url : "/getrend/autocomplete/json02",
@@ -131,11 +127,14 @@ $(function() {
 						return false;//한글 에러 잡기용도로 사용됨
 					},
 					
-				}).autocomplete( "instance" )._renderItem = function( ul, item ) {	
-			      return $( "<li>" )	//기본 tag가 li로 되어 있음 
-			        .append( "<div>" + item.value + "</div>" )	//여기에다가 원하는 모양의 HTML을 만들면 UI가 원하는 모양으로 변함.
-			        .appendTo( ul );	//웹 상으로 보이는 건 정상적인 "김치 볶음밥" 인데 내부에서는 ㄱㅊㅂㅇㅂ,김치 볶음밥 에서 검색을 함.
-			    };
+					
+				}).autocomplete( "instance" )._renderItem = 
+					function( ul, item ) {
+						var cnt = 0;
+						if (cnt > 5) return false;
+			       		return $( "<li>" ).append( "<div>" + item.value + "</div>" ).appendTo( ul );
+			       		cnt++;	
+			    	};
 			},
 			
 		});
@@ -180,7 +179,6 @@ $(function() {
 
 </head>
 <body>
-"김치 볶음밥", "신라면", "진라면", "라볶이", "팥빙수","너구리","삼양라면","안성탕면","불닭볶음면","짜왕","라면사리"<br>
 자동완성01 ; 기본   <input id="searchInput" type="text"><br>
 자동완성02 ; 초중종성   <input id="searchInput02" type="text">
 </body>

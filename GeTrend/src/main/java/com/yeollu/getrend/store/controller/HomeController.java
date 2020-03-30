@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yeollu.getrend.crawler.CrawlerExecutor;
 import com.yeollu.getrend.crawler.instagram_Selenium_location_post2;
+import com.yeollu.getrend.crawler.instagram_Selenium_location_post3;
+import com.yeollu.getrend.crawler.mango_store_info;
+import com.yeollu.getrend.crawler.mango_store_info2;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
@@ -95,7 +99,6 @@ public class HomeController {
 			String location_id = QueryStringSender.send(store);
 			if(location_id == null || location_id.equals("")) {
 			} else {
-				logger.info("{}", location_id);
 				if(!instaLocationDAO.isExistedInstaLocation(location_id)) {
 					InstaLocationVO instaLocation = new InstaLocationVO();
 					instaLocation.setLocation_id(location_id);
@@ -109,43 +112,55 @@ public class HomeController {
 				}
 			}
 		}
-//		logger.info("{}", selectedList);
+		logger.info("{}", instaStoreList);
 		
 		
 		
-		if(instaStoreList.size() > 3) {
-			instaStoreList = new ArrayList<InstaStoreVO> (instaStoreList.subList(0, 3));
-		}
 		
-//		인스타그램 크롤링 요청
-		instagram_Selenium_location_post2 ins = instagram_Selenium_location_post2.getInstance();
+//		if(instaStoreList.size() > 3) {
+//			instaStoreList = new ArrayList<InstaStoreVO> (instaStoreList.subList(0, 3));
+//		}
+		
 		
 		ArrayList<String> locationList = new ArrayList<String>();
 		for(int i = 0; i < instaStoreList.size(); i++) {
 			locationList.add(instaStoreList.get(i).getLocation_id());
 		}
-		ArrayList<InstaImageVO> imgList = new ArrayList<InstaImageVO>();
-		try {
-			imgList = ins.location_post(locationList);
-			logger.info("{}", imgList.size());
-			
-			logger.info("{}", imgList);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+//		인스타그램 크롤링 요청
+		ArrayList<InstaImageVO> instaImageList = new ArrayList<InstaImageVO>();
+		ArrayList<CrawlerExecutor> crawlerExecutorList = new ArrayList<CrawlerExecutor>();
+		for(String location : locationList) {
+			CrawlerExecutor crawlerExecutor = new CrawlerExecutor();
+			crawlerExecutor.setLocation(location);
+			new Thread(crawlerExecutor, "crawling :  " + location).start();
+			crawlerExecutorList.add(crawlerExecutor);
 		}
+		for(CrawlerExecutor crawlerExecutor : crawlerExecutorList) {
+			instaImageList.add(crawlerExecutor.getInstaImage());
+		}
+		
 		
 //		View로 보낼  최종 리스트
 		ArrayList<InstaStoreInfoVO> instaStoreInfoList = new ArrayList<InstaStoreInfoVO>();
-		for(int i = 0; i < instaStoreList.size(); i++) {
-			InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
-			instaStoreInfo.setInstaStore(instaStoreList.get(i));
-			instaStoreInfo.setInstaImage(imgList.get(i));
-			
-			instaStoreInfoList.add(instaStoreInfo);
+		try {
+			for(int i = 0; i < instaStoreList.size(); i++) {
+				InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
+				instaStoreInfo.setInstaStore(instaStoreList.get(i));
+				
+				if(instaImageList.size() > i) {
+					instaStoreInfo.setInstaImage(instaImageList.get(i));					
+				} else {
+					instaStoreInfo.setInstaImage(null);
+				}
+				
+				instaStoreInfoList.add(instaStoreInfo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-			
+		
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;
 		logger.info("걸린 시간 : {}", diff);

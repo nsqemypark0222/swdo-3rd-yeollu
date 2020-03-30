@@ -24,15 +24,28 @@ public class AutocompleteController {
 	private StoreDAO storeDAO;
 	private static final Logger logger = LoggerFactory.getLogger(AutocompleteController.class);
 
-	@RequestMapping(value = "/json01", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	
+	@RequestMapping(value = "/source", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String json01(String param) {    
 	    logger.info("param {}", param);
-		String[] array = {"김치 볶음밥", "신라면", "진라면", "라볶이", "팥빙수","너구리","삼양라면","안성탕면","불닭볶음면","짜왕","라면사리"};	    
+	    ArrayList<String> array = new ArrayList<String>();
+		array.addAll(storeDAO.autoStoreName());
+		array.addAll(storeDAO.autoStoreAdr());
+		array.addAll(storeDAO.autoStoreCate2_01());
+		array.addAll(storeDAO.autoStoreCate2_02());
+		array.addAll(storeDAO.autoStoreCate2_03());
+		
 	    ArrayList<String> list = new ArrayList<String>();
-		for (int i = 0; i < array.length; i++) {
-	    	if(array[i].contains(param)) {
-				list.add(array[i]);
+	    int j = 0;
+		for (int i = 0; i < array.size(); i++) {
+	    	if(array.get(i).contains(param)) {
+				list.add(array.get(i));
+				j++;
+				if(j > 10) {
+					logger.info("검색 수 {}", i);
+					break;
+				}
 			}
 		}
 		logger.info("list {}",list);
@@ -40,24 +53,6 @@ public class AutocompleteController {
 		Gson gson = new Gson();
 	    return gson.toJson(list);
 	}
-	
-	
-	//초성 중성 종성
-	@RequestMapping(value = "/json02", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	@ResponseBody
-	public String json02() {    
-		ArrayList<String> array = new ArrayList<String>();
-		array.addAll(storeDAO.autoStoreName());
-		array.addAll(storeDAO.autoStoreAdr1_01());	
-		array.addAll(storeDAO.autoStoreAdr1_02());	
-		array.addAll(storeDAO.autoStoreCate3_01());
-		array.addAll(storeDAO.autoStoreCate3_02());
-		array.addAll(storeDAO.autoStoreCate3_03());
-		
-		Gson gson = new Gson();
-	    return gson.toJson(array);
-	}
-	
 		
 	@RequestMapping(value = "/keyword", method = RequestMethod.POST)
 	@ResponseBody

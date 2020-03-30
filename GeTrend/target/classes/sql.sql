@@ -5,6 +5,7 @@ drop table users;
 drop table stores;
 drop table mango_stores;
 drop table follows;
+drop table likes;
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -69,6 +70,15 @@ create table follows (
     , follows_indate        date                    default sysdate
     , constraint pk_follows primary key (user_email, follows_following)
     , constraint fk1_follows foreign key (user_email) references users(user_email)
+);
+
+create table likes (
+    user_email 	            varchar2(50)            not null
+    , store_no 		        varchar2(200)           not null
+    , likes_indate          date                    default sysdate
+    , constraint pk_likes primary key (user_email, store_no)
+    , constraint fk1_likes foreign key (user_email) references users(user_email)
+    , constraint fk2_likes foreign key (store_no) references stores(store_no)
 );
 
 commit;

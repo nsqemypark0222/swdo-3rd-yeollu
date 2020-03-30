@@ -12,8 +12,7 @@ select
 	, store_name2
 	, store_cate1
 	, store_cate2
-	, store_cate3
-	, store_dem
+	, store_adr
 	, store_adr1
 	, store_adr2
 	, store_x
@@ -31,8 +30,7 @@ select
 	, s.store_name2
 	, s.store_cate1
 	, s.store_cate2
-	, s.store_cate3
-	, s.store_dem
+	, s.store_adr
 	, s.store_adr1
 	, s.store_adr2
 	, s.store_x

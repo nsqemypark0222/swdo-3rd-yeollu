@@ -16,19 +16,75 @@
   crossorigin="anonymous"></script>
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@api['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
+<style>
+.space{
+ margin-top:80%;
+}
 
+</style>
 </head>
 <body>
-test
-
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
-	
-	<div id="map" style="width: 850px; height: 350px;">
-
+	<div id="space">
+	<div id="map" style="width: 850px; height: 400px; margin-top:5%; margin-left:15%;">
+		<input type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal" value="Category Test" 
+		style="position: absolute;top: 11px; left: 1%; z-index: 400;">
+          <div class="modal" id="myModal">
+           <div class="modal-dialog">
+           <div class="modal-content">
+			<!-- 음식 카테고리 모달 헤더 -->
+			<div class="mol-header">
+		         <h4 class="modal-title">Category</h4>
+		           <button type="button" class="close" data-dismiss="modal">&times;</button>
+		     </div>
+		      <!--  음식 카테고리 모달 body -->
+		       <div class="modal-body">
+		           	소상공인 db 음식 종류
+		       </div>
+		        
+		     	<!-- 음식 카테고리 모달 footer -->
+		        <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		        </div>
+    	 	</div>
+    		</div>
+    	 </div>
+    	 
+    	  <input type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" value="영업확인 Test" 
+    	  style="position: absolute;top: 11px; left: 18%; z-index: 400;">
+          <div class="modal" id="myModal">
+           <div class="modal-dialog">
+           <div class="modal-content">
+				<!-- 영업확인  모달 헤더 -->
+			<div class="mol-header">
+		         <h4 class="modal-title">영업 확인</h4>
+		           <button type="button" class="close" data-dismiss="modal">&times;</button>
+		     </div>
+		      <!--  영업확인  모달 body -->
+		       <div class="modal-body">
+		          	식당 영업 요일별 확인 
+		       </div>
+		        
+		     	<!-- 영업확인 모달 footer -->
+		        <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		        </div>
+		        
+    	 	</div>
+    		</div>
+    	 </div>
 	</div>
-	
+	 
+  
 	<p>
 		<button onclick="selectOverlay('POLYGON')">범위 선택</button>
 	</p>
@@ -99,16 +155,29 @@ test
 			<c:otherwise>
 				<a href="users/userJoin">회원가입</a>
 				<a href="users/userLogin">로그인</a>
+				
 			</c:otherwise>
 		</c:choose>	
 	</div>
 	
+<<<<<<< HEAD
 	
+	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
+	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
+	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
+	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
+=======
 	<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
 	<a href="<c:url value='/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocompleteForm'/>">자동완성 테스트</a>
+<<<<<<< HEAD
+	</div>
+>>>>>>> 877bf820be8f9722b06f516873ca0fc2d76fb8f3
 	
+=======
 	
+	<a href="users/follow">follow</a>
+>>>>>>> 1b4a8406c316d27b14b2f16962ddb35195310137
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>

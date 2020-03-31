@@ -33,6 +33,11 @@ public class CrawlController {
 	@Autowired
 	private MangoStoreDAO mangoStoreInfoDAO;
 
+	@RequestMapping(value = "/crawlForm", method = RequestMethod.GET)
+	public String crawlForm() {
+		return "crawl_test";
+	}
+
 
 	@RequestMapping(value = "/mango_store_info", method = RequestMethod.POST)
 	public String mango_store_info(String store_name) {

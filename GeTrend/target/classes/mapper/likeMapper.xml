@@ -35,6 +35,15 @@ where
 	user_email = #{user_email}	
 </select>
 
+<select id="likeStoreCountByEmail" parameterType="string" resultType="int">
+select
+	count(store_no)
+from
+	likes
+where
+	user_email = #{user_email}	
+</select>
+
 <select id="likeSelectByStoreno" parameterType="string" resultType="like">
 select
 	store_no

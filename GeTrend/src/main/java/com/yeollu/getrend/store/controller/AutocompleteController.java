@@ -22,7 +22,10 @@ public class AutocompleteController {
 	private StoreDAO storeDAO;
 	private static final Logger logger = LoggerFactory.getLogger(AutocompleteController.class);
 
-	
+	@RequestMapping(value = "/autocompleteForm", method = RequestMethod.GET)
+	public String autocompleteForm() {
+		return "autocomplete_test";
+	}
 	@RequestMapping(value = "/source", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String source(String param) {    

@@ -39,6 +39,7 @@ public class UserController {
 	@Inject
 	private MailService mailService;
 	
+	
 	public void setMailService(MailService mailService) {
 		this.mailService = mailService;
 	}
@@ -261,6 +262,7 @@ public class UserController {
 		String user_email = (String)session.getAttribute("loginemail");
 		UserVO user = dao.selectEmail(user_email);
 		model.addAttribute("user", user);
+		logger.info("회원정보수정 페이지");
 		logger.info("user_email {}",user_email);
 		return "/users/userUpdate";
 	}
@@ -268,6 +270,7 @@ public class UserController {
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(UserVO user){
 		logger.info("{}", user);
+		
 		int cnt = dao.updateUser(user);
 		logger.info("{}",cnt);
 		if(cnt>0) {

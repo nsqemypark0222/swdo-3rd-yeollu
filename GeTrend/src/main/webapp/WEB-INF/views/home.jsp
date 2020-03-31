@@ -16,19 +16,76 @@
   crossorigin="anonymous"></script>
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@api['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
+<style>
+.space{
+ margin-top:80%;
+}
 
+</style>
 </head>
 <body>
-
 
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
-	
-	<div id="map" style="width: 850px; height: 350px;">
-
+	<div id="space">
+	<div id="map" style="width: 850px; height: 400px; margin-top:5%; margin-left:15%;">
+		<input type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal" value="Category Test" 
+		style="position: absolute;top: 11px; left: 1%; z-index: 400;">
+          <div class="modal" id="myModal">
+           <div class="modal-dialog">
+           <div class="modal-content">
+			<!-- 음식 카테고리 모달 헤더 -->
+			<div class="mol-header">
+		         <h4 class="modal-title">Category</h4>
+		           <button type="button" class="close" data-dismiss="modal">&times;</button>
+		     </div>
+		      <!--  음식 카테고리 모달 body -->
+		       <div class="modal-body">
+		           	소상공인 db 음식 종류
+		       </div>
+		        
+		     	<!-- 음식 카테고리 모달 footer -->
+		        <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		        </div>
+    	 	</div>
+    		</div>
+    	 </div>
+    	 
+    	  <input type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" value="영업확인 Test" 
+    	  style="position: absolute;top: 11px; left: 18%; z-index: 400;">
+          <div class="modal" id="myModal">
+           <div class="modal-dialog">
+           <div class="modal-content">
+				<!-- 영업확인  모달 헤더 -->
+			<div class="mol-header">
+		         <h4 class="modal-title">영업 확인</h4>
+		           <button type="button" class="close" data-dismiss="modal">&times;</button>
+		     </div>
+		      <!--  영업확인  모달 body -->
+		       <div class="modal-body">
+		          	식당 영업 요일별 확인 
+		       </div>
+		        
+		     	<!-- 영업확인 모달 footer -->
+		        <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		        </div>
+		        
+    	 	</div>
+    		</div>
+    	 </div>
 	</div>
-	
+	 
+  
 	<p>
 		<button onclick="selectOverlay('POLYGON')">범위 선택</button>
 	</p>
@@ -50,11 +107,33 @@
    	<div>
    		<table id="table" border="1">
    			<tr>
-   				<th>STORE_NO</th>
-   				<th>STORE_X</th>
-   				<th>STORE_Y</th>
-   				<th>STORE_NAME</th>
+   				<th>store_no</th>
+   				<th>store_name</th>
+   				<th>store_name2</th>
+   				<th>store_cate1</th>
+   				<th>store_cate2</th>
+   				<th>store_adr</th>
+   				<th>store_adr1</th>
+   				<th>store_adr2</th>
+   				<th>store_x</th>
+   				<th>store_y</th>
    				<th>PROFILE_URL</th>
+   			</tr>
+   		</table>
+   	</div>
+   	
+   	<div>
+   		<table id="mangoTable" border="1">
+   			<tr>
+   				<th>store_no</th>
+   				<th>mango_tel</th>
+   				<th>mango_kind</th>
+   				<th>mango_price</th>
+   				<th>mango_parking</th>
+   				<th>mango_time</th>
+   				<th>mango_break_time</th>
+   				<th>mango_last_order</th>
+   				<th>mango_indate</th>
    			</tr>
    		</table>
    	</div>
@@ -79,22 +158,30 @@
 			<c:otherwise>
 				<a href="users/userJoin">회원가입</a>
 				<a href="users/userLogin">로그인</a>
+				
 			</c:otherwise>
 		</c:choose>	
 	</div>
 	
 	
-	<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
-	<a href="<c:url value='/crawlForm'/>">크롤링 테스트</a>
-	<a href="<c:url value='/autocompleteForm'/>">자동완성 테스트</a>
+	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
+	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
+	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
+	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
+
+	</div>
+
 	
-	
+	<a href="users/follow">follow</a>
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
 
 <script type="text/javascript">
 		$(function() {
+
+
+			
 			function search(points) {
 
 				$.ajax({
@@ -105,14 +192,32 @@
 					dataType: "json",
 					success: function(result) {
 						alert("성공");
+						printMarker(result);
 						console.log(result);
 						$(result).each(function(index, item) {
 							$("#table").append(
 								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
+										+ "<td>" + item.instaStore.store_name + "</td>"
+										+ "<td>" + item.instaStore.store_name2 + "</td>"
+										+ "<td>" + item.instaStore.store_cate1 + "</td>"
+										+ "<td>" + item.instaStore.store_cate2 + "</td>"
+										+ "<td>" + item.instaStore.store_adr + "</td>"
+										+ "<td>" + item.instaStore.store_adr1 + "</td>"
+										+ "<td>" + item.instaStore.store_adr2 + "</td>"
 										+ "<td>" + item.instaStore.store_x + "</td>"
 										+ "<td>" + item.instaStore.store_y + "</td>"
-										+ "<td>" + item.instaStore.store_name + "</td>"
-										+ '<td><img src=' + item.instaImage.repImg + ' /></td>'
+										+ '<td><img src=' + item.instaImage.repImg + ' /></td>' + "</tr>"
+							);
+							$("#mangoTable").append(
+									"<tr>" + "<td>" + item.mangoStore.store_no + "</td>"
+										+ "<td>" + item.mangoStore.mango_tel + "</td>"
+										+ "<td>" + item.mangoStore.mango_kind + "</td>"
+										+ "<td>" + item.mangoStore.mango_price + "</td>"
+										+ "<td>" + item.mangoStore.mango_parking + "</td>"
+										+ "<td>" + item.mangoStore.mango_time + "</td>"
+										+ "<td>" + item.mangoStore.mango_break_time + "</td>"
+										+ "<td>" + item.mangoStore.mango_last_order + "</td>"
+										+ "<td>" + item.mangoStore.mango_holiday + "</td>" + "</tr>"
 							);
 							$(item.instaImage.postImgList).each(function(idx, itm) {
 								$("#imageContainer").append(
@@ -152,6 +257,54 @@
 		};
 
 		const map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+
+
+		
+		const printMarker = (result) => {
+			// 마커를 표시할 위치와 title 객체 배열입니다
+			let positions = [];
+			
+			for(let n in result) {
+				const posotion = {
+					title: result[n].instaStore.store_name,
+					latlng: new kakao.maps.LatLng(result[n].instaStore.store_y, result[n].instaStore.store_x)
+				}
+				positions.push(posotion);
+			}
+			/* let positions = [
+				{
+					title: '카카오',
+					latlng: new kakao.maps.LatLng(35.15113, 126.924584)
+				}
+			]; */
+
+			// 마커 이미지의 이미지 주소입니다
+			const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+			for(let i = 0; i < positions.length; i++) {
+
+				// 마커 이미지의 이미지 크기 입니다
+				const imageSize = new kakao.maps.Size(24, 35);
+
+				// 마커 이미지를 생성합니다    
+			    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+
+			 // 마커를 생성합니다
+			    const marker = new kakao.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: positions[i].latlng, // 마커를 표시할 위치
+			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+			        image : markerImage // 마커 이미지 
+			    });
+			}
+		};
+
+
+
+		
+
 
 		const options = {
 		        // Drawing Manager를 생성할 때 사용할 옵션입니다

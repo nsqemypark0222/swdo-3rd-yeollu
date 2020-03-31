@@ -7,9 +7,13 @@ drop table stores;
 drop table mango_stores;
 drop table follows;
 drop table likes;
+<<<<<<< HEAD
 drop table users;
 drop table stores;
 --drop table stores cascade constraints;
+=======
+drop table insta_replys;
+>>>>>>> 30f239e5199ac474ea0775420417ad45138e3af9
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -87,6 +91,16 @@ create table likes (
     , constraint fk2_likes foreign key (store_no) references stores(store_no)
 );
 
+create table insta_replys(
+reply_no 		number 	primary key 
+,store_no 	varchar2(200)
+,user_email	 varchar2(50)
+,reply_contents 	varchar2(1000)
+,reply_star	 number
+,reply_indate	 date default sysdate
+,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
+);
+
 commit;
 
 
@@ -151,6 +165,7 @@ where
     i.store_no = s.store_no
 group by
     s.store_no;
+<<<<<<< HEAD
 --------------------------------------------------------------------------------------------------------------------------------
 select
     s.store_name
@@ -171,3 +186,6 @@ where
 
 
 
+=======
+--------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> 30f239e5199ac474ea0775420417ad45138e3af9

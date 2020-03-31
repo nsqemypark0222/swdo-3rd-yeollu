@@ -164,4 +164,13 @@ table {
     color: #777;
   }
 }
-
+#kakaoIdLogin {
+	float: left;
+	margin-right: 1px;	
+}
+#naverIdLogin {
+	float: left;	
+}
+#socialbtn img{
+	width: 228px;
+}

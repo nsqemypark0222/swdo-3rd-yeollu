@@ -2,14 +2,13 @@ drop sequence seq_searched_stores;
 drop table searched_stores;
 drop table insta_locations;
 drop table mango_stores;
-drop table users;
-drop table stores;
 drop table mango_stores;
 drop table follows;
 drop table likes;
 drop table users;
 drop table stores;
 --drop table stores cascade constraints;
+drop table insta_replys;
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -85,6 +84,16 @@ create table likes (
     , constraint pk_likes primary key (user_email, store_no)
     , constraint fk1_likes foreign key (user_email) references users(user_email)
     , constraint fk2_likes foreign key (store_no) references stores(store_no)
+);
+
+create table insta_replys(
+reply_no 		number 	primary key 
+,store_no 	varchar2(200)
+,user_email	 varchar2(50)
+,reply_contents 	varchar2(1000)
+,reply_star	 number
+,reply_indate	 date default sysdate
+,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
 );
 
 commit;
@@ -168,6 +177,3 @@ where
     s.store_no = m.store_no
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
-
-
-

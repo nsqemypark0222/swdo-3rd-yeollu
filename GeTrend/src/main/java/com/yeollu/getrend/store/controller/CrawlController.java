@@ -33,6 +33,11 @@ public class CrawlController {
 	@Autowired
 	private MangoStoreDAO mangoStoreInfoDAO;
 
+	@RequestMapping(value = "/crawlForm", method = RequestMethod.GET)
+	public String crawlForm() {
+		return "crawl_test";
+	}
+
 
 	@RequestMapping(value = "/mango_store_info", method = RequestMethod.POST)
 	public String mango_store_info(String store_name) {
@@ -51,6 +56,33 @@ public class CrawlController {
 		long startTime = System.currentTimeMillis();
 		
 		ArrayList<StoreVO> __list = storeDAO.selectAllStores();
+//		int i = 0;
+//		for(StoreVO store : __list) {
+//			try {
+//				MangoStoreVO mangoStore = new MangoStoreVO();
+//				mangoStore.setStore_no(store.getStore_no());
+//				mangoStore.setMango_tel("");
+//				mangoStore.setMango_kind("");
+//				mangoStore.setMango_price("");
+//				mangoStore.setMango_parking("");
+//				mangoStore.setMango_time("");
+//				mangoStore.setMango_break_time("");
+//				mangoStore.setMango_last_order("");
+//				mangoStore.setMango_holiday("");
+//				logger.info("{}", mangoStore.getStore_no());
+//				int cnt = mangoStoreInfoDAO.insertMangoStore(mangoStore);
+//				if(cnt > 0) {
+//					logger.info("추가 성공");
+//					i++;
+//				} else {
+//					logger.info("추가 실패");
+//				}
+//			} catch (Exception e) {
+//				continue;
+//			}
+//			
+//			logger.info("i : " + i);
+//		}
 		ArrayList<StoreVO> _list = new ArrayList<StoreVO>(__list.subList(0, __list.size()));
 		logger.info("총 사이즈 : {}", __list.size());
 		

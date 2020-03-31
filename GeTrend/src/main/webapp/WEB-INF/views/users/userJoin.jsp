@@ -22,6 +22,7 @@
 <script>
 
 $(function(){
+	
 	$("#cancel").click(function(){
 		location.href="<c:url value='/'/>";
 	});
@@ -119,7 +120,6 @@ $("#joinCodeCheck").click(function(){
 				   <div class="form-label-group text-center">
 						<input type="text" class="form-control" name="user_name" id="user_name" v-model="user_name" placeholder="이름">
 					</div>
-					</form>
 					 <div class="form-label-group row">
 						<div class="col-md-6">
 						<input type="submit" class="btn btn-lg btn-warning mb-2" value="가입"  id="join" >
@@ -129,6 +129,7 @@ $("#joinCodeCheck").click(function(){
 						</div>		
 						  <hr class="my-4">
 					</div>
+					</form>
 					</div> 
 				</div>
 			</div>

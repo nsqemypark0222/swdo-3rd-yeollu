@@ -12,14 +12,33 @@ select
 	, store_name2
 	, store_cate1
 	, store_cate2
-	, store_cate3
-	, store_dem
+	, store_adr
 	, store_adr1
 	, store_adr2
 	, store_x
 	, store_y
 from
 	stores
+order by
+	store_no asc
+</select>
+
+<select id="selectStoresByStoreAdr" parameterType="string" resultType="store">
+select
+	store_no
+	, store_name
+	, store_name2
+	, store_cate1
+	, store_cate2
+	, store_adr
+	, store_adr1
+	, store_adr2
+	, store_x
+	, store_y
+from
+	stores
+where
+	store_adr = #{store_adr}
 order by
 	store_no asc
 </select>
@@ -31,8 +50,7 @@ select
 	, s.store_name2
 	, s.store_cate1
 	, s.store_cate2
-	, s.store_cate3
-	, s.store_dem
+	, s.store_adr
 	, s.store_adr1
 	, s.store_adr2
 	, s.store_x
@@ -52,48 +70,46 @@ select
 from
 	stores
 </select>
-<select id="autoStoreAdr1_01" resultType="string">
+
+
+<select id="autoStoreAdr" resultType="string">
 select 
-	distinct substr(store_adr1,7,2)
-from stores
-</select>
-<select id="autoStoreAdr1_02" resultType="string">
-select 
-	distinct substr(store_adr1,10,3)
+	distinct store_adr
 from stores
 </select>
 
-<select id="autoStoreCate3_01" resultType="string">
+
+<select id="autoStoreCate2_01" resultType="string">
 select 
-	distinct store_cate3 
+	distinct store_cate2 
 from 
 	stores 
 where 
-	instr(store_cate3,'/') = 0
+	instr(store_cate2,'/') = 0
 </select>
 
 
-<select id="autoStoreCate3_02" resultType="string">
+<select id="autoStoreCate2_02" resultType="string">
 select 
-	distinct substr(store_cate3,1,instr(store_cate3,'/',1)-1) 
+	distinct substr(store_cate2,1,instr(store_cate2,'/',1)-1)
 from 
 	stores 
 where 
-	instr(store_cate3,'/') != 0 
+	instr(store_cate2,'/') != 0 
 and 
-	(instr(store_cate3,'/') = instr(store_cate3,'/',-1))
+	(instr(store_cate2,'/') = instr(store_cate2,'/',-1))
 </select>
 
 
-<select id="autoStoreCate3_03" resultType="string">
+<select id="autoStoreCate2_03" resultType="string">
 select 
-	distinct substr(store_cate3,instr(store_cate3,'/',-1)+1)
+	distinct substr(store_cate2,instr(store_cate2,'/',-1)+1)
 from 
 	stores 
 where 
-	instr(store_cate3,'/') != 0 
+	instr(store_cate2,'/') != 0 
 and 
-	(instr(store_cate3,'/') = instr(store_cate3,'/',-1))
+	(instr(store_cate2,'/') = instr(store_cate2,'/',-1))
 </select>
 
 

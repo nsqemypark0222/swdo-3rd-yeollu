@@ -6,10 +6,7 @@ drop table stores;
 --drop table mango_stores;
 drop table follows;
 drop table likes;
-<<<<<<< HEAD
 drop table insta_replys;
-=======
->>>>>>> 301ac4fe77715f3060bd198e1e4f15375b072219
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -84,7 +81,6 @@ create table likes (
     , constraint fk2_likes foreign key (store_no) references stores(store_no)
 );
 
-<<<<<<< HEAD
 create table insta_replys(
 reply_no 		number 	primary key 
 ,store_no 	varchar2(200)
@@ -95,8 +91,6 @@ reply_no 		number 	primary key
 ,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
 );
 
-=======
->>>>>>> 301ac4fe77715f3060bd198e1e4f15375b072219
 commit;
 
 

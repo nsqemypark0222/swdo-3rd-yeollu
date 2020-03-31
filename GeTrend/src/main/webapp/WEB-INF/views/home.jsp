@@ -150,7 +150,7 @@
 				<a href="users/logout">로그아웃</a>
 				<a href="users/kakaoshare">공유하기</a>
 				<a href="reply/replyForm">댓글달기</a>
-				
+				<a href="users/follow">follow</a>
 			</c:when>
 			<c:otherwise>
 				<a href="users/userJoin">회원가입</a>
@@ -165,20 +165,10 @@
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
 	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
-<<<<<<< HEAD
 	
 	</div>
-	<a href="users/follow">follow</a>
 	
 	
-=======
-	<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
-	<a href="<c:url value='/crawlForm'/>">크롤링 테스트</a>
-	<a href="<c:url value='/autocompleteForm'/>">자동완성 테스트</a>
-	</div>
-	
-	<a href="users/follow">follow</a>
->>>>>>> e40dc1603095da91bf9932f1a086130f57ffd3c8
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>

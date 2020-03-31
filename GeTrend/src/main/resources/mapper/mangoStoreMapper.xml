@@ -30,5 +30,23 @@ insert into
 	)
 </insert>
 
+<select id="selectMangoStoreByStoreNo" parameterType="string" resultType="mangoStore">
+select
+	store_no
+	, mango_tel
+	, mango_kind
+	, mango_price
+	, mango_parking
+	, mango_time
+	, mango_break_time
+	, mango_last_order
+	, mango_holiday
+	, mango_indate
+from
+	mango_stores
+where
+	store_no = #{store_no}
+</select>
+
 </mapper>
 

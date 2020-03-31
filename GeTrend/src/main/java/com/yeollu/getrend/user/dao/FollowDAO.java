@@ -11,9 +11,12 @@ import com.yeollu.getrend.user.vo.UserVO;
 public class FollowDAO {
 	@Autowired
 	private SqlSession session;
+<<<<<<< HEAD
 
 	
 	
+=======
+>>>>>>> 18151576be3b0e59d8f2036632a733429ed68226
 	public int insertFollow(FollowVO follow) {
 		int cnt = 0;
 		try {
@@ -23,8 +26,11 @@ public class FollowDAO {
 			e.printStackTrace();
 		}return cnt;
 	}
+<<<<<<< HEAD
 	
 
+=======
+>>>>>>> 18151576be3b0e59d8f2036632a733429ed68226
 	public int deleteFollow(FollowVO follow) {
 		int cnt = 0;
 		try {
@@ -51,8 +57,12 @@ public class FollowDAO {
 			cnt = mapper.countFollower(user_email);
 		} catch (Exception e) {
 			e.printStackTrace();
+<<<<<<< HEAD
 		}
 
 		return cnt;
+=======
+		}return cnt;
+>>>>>>> 18151576be3b0e59d8f2036632a733429ed68226
 	}
 }

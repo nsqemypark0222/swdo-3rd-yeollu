@@ -1,11 +1,12 @@
 drop sequence seq_searched_stores;
 drop table searched_stores;
 drop table insta_locations;
-drop table users;
-drop table stores;
 drop table mango_stores;
 drop table follows;
 drop table likes;
+drop table users;
+drop table stores;
+--drop table stores cascade constraints;
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -14,6 +15,8 @@ create table users(
     , user_type             varchar2(10)
     , user_profile          varchar2(1000)
 );
+
+
 
 -- sqlldr userid=hr/hr control='C:\Users\user\Desktop\stores3_control.ctl'
 -- sqlplus sys as sysdba

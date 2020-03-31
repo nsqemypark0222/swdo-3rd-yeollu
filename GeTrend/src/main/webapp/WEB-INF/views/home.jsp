@@ -19,7 +19,7 @@
 
 </head>
 <body>
-test
+
 
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -104,7 +104,6 @@ test
 					data: JSON.stringify(points),
 					success: function(result) {
 						alert("성공");
-						$("#desc").text(result);
 						$(result).each(function(index, item) {
 							$("#table").append(
 								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"

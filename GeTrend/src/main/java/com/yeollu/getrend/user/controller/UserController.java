@@ -71,7 +71,7 @@ public class UserController {
     @RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
     @ResponseBody
     public String sendMailAuth(HttpSession session, @RequestParam String user_email) {
-        logger.info("dd");
+        logger.info("emailAuth");
     	int ran = new Random().nextInt(100000) + 10000; // 10000 ~ 99999
         String joinCode = String.valueOf(ran);
         session.setAttribute("joinCode", joinCode);
@@ -88,7 +88,7 @@ public class UserController {
         	return "fail";
         }
     }
-    //회워가입 인증 코드 확인
+    //회원가입 인증 코드 확인
     @RequestMapping(value = "/joinCodeCheck", method = RequestMethod.POST)
     @ResponseBody
     public String joinCodeCheck(HttpSession session, @RequestParam String joinCode) {
@@ -99,7 +99,6 @@ public class UserController {
     	logger.info("joinCode : {}", joinCode);
     	
     	if(_joinCode.equals(joinCode)) {
-    		
         	return "success";
         }
         else {

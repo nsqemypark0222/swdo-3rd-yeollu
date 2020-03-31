@@ -12,22 +12,22 @@ public class FollowDAO {
 	@Autowired
 	private SqlSession session;
 
-	public int insertFollow02(FollowVO follow) {
+	public int insertFollow(FollowVO follow) {
 		int cnt = 0;
 		try {
 			FollowMapper mapper = session.getMapper(FollowMapper.class);
-			cnt = mapper.insertFollow02(follow);
+			cnt = mapper.insertFollow(follow);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}return cnt;
 	}
 	
 	
-	public int deleteFollow02(FollowVO follow) {
+	public int deleteFollow(FollowVO follow) {
 		int cnt = 0;
 		try {
 			FollowMapper mapper = session.getMapper(FollowMapper.class);
-			cnt = mapper.deleteFollow02(follow);
+			cnt = mapper.deleteFollow(follow);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}return cnt;

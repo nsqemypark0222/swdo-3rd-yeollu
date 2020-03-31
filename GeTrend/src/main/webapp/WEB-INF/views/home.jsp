@@ -106,7 +106,7 @@
    			<tr>
    				<th>store_no</th>
    				<th>store_name</th>
-   				<th>sgtore_name2</th>
+   				<th>store_name2</th>
    				<th>store_cate1</th>
    				<th>store_cate2</th>
    				<th>store_adr</th>
@@ -160,30 +160,25 @@
 		</c:choose>	
 	</div>
 	
-<<<<<<< HEAD
 	
 	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
 	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
-=======
-	<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
-	<a href="<c:url value='/crawlForm'/>">크롤링 테스트</a>
-	<a href="<c:url value='/autocompleteForm'/>">자동완성 테스트</a>
-<<<<<<< HEAD
+
 	</div>
->>>>>>> 877bf820be8f9722b06f516873ca0fc2d76fb8f3
-	
-=======
+
 	
 	<a href="users/follow">follow</a>
->>>>>>> 1b4a8406c316d27b14b2f16962ddb35195310137
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
 
 <script type="text/javascript">
 		$(function() {
+
+
+			
 			function search(points) {
 
 				$.ajax({
@@ -194,6 +189,7 @@
 					dataType: "json",
 					success: function(result) {
 						alert("성공");
+						printMarker(result);
 						console.log(result);
 						$(result).each(function(index, item) {
 							$("#table").append(
@@ -258,6 +254,54 @@
 		};
 
 		const map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+
+
+		
+		const printMarker = (result) => {
+			// 마커를 표시할 위치와 title 객체 배열입니다
+			let positions = [];
+			
+			for(let n in result) {
+				const posotion = {
+					title: result[n].instaStore.store_name,
+					latlng: new kakao.maps.LatLng(result[n].instaStore.store_y, result[n].instaStore.store_x)
+				}
+				positions.push(posotion);
+			}
+			/* let positions = [
+				{
+					title: '카카오',
+					latlng: new kakao.maps.LatLng(35.15113, 126.924584)
+				}
+			]; */
+
+			// 마커 이미지의 이미지 주소입니다
+			const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+			for(let i = 0; i < positions.length; i++) {
+
+				// 마커 이미지의 이미지 크기 입니다
+				const imageSize = new kakao.maps.Size(24, 35);
+
+				// 마커 이미지를 생성합니다    
+			    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+
+			 // 마커를 생성합니다
+			    const marker = new kakao.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: positions[i].latlng, // 마커를 표시할 위치
+			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+			        image : markerImage // 마커 이미지 
+			    });
+			}
+		};
+
+
+
+		
+
 
 		const options = {
 		        // Drawing Manager를 생성할 때 사용할 옵션입니다

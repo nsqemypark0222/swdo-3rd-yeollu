@@ -27,6 +27,19 @@ public class StoreDAO {
 		return list;
 	}
 	
+	public ArrayList<StoreVO> selectStoresWithMangoStores() {
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.selectStoresWithMangoStores();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	public InstaStoreVO selectInstaStore(String store_no) {
 		InstaStoreVO instaStore = null;
 		

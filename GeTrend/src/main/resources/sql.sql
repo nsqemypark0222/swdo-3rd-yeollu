@@ -6,6 +6,7 @@ drop table stores;
 drop table mango_stores;
 drop table follows;
 drop table likes;
+drop table insta_replys;
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -15,7 +16,7 @@ create table users(
     , user_profile          varchar2(1000)
 );
 
--- sqlldr userid=hr/hr control='C:\Users\user\Desktop\stores_control.ctl'
+-- sqlldr userid=hr/hr control='C:\Users\user\Desktop\stores3_control.ctl'
 -- sqlplus sys as sysdba
 -- alter system set processes=500 scope=spfile;
 -- shutdown immediate
@@ -79,6 +80,16 @@ create table likes (
     , constraint pk_likes primary key (user_email, store_no)
     , constraint fk1_likes foreign key (user_email) references users(user_email)
     , constraint fk2_likes foreign key (store_no) references stores(store_no)
+);
+
+create table insta_replys(
+reply_no 		number 	primary key 
+,store_no 	varchar2(200)
+,user_email	 varchar2(50)
+,reply_contents 	varchar2(1000)
+,reply_star	 number
+,reply_indate	 date default sysdate
+,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
 );
 
 commit;

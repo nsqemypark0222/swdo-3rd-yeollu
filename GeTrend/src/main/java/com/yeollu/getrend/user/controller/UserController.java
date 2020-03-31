@@ -39,6 +39,7 @@ public class UserController {
 	@Inject
 	private MailService mailService;
 	
+	
 	public void setMailService(MailService mailService) {
 		this.mailService = mailService;
 	}

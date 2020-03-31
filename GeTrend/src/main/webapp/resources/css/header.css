@@ -1,0 +1,57 @@
+@charset "UTF-8";
+	@media (min-width: 992px) {
+  .animate {
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+  }
+}
+
+.navbar-brand{
+	flex-direction: row;
+	color: rgba(255, 138, 0, 0.78);
+	font-family: Prompt;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 90px;
+	line-height: 80px;
+	/* or 89% */
+	display: flex;
+	align-items: center;
+	text-align: center;
+	letter-spacing: -0.2em;
+	width: 300px;
+		
+}
+#navbar-brand{
+	color: rgba(255, 138, 0, 0.78);
+}
+.navbar input[type='text']{
+	background-color: rgba(255, 138, 0, 0.78);
+	color:#FFFFFF;
+	width:450px;
+
+}
+.navbar-light .navbar-brand {
+    color: rgba(255, 138, 0, 0.78);
+    margin-left: 18%;
+}
+.navbar-brand:hover {
+    color: rgba(255, 138, 0, 0.78);
+}
+#title:hover{
+	    color: rgba(255, 138, 0, 0.78);
+}
+.form-inline{
+	margin-top: 20px;
+}
+
+.menu_list{
+  padding-top:30px; 
+  margin-left:20px;
+}
+.form-control{
+    margin-left:30px;
+
+}

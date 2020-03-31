@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,18 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 $(function(){
+	  $("#upload").change(function(){
+	   if(this.files && this.files[0]) {
+	    var reader = new FileReader;
+	    reader.onload = function(data) {
+	     $(".select_img img").attr("src", data.target.result).width(200);
+	    }
+	    reader.readAsDataURL(this.files[0]);
+	   }
+	  });
+	})
+
+$(function(){
 	$("#cancel").click(function(){
 		$(location).attr('href',"<c:url value='/'/>");
 	});
@@ -26,8 +39,7 @@ $(function(){
 	var user_email = $("#user_email").val();
 	$("#UserDelete").click(function(){
 		$(location).attr('href',"DeleteUser?user_email="+user_email);	
-	}); 
-	
+	});
 });
 </script>
 </head>
@@ -43,22 +55,22 @@ $(function(){
 					<div class="select_img"  style="text-align: left;">
 						<img src="" class="rounded-circle" id="upload" />
 					</div>
-					<c:if test="${user != null}">
+					<c:if test="${sessionScope.user_email != null}">
 						<div class="select_img" class="rounded-circle" style="text-align: left;">
-							<img alt="file" style="width: 200px;"src="/img/${user}">
+							<img alt="file" style="width: 200px;"src="/img/${users}">
 						</div>
 					</c:if>
-						<input type="file" id="upload" name="upload">
+						<input type="file" id="upload" name="upload" accept="image/gif, image/jpeg, image/png">
 					<div class="contaniner-fluid text-center bg-sub">	
-						<p>${user.user_name}</p>
+						<p>${users.user_name}</p>
 					</div>	
 						
 		              <div class="form-label-group">
-		                <input type="email" id="user_email" class="form-control" value="${user.user_email}"  placeholder="user_email" readonly="readonly" required autofocus>
+		                <input type="email" id="user_email" class="form-control" value="${users.user_email}"  placeholder="user_email" readonly="readonly" required autofocus>
 		                <label for="user_email">이메일 </label>
 		              </div>
 		              <div class="form-label-group">
-		                <input type="password" id="user_pw" class="form-control" value="${user.user_pw}"placeholder="Password" v-model="user_pw" required>
+		                <input type="password" id="user_pw" class="form-control" value="${users.user_pw}"placeholder="Password" v-model="user_pw" required>
 		                <label for="user_pw">Password</label>
 		              </div>
 		               <div class="form-label-group">
@@ -66,7 +78,7 @@ $(function(){
 		                <label for="pwCheck">비밀번호 확인</label>
 		              </div>
 		              <div class="form-label-group">
-		                <input type="text" name="user_name" id="user_name" class="form-control" value="${user.user_name}" v-model="user_name" placeholder="user_name" required>
+		                <input type="text" name="user_name" id="user_name" class="form-control" value="${users.user_name}" v-model="user_name" placeholder="user_name" required>
 		                <label for="user_name">닉네임 </label>
 		              </div>
 		        

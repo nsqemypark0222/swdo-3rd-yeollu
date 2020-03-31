@@ -3,7 +3,7 @@ drop table searched_stores;
 drop table insta_locations;
 drop table users;
 drop table stores;
-drop table mango_stores;
+--drop table mango_stores;
 drop table follows;
 drop table likes;
 
@@ -95,11 +95,13 @@ commit;
 
 --------------------------------------------------------------------------------------------------------------------------------
 select * from users;
-select * from stores;
+select * from stores order by store_no asc;
+select count(*) from stores;
 select * from insta_locations;
 select count(*) from insta_locations;
 select * from searched_stores;
-select * from mango_stores;
+select * from mango_stores order by store_no asc;
+select count(*) from mango_stores; 
 --------------------------------------------------------------------------------------------------------------------------------
 select
     s.store_no
@@ -123,8 +125,7 @@ select
 	, store_name2
 	, store_cate1
 	, store_cate2
-	, store_cate3
-	, store_dem
+	, store_adr
 	, store_adr1
 	, store_adr2
 	, store_x
@@ -143,4 +144,52 @@ where
 group by
     s.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
+select
+    s.store_name
+from
+    stores s, mango_stores m
+where
+    s.store_no = m.store_no
+    and mango_kind is not null;
+--------------------------------------------------------------------------------------------------------------------------------
+select
+    s.store_name
+from
+    stores s, mango_stores m, insta_locations l
+where
+    s.store_no = m.store_no
+    and s.store_no = l.store_no;
+--------------------------------------------------------------------------------------------------------------------------------
+select
+    count(*)
+from
+    stores
+where
+    store_adr = '광천동'
+    or store_adr = '구동'
+    or store_adr = '궁동'
+    or store_adr = '금곡동'
+    or store_adr = '금남로1가'
+    or store_adr = '금남로2가'
+    or store_adr = '금남로3가'
+    or store_adr = '금남로4가'
+    or store_adr = '금남로5가'
+    or store_adr = '금동'
+    or store_adr = '금호동'
+order by
+    store_no asc;
+--------------------------------------------------------------------------------------------------------------------------------
+select
+    count(*)
+from
+    stores s, mango_stores m
+where
+    s.store_no = m.store_no
+    and s.store_adr = '광천동'
+order by
+    s.store_no asc;
+
+
+
+
 

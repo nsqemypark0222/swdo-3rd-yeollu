@@ -14,4 +14,5 @@ public interface StoreMapper {
 	public ArrayList<String> autoStoreCate3_01();
 	public ArrayList<String> autoStoreCate3_02();
 	public ArrayList<String> autoStoreCate3_03();
+	public ArrayList<StoreVO> selectStoresByStoreAdr(String store_adr);
 }

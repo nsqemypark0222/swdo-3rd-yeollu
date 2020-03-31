@@ -102,4 +102,17 @@ public class StoreDAO {
 		
 		return list;
 	}
+	
+	public ArrayList<StoreVO> selectStoresByStoreAdr(String store_adr) {
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.selectStoresByStoreAdr(store_adr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }

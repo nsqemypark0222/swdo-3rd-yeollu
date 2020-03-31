@@ -38,12 +38,12 @@ public class AutocompleteController {
 	    int j = 0;
 		for (int i = 0; i < array.size(); i++) {
 	    	if(array.get(i).contains(param)) {
-				list.add(array.get(i));
 				j++;
 				if(j > 10) {
 					logger.info("검색 수 {}", i);
 					break;
 				}
+				list.add(array.get(i));
 			}
 		}
 		logger.info("list {}",list);

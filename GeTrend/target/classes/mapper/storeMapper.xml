@@ -23,6 +23,26 @@ order by
 	store_no asc
 </select>
 
+<select id="selectStoresByStoreAdr" parameterType="string" resultType="store">
+select
+	store_no
+	, store_name
+	, store_name2
+	, store_cate1
+	, store_cate2
+	, store_adr
+	, store_adr1
+	, store_adr2
+	, store_x
+	, store_y
+from
+	stores
+where
+	store_adr = #{store_adr}
+order by
+	store_no asc
+</select>
+
 <select id="selectInstaStore" parameterType="string" resultType="instaStore">
 select
 	s.store_no

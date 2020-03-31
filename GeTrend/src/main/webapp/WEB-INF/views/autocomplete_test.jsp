@@ -52,8 +52,8 @@
            return false;
        },
        minLength: 1,
-       autoFocus: false,
-       delay: 500
+       autoFocus: false
+//       delay: 500
        }).data("ui-autocomplete")._renderItem = function(ul, item) {
 		var $a = $("<b></b>").text(item.value);
 		highlightText(this.term, $a);

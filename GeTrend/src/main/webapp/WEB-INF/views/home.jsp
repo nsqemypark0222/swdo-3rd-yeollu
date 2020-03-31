@@ -102,8 +102,10 @@
 					type: "post",
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify(points),
+					dataType: "json",
 					success: function(result) {
 						alert("성공");
+						console.log(result);
 						$(result).each(function(index, item) {
 							$("#table").append(
 								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"

@@ -82,9 +82,10 @@ test
 	</div>
 	
 	
-	<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
-	<a href="<c:url value='/crawlForm'/>">크롤링 테스트</a>
-	<a href="<c:url value='/autocompleteForm'/>">자동완성 테스트</a>
+	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
+	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
+	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
+	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
 	
 	
 	<footer>

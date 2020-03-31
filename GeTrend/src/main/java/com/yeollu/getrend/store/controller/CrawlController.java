@@ -33,6 +33,11 @@ public class CrawlController {
 	@Autowired
 	private MangoStoreDAO mangoStoreInfoDAO;
 
+	@RequestMapping(value = "/crawlForm", method = RequestMethod.GET)
+	public String crawlForm() {
+		return "crawl_test";
+	}
+
 
 	@RequestMapping(value = "/mango_store_info", method = RequestMethod.POST)
 	public String mango_store_info(String store_name) {
@@ -78,18 +83,46 @@ public class CrawlController {
 //		ArrayList<StoreVO> __list = storeDAO.selectStoresByStoreAdr("노대동"); //
 //		ArrayList<StoreVO> __list = storeDAO.selectStoresByStoreAdr("농성동"); //
 //		ArrayList<StoreVO> __list = storeDAO.selectStoresByStoreAdr("누문동"); //
-		ArrayList<StoreVO> __list = storeDAO.selectStoresByStoreAdr("대산동"); //
-		__list.addAll(storeDAO.selectStoresByStoreAdr("대의동")); //
-		__list.addAll(storeDAO.selectStoresByStoreAdr("대인동")); //
-		__list.addAll(storeDAO.selectStoresByStoreAdr("대촌동")); //
-		__list.addAll(storeDAO.selectStoresByStoreAdr("덕남동")); //
-		__list.addAll(storeDAO.selectStoresByStoreAdr("덕흥동")); //
-		__list.addAll(storeDAO.selectStoresByStoreAdr("도덕동")); //
-		__list.addAll(storeDAO.selectStoresByStoreAdr("도산동")); //
-		__list.addAll(storeDAO.selectStoresByStoreAdr("도천동")); //
-		__list.addAll(storeDAO.selectStoresByStoreAdr("동림동")); //
-		__list.addAll(storeDAO.selectStoresByStoreAdr("동산동")); //
-		ArrayList<StoreVO> _list = new ArrayList<StoreVO>(__list.subList(235, __list.size()));
+//		ArrayList<StoreVO> __list = storeDAO.selectStoresByStoreAdr("대산동"); //
+//		__list.addAll(storeDAO.selectStoresByStoreAdr("대의동")); //
+//		__list.addAll(storeDAO.selectStoresByStoreAdr("대인동")); //
+//		__list.addAll(storeDAO.selectStoresByStoreAdr("대촌동")); //
+//		__list.addAll(storeDAO.selectStoresByStoreAdr("덕남동")); //
+//		__list.addAll(storeDAO.selectStoresByStoreAdr("덕흥동")); //
+//		__list.addAll(storeDAO.selectStoresByStoreAdr("도덕동")); //
+//		__list.addAll(storeDAO.selectStoresByStoreAdr("도산동")); //
+//		__list.addAll(storeDAO.selectStoresByStoreAdr("도천동")); //
+//		__list.addAll(storeDAO.selectStoresByStoreAdr("동림동")); //
+//		__list.addAll(storeDAO.selectStoresByStoreAdr("동산동")); //
+		
+		ArrayList<StoreVO> __list = storeDAO.selectStoresByStoreAdr("청풍동"); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("충장로1가")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("충장로2가")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("충장로3가")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("충장로4가")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("충장로5가")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("충효동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("지평동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("태령동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("풍암동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("풍향동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("하남동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("하산동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("학동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("행암동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("호남동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("화암동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("화장동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("화정동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("황금동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("황룡동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("효령동")); //
+		__list.addAll(storeDAO.selectStoresByStoreAdr("흑석동")); //
+		
+		ArrayList<StoreVO> _list = new ArrayList<StoreVO>(__list.subList(0, __list.size()));
+		
+		
+		//ArrayList<StoreVO> _list = new ArrayList<StoreVO>(__list.subList(235, __list.size()));
 		logger.info("총 사이즈 : {}", __list.size());
 		
 		for(int i = 0; i < _list.size(); i += 5) {

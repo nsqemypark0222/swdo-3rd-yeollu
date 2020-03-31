@@ -38,6 +38,10 @@ public class MypageController {
 	private FollowDAO followDAO;
 	@RequestMapping(value = "/mypageForm", method = RequestMethod.GET)
 	public String mypageForm(Model model) {
+		//가상 상세페이지
+		//가게 이름, 가게 번호, 댓글
+		
+		
 		return "mypage/mypage_test";
 	}
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)

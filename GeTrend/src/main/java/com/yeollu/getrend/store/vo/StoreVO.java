@@ -6,7 +6,7 @@ import lombok.Data;
 public class StoreVO {
 	private String store_no;
 	private String store_name;
-	private String sgtore_name2;
+	private String store_name2;
 	private String store_cate1;
 	private String store_cate2;
 	private String store_adr;

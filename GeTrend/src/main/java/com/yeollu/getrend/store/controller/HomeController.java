@@ -24,6 +24,7 @@ import com.yeollu.getrend.crawler.instagram_Selenium_location_post3;
 import com.yeollu.getrend.crawler.mango_store_info;
 import com.yeollu.getrend.crawler.mango_store_info2;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
+import com.yeollu.getrend.store.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.util.map.core.Polygon;
@@ -33,6 +34,7 @@ import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
+import com.yeollu.getrend.store.vo.MangoStoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
 @Controller
@@ -48,6 +50,9 @@ public class HomeController {
 	
 	@Autowired
 	private InstaLocationDAO instaLocationDAO;
+	
+	@Autowired
+	private MangoStoreDAO mangoStoreDAO;
 		
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -82,9 +87,9 @@ public class HomeController {
 			}	
 		}
 		
-		ArrayList<InstaStoreVO> instaStoreList = new ArrayList<InstaStoreVO>();
 //		인스타그램에 쿼리스트링을 보내 상가의 위치 정보 수집하여 location_id를 하나 리턴받아
 //		InstaStore 객체 생성하여 instaStoreList에 수집
+		ArrayList<InstaStoreVO> instaStoreList = new ArrayList<InstaStoreVO>();
 		for(StoreVO store : selectedList) {
 			String location_id = QueryStringSender.send(store);
 			if(location_id == null || location_id.equals("")) {
@@ -105,6 +110,13 @@ public class HomeController {
 		logger.info("{}", instaStoreList);
 		
 		
+//		망고플레이트 정보 추가
+		ArrayList<MangoStoreVO> mangoStoreList = new ArrayList<MangoStoreVO>();
+		for(InstaStoreVO instaStore : instaStoreList) {
+			MangoStoreVO mangoStore = new MangoStoreVO();
+			mangoStore = mangoStoreDAO.selectMangoStoreByStoreNo(instaStore.getStore_no());
+			mangoStoreList.add(mangoStore);
+		}
 		
 		
 //		if(instaStoreList.size() > 3) {
@@ -137,6 +149,7 @@ public class HomeController {
 			for(int i = 0; i < instaStoreList.size(); i++) {
 				InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
 				instaStoreInfo.setInstaStore(instaStoreList.get(i));
+				instaStoreInfo.setMangoStore(mangoStoreList.get(i));
 				
 				if(instaImageList.size() > i) {
 					instaStoreInfo.setInstaImage(instaImageList.get(i));					

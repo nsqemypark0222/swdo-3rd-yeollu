@@ -104,11 +104,33 @@
    	<div>
    		<table id="table" border="1">
    			<tr>
-   				<th>STORE_NO</th>
-   				<th>STORE_X</th>
-   				<th>STORE_Y</th>
-   				<th>STORE_NAME</th>
+   				<th>store_no</th>
+   				<th>store_name</th>
+   				<th>sgtore_name2</th>
+   				<th>store_cate1</th>
+   				<th>store_cate2</th>
+   				<th>store_adr</th>
+   				<th>store_adr1</th>
+   				<th>store_adr2</th>
+   				<th>store_x</th>
+   				<th>store_y</th>
    				<th>PROFILE_URL</th>
+   			</tr>
+   		</table>
+   	</div>
+   	
+   	<div>
+   		<table id="mangoTable" border="1">
+   			<tr>
+   				<th>store_no</th>
+   				<th>mango_tel</th>
+   				<th>mango_kind</th>
+   				<th>mango_price</th>
+   				<th>mango_parking</th>
+   				<th>mango_time</th>
+   				<th>mango_break_time</th>
+   				<th>mango_last_order</th>
+   				<th>mango_indate</th>
    			</tr>
    		</table>
    	</div>
@@ -169,10 +191,27 @@
 						$(result).each(function(index, item) {
 							$("#table").append(
 								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
+										+ "<td>" + item.instaStore.store_name + "</td>"
+										+ "<td>" + item.instaStore.store_name2 + "</td>"
+										+ "<td>" + item.instaStore.store_cate1 + "</td>"
+										+ "<td>" + item.instaStore.store_cate2 + "</td>"
+										+ "<td>" + item.instaStore.store_adr + "</td>"
+										+ "<td>" + item.instaStore.store_adr1 + "</td>"
+										+ "<td>" + item.instaStore.store_adr2 + "</td>"
 										+ "<td>" + item.instaStore.store_x + "</td>"
 										+ "<td>" + item.instaStore.store_y + "</td>"
-										+ "<td>" + item.instaStore.store_name + "</td>"
-										+ '<td><img src=' + item.instaImage.repImg + ' /></td>'
+										+ '<td><img src=' + item.instaImage.repImg + ' /></td>' + "</tr>"
+							);
+							$("#mangoTable").append(
+									"<tr>" + "<td>" + item.mangoStore.store_no + "</td>"
+										+ "<td>" + item.mangoStore.mango_tel + "</td>"
+										+ "<td>" + item.mangoStore.mango_kind + "</td>"
+										+ "<td>" + item.mangoStore.mango_price + "</td>"
+										+ "<td>" + item.mangoStore.mango_parking + "</td>"
+										+ "<td>" + item.mangoStore.mango_time + "</td>"
+										+ "<td>" + item.mangoStore.mango_break_time + "</td>"
+										+ "<td>" + item.mangoStore.mango_last_order + "</td>"
+										+ "<td>" + item.mangoStore.mango_holiday + "</td>" + "</tr>"
 							);
 							$(item.instaImage.postImgList).each(function(idx, itm) {
 								$("#imageContainer").append(

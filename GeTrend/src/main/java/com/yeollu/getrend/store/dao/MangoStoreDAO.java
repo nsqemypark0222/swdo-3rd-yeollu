@@ -24,5 +24,18 @@ public class MangoStoreDAO {
 		
 		return cnt;
 	}
+	
+	public MangoStoreVO selectMangoStoreByStoreNo(String store_no) {
+		MangoStoreVO mangoStore = new MangoStoreVO();
+		
+		try {
+			MangoStoreMapper mapper = session.getMapper(MangoStoreMapper.class);
+			mangoStore = mapper.selectMangoStoreByStoreNo(store_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mangoStore;
+	}
 
 }

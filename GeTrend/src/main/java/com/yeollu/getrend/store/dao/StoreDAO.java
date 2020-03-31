@@ -53,60 +53,62 @@ public class StoreDAO {
 		return list;
 	}
 	
-	public ArrayList<String> autoStoreAdr1_01(){
+	public ArrayList<String> autoStoreAdr(){
 		ArrayList<String> list = new ArrayList<String>();
 		
 		try {
 			StoreMapper mapper = session.getMapper(StoreMapper.class);
-			list = mapper.autoStoreAdr1_01();
+			list = mapper.autoStoreAdr();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return list;
 	}
-	public ArrayList<String> autoStoreAdr1_02(){
+
+	public ArrayList<String> autoStoreCate2_01(){
 		ArrayList<String> list = new ArrayList<String>();
 		
 		try {
 			StoreMapper mapper = session.getMapper(StoreMapper.class);
-			list = mapper.autoStoreAdr1_02();
+			list = mapper.autoStoreCate2_01();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return list;
 	}
-	public ArrayList<String> autoStoreCate3_01(){
+	public ArrayList<String> autoStoreCate2_02(){
 		ArrayList<String> list = new ArrayList<String>();
 		
 		try {
 			StoreMapper mapper = session.getMapper(StoreMapper.class);
-			list = mapper.autoStoreCate3_01();
+			list = mapper.autoStoreCate2_02();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return list;
 	}
-	public ArrayList<String> autoStoreCate3_02(){
+	public ArrayList<String> autoStoreCate2_03(){
 		ArrayList<String> list = new ArrayList<String>();
 		
 		try {
 			StoreMapper mapper = session.getMapper(StoreMapper.class);
-			list = mapper.autoStoreCate3_02();
+			list = mapper.autoStoreCate2_03();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return list;
 	}
-	public ArrayList<String> autoStoreCate3_03(){
-		ArrayList<String> list = new ArrayList<String>();
+	
+	public ArrayList<StoreVO> selectStoresByStoreAdr(String store_adr) {
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
 		
 		try {
 			StoreMapper mapper = session.getMapper(StoreMapper.class);
-			list = mapper.autoStoreCate3_03();
+			list = mapper.selectStoresByStoreAdr(store_adr);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

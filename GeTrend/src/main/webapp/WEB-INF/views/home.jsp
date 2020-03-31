@@ -98,9 +98,7 @@
    	</div>
    	
 
-   	<div id="desc">
    	
-   	</div>
    	
 
    	<div>
@@ -135,16 +133,21 @@
 			<c:otherwise>
 				<a href="users/userJoin">회원가입</a>
 				<a href="users/userLogin">로그인</a>
+				
 			</c:otherwise>
 		</c:choose>	
 	</div>
 	
-	
 	<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
 	<a href="<c:url value='/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocompleteForm'/>">자동완성 테스트</a>
+<<<<<<< HEAD
 	</div>
 	
+=======
+	
+	<a href="users/follow">follow</a>
+>>>>>>> 1b4a8406c316d27b14b2f16962ddb35195310137
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
@@ -158,9 +161,10 @@
 					type: "post",
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify(points),
+					dataType: "json",
 					success: function(result) {
 						alert("성공");
-						$("#desc").text(result);
+						console.log(result);
 						$(result).each(function(index, item) {
 							$("#table").append(
 								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"

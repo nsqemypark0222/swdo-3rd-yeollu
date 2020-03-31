@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.yeollu.getrend.crawler.CrawlerExecutor;
 import com.yeollu.getrend.crawler.instagram_Selenium_location_post2;
 import com.yeollu.getrend.crawler.instagram_Selenium_location_post3;

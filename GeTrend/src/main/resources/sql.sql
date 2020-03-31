@@ -3,9 +3,10 @@ drop table searched_stores;
 drop table insta_locations;
 drop table users;
 drop table stores;
-drop table mango_stores;
+--drop table mango_stores;
 drop table follows;
 drop table likes;
+drop table insta_replys;
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -15,7 +16,7 @@ create table users(
     , user_profile          varchar2(1000)
 );
 
--- sqlldr userid=hr/hr control='C:\Users\user\Desktop\stores_control.ctl'
+-- sqlldr userid=hr/hr control='C:\Users\user\Desktop\stores3_control.ctl'
 -- sqlplus sys as sysdba
 -- alter system set processes=500 scope=spfile;
 -- shutdown immediate
@@ -27,10 +28,9 @@ create table stores(
     , store_name2           varchar2(200)
     , store_cate1           varchar2(200)
     , store_cate2           varchar2(200)
-    , store_cate3           varchar2(200)
-    , store_dem             varchar(200)
-    , store_adr1            varchar(300)
-    , store_adr2            varchar(300)
+    , store_adr             varchar2(300)
+    , store_adr1            varchar2(300)
+    , store_adr2            varchar2(300)
     , store_x               number
     , store_y               number
 );
@@ -81,6 +81,16 @@ create table likes (
     , constraint fk2_likes foreign key (store_no) references stores(store_no)
 );
 
+create table insta_replys(
+reply_no 		number 	primary key 
+,store_no 	varchar2(200)
+,user_email	 varchar2(50)
+,reply_contents 	varchar2(1000)
+,reply_star	 number
+,reply_indate	 date default sysdate
+,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
+);
+
 commit;
 
 
@@ -96,11 +106,13 @@ commit;
 
 --------------------------------------------------------------------------------------------------------------------------------
 select * from users;
-select * from stores;
+select * from stores order by store_no asc;
+select count(*) from stores;
 select * from insta_locations;
 select count(*) from insta_locations;
 select * from searched_stores;
-select * from mango_stores;
+select * from mango_stores order by store_no asc;
+select count(*) from mango_stores; 
 --------------------------------------------------------------------------------------------------------------------------------
 select
     s.store_no
@@ -124,8 +136,7 @@ select
 	, store_name2
 	, store_cate1
 	, store_cate2
-	, store_cate3
-	, store_dem
+	, store_adr
 	, store_adr1
 	, store_adr2
 	, store_x
@@ -144,4 +155,52 @@ where
 group by
     s.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
+select
+    s.store_name
+from
+    stores s, mango_stores m
+where
+    s.store_no = m.store_no
+    and mango_kind is not null;
+--------------------------------------------------------------------------------------------------------------------------------
+select
+    s.store_name
+from
+    stores s, mango_stores m, insta_locations l
+where
+    s.store_no = m.store_no
+    and s.store_no = l.store_no;
+--------------------------------------------------------------------------------------------------------------------------------
+select
+    count(*)
+from
+    stores
+where
+    store_adr = '광천동'
+    or store_adr = '구동'
+    or store_adr = '궁동'
+    or store_adr = '금곡동'
+    or store_adr = '금남로1가'
+    or store_adr = '금남로2가'
+    or store_adr = '금남로3가'
+    or store_adr = '금남로4가'
+    or store_adr = '금남로5가'
+    or store_adr = '금동'
+    or store_adr = '금호동'
+order by
+    store_no asc;
+--------------------------------------------------------------------------------------------------------------------------------
+select
+    count(*)
+from
+    stores s, mango_stores m
+where
+    s.store_no = m.store_no
+    and s.store_adr = '광천동'
+order by
+    s.store_no asc;
+
+
+
+
 

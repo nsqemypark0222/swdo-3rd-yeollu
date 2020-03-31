@@ -1,13 +1,11 @@
 package com.yeollu.getrend.crawler;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,7 +38,7 @@ public class mango_store_info2 {
 		String driverPath = PropertiesUtil.get("util", "CHROME_DRIVER");
 		System.setProperty("webdriver.chrome.driver", driverPath);    	 	
 		options = new ChromeOptions();
-//		options.addArguments("headless");
+		options.addArguments("headless");
 		options.addArguments("window-size=1920x1080");
         options.addArguments("disable-gpu");
         options.addArguments("disable-infobars");

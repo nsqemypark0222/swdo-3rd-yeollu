@@ -4,7 +4,7 @@ drop table insta_locations;
 drop table mango_stores;
 drop table users;
 drop table stores;
---drop table mango_stores;
+drop table mango_stores;
 drop table follows;
 drop table likes;
 drop table users;
@@ -55,6 +55,7 @@ create table searched_stores (
 
 create sequence seq_searched_stores;
 
+-- sqlldr userid=hr/hr control='C:\Users\user\Desktop\mango_stores_control.ctl'
 create table mango_stores (
     store_no                varchar2(200)           primary key
     , mango_tel             varchar2(100)
@@ -112,6 +113,7 @@ select count(*) from mango_stores;
 select
     s.store_no
     , s.store_name
+    , m.mango_tel
     , m.mango_kind
     , m.mango_price
     , m.mango_parking
@@ -166,36 +168,6 @@ where
     s.store_no = m.store_no
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
-select
-    count(*)
-from
-    stores
-where
-    store_adr = '광천동'
-    or store_adr = '구동'
-    or store_adr = '궁동'
-    or store_adr = '금곡동'
-    or store_adr = '금남로1가'
-    or store_adr = '금남로2가'
-    or store_adr = '금남로3가'
-    or store_adr = '금남로4가'
-    or store_adr = '금남로5가'
-    or store_adr = '금동'
-    or store_adr = '금호동'
-order by
-    store_no asc;
---------------------------------------------------------------------------------------------------------------------------------
-select
-    count(*)
-from
-    stores s, mango_stores m
-where
-    s.store_no = m.store_no
-    and s.store_adr = '광천동'
-order by
-    s.store_no asc;
-
-
 
 
 

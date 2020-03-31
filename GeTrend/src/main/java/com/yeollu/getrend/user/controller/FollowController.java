@@ -36,7 +36,7 @@ public class FollowController {
 		logger.info(user_email);
 		follow.setUser_email(user_email);
 		logger.info("{}",follow);
-		int cnt = dao.insertFollow(follow);
+		int cnt = dao.insertFollow02(follow);
 		logger.info("{}",cnt);
 	}
 	//follow 취소
@@ -48,7 +48,7 @@ public class FollowController {
 		logger.info(user_email);
 		follow.setUser_email(user_email);
 		logger.info("{}",follow);
-		int cnt = dao.deleteFollow(follow);
+		int cnt = dao.deleteFollow02(follow);
 		logger.info("{}",cnt);
 	}
 	

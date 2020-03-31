@@ -11,38 +11,25 @@ import com.yeollu.getrend.user.vo.UserVO;
 public class FollowDAO {
 	@Autowired
 	private SqlSession session;
-<<<<<<< HEAD
 
-	
-	public int insertFollow(FollowVO follow){
-=======
-	
-	public int insertFollow(FollowVO follow) {
->>>>>>> 877bf820be8f9722b06f516873ca0fc2d76fb8f3
+	public int insertFollow02(FollowVO follow) {
 		int cnt = 0;
 		try {
 			FollowMapper mapper = session.getMapper(FollowMapper.class);
-			cnt = mapper.insertFollow(follow);
+			cnt = mapper.insertFollow02(follow);
 		} catch (Exception e) {
 			e.printStackTrace();
-<<<<<<< HEAD
 		}return cnt;
 	}
 	
-	public int deleteFollow(FollowVO follow){
-=======
-		}
-		return cnt;
-	}
-	public int deleteFollow(FollowVO follow) {
->>>>>>> 877bf820be8f9722b06f516873ca0fc2d76fb8f3
+	
+	public int deleteFollow02(FollowVO follow) {
 		int cnt = 0;
 		try {
 			FollowMapper mapper = session.getMapper(FollowMapper.class);
-			cnt = mapper.deleteFollow(follow);
+			cnt = mapper.deleteFollow02(follow);
 		} catch (Exception e) {
 			e.printStackTrace();
-<<<<<<< HEAD
 		}return cnt;
 	}
 	
@@ -63,9 +50,5 @@ public class FollowDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}return cnt;
-=======
-		}
-		return cnt;
->>>>>>> 877bf820be8f9722b06f516873ca0fc2d76fb8f3
 	}
 }

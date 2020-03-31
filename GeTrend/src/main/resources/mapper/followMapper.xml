@@ -4,10 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yeollu.getrend.user.dao.FollowMapper">
-<<<<<<< HEAD
 
 <!-- 내가 구독하겠다 = 팔로잉 -->
-<insert id="insertFollow" parameterType="follow">
+<insert id="insertFollow02" parameterType="follow">
 insert into 
 	follows(
 	user_email
@@ -21,7 +20,7 @@ insert into
 
 
 <!-- 구독 취소 -->
-<delete id="deleteFollow" parameterType="follow">
+<delete id="deleteFollow02" parameterType="follow">
 delete from
 	follows 
 where 
@@ -49,7 +48,6 @@ where
 </select>
 
 
-=======
 <insert id="insertFollow" parameterType="follow">
 insert into 
 	follows(
@@ -67,6 +65,5 @@ where
 	user_email =#{user_email}
 and follows_following =#{follows_following}
 </delete>
->>>>>>> 877bf820be8f9722b06f516873ca0fc2d76fb8f3
 </mapper>
 

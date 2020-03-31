@@ -13,7 +13,6 @@
 		<typeAlias type="com.yeollu.getrend.store.vo.InstaReplyVO" alias="reply"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.LikeVO" alias="like"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.MangoStoreVO" alias="mangoStore"/>	
-		<typeAlias type="com.yeollu.getrend.user.vo.FollowVO" alias="follow"/>	
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml"/>
@@ -24,6 +23,5 @@
 		<mapper resource="mapper/instaReplyMapper.xml"/>
 		<mapper resource="mapper/likeMapper.xml"/>
 		<mapper resource="mapper/mangoStoreMapper.xml"/>
-		<mapper resource="mapper/followMapper.xml"/>
 	</mappers>
 </configuration>

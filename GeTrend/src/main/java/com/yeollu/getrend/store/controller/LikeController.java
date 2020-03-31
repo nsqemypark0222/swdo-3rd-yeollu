@@ -23,6 +23,10 @@ public class LikeController {
 	@Autowired
 	private LikeDAO likeDAO;
 		
+	@RequestMapping(value = "/likeForm", method = RequestMethod.GET)
+	public String likeForm() {
+		return "like_test";
+	}
 	
 	@RequestMapping(value = "/likeInsert", method = RequestMethod.POST)
 	@ResponseBody

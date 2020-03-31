@@ -41,6 +41,7 @@ select
 	,user_pw
 	,user_name
 	,user_type
+	,user_profile
 from
 	users
 where

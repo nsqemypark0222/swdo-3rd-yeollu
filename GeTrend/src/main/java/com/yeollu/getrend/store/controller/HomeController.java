@@ -56,19 +56,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/likeForm", method = RequestMethod.GET)
-	public String likeForm() {
-		return "like_test";
-	}
-	
-	@RequestMapping(value = "/crawlForm", method = RequestMethod.GET)
-	public String crawlForm() {
-		return "crawl_test";
-	}
-	@RequestMapping(value = "/autocompleteForm", method = RequestMethod.GET)
-	public String autocompleteForm() {
-		return "autocomplete_test";
-	}
+
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody

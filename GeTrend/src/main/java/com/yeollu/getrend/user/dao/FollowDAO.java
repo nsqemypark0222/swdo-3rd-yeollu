@@ -20,6 +20,7 @@ public class FollowDAO {
 			e.printStackTrace();
 		}return cnt;
 	}
+
 	public int deleteFollow(FollowVO follow) {
 		int cnt = 0;
 		try {

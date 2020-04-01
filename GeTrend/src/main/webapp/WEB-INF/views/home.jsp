@@ -106,7 +106,7 @@
    			<tr>
    				<th>store_no</th>
    				<th>store_name</th>
-   				<th>sgtore_name2</th>
+   				<th>store_name2</th>
    				<th>store_cate1</th>
    				<th>store_cate2</th>
    				<th>store_adr</th>

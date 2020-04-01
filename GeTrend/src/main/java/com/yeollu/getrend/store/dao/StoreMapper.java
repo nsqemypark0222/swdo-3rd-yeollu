@@ -7,6 +7,7 @@ import com.yeollu.getrend.store.vo.StoreVO;
 
 public interface StoreMapper {
 	public ArrayList<StoreVO> selectAllStores();
+	public ArrayList<StoreVO> selectStoresWithMangoStores();
 	public InstaStoreVO selectInstaStore(String store_no);
 	public ArrayList<String> autoStoreName();
 	public ArrayList<String> autoStoreAdr1_01();

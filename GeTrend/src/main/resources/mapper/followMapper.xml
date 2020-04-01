@@ -43,5 +43,7 @@ select
 where 
 	user_email = #{user_email}
 </select>
+
+
 </mapper>
 

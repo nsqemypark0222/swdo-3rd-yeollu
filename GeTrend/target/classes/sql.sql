@@ -1,22 +1,19 @@
 drop sequence seq_searched_stores;
 drop table searched_stores;
 drop table insta_locations;
+drop table mango_stores;
 drop table users;
 drop table stores;
 drop table mango_stores;
 drop table follows;
 drop table likes;
 <<<<<<< HEAD
+drop table users;
+drop table stores;
+--drop table stores cascade constraints;
+=======
 drop table insta_replys;
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-drop table insta_replys;
-=======
->>>>>>> 301ac4fe77715f3060bd198e1e4f15375b072219
->>>>>>> 1b4a8406c316d27b14b2f16962ddb35195310137
->>>>>>> 6d621ec112e746f6b5abe4dfda2ab8b67f7cda38
+>>>>>>> 30f239e5199ac474ea0775420417ad45138e3af9
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -25,6 +22,8 @@ create table users(
     , user_type             varchar2(10)
     , user_profile          varchar2(1000)
 );
+
+
 
 -- sqlldr userid=hr/hr control='C:\Users\user\Desktop\stores3_control.ctl'
 -- sqlplus sys as sysdba
@@ -92,12 +91,6 @@ create table likes (
     , constraint fk2_likes foreign key (store_no) references stores(store_no)
 );
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 6d621ec112e746f6b5abe4dfda2ab8b67f7cda38
 create table insta_replys(
 reply_no 		number 	primary key 
 ,store_no 	varchar2(200)
@@ -108,12 +101,6 @@ reply_no 		number 	primary key
 ,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
 );
 
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 301ac4fe77715f3060bd198e1e4f15375b072219
->>>>>>> 1b4a8406c316d27b14b2f16962ddb35195310137
->>>>>>> 6d621ec112e746f6b5abe4dfda2ab8b67f7cda38
 commit;
 
 
@@ -178,4 +165,27 @@ where
     i.store_no = s.store_no
 group by
     s.store_no;
+<<<<<<< HEAD
 --------------------------------------------------------------------------------------------------------------------------------
+select
+    s.store_name
+from
+    stores s, mango_stores m
+where
+    s.store_no = m.store_no
+    and mango_kind is not null;
+--------------------------------------------------------------------------------------------------------------------------------
+select
+    s.store_name
+from
+    stores s, mango_stores m, insta_locations l
+where
+    s.store_no = m.store_no
+    and s.store_no = l.store_no;
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+
+=======
+--------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> 30f239e5199ac474ea0775420417ad45138e3af9

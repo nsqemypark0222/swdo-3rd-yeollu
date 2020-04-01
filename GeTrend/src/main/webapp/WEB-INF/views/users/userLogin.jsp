@@ -112,7 +112,12 @@ $(function(){
 					//]]>
 				</script>
                 <a href="userJoin">회원가입</a>
-	
-
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
 </body>
 </html>

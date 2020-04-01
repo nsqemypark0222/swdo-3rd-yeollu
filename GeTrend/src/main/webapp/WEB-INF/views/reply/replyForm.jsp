@@ -23,11 +23,10 @@
 		});
 		
 		$("#removeBtn").on("click", function() {
-			
 			$.ajax({
 				url: "replyRemove",
 				type: "get",
-				data: {"reply_no": $("reply_no").val(),"user_email": $("user_email").val()},
+				data: {"reply_no": $("reply_no").val(), "user_email":$("user_email").val()},
 				success: printList,
 				error: function() { alert("에러 발생"); }
 			});
@@ -55,7 +54,7 @@
 						output += "<td>" + item.USER_NAME + "</td>";
 						output += "<td>" + item.REPLY_CONTENTS + "</td>";
 						output += "<td>" + item.REPLY_INDATE + "</td>";
-						
+						output += "<td><input type='button' id='removeBtn' value='삭제'></td>";
 						output += "</tr>";
 					});
 					
@@ -132,9 +131,8 @@
 				<th></th>
 				<th></th>
 				<th></th>
-				<th>
-				<input type="button" id="removeBtn" value="삭제">
-				</th>
+					<th><input type="button" id="removeBtn" value="삭제"></th>
+				
 			</tr>
 		</table>	
 	</div>

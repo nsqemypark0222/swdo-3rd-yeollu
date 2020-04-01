@@ -23,6 +23,34 @@ order by
 	store_no asc
 </select>
 
+<select id="selectStoresWithMangoStores" resultType="store">
+select
+	s.store_no
+	, s.store_name
+	, s.store_name2
+	, s.store_cate1
+	, s.store_cate2
+	, s.store_adr
+	, s.store_adr1
+	, s.store_adr2
+	, s.store_x
+	, s.store_y
+from
+	stores s, mango_stores m
+where
+	s.store_no = m.store_no
+	and (m.mango_tel is not null
+	or mango_kind is not null
+	or mango_price is not null
+	or mango_parking is not null
+	or mango_time is not null
+	or mango_break_time is not null
+	or mango_last_order is not null
+	or mango_holiday is not null)
+order by
+	s.store_no asc
+</select>
+
 <select id="selectStoresByStoreAdr" parameterType="string" resultType="store">
 select
 	store_no

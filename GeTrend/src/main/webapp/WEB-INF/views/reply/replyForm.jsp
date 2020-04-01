@@ -9,6 +9,48 @@
 <link rel= "stylesheet" type="text/css" href="../resources/css/reply.css">
 <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
 <script>
+function deleteReply(no){
+	$.ajax({
+		url: "replyRemove",
+		type: "get",
+		data: {"reply_no": no},
+		success: printList,
+		error: function() { alert("에러 발생"); }
+	});
+}
+
+function printList() {
+	$.ajax({
+		url: "replyList",
+		type: "get",
+		data: {"store_no" : $("store_no").val()},
+		success: function(result) {
+			var output = "";
+			output += "<tr>";
+			output += "<th>별점</th>";
+			output += "<th>닉네임</th>";
+			output += "<th>리뷰</th>";
+			output += "<th>날짜</th>";
+			
+			output += "<th></th>";
+			output += "</tr>";
+			
+			$(result).each(function(index, item) {
+				output += "<tr>";
+				output += "<td>" + item.REPLY_STAR + "</td>";
+				output += "<td>" + item.USER_NAME + "</td>";
+				output += "<td>" + item.REPLY_CONTENTS + "</td>";
+				output += "<td>" + item.REPLY_INDATE + "</td>";
+				output += "<td><input type='button' id='removeBtn' value='삭제' onclick='deleteReply("+item.REPLY_NO+")'></td>";
+				output += "</tr>";
+			});
+			
+			$("#printTable").html(output);
+		},
+		error: function() { alert("에러 발생"); }
+	});
+}
+
 	$(function() {
 		$("#writeBtn").on("click", function() {
 			var reply_contents = $("#reply_contents").val();
@@ -21,48 +63,9 @@
 				error: function() { alert("에러 발생"); }
 			});
 		});
-		
-		$("#removeBtn").on("click", function() {
-			$.ajax({
-				url: "replyRemove",
-				type: "get",
-				data: {"reply_no": $("reply_no").val(), "user_email":$("user_email").val()},
-				success: printList,
-				error: function() { alert("에러 발생"); }
-			});
-		});
-		
-		function printList() {
-			$.ajax({
-				url: "replyList",
-				type: "get",
-				data: {"store_no" : $("store_no").val()},
-				success: function(result) {
-					var output = "";
-					output += "<tr>";
-					output += "<th>별점</th>";
-					output += "<th>닉네임</th>";
-					output += "<th>리뷰</th>";
-					output += "<th>날짜</th>";
-					
-					output += "<th></th>";
-					output += "</tr>";
-					
-					$(result).each(function(index, item) {
-						output += "<tr>";
-						output += "<td>" + item.REPLY_STAR + "</td>";
-						output += "<td>" + item.USER_NAME + "</td>";
-						output += "<td>" + item.REPLY_CONTENTS + "</td>";
-						output += "<td>" + item.REPLY_INDATE + "</td>";
-						output += "<td><input type='button' id='removeBtn' value='삭제'></td>";
-						output += "</tr>";
-					});
-					
-					$("#printTable").html(output);
-				},
-				error: function() { alert("에러 발생"); }
-			});
-		}
+
+	
+
 	$('.starRev span').on("click",function(){
 		console.log($(this));
 		$(this).parent().children('span').removeClass('on');
@@ -124,16 +127,7 @@
 	<hr>
 	<div> <!-- print form -->
 		<table id="printTable">
-			
-			<tr>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-					<th><input type="button" id="removeBtn" value="삭제"></th>
-				
-			</tr>
+	
 		</table>	
 	</div>
 

@@ -6,4 +6,5 @@ import lombok.Data;
 public class LikeVO {
 	private String store_no;
 	private String user_email;
+	private String likes_indate;
 }

@@ -51,21 +51,13 @@ function likeDelete(){
 <hr>
 좋아요 insert<br>
 	<form id="likeForm">
-		<input type="hidden" id="user_email"   name="user_email" value="tete030tete@gmail.com">
+		<input type="hidden" id="user_email"   name="user_email" value="${sessionScope.loginemail}">
 		<input type="hidden" id="store_no"	   name="store_no"   value="25293330">
 		<input type="button" id="likeButton"   value="좋아요" onclick="likeInsert();">
 	</form>
 
 
 <hr>
-<a href="/getrend/likes/likeSelectByEmail?user_email=aaa@gmail.com">이메일로 좋아요 select</a><br>
-<a href="/getrend/likes/likeSelectByStoreno?store_no=25293330">store_no로 좋아요 select</a><br>
-
-<c:if test="${list != null}">
-	<c:forEach var="like" items="${list}">
-		${like}<br>
-	</c:forEach>
-</c:if>
 
 </body>
 </html>

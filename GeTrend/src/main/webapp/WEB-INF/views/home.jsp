@@ -153,7 +153,7 @@
 				<a href="users/logout">로그아웃</a>
 				<a href="users/kakaoshare">공유하기</a>
 				<a href="reply/replyForm">댓글달기</a>
-				
+				<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>	
 			</c:when>
 			<c:otherwise>
 				<a href="users/userJoin">회원가입</a>
@@ -163,16 +163,10 @@
 		</c:choose>	
 	</div>
 	
-	
-	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
-	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
-	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
-	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
-
 	</div>
 
+	<a href="<c:url value='/users/follow'/>">follow</a>
 	
-	<a href="users/follow">follow</a>
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
@@ -180,10 +174,7 @@
 <script type="text/javascript">
 		$(function() {
 
-
-			
 			function search(points) {
-
 				$.ajax({
 					url: "<c:url value='/search' />",
 					type: "post",
@@ -237,13 +228,7 @@
 			}
 			searchFunc = search;
 
-			$("#naturalLanguageProcessing").click(function(){
-				location.href="<c:url value='/naturalLanguageProcessing'/>";
-			});
-
-			$("#naverTest").click(function(){
-				location.href="<c:url value='/naverTest'/>";
-			});
+			
 		});
 
 		function search(points) {
@@ -300,11 +285,6 @@
 			    });
 			}
 		};
-
-
-
-		
-
 
 		const options = {
 		        // Drawing Manager를 생성할 때 사용할 옵션입니다

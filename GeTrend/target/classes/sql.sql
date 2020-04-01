@@ -1,3 +1,4 @@
+drop sequence seq_insta_replys;
 drop sequence seq_searched_stores;
 drop table searched_stores;
 drop table insta_locations;
@@ -86,6 +87,8 @@ create table likes (
     , constraint fk2_likes foreign key (store_no) references stores(store_no)
 );
 
+create sequence seq_insta_replys;
+
 create table insta_replys(
 reply_no 		number 	primary key 
 ,store_no 	varchar2(200)
@@ -109,6 +112,7 @@ commit;
 
 
 
+
 --------------------------------------------------------------------------------------------------------------------------------
 select * from users;
 select * from stores order by store_no asc;
@@ -118,6 +122,7 @@ select count(*) from insta_locations;
 select * from searched_stores;
 select * from mango_stores order by store_no asc;
 select count(*) from mango_stores; 
+select * from follows;
 --------------------------------------------------------------------------------------------------------------------------------
 select
     s.store_no
@@ -177,3 +182,5 @@ where
     s.store_no = m.store_no
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
+
+    

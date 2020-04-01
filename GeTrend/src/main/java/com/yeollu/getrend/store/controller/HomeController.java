@@ -61,7 +61,6 @@ public class HomeController {
 		
 		return "home";
 	}
-	
 
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)

@@ -47,9 +47,11 @@ public class ReplyController {
 	@RequestMapping(value = "replyRemove", method = RequestMethod.GET)
 	@ResponseBody
 	public void replyRemove(InstaReplyVO reply, HttpSession session) {
+		logger.info("{}", reply);
 		String user_email = (String)session.getAttribute("user_email");
 		reply.setUser_email(user_email);
-		dao.replyRemove(reply);
+		int cnt = dao.replyRemove(reply);
+		logger.info("삭제 {}", cnt);
 	}
 	
 	//리스트

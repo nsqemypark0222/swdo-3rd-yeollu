@@ -133,7 +133,7 @@
    				<th>mango_time</th>
    				<th>mango_break_time</th>
    				<th>mango_last_order</th>
-   				<th>mango_indate</th>
+   				<th>mango_holiday</th>
    			</tr>
    		</table>
    	</div>

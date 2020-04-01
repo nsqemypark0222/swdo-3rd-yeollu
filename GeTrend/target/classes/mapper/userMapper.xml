@@ -47,5 +47,17 @@ from
 where
 	user_email =#{user_email}
 </select>
+
+<select id="selectName" parameterType="string" resultType="user">
+select
+	user_email
+	,user_name
+	,user_profile
+from
+	users
+where
+	user_name =#{user_name}
+</select>
+
 </mapper>
 

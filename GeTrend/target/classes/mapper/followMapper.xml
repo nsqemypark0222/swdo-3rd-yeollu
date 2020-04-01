@@ -7,6 +7,7 @@
 
 <!-- 내가 구독하겠다 = 팔로잉 -->
 <insert id="insertFollow" parameterType="follow">
+<![CDATA[
 insert into 
 	follows(
 	user_email
@@ -14,17 +15,21 @@ insert into
 	) 
 	values(
 	#{user_email}
-	,#{following_email}
+	,#{follows_following}
 	)
+]]>
 </insert>
+
 <!-- 구독 취소 -->
 <delete id="deleteFollow" parameterType="follow">
+<![CDATA[
 delete from
 	follows 
-where 
-	user_email = ${user_email}
+where
+	user_email = #{user_email}
 and 
-	follows_following = ${follows_following}
+	follows_following = #{follows_following}
+]]>
 </delete>
 <!-- 나를 구독한 사람수 -->
 <select id="CountFollower" parameterType="string" resultType="int">

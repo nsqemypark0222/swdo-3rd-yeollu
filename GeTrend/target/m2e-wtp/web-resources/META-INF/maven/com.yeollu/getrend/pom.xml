@@ -219,7 +219,6 @@
 		
 		<!--스프링시큐리티 web 라이브러리-->
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-web</artifactId>
@@ -242,6 +241,14 @@
 		    <artifactId>spring-security-config</artifactId>
 		    <version>4.2.14.RELEASE</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>4.2.14.RELEASE</version>
+		</dependency>
+		
 		    
 		<dependency>
 		   <groupId>javax.mail</groupId>

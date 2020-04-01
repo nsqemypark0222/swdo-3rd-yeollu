@@ -133,7 +133,7 @@
    				<th>mango_time</th>
    				<th>mango_break_time</th>
    				<th>mango_last_order</th>
-   				<th>mango_indate</th>
+   				<th>mango_holiday</th>
    			</tr>
    		</table>
    	</div>
@@ -171,8 +171,8 @@
 
 	</div>
 
+	<a href="<c:url value='/users/follow'/>">follow</a>
 	
-	<a href="users/follow">follow</a>
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
@@ -180,10 +180,7 @@
 <script type="text/javascript">
 		$(function() {
 
-
-			
 			function search(points) {
-
 				$.ajax({
 					url: "<c:url value='/search' />",
 					type: "post",
@@ -237,13 +234,7 @@
 			}
 			searchFunc = search;
 
-			$("#naturalLanguageProcessing").click(function(){
-				location.href="<c:url value='/naturalLanguageProcessing'/>";
-			});
-
-			$("#naverTest").click(function(){
-				location.href="<c:url value='/naverTest'/>";
-			});
+			
 		});
 
 		function search(points) {
@@ -300,11 +291,6 @@
 			    });
 			}
 		};
-
-
-
-		
-
 
 		const options = {
 		        // Drawing Manager를 생성할 때 사용할 옵션입니다

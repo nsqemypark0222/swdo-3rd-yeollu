@@ -1,12 +1,19 @@
 drop sequence seq_searched_stores;
 drop table searched_stores;
 drop table insta_locations;
+drop table mango_stores;
 drop table users;
 drop table stores;
 drop table mango_stores;
 drop table follows;
 drop table likes;
+<<<<<<< HEAD
+drop table users;
+drop table stores;
+--drop table stores cascade constraints;
+=======
 drop table insta_replys;
+>>>>>>> 30f239e5199ac474ea0775420417ad45138e3af9
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -15,6 +22,8 @@ create table users(
     , user_type             varchar2(10)
     , user_profile          varchar2(1000)
 );
+
+
 
 -- sqlldr userid=hr/hr control='C:\Users\user\Desktop\stores3_control.ctl'
 -- sqlplus sys as sysdba
@@ -156,4 +165,27 @@ where
     i.store_no = s.store_no
 group by
     s.store_no;
+<<<<<<< HEAD
 --------------------------------------------------------------------------------------------------------------------------------
+select
+    s.store_name
+from
+    stores s, mango_stores m
+where
+    s.store_no = m.store_no
+    and mango_kind is not null;
+--------------------------------------------------------------------------------------------------------------------------------
+select
+    s.store_name
+from
+    stores s, mango_stores m, insta_locations l
+where
+    s.store_no = m.store_no
+    and s.store_no = l.store_no;
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+
+=======
+--------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> 30f239e5199ac474ea0775420417ad45138e3af9

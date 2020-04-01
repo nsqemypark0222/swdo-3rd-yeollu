@@ -1,5 +1,6 @@
 package com.yeollu.getrend.store.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -71,6 +72,8 @@ public class HomeController {
 		
 //		DB에 저장된 모든 상가 리스트를 가져옴
 		ArrayList<StoreVO> list = storeDAO.selectAllStores();
+//		ArrayList<StoreVO> list = storeDAO.selectStoresWithMangoStores();
+		
 		
 		ArrayList<StoreVO> selectedList = new ArrayList<StoreVO>();
 				
@@ -143,7 +146,7 @@ public class HomeController {
 		}
 		
 		
-//		View로 보낼  최종 리스트
+//		View로 보낼 최종 객체 리스트
 		ArrayList<InstaStoreInfoVO> instaStoreInfoList = new ArrayList<InstaStoreInfoVO>();
 		try {
 			for(int i = 0; i < instaStoreList.size(); i++) {
@@ -168,7 +171,12 @@ public class HomeController {
 		long diff = (endTime - startTime) / 1000;
 		logger.info("걸린 시간 : {}", diff);
 		
-
+		try {
+			Runtime.getRuntime().exec("taskkill /f /im chromedriver.exe /t");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return instaStoreInfoList;
 	}

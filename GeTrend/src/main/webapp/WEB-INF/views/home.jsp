@@ -24,8 +24,15 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 <style>
-.space{
- margin-top:80%;
+
+#space{
+ margin-top:1%;
+}
+#map{
+	width: 850px; 
+	height: 400px; 
+	margin-top:5%; 
+	margin-left:15%;
 }
 
 </style>
@@ -34,11 +41,15 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
+	<!-- 지도와의 간격 div  -->
 	<div id="space">
-	<div id="map" style="width: 850px; height: 400px; margin-top:5%; margin-left:15%;">
+	<!-- 카카오맵 -->
+	<div id="map">
+	<!-- 지도 위의 버튼 1 음식 카테고리 -->
+	<div class="btn-modal">
 		<input type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal" value="Category Test" 
 		style="position: absolute;top: 11px; left: 1%; z-index: 400;">
-          <div class="modal" id="myModal">
+          <div class="modal fade" id="myModal">
            <div class="modal-dialog">
            <div class="modal-content">
 			<!-- 음식 카테고리 모달 헤더 -->
@@ -53,15 +64,16 @@
 		        
 		     	<!-- 음식 카테고리 모달 footer -->
 		        <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
 		        </div>
     	 	</div>
     		</div>
     	 </div>
-    	 
-    	  <input type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" value="영업확인 Test" 
+    	</div>
+    	<!-- 지도 위의 버튼 2 영업확인고리 -->
+    	  <input type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" value="영업확인 Test" 
     	  style="position: absolute;top: 11px; left: 18%; z-index: 400;">
-          <div class="modal" id="myModal">
+          <div class="modal fade" id="myModal">
            <div class="modal-dialog">
            <div class="modal-content">
 				<!-- 영업확인  모달 헤더 -->
@@ -76,7 +88,7 @@
 		        
 		     	<!-- 영업확인 모달 footer -->
 		        <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
 		        </div>
 		        
     	 	</div>
@@ -84,19 +96,19 @@
     	 </div>
 	</div>
 	 
-  
-	<p>
-		<button onclick="selectOverlay('POLYGON')">범위 선택</button>
-	</p>
-	
-	<p class="getdata">
-   		<button onclick="getDataFromDrawingMap()">조회 하기</button>
-   	</p>
-   	
-   	<div id="print">
-   	
-   	</div>
-   	
+  	<div class="">
+		<p>
+			<button type="button"  class="btn btn-warning btn-lg" onclick="selectOverlay('POLYGON')">범위 선택</button>
+		</p>
+		
+		<p class="getdata"> 
+	   		<button type="button"  class="btn btn-outline-warning btn-lg" onclick="getDataFromDrawingMap()">조회 하기</button>
+	   	</p>
+	   	
+	   	<div id="print">
+	   	
+	   	</div>
+   </div>	
 
    	
    	

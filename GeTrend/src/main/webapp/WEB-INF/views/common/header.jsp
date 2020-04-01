@@ -25,23 +25,31 @@
     				<input class="form-control mr-sm-2" type="text" placeholder="Search">
     			</div>
     		</form>
-    			<c:if test="${session.user_email != null }">
             	<div class="menu_list">
   			     	<ul class="nav jus">
+  			     	<c:if test="${session.user_email != null }">		     	
   			        <li class="nav-item">
-  			          <input type="button" class="btn btn-light" value="내 방"></button>
+  			          <input type="button" class="btn btn-light" id="mypage" value="내 방">
   			        </li>
   			        <li class="nav-item">
-  			          <input type="button" class="btn btn-light" value="Logout"></button>
+  			          <input type="button" class="btn btn-light" value="Logout">
   			        </li>
   			        <li class="nav-item">
-                  <a class="nav-link" href="#">
-                  <img class="profile" style="border-radius: 60px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" width="30px" height="30px"  >
+	                  <a class="nav-link" href="users/userUpdate">
+	                  <img class="profile" style="border-radius: 60px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" width="30px" height="30px"  >
   			          </a>
   			        </li>
+  			        </c:if>
+  			        <li>
+  			        	<a href="users/userJoin">회원가입 </a>
+  			        </li>
+  			        <li>
+  			    		<a href="users/userLogin">로그인</a>
+  			        </li>
   			      </ul>
+  			      
               </div>
-              </c:if>	  
+             	  
 		</div>	 
 </nav>
 </body>

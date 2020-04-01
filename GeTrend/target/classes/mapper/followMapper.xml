@@ -31,6 +31,8 @@ and
 	follows_following = #{follows_following}
 ]]>
 </delete>
+
+
 <!-- 나를 구독한 사람수 -->
 <select id="CountFollower" parameterType="string" resultType="int">
 select 

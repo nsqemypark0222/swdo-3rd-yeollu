@@ -48,4 +48,14 @@ public class UserDAO {
 			e.printStackTrace();
 		}return user;
 	}
+	
+	public UserVO selectName(String user_name){
+		UserVO user = null;
+		try {
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			user = mapper.selectName(user_name);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return user;
+	}
 }

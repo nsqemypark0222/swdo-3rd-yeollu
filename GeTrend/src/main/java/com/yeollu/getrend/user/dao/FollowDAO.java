@@ -49,7 +49,6 @@ public class FollowDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return cnt;
 		
 	}

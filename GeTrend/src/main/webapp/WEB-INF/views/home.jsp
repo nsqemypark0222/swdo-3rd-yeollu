@@ -167,15 +167,11 @@
 	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
-<<<<<<< HEAD
 	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>	
-=======
-	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
 
 	</div>
 
 	
->>>>>>> 7c5832fad2fb4eff6b447d2719964a138d22a2b3
 	<a href="users/follow">follow</a>
 	
 	<footer>

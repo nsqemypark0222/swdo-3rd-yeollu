@@ -271,6 +271,12 @@ public class UserController {
 	public String update(UserVO user){
 		logger.info("{}", user);
 		
+		String inputPw = user.getUser_pw();
+		String pw = passEncoder.encode(inputPw);
+		user.setUser_pw(pw);
+		logger.info(inputPw);
+		logger.info(pw);
+		
 		int cnt = dao.updateUser(user);
 		logger.info("{}",cnt);
 		if(cnt>0) {

@@ -48,10 +48,12 @@ public class ReplyController {
 	@ResponseBody
 	public void replyRemove(InstaReplyVO reply, HttpSession session) {
 		logger.info("{}", reply);
-		String user_email = (String)session.getAttribute("user_email");
+		String user_email = (String)session.getAttribute("loginemail");
 		reply.setUser_email(user_email);
 		int cnt = dao.replyRemove(reply);
 		logger.info("삭제 {}", cnt);
+		
+		
 	}
 	
 	//리스트
@@ -59,7 +61,13 @@ public class ReplyController {
 	@ResponseBody
 	public ArrayList<HashMap<String,Object>> list(InstaReplyVO reply, HttpSession session) {
 		reply.setStore_no("25523615");
+		String loginemail = (String)session.getAttribute("loginemail");
 		ArrayList<HashMap<String,Object>> rlist = dao.replyList(reply);
+		for (HashMap<String, Object> hashMap : rlist) {
+			hashMap.put("loginemail", loginemail);
+		}
+		
+		logger.info("replyList {}",rlist);
 		
 		
 		return rlist;

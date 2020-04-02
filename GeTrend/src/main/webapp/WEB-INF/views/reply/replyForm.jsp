@@ -11,7 +11,7 @@
 <script>
 function deleteReply(no){
 	$.ajax({
-		url: "replyRemove",
+		url: "/getrend/reply/replyRemove",
 		type: "get",
 		data: {"reply_no": no},
 		success: printList,
@@ -21,9 +21,9 @@ function deleteReply(no){
 
 function printList() {
 	$.ajax({
-		url: "replyList",
+		url: "/getrend/reply/replyList",
 		type: "get",
-		data: {"store_no" : $("store_no").val()},
+		data: {"store_no" : "25523615"},
 		success: function(result) {
 			var output = "";
 			output += "<tr>";
@@ -31,17 +31,19 @@ function printList() {
 			output += "<th>닉네임</th>";
 			output += "<th>리뷰</th>";
 			output += "<th>날짜</th>";
-			
 			output += "<th></th>";
 			output += "</tr>";
 			
 			$(result).each(function(index, item) {
+				console.log(item);
 				output += "<tr>";
 				output += "<td>" + item.REPLY_STAR + "</td>";
-				output += "<td>" + item.USER_NAME + "</td>";
+				output += "<td><a href='/getrend/mypage/mypage?user_name="+item.USER_NAME+"'>" + item.USER_NAME + "</a></td>";
 				output += "<td>" + item.REPLY_CONTENTS + "</td>";
 				output += "<td>" + item.REPLY_INDATE + "</td>";
-				output += "<td><input type='button' id='removeBtn' value='삭제' onclick='deleteReply("+item.REPLY_NO+")'></td>";
+				if(item.loginemail ==item.USER_EMAIL){
+					output += "<td><input type='button' id='removeBtn' value='삭제' onclick='deleteReply("+item.REPLY_NO+")'></td>";
+				}
 				output += "</tr>";
 			});
 			
@@ -56,7 +58,7 @@ function printList() {
 			var reply_contents = $("#reply_contents").val();
 			
 			$.ajax({
-				url: "replyWrite",
+				url: "/getrend/reply/replyWrite",
 				type: "get",
 				data: $("#inputForm").serialize(),
 				success: printList,
@@ -79,6 +81,7 @@ function printList() {
 
 	printList();
 });
+
 
 </script>
 </head>

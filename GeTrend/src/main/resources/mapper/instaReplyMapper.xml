@@ -37,6 +37,7 @@ select
 	,r.reply_star as reply_star
 	,to_char(r.reply_indate,'yyyy-MM-dd') as reply_indate
 	,u.user_name as user_name
+	,u.user_profile as user_profile
 from
 	insta_replys r, users u
 where

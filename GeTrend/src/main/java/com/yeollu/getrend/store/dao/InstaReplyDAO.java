@@ -45,4 +45,15 @@ public class InstaReplyDAO {
 		}
 		return rlist;
 	}
+	
+	public ArrayList<HashMap<String, Object>> replyListByEmail(String user_email){
+		ArrayList<HashMap<String,Object>> rlist = null;
+		try {
+			InstaReplyMapper mapper = session.getMapper(InstaReplyMapper.class);
+			rlist = mapper.replyListByEmail(user_email);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rlist;
+	}
 }

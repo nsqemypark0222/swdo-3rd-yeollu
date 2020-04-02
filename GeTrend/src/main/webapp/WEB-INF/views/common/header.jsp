@@ -41,10 +41,14 @@
   			        </li>
   			        </c:if>
   			        <li>
-  			        	<a href="users/userJoin">회원가입 </a>
+  			        <a href="<c:url value="/users/userJoin"/>">
+  			          <input type="button" class="btn btn-light" id="userJoin" value="회원가입">
+  			          </a>
   			        </li>
   			        <li>
-  			    		<a href="users/userLogin">로그인</a>
+  			        	<a href="<c:url value="/users/userLogin"/>">
+  			          <input type="button" class="btn btn-light" id="userLogin" value="로그인">
+  			          </a>
   			        </li>
   			      </ul>
   			      

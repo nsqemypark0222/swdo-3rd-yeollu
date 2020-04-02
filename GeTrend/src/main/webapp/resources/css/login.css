@@ -63,7 +63,7 @@ table {
 }
 
 .bg-image {
-  background-image: url('../img/Group 38.png');
+  background-image: url('../img/Group 37.png');
   background-size: cover;
   background-position: center;
 }
@@ -164,4 +164,13 @@ table {
     color: #777;
   }
 }
-
+#kakaoIdLogin {
+	float: left;
+	margin-right: 1px;	
+}
+#naverIdLogin {
+	float: left;	
+}
+#socialbtn img{
+	width: 228px;
+}

@@ -8,4 +8,5 @@ public class UserVO {
 	private String user_pw;
 	private String user_name;
 	private String user_type;
+	private String user_profile;
 }

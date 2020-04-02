@@ -8,11 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- 반응형 웹 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>[ Home | GeTrend ]</title>
-
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@api['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -23,32 +23,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
-<style>
-
-#space{
- margin-top:1%;
-}
-#map{
-	width: 850px; 
-	height: 400px; 
-	margin-top:5%; 
-	margin-left:15%;
-}
-
-</style>
+<link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'>
 </head>
 <body>
+
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
-	<!-- 지도와의 간격 div  -->
+
+	<!-- 지도와의 간격 div-->
 	<div id="space">
 	<!-- 카카오맵 -->
+	<div class="container-fluid">
 	<div id="map">
 	<!-- 지도 위의 버튼 1 음식 카테고리 -->
 	<div class="btn-modal">
-		<input type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal" value="Category Test" 
-		style="position: absolute;top: 11px; left: 1%; z-index: 400;">
+		<input type="button" class="btn btn-dark" id="category" data-toggle="modal" data-target="#myModal" value="Category Test">
           <div class="modal fade" id="myModal">
            <div class="modal-dialog">
            <div class="modal-content">
@@ -71,8 +61,7 @@
     	 </div>
     	</div>
     	<!-- 지도 위의 버튼 2 영업확인고리 -->
-    	  <input type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" value="영업확인 Test" 
-    	  style="position: absolute;top: 11px; left: 18%; z-index: 400;">
+    	  <input type="button" class="btn btn-warning" id="opentime" data-toggle="modal" data-target="#myModal" value="영업확인 Test" >
           <div class="modal fade" id="myModal">
            <div class="modal-dialog">
            <div class="modal-content">
@@ -94,15 +83,21 @@
     	 	</div>
     		</div>
     	 </div>
+    	 <button type="button"  class="btn btn-dark" onclick="selectOverlay('POLYGON')"
+    		 style="position: absolute; top: 88%; left:75%; z-index: 400;">
+    	 범위 선택</button>
+    	<button type="button"  class="btn btn-warning" onclick="getDataFromDrawingMap()"
+    	style="position: absolute; top: 88%; left:88%; z-index: 400;">	
+    	조회 하기</button>    	 
 	</div>
-	 
+	</div> 
   	<div class="">
 		<p>
-			<button type="button"  class="btn btn-warning btn-lg" onclick="selectOverlay('POLYGON')">범위 선택</button>
+			<button type="button"  class="btn btn-warning" onclick="selectOverlay('POLYGON')">범위 선택</button>
 		</p>
 		
 		<p class="getdata"> 
-	   		<button type="button"  class="btn btn-outline-warning btn-lg" onclick="getDataFromDrawingMap()">조회 하기</button>
+	   		<button type="button"  class="btn btn-outline-warning" onclick="getDataFromDrawingMap()">조회 하기</button>
 	   	</p>
 	   	
 	   	<div id="print">
@@ -110,17 +105,41 @@
 	   	</div>
    </div>	
 
+   	<div id="desc">
    	
+   	</div>
    	
 
    	<div>
    		<table id="table" border="1">
    			<tr>
-   				<th>STORE_NO</th>
-   				<th>STORE_X</th>
-   				<th>STORE_Y</th>
-   				<th>STORE_NAME</th>
+   				<th>store_no</th>
+   				<th>store_name</th>
+   				<th>store_name2</th>
+   				<th>store_cate1</th>
+   				<th>store_cate2</th>
+   				<th>store_adr</th>
+   				<th>store_adr1</th>
+   				<th>store_adr2</th>
+   				<th>store_x</th>
+   				<th>store_y</th>
    				<th>PROFILE_URL</th>
+   			</tr>
+   		</table>
+   	</div>
+   	
+   	<div>
+   		<table id="mangoTable" border="1">
+   			<tr>
+   				<th>store_no</th>
+   				<th>mango_tel</th>
+   				<th>mango_kind</th>
+   				<th>mango_price</th>
+   				<th>mango_parking</th>
+   				<th>mango_time</th>
+   				<th>mango_break_time</th>
+   				<th>mango_last_order</th>
+   				<th>mango_indate</th>
    			</tr>
    		</table>
    	</div>
@@ -145,27 +164,31 @@
 			<c:otherwise>
 				<a href="users/userJoin">회원가입</a>
 				<a href="users/userLogin">로그인</a>
+				<a href="users/userUpdate">회원 수정</a>
 				
 			</c:otherwise>
 		</c:choose>	
 	</div>
 	
-	<a href="<c:url value='/likeForm'/>">좋아요 테스트</a>
-	<a href="<c:url value='/crawlForm'/>">크롤링 테스트</a>
-	<a href="<c:url value='/autocompleteForm'/>">자동완성 테스트</a>
-<<<<<<< HEAD
-	</div>
 	
-=======
+	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
+	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
+	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
+	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
+
+	</div>
+
 	
 	<a href="users/follow">follow</a>
->>>>>>> 1b4a8406c316d27b14b2f16962ddb35195310137
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
 
 <script type="text/javascript">
 		$(function() {
+
+
+			
 			function search(points) {
 
 				$.ajax({
@@ -176,14 +199,32 @@
 					dataType: "json",
 					success: function(result) {
 						alert("성공");
+						printMarker(result);
 						console.log(result);
 						$(result).each(function(index, item) {
 							$("#table").append(
 								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
+										+ "<td>" + item.instaStore.store_name + "</td>"
+										+ "<td>" + item.instaStore.store_name2 + "</td>"
+										+ "<td>" + item.instaStore.store_cate1 + "</td>"
+										+ "<td>" + item.instaStore.store_cate2 + "</td>"
+										+ "<td>" + item.instaStore.store_adr + "</td>"
+										+ "<td>" + item.instaStore.store_adr1 + "</td>"
+										+ "<td>" + item.instaStore.store_adr2 + "</td>"
 										+ "<td>" + item.instaStore.store_x + "</td>"
 										+ "<td>" + item.instaStore.store_y + "</td>"
-										+ "<td>" + item.instaStore.store_name + "</td>"
-										+ '<td><img src=' + item.instaImage.repImg + ' /></td>'
+										+ '<td><img src=' + item.instaImage.repImg + ' /></td>' + "</tr>"
+							);
+							$("#mangoTable").append(
+									"<tr>" + "<td>" + item.mangoStore.store_no + "</td>"
+										+ "<td>" + item.mangoStore.mango_tel + "</td>"
+										+ "<td>" + item.mangoStore.mango_kind + "</td>"
+										+ "<td>" + item.mangoStore.mango_price + "</td>"
+										+ "<td>" + item.mangoStore.mango_parking + "</td>"
+										+ "<td>" + item.mangoStore.mango_time + "</td>"
+										+ "<td>" + item.mangoStore.mango_break_time + "</td>"
+										+ "<td>" + item.mangoStore.mango_last_order + "</td>"
+										+ "<td>" + item.mangoStore.mango_holiday + "</td>" + "</tr>"
 							);
 							$(item.instaImage.postImgList).each(function(idx, itm) {
 								$("#imageContainer").append(
@@ -223,6 +264,54 @@
 		};
 
 		const map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+
+
+		
+		const printMarker = (result) => {
+			// 마커를 표시할 위치와 title 객체 배열입니다
+			let positions = [];
+			
+			for(let n in result) {
+				const posotion = {
+					title: result[n].instaStore.store_name,
+					latlng: new kakao.maps.LatLng(result[n].instaStore.store_y, result[n].instaStore.store_x)
+				}
+				positions.push(posotion);
+			}
+			/* let positions = [
+				{
+					title: '카카오',
+					latlng: new kakao.maps.LatLng(35.15113, 126.924584)
+				}
+			]; */
+
+			// 마커 이미지의 이미지 주소입니다
+			const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+			for(let i = 0; i < positions.length; i++) {
+
+				// 마커 이미지의 이미지 크기 입니다
+				const imageSize = new kakao.maps.Size(24, 35);
+
+				// 마커 이미지를 생성합니다    
+			    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+
+			 // 마커를 생성합니다
+			    const marker = new kakao.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: positions[i].latlng, // 마커를 표시할 위치
+			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+			        image : markerImage // 마커 이미지 
+			    });
+			}
+		};
+
+
+
+		
+
 
 		const options = {
 		        // Drawing Manager를 생성할 때 사용할 옵션입니다

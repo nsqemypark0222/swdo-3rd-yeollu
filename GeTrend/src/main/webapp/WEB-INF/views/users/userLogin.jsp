@@ -7,9 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>login</title>
+<link rel="stylesheet" href='<c:url value="/resources/css/login.css"/>'>
+<link rel="stylesheet" href='<c:url value="/resources/css/bootstrap.min.css"/>'>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 $(function(){
 	$("#cancel").click(function(){
@@ -19,42 +22,49 @@ $(function(){
 </script>
 </head>
 <body>
-	<h1>LOGIN :)</h1>
-	<form action="login" method="post">
-		<table>
-		<tr>
-			<td><label>E-MAIL</label></td>
-			<td><input type="email" id="user_email" name="user_email" value="${rememberemail}"></td>
-			<td><input type="checkbox" name="remember" value="1"> 아이디 기억하기</td>
-		</tr>
-		<c:if test='${!errMsg1.equals("")}'>
-			 <tr>
-				<td colspan="2"> ${errMsg1}</td>
-			 </tr>
-		 </c:if>
-		 <tr>
-		 <td><label>Password</label></td> 
-		 <td><input type="password" name="user_pw" id="user_pw"></td>
-		 </tr>
-		 <c:if test='${!errMsg2.equals("")}'>
-			 <tr> 
-				<td colspan="2"> ${errMsg2}</td>
-			 </tr>
-		 </c:if>
-		 <tr>
-			<td><input type="submit" value="로그인" id="login">	</td>
-			<td><input type="reset" value="취소"id="cancel">	</td>
-			<td><a href="userJoin">회원가입</a></td>
-		 </tr>
-		</table>
-	</form>
-		<div id="socialbtn">
-	               <div id="kakaoIdLogin"><a id="kakao-login-btn"></a></div>
+<div class="container-fluid">
+  <div class="row no-gutter">
+    <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+    <div class="col-md-8 col-lg-6">
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-lg-8 mx-auto">
+              <h3 class="login-heading mb-4">LOGIN</h3>
+              <form action="login" method="post" id="userLogin">
+                <div class="form-label-group">
+                  <input type="email" id="user_email" name="user_email" value="${rememberemail}" class="form-control" v-model="user_email" required autofocus>
+                  <label for="inputEmail">E-mail address</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="password" name="user_pw" id="user_pw" class="form-control"  v-model="user_pw"  required>
+                  <label for="inputPassword">Password</label>
+                </div>
+
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="remember" name="remember" v-model="remember" value="1">
+                  <label class="custom-control-label" for="remember">Remember E-mail</label>
+                  <a href="userJoin" style="padding-left: 50%;">회원가입</a>
+                  
+                </div>
+                
+                <button class="btn btn-lg btn-warning btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" id="login">Sign in</button>
+               </form>
+               <div id="socialbtn">
+	               <div id="kakaoIdLogin"> <a id="kakao-login-btn"></a></div>
 	               <div id="naverIdLogin"></div>  <!-- 버튼이 들어갈 위치 선언. ID는 반드시 지정된 값으로 설정하여야 합니다.-->
 	               <div style="clear:both;"></div>
-	    </div>
+	           </div>
 	           
-		<script type="text/javascript">
+	          </div> 
+			</div>
+			</div>
+		 </div>
+	 </div>
+ </div>
+</div> 				           
+<script type="text/javascript">
 					var naverLogin = new naver.LoginWithNaverId(
 						{
 							clientId: 'mhTruKtoEj6RAeMJZQfY',
@@ -111,8 +121,35 @@ $(function(){
 					});
 					//]]>
 				</script>
-                
-	
-
 </body>
+<script>
+const userLogin = new Vue({
+	el:'#userLogin',
+	data:{
+		Login:false,
+		user_email:'',
+		user_pw:'',
+		remember:false
+	},
+	methods:{
+		userLogin(){
+			this.Login = !this.Login;
+			if(!this.user_email){
+				user_email.focus();
+				return false;
+			}else if(!this.validEmail(this.user_email)){
+				return false;
+			}
+			if(!this.user_pw){
+				return false;
+			}
+		},
+		validEmail: function(user_email){
+			var re =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(user_email);
+		}	
+	}
+});
+
+</script>
 </html>

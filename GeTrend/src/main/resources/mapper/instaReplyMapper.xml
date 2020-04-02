@@ -44,6 +44,28 @@ where
 	and r.store_no = #{store_no}
 </select>
 	
-
+<select id="replyListByEmail" parameterType="string" resultType="hashmap">
+select
+	r.reply_no as reply_no
+	,s.store_no as store_no 
+	,s.store_name as store_name
+	,s.store_adr as store_adr
+	,r.user_email as user_email
+	,r.reply_contents as reply_contents
+	,r.reply_star as reply_star
+	,to_char(r.reply_indate,'yyyy-MM-dd') as reply_indate
+	,u.user_name as user_name
+	,u.user_profile as user_profile
+from
+	insta_replys r, stores s, users u
+where
+	r.store_no = s.store_no
+and
+	r.user_email = u.user_email 
+and
+	r.user_email = #{user_email}
+order by
+	r.reply_no desc	
+</select>
 </mapper>
 

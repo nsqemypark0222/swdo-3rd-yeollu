@@ -36,12 +36,10 @@ public class instagram_Selenium_location_post3 {
 	private WebDriverWait wait;
 	
 	static {
-//		System.setProperty("webdriver.chrome.driver", "C:/stsinstall/sts-4.5.0.RELEASE/chromedriver.exe");
-//		System.setProperty("webdriver.chrome.driver", "C:/sts/sts-4.5.0.RELEASE/chromedriver.exe");
 		String driverPath = PropertiesUtil.get("util", "CHROME_DRIVER");
 		System.setProperty("webdriver.chrome.driver", driverPath);    	 	
 		options = new ChromeOptions();
-//		options.addArguments("headless");
+		options.addArguments("headless");
 		options.addArguments("window-size=1920x1080");
         options.addArguments("disable-gpu");
         options.addArguments("disable-infobars");
@@ -86,7 +84,7 @@ public class instagram_Selenium_location_post3 {
 	public InstaImageVO location_post(String location) {
 		driver = new ChromeDriver(options);
 		logger.info("드라이버 실행 : {}", location);
-		wait = new WebDriverWait(driver, 4);
+		wait = new WebDriverWait(driver, 1);
 		
 		InstaImageVO instaImage = new InstaImageVO();
 		try {

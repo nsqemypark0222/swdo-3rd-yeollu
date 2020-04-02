@@ -35,7 +35,7 @@
 }
 .navbar-light .navbar-brand {
     color: rgba(255, 138, 0, 0.78);
-    margin-left: 18%;
+    /* margin-left: 14%; */
 }
 .navbar-brand:hover {
     color: rgba(255, 138, 0, 0.78);

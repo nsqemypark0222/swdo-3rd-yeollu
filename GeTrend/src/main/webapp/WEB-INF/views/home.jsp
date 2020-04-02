@@ -10,10 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>[ Home | GeTrend ]</title>
 
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@api['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -133,7 +130,7 @@
    				<th>mango_time</th>
    				<th>mango_break_time</th>
    				<th>mango_last_order</th>
-   				<th>mango_indate</th>
+   				<th>mango_holiday</th>
    			</tr>
    		</table>
    	</div>
@@ -163,11 +160,22 @@
 		</c:choose>	
 	</div>
 	
+<<<<<<< HEAD
 	</div>
 
+=======
+	
+	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
+>>>>>>> 08452460587b23dad777681dfe3ec281228d3697
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
-	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>	
-	<a href="users/follow">follow</a>
+	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
+	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>	
+	<a href="<c:url value='/users/follow'/>">follow</a>
+
+	</div>
+
+
+
 	
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
@@ -176,10 +184,7 @@
 <script type="text/javascript">
 		$(function() {
 
-
-			
 			function search(points) {
-
 				$.ajax({
 					url: "<c:url value='/search' />",
 					type: "post",
@@ -233,13 +238,7 @@
 			}
 			searchFunc = search;
 
-			$("#naturalLanguageProcessing").click(function(){
-				location.href="<c:url value='/naturalLanguageProcessing'/>";
-			});
-
-			$("#naverTest").click(function(){
-				location.href="<c:url value='/naverTest'/>";
-			});
+			
 		});
 
 		function search(points) {
@@ -259,6 +258,7 @@
 
 		
 		const printMarker = (result) => {
+			
 			// 마커를 표시할 위치와 title 객체 배열입니다
 			let positions = [];
 			
@@ -287,7 +287,7 @@
 				// 마커 이미지를 생성합니다    
 			    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
 
-			 // 마커를 생성합니다
+			 	// 마커를 생성합니다
 			    const marker = new kakao.maps.Marker({
 			        map: map, // 마커를 표시할 지도
 			        position: positions[i].latlng, // 마커를 표시할 위치
@@ -296,11 +296,6 @@
 			    });
 			}
 		};
-
-
-
-		
-
 
 		const options = {
 		        // Drawing Manager를 생성할 때 사용할 옵션입니다

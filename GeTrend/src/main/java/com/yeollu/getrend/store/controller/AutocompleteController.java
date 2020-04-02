@@ -13,14 +13,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.yeollu.getrend.crawler.CrawlerExecutor;
+import com.yeollu.getrend.store.dao.InstaLocationDAO;
+import com.yeollu.getrend.store.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
+import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
+import com.yeollu.getrend.store.vo.InstaImageVO;
+import com.yeollu.getrend.store.vo.InstaLocationVO;
+import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
+import com.yeollu.getrend.store.vo.InstaStoreVO;
+import com.yeollu.getrend.store.vo.MangoStoreVO;
+import com.yeollu.getrend.store.vo.StoreVO;
 
 @Controller
 @RequestMapping(value="/autocomplete")
 public class AutocompleteController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(AutocompleteController.class);
+	
 	@Autowired
 	private StoreDAO storeDAO;
-	private static final Logger logger = LoggerFactory.getLogger(AutocompleteController.class);
+	
+	@Autowired
+	private InstaLocationDAO instaLocationDAO;
+	
+	@Autowired
+	private MangoStoreDAO mangoStoreDAO;
+	
 
 	@RequestMapping(value = "/autocompleteForm", method = RequestMethod.GET)
 	public String autocompleteForm() {
@@ -57,8 +76,83 @@ public class AutocompleteController {
 
 	@RequestMapping(value = "/keyword", method = RequestMethod.POST)
 	@ResponseBody
-	public void keyword(String keyword) {    
+	public ArrayList<InstaStoreInfoVO> keyword(String keyword) {
 		logger.info("keyword {}", keyword);
+		long startTime = System.currentTimeMillis();
+		
+		ArrayList<StoreVO> list = storeDAO.searchStoresByTerm(keyword);
+		logger.info("{}", list.size());
+		
+		ArrayList<InstaStoreVO> instaStoreList = new ArrayList<InstaStoreVO>();
+		for(StoreVO store : list) {
+			String location_id = QueryStringSender.send(store);
+			if(location_id == null || location_id.equals("")) {
+			} else {
+				if(!instaLocationDAO.isExistedInstaLocation(location_id)) {
+					InstaLocationVO instaLocation = new InstaLocationVO();
+					instaLocation.setLocation_id(location_id);
+					instaLocation.setStore_no(store.getStore_no());
+					instaLocationDAO.insertInstaLocation(instaLocation);
+				}
+				InstaStoreVO instaStore = storeDAO.selectInstaStore(store.getStore_no());
+				if(instaStore != null) {
+					instaStore.setLocation_id(location_id);
+					instaStoreList.add(instaStore);
+				}
+			}
+		}
+		logger.info("{}", instaStoreList);
+		
+		ArrayList<MangoStoreVO> mangoStoreList = new ArrayList<MangoStoreVO>();
+		for(InstaStoreVO instaStore : instaStoreList) {
+			MangoStoreVO mangoStore = new MangoStoreVO();
+			mangoStore = mangoStoreDAO.selectMangoStoreByStoreNo(instaStore.getStore_no());
+			mangoStoreList.add(mangoStore);
+		}
+		
+		ArrayList<String> locationList = new ArrayList<String>();
+		for(int i = 0; i < instaStoreList.size(); i++) {
+			locationList.add(instaStoreList.get(i).getLocation_id());
+		}
+		
+		ArrayList<InstaImageVO> instaImageList = new ArrayList<InstaImageVO>();
+		ArrayList<CrawlerExecutor> crawlerExecutorList = new ArrayList<CrawlerExecutor>();
+		for(String location : locationList) {
+			CrawlerExecutor crawlerExecutor = new CrawlerExecutor();
+			crawlerExecutor.setLocation(location);
+			new Thread(crawlerExecutor, "crawling :  " + location).start();
+			crawlerExecutorList.add(crawlerExecutor);
+		}
+		for(CrawlerExecutor crawlerExecutor : crawlerExecutorList) {
+			instaImageList.add(crawlerExecutor.getInstaImage());
+		}
+		CrawlerExecutor.killChromeDriver();
+		
+		ArrayList<InstaStoreInfoVO> instaStoreInfoList = new ArrayList<InstaStoreInfoVO>();
+		try {
+			for(int i = 0; i < instaStoreList.size(); i++) {
+				InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
+				instaStoreInfo.setInstaStore(instaStoreList.get(i));
+				instaStoreInfo.setMangoStore(mangoStoreList.get(i));
+				
+				if(instaImageList.size() > i) {
+					instaStoreInfo.setInstaImage(instaImageList.get(i));					
+				} else {
+					instaStoreInfo.setInstaImage(null);
+				}
+				
+				instaStoreInfoList.add(instaStoreInfo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		long endTime = System.currentTimeMillis();
+		long diff = (endTime - startTime) / 1000;
+		logger.info("걸린 시간 : {}", diff);
+		
+		
+		return instaStoreInfoList;
 	}
 	
 	

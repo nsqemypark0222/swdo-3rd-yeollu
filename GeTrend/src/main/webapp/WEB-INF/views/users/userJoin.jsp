@@ -95,7 +95,7 @@ $("#joinCodeCheck").click(function(){
           <div class="card-body">
               <h2 class="card-title text-center">Sign In</h2>
 				<div id="joinFrm">
-					<form action="Join" method="post" name="joinFrm" @submit="formCheck" id="joinFrm">
+					<form action="join" method="post" name="joinFrm" @submit="formCheck" id="joinFrm">
 					  <div class="form-label-group row">
 					   	 <div class="col-md-9">
 						 	<input type="email" class="form-control mb-2" name="user_email" id="user_email" v-model="user_email" placeholder="이메일" required autofocus>
@@ -165,7 +165,7 @@ const joinFrm = new Vue({
 				alert("비밀번호는 4~10 글자를 입력하세요");
 				return false;
 			}
-			if(!this.user_pw != this.pwCheck){
+			if(this.user_pw != this.pwCheck){
 				alert("비밀번호를 확인해주세요.")
 				return false;
 			}

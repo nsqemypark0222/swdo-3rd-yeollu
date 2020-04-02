@@ -51,6 +51,32 @@ order by
 	s.store_no asc
 </select>
 
+<select id="searchStoresByTerm" parameterType="string" resultType="store">
+select
+	store_no
+	, store_name
+	, store_name2
+	, store_cate1
+	, store_cate2
+	, store_adr
+	, store_adr1
+	, store_adr2
+	, store_x
+	, store_y
+from
+	stores
+where
+	store_name like '%' || #{term} || '%'
+	or store_name2 like '%' || #{term} || '%'
+	or store_cate1 like '%' || #{term} || '%'
+	or store_cate2 like '%' || #{term} || '%'
+	or store_adr like '%' || #{term} || '%'
+	or store_adr1 like '%' || #{term} || '%'
+	or store_adr2 like '%' || #{term} || '%'
+order by
+	store_no asc
+</select>
+
 <select id="selectStoresByStoreAdr" parameterType="string" resultType="store">
 select
 	store_no

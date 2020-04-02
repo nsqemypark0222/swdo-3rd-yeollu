@@ -34,7 +34,7 @@ and
 
 
 <!-- 나를 구독한 사람수 -->
-<select id="CountFollower" parameterType="string" resultType="int">
+<select id="countFollower" parameterType="string" resultType="int">
 select 
 	count(user_email) 
 where 
@@ -42,7 +42,7 @@ where
 </select>
 
 <!-- 내가 구독한 사람수 -->
-<select id="CountFollow" parameterType="string" resultType="int">
+<select id="countFollow" parameterType="string" resultType="int">
 select 
 	count(follows_follwing) 
 where 

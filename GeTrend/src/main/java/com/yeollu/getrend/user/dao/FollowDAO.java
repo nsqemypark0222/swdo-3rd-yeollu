@@ -11,6 +11,7 @@ import com.yeollu.getrend.user.vo.UserVO;
 public class FollowDAO {
 	@Autowired
 	private SqlSession session;
+
 	public int insertFollow(FollowVO follow) {
 		int cnt = 0;
 		try {
@@ -20,6 +21,7 @@ public class FollowDAO {
 			e.printStackTrace();
 		}return cnt;
 	}
+
 	public int deleteFollow(FollowVO follow) {
 		int cnt = 0;
 		try {
@@ -48,5 +50,6 @@ public class FollowDAO {
 			e.printStackTrace();
 		}
 		return cnt;
+
 	}
 }

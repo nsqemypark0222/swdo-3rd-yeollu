@@ -11,4 +11,6 @@ public interface InstaReplyMapper {
 	public int replyRemove(InstaReplyVO vo);
 	public ArrayList<HashMap<String, Object>> replyList(InstaReplyVO reply);
 	public ArrayList<HashMap<String, Object>> replyListByEmail(String user_email);
+	public ArrayList<HashMap<String, Object>> replyListByFollow(String user_email);
+	public ArrayList<HashMap<String, Object>> replyListByLikedStore(String user_email);
 }

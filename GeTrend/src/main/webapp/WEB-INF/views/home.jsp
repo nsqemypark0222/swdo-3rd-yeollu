@@ -153,7 +153,7 @@
 				<a href="users/logout">로그아웃</a>
 				<a href="users/kakaoshare">공유하기</a>
 				<a href="reply/replyForm">댓글달기</a>
-				<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>	
+				<a href="<c:url value='/mypage/mypageForm'/>">팔로우, 댓글, 좋아요 테스트</a>	
 			</c:when>
 			<c:otherwise>
 				<a href="users/userJoin">회원가입</a>

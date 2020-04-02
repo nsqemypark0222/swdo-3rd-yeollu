@@ -68,6 +68,18 @@ public class LikeDAO {
 		return list;
 	}
 	
+	public int likeSelectByEmailStoreno(LikeVO like){
+		int cnt = 0;
+	try {
+		LikeMapper mapper = session.getMapper(LikeMapper.class);
+		cnt = mapper.likeSelectByEmailStoreno(like);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}		
+	return cnt;
+}
+	
+	
 	public int likeStoreCountByEmail(String user_email){
 			int cnt = 0;
 		try {

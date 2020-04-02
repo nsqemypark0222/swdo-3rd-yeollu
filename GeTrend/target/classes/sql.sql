@@ -2,18 +2,13 @@ drop sequence seq_searched_stores;
 drop table searched_stores;
 drop table insta_locations;
 drop table mango_stores;
-drop table users;
-drop table stores;
 drop table mango_stores;
 drop table follows;
 drop table likes;
-<<<<<<< HEAD
 drop table users;
 drop table stores;
 --drop table stores cascade constraints;
-=======
 drop table insta_replys;
->>>>>>> 30f239e5199ac474ea0775420417ad45138e3af9
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -165,7 +160,6 @@ where
     i.store_no = s.store_no
 group by
     s.store_no;
-<<<<<<< HEAD
 --------------------------------------------------------------------------------------------------------------------------------
 select
     s.store_name
@@ -183,9 +177,3 @@ where
     s.store_no = m.store_no
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
-
-
-
-=======
---------------------------------------------------------------------------------------------------------------------------------
->>>>>>> 30f239e5199ac474ea0775420417ad45138e3af9

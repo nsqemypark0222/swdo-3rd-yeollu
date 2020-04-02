@@ -53,6 +53,19 @@ public class StoreDAO {
 		return instaStore;
 	}
 	
+	public ArrayList<StoreVO> searchStoresByTerm(String term) {
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.searchStoresByTerm(term);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	public ArrayList<String> autoStoreName(){
 		ArrayList<String> list = new ArrayList<String>();
 		

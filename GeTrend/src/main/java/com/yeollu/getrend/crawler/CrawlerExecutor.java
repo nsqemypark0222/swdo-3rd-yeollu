@@ -1,6 +1,8 @@
 package com.yeollu.getrend.crawler;
 
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,5 +49,14 @@ public class CrawlerExecutor implements Runnable {
 		}
 		logger.info("{}", instaImage);
 		return instaImage;
+	}
+	
+	public static void killChromeDriver() {
+		try {
+			Runtime.getRuntime().exec("taskkill /f /im chromedriver.exe /t");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

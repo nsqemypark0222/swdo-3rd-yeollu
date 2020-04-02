@@ -165,7 +165,7 @@ const joinFrm = new Vue({
 				alert("비밀번호는 4~10 글자를 입력하세요");
 				return false;
 			}
-			if(!this.user_pw != this.pwCheck){
+			if(this.user_pw != this.pwCheck){
 				alert("비밀번호를 확인해주세요.")
 				return false;
 			}

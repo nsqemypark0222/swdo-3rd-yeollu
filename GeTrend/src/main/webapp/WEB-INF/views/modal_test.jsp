@@ -35,6 +35,7 @@ $(function() {
 								temp +=	 '<input type="button" id="followBtn" value="팔로우" onclick="insertFollow(\''+item.USER_EMAIIL+'\');">';
 							 }
 					   }
+						 temp += '<br>'; 
 						$("#modal li").append(temp);
 					});
 						
@@ -64,6 +65,7 @@ $(function() {
 								temp +=	 '<input type="button" id="followBtn" value="팔로우" onclick="insertFollow(\''+item.USER_EMAIIL+'\');">';
 							 }
 					   }
+						 temp += '<br>'; 
 						$("#modal li").append(temp);
 					});
 						
@@ -92,6 +94,7 @@ $(function() {
 								temp +=	 '<input type="button" id="followBtn" value="팔로우" onclick="insertFollow(\''+item.USER_EMAIIL+'\');">';
 							 }
 					   }
+						   temp += '<br>'; 
 						$("#modal li").append(temp);
 					});
 						
@@ -109,7 +112,7 @@ $(document).click(function() {
 
 </script>
 <style>
-* {
+.modalDiv {
         margin: 0;
         padding: 0;
         list-style: none;

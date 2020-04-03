@@ -2,6 +2,7 @@ package com.yeollu.getrend.store.dao;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,8 @@ public class LikeDAO {
 		return cnt;
 	}
 	
-	public ArrayList<LikeVO> likeSelectByEmail(String user_email){
-		ArrayList<LikeVO> list = new ArrayList<LikeVO>();
+	public ArrayList<HashMap<String, Object>> likeSelectByEmail(String user_email){
+		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		
 		try {
 			LikeMapper mapper = session.getMapper(LikeMapper.class);
@@ -55,18 +56,17 @@ public class LikeDAO {
 		return list;
 	}
 	
-	public ArrayList<LikeVO> likeSelectByStoreno(String store_no){
-		ArrayList<LikeVO> list = new ArrayList<LikeVO>();
-		
-		try {
-			LikeMapper mapper = session.getMapper(LikeMapper.class);
-			list = mapper.likeSelectByStoreno(store_no);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return list;
-	}
+	public int likeSelectByEmailStoreno(LikeVO like){
+		int cnt = 0;
+	try {
+		LikeMapper mapper = session.getMapper(LikeMapper.class);
+		cnt = mapper.likeSelectByEmailStoreno(like);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}		
+	return cnt;
+}
+	
 	
 	public int likeStoreCountByEmail(String user_email){
 			int cnt = 0;

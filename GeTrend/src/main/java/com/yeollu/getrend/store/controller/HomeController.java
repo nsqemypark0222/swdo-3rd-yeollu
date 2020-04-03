@@ -31,7 +31,6 @@ import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
-import com.yeollu.getrend.store.util.preprocess.core.WiseNLU;
 import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
 import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;

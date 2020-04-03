@@ -2,6 +2,8 @@ package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,46 +25,25 @@ public class LikeController {
 	@Autowired
 	private LikeDAO likeDAO;
 		
-	@RequestMapping(value = "/likeForm", method = RequestMethod.GET)
-	public String likeForm() {
-		return "like_test";
-	}
 	
 	@RequestMapping(value = "/likeInsert", method = RequestMethod.POST)
 	@ResponseBody
-	public void likeInsert(LikeVO like) {
-		logger.info("likeInsert");
+	public void likeInsert(LikeVO like, HttpSession session) {
+		like.setUser_email((String)session.getAttribute("loginemail"));
+		logger.info("likeInsert {}",like);
 		int cnt = likeDAO.likeInsert(like);
 		logger.info("likeInsert cnt {}",cnt);
 	}
 	
 	@RequestMapping(value = "/likeDelete", method = RequestMethod.POST)
 	@ResponseBody
-	public void likeDelete(LikeVO like) {
+	public void likeDelete(LikeVO like,HttpSession session) {
 		logger.info("likeDelete");
+		like.setUser_email((String)session.getAttribute("loginemail"));
 		int cnt = likeDAO.likeDelete(like);
 		logger.info("likeDelete cnt {}",cnt);
 	}
 	
-	@RequestMapping(value = "/likeSelectByEmail", method = RequestMethod.GET)
-	public String likeSelectAll(String user_email, Model model) {
-		logger.info("likeSelectByEmail");
-		logger.info("user_email {}",user_email);
-		ArrayList<LikeVO> list = likeDAO.likeSelectByEmail(user_email);
-		logger.info("likeSelectByEmail list {}",list);
-		model.addAttribute("list", list);
-		return "like_test";
-	}
-	
-	
-	@RequestMapping(value = "/likeSelectByStoreno", method = RequestMethod.GET)
-	public String likeSelectByStoreno(String store_no, Model model) {
-		logger.info("likeSelectByStoreno");
-		logger.info("store_no {}",store_no);
-		ArrayList<LikeVO> list = likeDAO.likeSelectByStoreno(store_no);
-		logger.info("likeSelectByStoreno list {}",list);
-		model.addAttribute("list", list);
-		return "like_test";
-	}
+
 
 }

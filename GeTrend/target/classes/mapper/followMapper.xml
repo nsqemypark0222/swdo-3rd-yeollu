@@ -7,7 +7,6 @@
 
 <!-- 내가 구독하겠다 = 팔로잉 -->
 <insert id="insertFollow" parameterType="follow">
-<![CDATA[
 insert into 
 	follows(
 	user_email
@@ -17,38 +16,78 @@ insert into
 	#{user_email}
 	,#{follows_following}
 	)
-]]>
 </insert>
 
 <!-- 구독 취소 -->
 <delete id="deleteFollow" parameterType="follow">
-<![CDATA[
 delete from
 	follows 
-where
+where 
 	user_email = #{user_email}
 and 
 	follows_following = #{follows_following}
-]]>
 </delete>
+
+<!--내가 팔로우한사람인지 확인 -->
+<select id="checkFollow" parameterType="follow" resultType="int">
+select
+	count(*)
+from
+	follows
+where
+	user_email = #{user_email}
+and
+	follows_following = #{follows_following}
+</select>
 
 
 <!-- 나를 구독한 사람수 -->
-<select id="CountFollower" parameterType="string" resultType="int">
+<select id="countFollower" parameterType="string" resultType="int">
 select 
 	count(user_email) 
+from
+	follows
 where 
-	follows_following = #{user_email}
+	follows_following = #{follows_following}
 </select>
 
 <!-- 내가 구독한 사람수 -->
-<select id="CountFollow" parameterType="string" resultType="int">
+<select id="countFollow" parameterType="string" resultType="int">
 select 
-	count(follows_follwing) 
+	count(follows_following) 
+from
+	follows
 where 
 	user_email = #{user_email}
 </select>
 
+<!--user_email이 팔로우한사람 리스트 -->
+<select id="selectFollowing" parameterType="string" resultType="hashmap">
+select
+	f.follows_following as user_email
+	,u.user_name as user_name
+	,u.user_profile as user_profile
+from
+	follows f, users u
+where
+	f.follows_following = u.user_email
+and
+	f.user_email = #{user_email}
+</select>
+
+<!--follows_following를 팔로우한사람 리스트 -->
+<select id="selectFollower" parameterType="string" resultType="hashmap">
+select
+	f.user_email as user_email
+	,u.user_name as user_name
+	,u.user_profile as user_profile
+from
+	follows f, users u
+where
+	f.user_email = u.user_email
+and
+	f.follows_following = #{follows_following}
+</select>
 
 </mapper>
 

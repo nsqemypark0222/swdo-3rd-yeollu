@@ -271,4 +271,88 @@ public class MypageController {
 
 	
 	
+	//follows_following을 구독하는 사람 리스트
+	@RequestMapping(value = "/followerList", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<HashMap<String, Object>> followerList(String follows_following, HttpSession session, Model model) {
+		ArrayList<HashMap<String, Object>> list = followDAO.selectFollower(follows_following);
+		//내가 팔로잉 중인 사람인지 체크	
+		for (HashMap<String, Object> hashMap : list) {
+			String loginemail = (String)session.getAttribute("loginemail");			
+			FollowVO follow = new FollowVO();
+			follow.setUser_email(loginemail);
+			follow.setFollows_following((String)hashMap.get("USER_EMAIL"));
+			logger.info("팔로우 {}", follow);
+			if(follow.getUser_email().equals(follow.getFollows_following())) {
+				hashMap.put("FOLLOWING", "me");
+			}else {
+				int ck = followDAO.checkFollow(follow);		
+				if(ck == 1) {
+					hashMap.put("FOLLOWING", "yes");
+				}else {
+					hashMap.put("FOLLOWING", "no");
+				}				
+			}
+		  }//for
+		
+		logger.info("list {}",list);
+		return list;
+	}
+	
+	//user_email이 구독하는 사람 리스트
+	@RequestMapping(value = "/followList", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<HashMap<String, Object>> followList(String user_email, HttpSession session, Model model) {
+		ArrayList<HashMap<String, Object>> list = followDAO.selectFollowing(user_email);
+		//내가 팔로잉 중인 사람인지 체크	
+		for (HashMap<String, Object> hashMap : list) {
+			String loginemail = (String)session.getAttribute("loginemail");			
+			FollowVO follow = new FollowVO();
+			follow.setUser_email(loginemail);
+			follow.setFollows_following((String)hashMap.get("USER_EMAIL"));
+			logger.info("팔로우 {}", follow);
+			if(follow.getUser_email().equals(follow.getFollows_following())) {
+				hashMap.put("FOLLOWING", "me");
+			}else {
+				int ck = followDAO.checkFollow(follow);		
+				if(ck == 1) {
+					hashMap.put("FOLLOWING", "yes");
+				}else {
+					hashMap.put("FOLLOWING", "no");
+				}				
+			}
+		  }//for
+		
+		logger.info("list {}",list);
+		return list;
+	}
+	
+	//user_email이 구독하는 가게 리스트
+	@RequestMapping(value = "/likeStoreList", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<HashMap<String, Object>> likeStoreList(String user_email, HttpSession session, Model model) {
+		ArrayList<HashMap<String, Object>> list = likeDAO.likeSelectByEmail(user_email);
+		//내가 팔로잉 중인 사람인지 체크	
+		for (HashMap<String, Object> hashMap : list) {
+			String loginemail = (String)session.getAttribute("loginemail");			
+			FollowVO follow = new FollowVO();
+			follow.setUser_email(loginemail);
+			follow.setFollows_following((String)hashMap.get("USER_EMAIL"));
+			logger.info("팔로우 {}", follow);
+			if(follow.getUser_email().equals(follow.getFollows_following())) {
+				hashMap.put("FOLLOWING", "me");
+			}else {
+				int ck = followDAO.checkFollow(follow);		
+				if(ck == 1) {
+					hashMap.put("FOLLOWING", "yes");
+				}else {
+					hashMap.put("FOLLOWING", "no");
+				}				
+			}
+		  }//for
+		
+		logger.info("list {}",list);
+		return list;
+	}
+	
 }

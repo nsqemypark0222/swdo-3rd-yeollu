@@ -61,24 +61,32 @@ where
 	user_email = #{user_email}
 </select>
 
-<!--내가 팔로우한사람 리스트 -->
-<select id="selectFollowing" parameterType="string" resultType="follow">
+<!--user_email이 팔로우한사람 리스트 -->
+<select id="selectFollowing" parameterType="string" resultType="hashmap">
 select
-	follows_following
+	f.follows_following as user_email
+	,u.user_name as user_name
+	,u.user_profile as user_profile
 from
-	follows
+	follows f, users u
 where
-	user_email = #{user_email}
+	f.follows_following = u.user_email
+and
+	f.user_email = #{user_email}
 </select>
 
-<!--나를 팔로우한사람 리스트 -->
-<select id="selectFollow" parameterType="string" resultType="follow">
+<!--follows_following를 팔로우한사람 리스트 -->
+<select id="selectFollower" parameterType="string" resultType="hashmap">
 select
-	user_email
+	f.user_email as user_email
+	,u.user_name as user_name
+	,u.user_profile as user_profile
 from
-	follows
+	follows f, users u
 where
-	follows_following = #{follows_following}
+	f.user_email = u.user_email
+and
+	f.follows_following = #{follows_following}
 </select>
 
 </mapper>

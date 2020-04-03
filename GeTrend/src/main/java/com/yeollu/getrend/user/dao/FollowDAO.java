@@ -1,6 +1,7 @@
 package com.yeollu.getrend.user.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +66,8 @@ public class FollowDAO {
 	}
 	
 	
-	public ArrayList<FollowVO> selectFollowing(String user_email){
-		ArrayList<FollowVO> list = new ArrayList<FollowVO>();
+	public ArrayList<HashMap<String, Object>> selectFollowing(String user_email){
+		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		try {
 			FollowMapper mapper = session.getMapper(FollowMapper.class);
 			list = mapper.selectFollowing(user_email);
@@ -75,11 +76,11 @@ public class FollowDAO {
 		}
 		return list;
 	}
-	public ArrayList<FollowVO> selectFollow(String follows_following){
-		ArrayList<FollowVO> list = new ArrayList<FollowVO>();
+	public ArrayList<HashMap<String, Object>> selectFollower(String follows_following){
+		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		try {
 			FollowMapper mapper = session.getMapper(FollowMapper.class);
-			list = mapper.selectFollow(follows_following);
+			list = mapper.selectFollower(follows_following);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

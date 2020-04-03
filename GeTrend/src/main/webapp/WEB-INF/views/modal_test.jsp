@@ -13,83 +13,177 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-function openModal(modalname){
-	  document.get
-	  $("#modal").fadeIn(300);
-	  $("."+modalname).fadeIn(300);
-	}
+$(function() {
+	var user_email = "aaa@getrend.com";
+	 $("#followerList").click(function(e) {
+		 e.stopPropagation();
+			$.ajax({
+				url : "/getrend/mypage/followerList",
+				type : "post",
+				data : {"follows_following" : user_email},
+				success : function(result){ 
+					$("#modal li").html('<h3>팔로워</h3>');
+					$(result).each(function(index, item){
+						
+						var temp =  '<a href="/getrend/mypage/mypage?user_name='+item.USER_NAME+'"><img class="reply_user_profile" src="<c:url value='/resources/img/profile_default.png'/>" alt="프로필 사진"></a>';
+							temp +=  item.USER_NAME + ' 게시물수';							
+						if(item.FOLLOWING != 'me'){
+							if(item.FOLLOWING == 'yes'){
+								temp +=	 '<input type="button"  id="unfollowBtn" value="언팔로우"  onclick="deleteFollow(\''+item.USER_EMAIIL+'\');">';						
+							 }
+							else{
+								temp +=	 '<input type="button" id="followBtn" value="팔로우" onclick="insertFollow(\''+item.USER_EMAIIL+'\');">';
+							 }
+					   }
+						$("#modal li").append(temp);
+					});
+						
+						$("#modal li").show();	
+				},
+				error : function(){alert("실패");}
+			})    
+		 });
 
-	$("#modal, .close").on('click',function(){
-	  $("#modal").fadeOut(300);
-	  $(".modal-con").fadeOut(300);
-	});
+	$("#followList").click(function(e) {
+		 e.stopPropagation();
+			$.ajax({
+				url : "/getrend/mypage/followList",
+				type : "post",
+				data : {"user_email" : user_email},
+				success : function(result){ 
+					$("#modal li").html('<h3>팔로우</h3>');
+					$(result).each(function(index, item){
+					
+						var temp =  '<a href="/getrend/mypage/mypage?user_name='+item.USER_NAME+'"><img class="reply_user_profile" src="<c:url value='/resources/img/profile_default.png'/>" alt="프로필 사진"></a>';
+							temp +=  item.USER_NAME + ' 게시물수';							
+						if(item.FOLLOWING != 'me'){
+							if(item.FOLLOWING == 'yes'){
+								temp +=	 '<input type="button"  id="unfollowBtn" value="언팔로우"  onclick="deleteFollow(\''+item.USER_EMAIIL+'\');">';						
+							 }
+							else{
+								temp +=	 '<input type="button" id="followBtn" value="팔로우" onclick="insertFollow(\''+item.USER_EMAIIL+'\');">';
+							 }
+					   }
+						$("#modal li").append(temp);
+					});
+						
+						$("#modal li").show();	
+				},
+				error : function(){alert("실패");}
+			})    
+		 });
+	$("#likeStoreList").click(function(e) {
+		 e.stopPropagation();
+			$.ajax({
+				url : "/getrend/mypage/likeStoreList",
+				type : "post",
+				data : {"user_email" : user_email},
+				success : function(result){ 
+					$("#modal li").html('<h3>관심있는 가게</h3>');
+					$(result).each(function(index, item){
+						
+						var temp =  '<a href=""><img class="reply_user_profile" src="" alt="가게 사진"></a>';
+							temp +=  item.STORE_NAME + ' 팔로워수';	
+						if(item.FOLLOWING != 'me'){						
+							if(item.FOLLOWING == 'yes'){
+								temp +=	 '<input type="button"  id="unfollowBtn" value="언팔로우"  onclick="deleteFollow(\''+item.USER_EMAIIL+'\');">';						
+							 }
+							else{
+								temp +=	 '<input type="button" id="followBtn" value="팔로우" onclick="insertFollow(\''+item.USER_EMAIIL+'\');">';
+							 }
+					   }
+						$("#modal li").append(temp);
+					});
+						
+						$("#modal li").show();	
+				},
+				error : function(){alert("실패");}
+			})    
+		 });
+
+											 
+$(document).click(function() {
+         $("#modal li").hide();
+    }) 
+});
+
 </script>
 <style>
-*{margin:0; padding:0;}
-a.button{display:inline-block; padding: 10px 20px; text-decoration:none; color:#fff; background:#000; margin:20px;}
-#modal{
-  display:none;
-  position:fixed; 
-  width:100%; height:100%;
-  top:0; left:0; 
-  background:rgba(0,0,0,0.3);
-}
-.modal-con{
-  display:none;
-  position:fixed;
-  top:50%; left:50%;
-  transform: translate(-50%,-50%);
-  max-width: 60%;
-  min-height: 30%;
-  background:#fff;
-}
-.modal-con .title{
-  font-size:20px; 
-  padding: 20px; 
-  background : gold;
-}
-.modal-con .con{
-  font-size:15px; line-height:1.3;
-  padding: 30px;
-}
-.modal-con .close{
-  display:block;
-  position:absolute;
-  width:30px; height:30px;
-  border-radius:50%; 
-  border: 3px solid #000;
-  text-align:center; line-height: 30px;
-  text-decoration:none;
-  color:#000; font-size:20px; font-weight: bold;
-  right:10px; top:10px;
-}
+* {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+    }
+
+    #title {
+        height: 300px;
+        background: #fff;
+        text-align: center;
+        
+    }
+
+    #title li {
+        color: #000;
+        font-weight: bold;
+        font-size: 26px;
+        display: inline-block;
+        cursor: pointer;
+        width: 22%;
+        margin: 50px 10px;
+    }
+
+    #title li:hover {
+        color: #000;
+    }
+
+    #modal>li {
+
+        position: fixed;
+        background: #999;
+        width: 30%;
+        min-height: 60%;
+        z-index: 9999;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px;
+        border-radius: 30px;
+        display: none;
+        
+    }
+
+    #modal li h3 {
+        text-align: center;
+        font-size: 26px;
+        color: #FF8A00;
+        border-bottom: 1px solid #ddd;
+        padding: 1rem 1rem;
+    }
+
+    #modal li div {
+        text-align: left;
+        margin: 10px 10px;
+        line-height: 30px;
+        color: #000;
+        overflow-y: scroll;
+    }
 </style>
 </head>
 
 <body>
 
-
-<div id="wrap">
-  <a href="javascript:openModal('modal1');" class="button modal-open">모달열기1</a>
-  <a href="javascript:openModal('modal2');" class="button modal-open">모달열기2</a>
-</div>
-
-<div id="modal"></div>
-  <div class="modal-con modal1">
-    <a href="javascript:;" class="close">X</a>
-    <p class="title">제목</p>
-    <div class="con">
-		모달테스트으
+    <div id="content">
+        <ul id="title">
+            <li id="followerList">팔로워</li>
+            <li id="followList">팔로우</li>
+            <li id="likeStoreList">관심있는 가게</li>
+        </ul>
+        <ul id="modal">
+            <li>             
+            </li>
+        </ul>
     </div>
-  </div>
-  
-   <div class="modal-con modal2">
-    <a href="javascript:;" class="close">X</a>
-    <p class="title">제목2</p>
-    <div class="con">
-		모달투
-    </div>
-  </div>
 
 
 </body>

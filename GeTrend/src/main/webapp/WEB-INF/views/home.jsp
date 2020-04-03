@@ -163,8 +163,6 @@
 		</c:choose>	
 	</div>
 	
-<<<<<<< HEAD
-	
 	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
@@ -172,13 +170,7 @@
 
 	</div>
 
-	
 	<a href="users/follow">follow</a>
-=======
-	</div>
-
-	<a href="<c:url value='/users/follow'/>">follow</a>
->>>>>>> 8e8e7b6ade87dbcd6d7aab06d41d5891aeeb4b90
 	
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

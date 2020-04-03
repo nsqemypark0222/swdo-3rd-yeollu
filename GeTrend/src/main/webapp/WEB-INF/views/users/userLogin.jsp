@@ -42,9 +42,11 @@ $(function(){
 					                	<input type="password" name="user_pw" id="user_pw" class="form-control" required>
 					                	<label for="inputPassword">Password</label>
 					                </div>
-					                <div class="custom-control custom-checkbox mb-3">
+					                 <div class="custom-control custom-checkbox mb-3">
 					                	<input type="checkbox" class="custom-control-input" id="remember" name="remember" value="1">
-					                	<label class="custom-control-label" for="customCheck1">Remember E-mail</label>
+					                	<label class="custom-control-label" for="remember">Remember E-mail</label>
+					                	
+					                	<a id="linkjoin" href="<c:url value='/users/userJoin'/>">회원가입</a>
 					                </div>
 					                
 					                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" id="login">Sign in</button>
@@ -71,7 +73,7 @@ $(function(){
 	<a href="http://developers.kakao.com/logout"></a>
 	
 	
-	<a href="<c:url value='/users/userJoin'/>">회원가입</a>
+
 	
 	
 	

@@ -99,6 +99,9 @@ reply_no 		number 	primary key
 ,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
 );
 
+
+
+
 commit;
 
 
@@ -182,5 +185,16 @@ where
     s.store_no = m.store_no
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
-
+select
+    m.mango_time, m.mango_break_time
+from
+    stores s, mango_stores m, insta_locations l
+where
+    s.store_no = m.store_no
+    and s.store_no = l.store_no;
     
+select sysdate from dual;
+select mango_time from mango_stores;
+select to_char(sysdate, 'HH24') from dual;
+select to_char(sysdate, 'dy') from dual;
+

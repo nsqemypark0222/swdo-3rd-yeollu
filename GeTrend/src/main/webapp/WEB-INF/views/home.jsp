@@ -344,6 +344,16 @@
 	        printContainer.innerHTML = row;
 			search(points);
 	   };
+
+	   const setCenter = (lat, lng) => {
+		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
+		   map.setCenter(moveLatLng);
+	   };
+
+	   const panTo = (lat, lng) => {
+		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
+		   map.panTo(moveLatLng);
+	   };
 		
 </script>
 </body>

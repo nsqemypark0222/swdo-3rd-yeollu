@@ -1,37 +1,26 @@
 package com.yeollu.getrend.store.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.yeollu.getrend.crawler.CrawlerExecutor;
-import com.yeollu.getrend.crawler.instagram_Selenium_location_post2;
-import com.yeollu.getrend.crawler.instagram_Selenium_location_post3;
-import com.yeollu.getrend.crawler.mango_store_info;
-import com.yeollu.getrend.crawler.mango_store_info2;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
-import com.yeollu.getrend.store.util.preprocess.core.WiseNLU;
 import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
 import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
@@ -59,13 +48,6 @@ public class HomeController {
 		
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
-		return "home";
-	}
-	
-	@RequestMapping(value = "/searchInput", method = RequestMethod.GET)
-	public String searchInput(@RequestParam(value = "param", required = false, defaultValue = "") String param) {
-		logger.info("searchInput : {}", param);
 		
 		return "home";
 	}

@@ -121,6 +121,7 @@
 						printMarker(result);
 						console.log(result);
 						$(result).each(function(index, item) {
+							panTo(item.instaStore.store_y, item.instaStore.store_x);
 							$("#table").append(
 								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
 										+ "<td>" + item.instaStore.store_name + "</td>"

@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>[ mypage test ]</title>
 <script  src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="/resources/css/bootstrap.css">
 <script type="text/javascript">
 
 function insertFollow(follows_following){

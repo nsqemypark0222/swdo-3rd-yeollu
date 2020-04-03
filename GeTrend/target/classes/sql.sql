@@ -185,8 +185,6 @@ where
     s.store_no = m.store_no
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
-<<<<<<< HEAD
-=======
 select
     m.mango_time, m.mango_break_time
 from
@@ -200,35 +198,3 @@ select mango_time from mango_stores;
 select to_char(sysdate, 'HH24') from dual;
 select to_char(sysdate, 'dy') from dual;
 
-select
-    m.mango_time, m.mango_break_time
-from
-    stores s, mango_stores m, insta_locations l
-where
-    s.store_no = m.store_no
-    and s.store_no = l.store_no;
-    
-select
-	store_no
-	, store_name
-	, store_name2
-	, store_cate1
-	, store_cate2
-	, store_adr
-	, store_adr1
-	, store_adr2
-	, store_x
-	, store_y
-from
-	stores
-where
-	store_name like '%' || '¸¶³àÄ«·Õ' || '%'
-	or store_name2 like '%' || '¸¶³àÄ«·Õ' || '%'
-	or store_cate1 like '%' || '¸¶³àÄ«·Õ' || '%'
-	or store_cate2 like '%' || '¸¶³àÄ«·Õ' || '%'
-	or store_adr like '%' || '¸¶³àÄ«·Õ' || '%'
-	or store_adr1 like '%' || '¸¶³àÄ«·Õ' || '%'
-	or store_adr2 like '%' || '¸¶³àÄ«·Õ' || '%'
-order by
-	store_no asc;
->>>>>>> 08452460587b23dad777681dfe3ec281228d3697

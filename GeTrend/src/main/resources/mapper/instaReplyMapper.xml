@@ -113,6 +113,8 @@ and
 	r.user_email = u.user_email 
 and
 	s.store_no in (select store_no from likes where user_email = #{user_email})
+and
+	r.user_email = #{user_email}
 order by
 	r.reply_no desc
 </select>  

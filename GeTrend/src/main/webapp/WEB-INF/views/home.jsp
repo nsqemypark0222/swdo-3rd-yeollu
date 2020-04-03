@@ -160,16 +160,8 @@
 		</c:choose>	
 	</div>
 	
-<<<<<<< HEAD
-	</div>
-
-=======
-	
-	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
->>>>>>> 08452460587b23dad777681dfe3ec281228d3697
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
-	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>	
 	<a href="<c:url value='/users/follow'/>">follow</a>
 
 	</div>

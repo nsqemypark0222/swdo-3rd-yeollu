@@ -214,7 +214,7 @@ public class MypageController {
 				else hashMap.put("LIKE", false);
 			}
 			model.addAttribute("replyList",replyList);	
-			
+			logger.info("mypageLikedStore replyList {}",replyList);
 		//남 프로필	
 		}else {
 			logger.info("남 프로필");

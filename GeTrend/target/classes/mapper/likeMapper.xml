@@ -25,14 +25,30 @@ and
 	user_email = #{user_email}
 </delete>
 
-<select id="likeSelectByEmail" parameterType="string" resultType="like">
+<select id="likeSelectByEmail" parameterType="string" resultType="hashmap">
 select
-	store_no
-	,user_email
+	s.store_no as store_no
+	,s.store_name as store_name
+	,l.user_email as user_email
+from
+	likes l, stores s
+where
+	l.store_no = s.store_no
+and
+	l.user_email = #{user_email}
+order by
+	s.store_name
+</select>
+
+<select id="likeSelectByEmailStoreno" parameterType="like" resultType="int">
+select
+	count(*)
 from
 	likes
 where
 	user_email = #{user_email}	
+and
+	store_no = #{store_no}
 </select>
 
 <select id="likeStoreCountByEmail" parameterType="string" resultType="int">
@@ -42,16 +58,6 @@ from
 	likes
 where
 	user_email = #{user_email}	
-</select>
-
-<select id="likeSelectByStoreno" parameterType="string" resultType="like">
-select
-	store_no
-	,user_email
-from
-	likes
-where
-	store_no = #{store_no}	
 </select>
 
 </mapper>

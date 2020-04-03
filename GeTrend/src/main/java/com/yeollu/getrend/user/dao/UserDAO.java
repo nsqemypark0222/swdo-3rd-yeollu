@@ -30,6 +30,16 @@ public class UserDAO {
 		}return cnt;
 	}
 	
+	public int updateSocialUser(UserVO user) {
+		int cnt = 0;
+		try {
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			cnt = mapper.updateSocialUser(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return cnt;
+	}
+	
 	public int deleteUser(String user_email) {
 		int cnt = 0;
 		try {

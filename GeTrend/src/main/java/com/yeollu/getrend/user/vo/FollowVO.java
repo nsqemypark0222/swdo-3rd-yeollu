@@ -6,5 +6,5 @@ import lombok.Data;
 public class FollowVO {
 	private String user_email;
 	private String follows_following;
-	private String follows_indate;
+	private String follow_indate;
 }

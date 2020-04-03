@@ -28,6 +28,7 @@ import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.MangoStoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
+import com.yeollu.getrend.user.util.ProfileImageHandler;
 
 @Controller
 public class HomeController {
@@ -48,6 +49,10 @@ public class HomeController {
 		
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		
+//		new ProfileImageHandler().upload();
+		
+		
 		
 		return "home";
 	}

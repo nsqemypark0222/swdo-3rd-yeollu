@@ -136,7 +136,7 @@ public class UserController {
 		logger.info(inputPw);
 		logger.info(pw);
 		
-		user.setUser_type("local");
+		user.setUser_type("LOCAL");
 		int cnt = dao.join(user);
 		if(cnt>0) logger.info("가입 성공");
 		else logger.info("가입 실패");
@@ -272,6 +272,7 @@ public class UserController {
 		logger.info("{}", user);
 		
 		String inputPw = user.getUser_pw();
+		
 		String pw = passEncoder.encode(inputPw);
 		user.setUser_pw(pw);
 		logger.info(inputPw);
@@ -300,5 +301,53 @@ public class UserController {
 		}
 		return "redirect:/";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//회원정보 수정 페이지 이동
+		@RequestMapping(value="/userUpdate2", method=RequestMethod.GET)
+		public String userUpdate2(HttpSession session, Model model) {
+			logger.info("회원정보수정 페이지");
+			String user_email = (String)session.getAttribute("loginemail");
+			logger.info("user_email : {}", user_email);
+			UserVO user = dao.selectEmail(user_email);
+			logger.info("user : {}", user);
+
+			model.addAttribute("user", user);
+			return "/users/userUpdate2";
+		}
+		//회원정보 수정
+		@RequestMapping(value="/update2", method=RequestMethod.POST)
+		public String update2(UserVO user, HttpSession session){
+			logger.info("{}", user);
+			
+			
+			int cnt = 0;
+			if(user.getUser_type().equals("LOCAL")) {
+				String inputPw = user.getUser_pw();
+				String pw = passEncoder.encode(inputPw);
+				user.setUser_pw(pw);
+				logger.info(inputPw);
+				logger.info(pw);
+				cnt = dao.updateUser(user);
+			} else {
+				cnt = dao.updateSocialUser(user);
+			}
+			
+			logger.info("{}",cnt);
+			if(cnt>0) {
+				logger.info("수정성공");
+				session.setAttribute("loginname", user.getUser_name());
+			}else {
+				logger.info("수정실패");
+			}
+			return "redirect:/";
+		}
 	
 }

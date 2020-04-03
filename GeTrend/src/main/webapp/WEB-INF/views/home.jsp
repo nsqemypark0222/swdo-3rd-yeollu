@@ -147,6 +147,10 @@
 			<c:when test="${sessionScope.loginemail != null}">
 				${sessionScope.loginname}님 환영합니다!<br/>
 				<a href="users/userUpdate">회원정보 수정</a>
+				<a href="users/userUpdate2">회원정보 수정2</a>
+				
+				
+				
 				<a href="users/logout">로그아웃</a>
 				<a href="users/kakaoshare">공유하기</a>
 				<a href="reply/replyForm">댓글달기</a>

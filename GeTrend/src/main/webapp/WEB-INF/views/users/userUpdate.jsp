@@ -20,18 +20,15 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 $(function(){
-	  $("#upload").change(function(){
-	   if(this.files && this.files[0]) {
-	    var reader = new FileReader;
-	    reader.onload = function(data) {
-	     $(".select_img img").attr("src", data.target.result).width(200);
-	    }
-	    reader.readAsDataURL(this.files[0]);
+	$("#upload").change(function() {
+		if(this.files && this.files[0]) {
+	    	var reader = new FileReader;
+	    	reader.onload = function(data) {
+	     		$(".select_img img").attr("src", data.target.result).width(200);
+	    	}
+	   	 	reader.readAsDataURL(this.files[0]);
 	   }
-	  });
-	})
-
-$(function(){
+	});
 	$("#cancel").click(function(){
 		$(location).attr('href',"<c:url value='/'/>");
 	});
@@ -44,56 +41,66 @@ $(function(){
 </script>
 </head>
 <body>
- <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">회원 수정</h5>
-             <form class="update" method="post" id="userUpdate">
-				<input type="file" id="upload" name="upload">
-					<div class="select_img"  style="text-align: left;">
-						<img src="" class="rounded-circle" id="upload" />
-					</div>
-					<c:if test="${sessionScope.user_email != null}">
-						<div class="select_img" class="rounded-circle" style="text-align: left;">
-							<img alt="file" style="width: 200px;"src="/img/${users}">
-						</div>
-					</c:if>
-						<input type="file" id="upload" name="upload" accept="image/gif, image/jpeg, image/png">
-					<div class="contaniner-fluid text-center bg-sub">	
-						<p>${users.user_name}</p>
-					</div>	
+	<div class="container">
+    	<div class="row">
+      		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        		<div class="card card-signin my-5">
+          			<div class="card-body">
+            			<h5 class="card-title text-center">회원 수정</h5>
+             			<form class="update" action="<c:url value='update'/>" method="post" id="updateForm" @submit="formCheck" >
+							<div class="select_img"  style="text-align: left;">
+								<img src="" class="rounded-circle" id="upload" />
+							</div>
+							
+							<c:if test="${sessionScope.user_email != null}">
+							<div class="select_img" class="rounded-circle" style="text-align: left;">
+								<img alt="file" style="width: 200px;"src="/img/${user}">
+							</div>
+							</c:if>
+							<input type="file" id="upload" name="upload" accept="image/gif, image/jpeg, image/png">
+							
+							<div class="contaniner-fluid text-center bg-sub">	
+								<p>${user.user_name}</p>
+							</div>	
 						
-		              <div class="form-label-group">
-		                <input type="email" id="user_email" class="form-control" value="${users.user_email}"  placeholder="user_email" readonly="readonly" required autofocus>
-		                <label for="user_email">이메일 </label>
-		              </div>
-		              <div class="form-label-group">
-		                <input type="password" id="user_pw" class="form-control" value="${users.user_pw}"placeholder="Password" v-model="user_pw" required>
-		                <label for="user_pw">Password</label>
-		              </div>
-		               <div class="form-label-group">
-		                <input type="password" id="pwCheck" class="form-control" placeholder="pwCheck" v-model="pwCheck" required>
-		                <label for="pwCheck">비밀번호 확인</label>
-		              </div>
-		              <div class="form-label-group">
-		                <input type="text" name="user_name" id="user_name" class="form-control" value="${users.user_name}" v-model="user_name" placeholder="user_name" required>
-		                <label for="user_name">닉네임 </label>
-		              </div>
+		              		<div class="form-label-group">
+		                		<input type="email" id="user_email" class="form-control" value="${user.user_email}"  placeholder="user_email" readonly="readonly" required autofocus>
+		                		<label for="user_email">이메일</label>
+		              		</div>
+		              		
+		              		<c:choose>
+		              			<c:when test="${user.user_type == 'NAVER' or user.user_type == 'KAKAO'}">
+		              				
+		              			</c:when>
+		              			<c:otherwise>
+		              				<div class="form-label-group">
+				                		<input type="password" id="user_pw" class="form-control" value="${user.user_pw}"placeholder="Password" v-model="user_pw" required>
+				                		<label for="user_pw">비밀번호</label>
+				              		</div>
+				              		
+				               		<div class="form-label-group">
+				                		<input type="password" id="pwCheck" class="form-control" placeholder="pwCheck" v-model="pwCheck" required>
+				                		<label for="pwCheck">비밀번호 확인</label>
+				              		</div>
+		              			</c:otherwise>
+		              		</c:choose>
+		              		
+		              		<div class="form-label-group">
+		                		<input type="text" name="user_name" id="user_name" class="form-control" value="${user.user_name}" v-model="user_name" placeholder="user_name" required>
+		                		<label for="user_name">닉네임 </label>
+		              		</div>
 		        
-		              <button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">Update Info</button>
-		              <button class="btn btn-lg btn-warning btn-block text-uppercase" type="reset">취소</button>
-		              <button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">회원탈퇴</button>
+		              		<button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">회원정보수정</button>
+		              		<button class="btn btn-lg btn-warning btn-block text-uppercase" type="reset">취소</button>
+		              		<button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">회원탈퇴</button>
 		
-		              <hr class="my-4">
-		          
-		        </form>
-		          </div>
-		        </div>
-		      </div>
-		    </div>
-</div>
+		              		<hr class="my-4">
+	          			</form>
+	          		</div>
+	        	</div>
+	      	</div>
+    	</div>
+	</div>
 </body>
 <script>
 /* function formCheck() {
@@ -115,15 +122,15 @@ $(function(){
 	return true;
 } */
 //Vue로 수정 user_pw, user_name,pwCheck 
- 	const userUpdate = new Vue({
-		el:'#userUpdate',
+ 	const updateForm = new Vue({
+		el:'#updateForm',
 		data:{
-			user_pw:'',
-			user_name:'',
-			pwCheck:''
+			user_pw: ${user.user_pw},
+			user_name: ${user.user_name},
+			pwCheck: ${user.user_pw}
 		},
 		methods:{
-			userUpdate(){
+			formCheck(){
 				this.Update = !this.Update;
 				if(!this.user_pw){
 					user_pw.focus();
@@ -140,7 +147,8 @@ $(function(){
 				if(this.user_pw != this.pwCheck){
 					alert("비밀번호가 일치하지 않습니다.");
 					return false;
-				}		
+				}
+				
 				return true;
 			}
 		}

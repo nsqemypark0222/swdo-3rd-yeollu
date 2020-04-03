@@ -28,6 +28,16 @@ set
 where
 	user_email =#{user_email}
 </update>
+
+<update id="updateSocialUser" parameterType="user">
+update
+	users
+set
+	user_name =#{user_name}
+where
+	user_email =#{user_email}
+</update>
+
 <delete id="deleteUser" parameterType="string">
 delete from
 	users

@@ -25,10 +25,6 @@ public class LikeController {
 	@Autowired
 	private LikeDAO likeDAO;
 		
-	@RequestMapping(value = "/likeForm", method = RequestMethod.GET)
-	public String likeForm() {
-		return "like_test";
-	}
 	
 	@RequestMapping(value = "/likeInsert", method = RequestMethod.POST)
 	@ResponseBody
@@ -48,25 +44,6 @@ public class LikeController {
 		logger.info("likeDelete cnt {}",cnt);
 	}
 	
-	@RequestMapping(value = "/likeSelectByEmail", method = RequestMethod.GET)
-	public String likeSelectAll(String user_email, Model model) {
-		logger.info("likeSelectByEmail");
-		logger.info("user_email {}",user_email);
-		ArrayList<LikeVO> list = likeDAO.likeSelectByEmail(user_email);
-		logger.info("likeSelectByEmail list {}",list);
-		model.addAttribute("list", list);
-		return "like_test";
-	}
-	
-	
-	@RequestMapping(value = "/likeSelectByStoreno", method = RequestMethod.GET)
-	public String likeSelectByStoreno(String store_no, Model model) {
-		logger.info("likeSelectByStoreno");
-		logger.info("store_no {}",store_no);
-		ArrayList<LikeVO> list = likeDAO.likeSelectByStoreno(store_no);
-		logger.info("likeSelectByStoreno list {}",list);
-		model.addAttribute("list", list);
-		return "like_test";
-	}
+
 
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
+import com.yeollu.getrend.util.PropertiesUtil;
 
 public class ProfileImageHandler {
 	
@@ -14,9 +15,9 @@ public class ProfileImageHandler {
 	
 	public ProfileImageHandler() {
 		cloudinary = new Cloudinary(ObjectUtils.asMap(
-				  "cloud_name", "dw5oh4ebf",
-				  "api_key", "634487884346878",
-				  "api_secret", "rLuJXODsUy7Kgmvxwv6iD9C367U"));
+				  "cloud_name", PropertiesUtil.get("image", "CLOUD_NAME"),
+				  "api_key", PropertiesUtil.get("image", "API_KEY"),
+				  "api_secret", PropertiesUtil.get("image", "API_SECRET")));
 	}
 	
 	public String upload() {

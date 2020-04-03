@@ -192,7 +192,6 @@ where
     s.store_no = m.store_no
     and s.store_no = l.store_no;
     
-
 select
     s.store_name, s.store_no, m.mango_time, m.mango_break_time, m.mango_holiday
 from
@@ -201,9 +200,7 @@ where
     s.store_no = m.store_no
     and m.mango_time is not null;
     
-
 select sysdate from dual;
 select mango_time from mango_stores;
 select to_char(sysdate, 'HH24') from dual;
 select to_char(sysdate, 'dy') from dual;
-

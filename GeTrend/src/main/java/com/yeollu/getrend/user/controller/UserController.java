@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yeollu.getrend.user.dao.FollowDAO;
 import com.yeollu.getrend.user.dao.UserDAO;
 import com.yeollu.getrend.user.util.MailService;
+import com.yeollu.getrend.user.vo.FollowVO;
 import com.yeollu.getrend.user.vo.UserVO;
 import com.yeollu.getrend.util.PropertiesUtil;
 
@@ -32,6 +34,7 @@ public class UserController {
 	
 	@Autowired
 	private UserDAO dao;
+	
 	
 	@Autowired
 	BCryptPasswordEncoder passEncoder;
@@ -259,10 +262,11 @@ public class UserController {
 	//회원정보 수정 페이지 이동
 	@RequestMapping(value="/userUpdate", method=RequestMethod.GET)
 	public String userUpdate(HttpSession session, Model model) {
+		logger.info("회원정보수정 페이지");
 		String user_email = (String)session.getAttribute("loginemail");
 		UserVO user = dao.selectEmail(user_email);
 		model.addAttribute("user", user);
-		logger.info("회원정보수정 페이지");
+		logger.info("{}",user);
 		logger.info("user_email {}",user_email);
 		return "/users/userUpdate";
 	}
@@ -289,8 +293,10 @@ public class UserController {
 	//회원탈퇴 
 	@RequestMapping(value="deleteUser", method=RequestMethod.GET)
 	public String deleteUser(String user_email, HttpSession session) {
+		
 		session.removeAttribute("loginemail");
 		session.removeAttribute("loginname");
+		
 		int cnt = dao.deleteUser(user_email);
 	
 		if(cnt> 0) {

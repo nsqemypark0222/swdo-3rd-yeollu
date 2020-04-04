@@ -38,7 +38,7 @@ $(function(){
 
 	var user_email = $("#user_email").val();
 	$("#UserDelete").click(function(){
-		$(location).attr('href',"DeleteUser?user_email="+user_email);	
+		$(location).attr('href',"DeleteUser?user_email="+ user_email);	
 	});
 });
 </script>
@@ -62,15 +62,15 @@ $(function(){
 					</c:if>
 						<input type="file" id="upload" name="upload" accept="image/gif, image/jpeg, image/png">
 					<div class="contaniner-fluid text-center bg-sub">	
-						<p>${users.user_name}</p>
+						<p>${user.user_name}</p>
 					</div>	
 						
 		              <div class="form-label-group">
-		                <input type="email" id="user_email" class="form-control" value="${users.user_email}"  placeholder="user_email" readonly="readonly" required autofocus>
+		                <input type="email" id="user_email" class="form-control" value="${user.user_email}"  placeholder="user_email" readonly="readonly" required autofocus>
 		                <label for="user_email">이메일 </label>
 		              </div>
 		              <div class="form-label-group">
-		                <input type="password" id="user_pw" class="form-control" value="${users.user_pw}"placeholder="Password" v-model="user_pw" required>
+		                <input type="password" id="user_pw" class="form-control" value="${user.user_pw}"placeholder="Password" v-model="user_pw" required>
 		                <label for="user_pw">Password</label>
 		              </div>
 		               <div class="form-label-group">
@@ -78,13 +78,13 @@ $(function(){
 		                <label for="pwCheck">비밀번호 확인</label>
 		              </div>
 		              <div class="form-label-group">
-		                <input type="text" name="user_name" id="user_name" class="form-control" value="${users.user_name}" v-model="user_name" placeholder="user_name" required>
+		                <input type="text" name="user_name" id="user_name" class="form-control" value="${user.user_name}" v-model="user_name" placeholder="user_name" required>
 		                <label for="user_name">닉네임 </label>
 		              </div>
 		        
 		              <button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">Update Info</button>
-		              <button class="btn btn-lg btn-warning btn-block text-uppercase" type="reset">취소</button>
-		              <button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">회원탈퇴</button>
+		              <button class="btn btn-lg btn-warning btn-block text-uppercase" id="cancel"type="reset">취소</button>
+		              <button class="btn btn-lg btn-warning btn-block text-uppercase" id="UserDelete" type="submit">회원탈퇴</button>
 		
 		              <hr class="my-4">
 		          

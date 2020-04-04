@@ -14,6 +14,9 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 <link href='<c:url value="/resources/css/header.css"/>' rel="stylesheet" media="all">
+<!-- 부트스트랩 아이콘 -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <title>Header</title>
 </head>	
 <body>
@@ -22,7 +25,7 @@
 		<div class="input-group">
 			<form class="form-inline" action="/">
 	 			<div class="col-md-9">
-    				<input class="form-control mr-sm-2" type="text" placeholder="Search">
+    				<input class="form-control mr-sm-2" type="text" placeholder="Search" >
     			</div>
     		</form>
             	<div class="menu_list">

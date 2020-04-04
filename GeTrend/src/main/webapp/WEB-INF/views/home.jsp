@@ -30,7 +30,9 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
-
+	<div class="column1"></div>
+	<!-- column-content시작 -->
+	<div class="column-content">
 	<!-- 지도와의 간격 div-->
 	<div id="space">
 	<!-- 카카오맵 -->
@@ -38,72 +40,187 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	<div id="map">
 	<!-- 지도 위의 버튼 1 음식 카테고리 -->
 	<div class="btn-modal">
-		<input type="button" class="btn btn-dark" id="category" data-toggle="modal" data-target="#myModal" value="Category Test">
+		<input type="button" class="btn btn-dark" id="category" data-toggle="modal" data-target="#myModal" value="category">
           <div class="modal fade" id="myModal">
            <div class="modal-dialog">
            <div class="modal-content">
 			<!-- 음식 카테고리 모달 헤더 -->
 			<div class="mol-header">
-		         <h4 class="modal-title">Category</h4>
+		         <h4 class="modal-title"> Category</h4>
 		           <button type="button" class="close" data-dismiss="modal">&times;</button>
 		     </div>
 		      <!--  음식 카테고리 모달 body -->
 		       <div class="modal-body">
-		           	소상공인 db 음식 종류
+		           	<h3>소상공인 db 음식 종류</h3>
+		           	<div class="form-check-inline">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio">한식
+					  </label>
+					</div>
+					<div class="form-check-inline">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio">양식
+					  </label>
+					</div>
+					<div class="form-check-inline disabled">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" >일식
+					  </label>
+					</div>
+					<div class="form-check-inline disabled">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" >디저트
+					  </label>
+					</div>
 		       </div>
-		        
 		     	<!-- 음식 카테고리 모달 footer -->
 		        <div class="modal-footer">
+		        <button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
 		        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
 		        </div>
     	 	</div>
     		</div>
     	 </div>
     	</div>
-    	<!-- 지도 위의 버튼 2 영업확인고리 -->
-    	  <input type="button" class="btn btn-warning" id="opentime" data-toggle="modal" data-target="#myModal" value="영업확인 Test" >
-          <div class="modal fade" id="myModal">
+    	
+    	<!-- 지도 위의 버튼 2 영업 확인 -->
+    	  <input type="button" class="btn btn-warning" id="opentime" data-toggle="modal" data-target="#myModal" value="영업확인 " >
+          <div class="modal fade" id="opentime">
            <div class="modal-dialog">
-           <div class="modal-content">
+           <div class="modal-content" id="opentime">
 				<!-- 영업확인  모달 헤더 -->
 			<div class="mol-header">
-		         <h4 class="modal-title">영업 확인</h4>
+		         <h4 class="modal-title"> 영업 확인</h4>
 		           <button type="button" class="close" data-dismiss="modal">&times;</button>
 		     </div>
 		      <!--  영업확인  모달 body -->
-		       <div class="modal-body">
-		          	식당 영업 요일별 확인 
+		       <div class="modal-body" id="opentime">
+		          	<p>식당 영업 요일별 확인</p>
+		          	<div class="form-check-inline">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio">월
+					  </label>
+					</div>
+					<div class="form-check-inline">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio">화
+					  </label>
+					</div>
+					<div class="form-check-inline disabled">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" >수
+					  </label>
+					</div>
+					<div class="form-check-inline disabled">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" >목
+					  </label>
+					</div>
+					<div class="form-check-inline disabled">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" >금
+					  </label>
+					</div>
+					<div class="form-check-inline disabled">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" >토
+					  </label>
+					</div>
+					<div class="form-check-inline disabled">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" >일
+					  </label>
+					</div>
 		       </div>
 		        
 		     	<!-- 영업확인 모달 footer -->
 		        <div class="modal-footer">
+		        <button type="button" class="btn btn-warning" data-dismiss="modal">확인</button>
 		        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
 		        </div>
 		        
     	 	</div>
     		</div>
     	 </div>
-    	 <button type="button"  class="btn btn-dark" onclick="selectOverlay('POLYGON')"
-    		 style="position: absolute; top: 88%; left:75%; z-index: 400;">
+    	 <button type="button"  class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')">
     	 범위 선택</button>
-    	<button type="button"  class="btn btn-warning" onclick="getDataFromDrawingMap()"
-    	style="position: absolute; top: 88%; left:88%; z-index: 400;">	
-    	조회 하기</button>    	 
+    	<button type="button"  class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
+    	조회 하기</button>  
+    	
+   			
+   		</div>  	 
 	</div>
-	</div> 
-  	<div class="">
+	
+</div>	
+
+  	<!-- <div class="">
 		<p>
 			<button type="button"  class="btn btn-warning" onclick="selectOverlay('POLYGON')">범위 선택</button>
 		</p>
-		
 		<p class="getdata"> 
 	   		<button type="button"  class="btn btn-outline-warning" onclick="getDataFromDrawingMap()">조회 하기</button>
 	   	</p>
-	   	
 	   	<div id="print">
-	   	
 	   	</div>
-   </div>	
+   </div> -->
+      	
+  		<!-- 추천 가게 리스트 출력 -->
+   		<div id="istoreList" class="istoreList">
+   		<ul class="list-group list-group-horizontal">
+   			<li class="list-group-item">
+   				<img src="resources/img/ok.jpg" alt="sampleTest" class="rounded float left" >
+   		   		<div class="istore1">
+   		   		<div class="overlay1">
+   				<div class="text" style="color:white;">동명동 추천 가게</div>
+  				</div>
+  				</div>
+   			</li>
+   		
+   			<li class="list-group-item">
+   				<div class="istore2">
+   				<img src="resources/img/ok.jpg" alt="sampleTest" class="rounded float left">
+   		   		 <div class="overlay2">
+   				<div class="text">양림동 추천 가게</div>
+  				</div>
+  				</div>
+   			</li>
+  	  		</ul>	
+  		</div>
+  		</div>		
+  
+	<!-- 사이드 컬럼  시작 -->
+   	<div class="column-side">
+   		<div id="istore" class="istore">
+   		<ul class="list-group list-group-horizontal">
+   			<li class="list-group-item">
+   				<img src="resources/img/firework.jpg" alt="sampleTest" class="rounded float-right" >
+   		   		<div class="istore1">
+   		   		<div class="overlay1">
+   				<div class="text" style="color:white;">오늘의 추천 가게</div>
+  				</div>
+  				</div>
+   			</li>
+   			<li class="list-group-item">
+   				<div class="istore2">
+   				<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right">
+   		   		 <div class="overlay2">
+   				<div class="text">내일의 추천 가게</div>
+  				</div>
+  				</div>
+   			</li>
+   				<li class="list-group-item">
+   				<div class="istore2">
+   				<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right">
+   		   		 <div class="overlay2">
+   				<div class="text">이번주 추천 가게</div>
+  				</div>
+  				</div>
+   			</li>
+  	  		</ul>	
+  		</div>
+  	</div>
+
+   						
 
    	<div id="desc">
    	
@@ -143,14 +260,8 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
    			</tr>
    		</table>
    	</div>
-   	
-   	<div id="imageContainer">
-   	
-   	</div>
 
-   	
 
-   	
    	<div>
 		<c:choose>
 			<c:when test="${sessionScope.loginemail != null}">
@@ -169,17 +280,16 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			</c:otherwise>
 		</c:choose>	
 	</div>
-	
+
 	
 	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
 	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
+	<a href="users/follow">follow</a>
 
-	</div>
 
 	
-	<a href="users/follow">follow</a>
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>

@@ -45,8 +45,7 @@ $(function(){
                 <div class="custom-control custom-checkbox mb-3">
                   <input type="checkbox" class="custom-control-input" id="remember" name="remember" v-model="remember" value="1">
                   <label class="custom-control-label" for="remember">Remember E-mail</label>
-                  <a href="userJoin" style="padding-left: 50%;">회원가입</a>
-                  
+                  <a href="userJoin" style="padding-left: 50%;">회원가입</a>     
                 </div>
                 
                 <button class="btn btn-lg btn-warning btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" id="login">Sign in</button>

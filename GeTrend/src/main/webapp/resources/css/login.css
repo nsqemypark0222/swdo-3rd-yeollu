@@ -167,10 +167,22 @@ table {
 #kakaoIdLogin {
 	float: left;
 	margin-right: 1px;	
+	width:226px;
 }
 #naverIdLogin {
-	float: left;	
+	float: left;
+	width:226px;	
 }
-#socialbtn img{
-	width: 228px;
+
+@media (max-width: 767px) {
+	#kakaoIdLogin {
+	float: left;
+	margin-right:1px;	
+	width: 226px;
+	}
+	#naverIdLogin {
+		float: left;	
+		width: 226px;
+	}
+	
 }

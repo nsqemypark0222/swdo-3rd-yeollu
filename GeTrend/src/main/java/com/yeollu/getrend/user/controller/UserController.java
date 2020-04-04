@@ -275,20 +275,36 @@ public class UserController {
 	}
 	//회원정보 수정
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(UserVO user){
+	public String update(UserVO user, HttpSession session, MultipartFile userAvatar){
+		logger.info("회원정보 수정 시작");
+		if(!userAvatar.isEmpty()) {
+			logger.info("유저 아바타 있음");
+			logger.info("{}", userAvatar.getOriginalFilename());
+			String url = ProfileImageHandler.requestUpload(userAvatar);
+			logger.info("{}", url);
+			user.setUser_profile(url);
+		} else {
+			logger.info("유저 아바타 없음");
+		}
 		logger.info("{}", user);
 		
-		String inputPw = user.getUser_pw();
 		
-		String pw = passEncoder.encode(inputPw);
-		user.setUser_pw(pw);
-		logger.info(inputPw);
-		logger.info(pw);
+		int cnt = 0;
+		if(user.getUser_type().equals("LOCAL")) {
+			String inputPw = user.getUser_pw();
+			String pw = passEncoder.encode(inputPw);
+			user.setUser_pw(pw);
+			logger.info(inputPw);
+			logger.info(pw);
+			cnt = dao.updateUser(user);
+		} else {
+			cnt = dao.updateSocialUser(user);
+		}
 		
-		int cnt = dao.updateUser(user);
 		logger.info("{}",cnt);
 		if(cnt>0) {
 			logger.info("수정성공");
+			session.setAttribute("loginname", user.getUser_name());
 		}else {
 			logger.info("수정실패");
 		}
@@ -310,63 +326,5 @@ public class UserController {
 		}
 		return "redirect:/";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//회원정보 수정 페이지 이동
-		@RequestMapping(value="/userUpdate2", method=RequestMethod.GET)
-		public String userUpdate2(HttpSession session, Model model) {
-			logger.info("회원정보수정 페이지");
-			String user_email = (String)session.getAttribute("loginemail");
-			logger.info("user_email : {}", user_email);
-			UserVO user = dao.selectEmail(user_email);
-			logger.info("user : {}", user);
-
-			model.addAttribute("user", user);
-			return "/users/userUpdate2";
-		}
-		//회원정보 수정
-		@RequestMapping(value="/update2", method=RequestMethod.POST)
-		public String update2(UserVO user, HttpSession session, MultipartFile userAvatar){
-			logger.info("회원정보 수정 시작");
-			if(!userAvatar.isEmpty()) {
-				logger.info("유저 아바타 있음");
-				logger.info("{}", userAvatar.getOriginalFilename());
-				String url = ProfileImageHandler.requestUpload(userAvatar);
-				logger.info("{}", url);
-				user.setUser_profile(url);
-			} else {
-				logger.info("유저 아바타 없음");
-			}
-			logger.info("{}", user);
-			
-			
-			int cnt = 0;
-			if(user.getUser_type().equals("LOCAL")) {
-				String inputPw = user.getUser_pw();
-				String pw = passEncoder.encode(inputPw);
-				user.setUser_pw(pw);
-				logger.info(inputPw);
-				logger.info(pw);
-				cnt = dao.updateUser(user);
-			} else {
-				cnt = dao.updateSocialUser(user);
-			}
-			
-			logger.info("{}",cnt);
-			if(cnt>0) {
-				logger.info("수정성공");
-				session.setAttribute("loginname", user.getUser_name());
-			}else {
-				logger.info("수정실패");
-			}
-			return "redirect:/";
-		}
 	
 }

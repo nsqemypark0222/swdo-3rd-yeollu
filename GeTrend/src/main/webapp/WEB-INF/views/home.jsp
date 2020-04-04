@@ -272,7 +272,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			<c:when test="${sessionScope.loginemail != null}">
 				${sessionScope.loginname}님 환영합니다!<br/>
 				<a href="users/userUpdate">회원정보 수정</a>
-				<a href="users/userUpdate2">회원정보 수정2</a>
 				
 				
 				

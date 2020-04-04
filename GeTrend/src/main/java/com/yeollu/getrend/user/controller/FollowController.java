@@ -1,5 +1,6 @@
 package com.yeollu.getrend.user.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -30,7 +31,7 @@ public class FollowController {
 	//follow
 	@RequestMapping(value = "/insertFollow", method = RequestMethod.POST)
 	@ResponseBody
-	public void follow(FollowVO follow, HttpSession session) {
+	public int follow(FollowVO follow, HttpSession session) {
 		logger.info("insertFollow");
 		String user_email = (String)session.getAttribute("loginemail");
 		logger.info(user_email);
@@ -38,11 +39,14 @@ public class FollowController {
 		logger.info("{}",follow);
 		int cnt = dao.insertFollow(follow);
 		logger.info("{}",cnt);
+		//페이지 주인을 구독한 사람 수
+		int countFollower = dao.countFollower(follow.getFollows_following());
+		return countFollower;
 	}
 	//follow 취소
 	@RequestMapping(value = "/deleteFollow", method = RequestMethod.POST)
 	@ResponseBody
-	public void deleteFollow(FollowVO follow,HttpSession session) {
+	public int deleteFollow(FollowVO follow,HttpSession session) {
 		logger.info("deleteFollow");
 		String user_email = (String)session.getAttribute("loginemail");
 		logger.info(user_email);
@@ -50,6 +54,11 @@ public class FollowController {
 		logger.info("{}",follow);
 		int cnt = dao.deleteFollow(follow);
 		logger.info("{}",cnt);
+		//페이지 주인을 구독한 사람 수
+		int countFollower = dao.countFollower(follow.getFollows_following());
+		return countFollower;
 	}
+	
+
 	
 }

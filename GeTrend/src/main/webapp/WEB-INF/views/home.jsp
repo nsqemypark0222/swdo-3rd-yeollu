@@ -15,6 +15,9 @@
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@api['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
+
+
+<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <!-- jQuery library -->
@@ -256,7 +259,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
    				<th>mango_time</th>
    				<th>mango_break_time</th>
    				<th>mango_last_order</th>
-   				<th>mango_indate</th>
+   				<th>mango_holiday</th>
    			</tr>
    		</table>
    	</div>
@@ -267,10 +270,14 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			<c:when test="${sessionScope.loginemail != null}">
 				${sessionScope.loginname}님 환영합니다!<br/>
 				<a href="users/userUpdate">회원정보 수정</a>
+				<a href="users/userUpdate2">회원정보 수정2</a>
+				
+				
+				
 				<a href="users/logout">로그아웃</a>
 				<a href="users/kakaoshare">공유하기</a>
 				<a href="reply/replyForm">댓글달기</a>
-				
+				<a href="<c:url value='/mypage/mypageForm'/>">팔로우, 댓글, 좋아요 테스트</a>	
 			</c:when>
 			<c:otherwise>
 				<a href="users/userJoin">회원가입</a>
@@ -287,6 +294,12 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
 	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
 	<a href="users/follow">follow</a>
+	
+
+	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
+	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
+	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
+	<a href="<c:url value='/users/follow'/>">follow</a>
 
 
 	
@@ -297,10 +310,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <script type="text/javascript">
 		$(function() {
 
-
-			
 			function search(points) {
-
 				$.ajax({
 					url: "<c:url value='/search' />",
 					type: "post",
@@ -354,13 +364,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			}
 			searchFunc = search;
 
-			$("#naturalLanguageProcessing").click(function(){
-				location.href="<c:url value='/naturalLanguageProcessing'/>";
-			});
-
-			$("#naverTest").click(function(){
-				location.href="<c:url value='/naverTest'/>";
-			});
+			
 		});
 
 		function search(points) {
@@ -380,6 +384,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 
 		
 		const printMarker = (result) => {
+			
 			// 마커를 표시할 위치와 title 객체 배열입니다
 			let positions = [];
 			
@@ -408,7 +413,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				// 마커 이미지를 생성합니다    
 			    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
 
-			 // 마커를 생성합니다
+			 	// 마커를 생성합니다
 			    const marker = new kakao.maps.Marker({
 			        map: map, // 마커를 표시할 지도
 			        position: positions[i].latlng, // 마커를 표시할 위치
@@ -417,11 +422,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			    });
 			}
 		};
-
-
-
-		
-
 
 		const options = {
 		        // Drawing Manager를 생성할 때 사용할 옵션입니다
@@ -474,6 +474,16 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	        const printContainer = document.getElementById("print");
 	        printContainer.innerHTML = row;
 			search(points);
+	   };
+
+	   const setCenter = (lat, lng) => {
+		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
+		   map.setCenter(moveLatLng);
+	   };
+
+	   const panTo = (lat, lng) => {
+		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
+		   map.panTo(moveLatLng);
 	   };
 		
 </script>

@@ -166,8 +166,8 @@ table {
 }
 #kakaoIdLogin {
 	float: left;
-	margin-right: 1px;	
 	width:226px;
+	margin-right: 5px;	
 }
 #naverIdLogin {
 	float: left;
@@ -185,4 +185,11 @@ table {
 		width: 226px;
 	}
 	
+}
+#linkjoin{
+	float:right;
+}
+#login{
+	background-color:#ffc107;
+	border-color:#ffc107;
 }

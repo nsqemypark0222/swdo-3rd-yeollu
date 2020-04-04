@@ -1,3 +1,4 @@
+drop sequence seq_insta_replys;
 drop sequence seq_searched_stores;
 drop table searched_stores;
 drop table insta_locations;
@@ -9,6 +10,7 @@ drop table users;
 drop table stores;
 --drop table stores cascade constraints;
 drop table insta_replys;
+
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -87,6 +89,8 @@ create table likes (
     , constraint fk2_likes foreign key (store_no) references stores(store_no)
 );
 
+create sequence seq_insta_replys;
+
 create table insta_replys(
 reply_no 		number 	primary key 
 ,store_no 	varchar2(200)
@@ -97,7 +101,9 @@ reply_no 		number 	primary key
 ,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
 );
 
+
 commit;
+
 
 
 
@@ -119,6 +125,7 @@ select count(*) from insta_locations;
 select * from searched_stores;
 select * from mango_stores order by store_no asc;
 select count(*) from mango_stores; 
+select * from follows;
 --------------------------------------------------------------------------------------------------------------------------------
 select
     s.store_no
@@ -178,3 +185,23 @@ where
     s.store_no = m.store_no
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
+select
+    s.store_name, s.store_no, m.mango_time, m.mango_break_time
+from
+    stores s, mango_stores m, insta_locations l
+where
+    s.store_no = m.store_no
+    and s.store_no = l.store_no;
+    
+select
+    s.store_name, s.store_no, m.mango_time, m.mango_break_time, m.mango_holiday
+from
+    stores s, mango_stores m
+where
+    s.store_no = m.store_no
+    and m.mango_time is not null;
+    
+select sysdate from dual;
+select mango_time from mango_stores;
+select to_char(sysdate, 'HH24') from dual;
+select to_char(sysdate, 'dy') from dual;

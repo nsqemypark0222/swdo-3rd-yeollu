@@ -120,6 +120,10 @@ public class instagram_Selenium_location_post3 {
 	        		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".qn-0x")));
 	        		String like = driver.findElement(By.cssSelector(".qn-0x")).getText().split("\n")[0];
 	        		
+	        		if(like.contains("천")) {
+	        			int idx = like.indexOf("천");
+	        			like = like.substring(0, idx);
+	        		}
 	        		if(like != null && !like.equals("")) {
 	        			System.out.println(j + 1 + "번 like : " + like);	
 	        			likeList.add(like);

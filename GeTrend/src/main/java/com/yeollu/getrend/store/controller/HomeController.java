@@ -1,12 +1,8 @@
 package com.yeollu.getrend.store.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.yeollu.getrend.crawler.CrawlerExecutor;
-import com.yeollu.getrend.crawler.instagram_Selenium_location_post2;
-import com.yeollu.getrend.crawler.instagram_Selenium_location_post3;
-import com.yeollu.getrend.crawler.mango_store_info;
-import com.yeollu.getrend.crawler.mango_store_info2;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
@@ -37,6 +28,7 @@ import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.MangoStoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
+import com.yeollu.getrend.user.util.ProfileImageHandler;
 
 @Controller
 public class HomeController {
@@ -58,11 +50,12 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
+//		new ProfileImageHandler().upload();
+		
+		
 		
 		return "home";
 	}
-	
-
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
@@ -144,7 +137,7 @@ public class HomeController {
 		for(CrawlerExecutor crawlerExecutor : crawlerExecutorList) {
 			instaImageList.add(crawlerExecutor.getInstaImage());
 		}
-		
+		CrawlerExecutor.killChromeDriver();
 		
 //		View로 보낼 최종 객체 리스트
 		ArrayList<InstaStoreInfoVO> instaStoreInfoList = new ArrayList<InstaStoreInfoVO>();
@@ -171,25 +164,8 @@ public class HomeController {
 		long diff = (endTime - startTime) / 1000;
 		logger.info("걸린 시간 : {}", diff);
 		
-		try {
-			Runtime.getRuntime().exec("taskkill /f /im chromedriver.exe /t");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		return instaStoreInfoList;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

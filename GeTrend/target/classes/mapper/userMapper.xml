@@ -25,6 +25,7 @@ update
 set
 	user_pw =#{user_pw}
 	,user_name =#{user_name}
+	,user_profile =#{user_profile}
 where
 	user_email =#{user_email}
 </update>
@@ -34,6 +35,7 @@ update
 	users
 set
 	user_name =#{user_name}
+	,user_profile =#{user_profile}
 where
 	user_email =#{user_email}
 </update>

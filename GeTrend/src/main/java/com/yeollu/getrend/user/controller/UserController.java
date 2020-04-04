@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yeollu.getrend.user.dao.FollowDAO;
 import com.yeollu.getrend.user.dao.UserDAO;
+import com.yeollu.getrend.user.util.FileService;
 import com.yeollu.getrend.user.util.MailService;
+import com.yeollu.getrend.user.util.ProfileImageHandler;
 import com.yeollu.getrend.user.vo.FollowVO;
 import com.yeollu.getrend.user.vo.UserVO;
 import com.yeollu.getrend.util.PropertiesUtil;
@@ -330,7 +333,17 @@ public class UserController {
 		}
 		//회원정보 수정
 		@RequestMapping(value="/update2", method=RequestMethod.POST)
-		public String update2(UserVO user, HttpSession session){
+		public String update2(UserVO user, HttpSession session, MultipartFile userAvatar){
+			logger.info("회원정보 수정 시작");
+			if(!userAvatar.isEmpty()) {
+				logger.info("유저 아바타 있음");
+				logger.info("{}", userAvatar.getOriginalFilename());
+				String url = ProfileImageHandler.requestUpload(userAvatar);
+				logger.info("{}", url);
+				user.setUser_profile(url);
+			} else {
+				logger.info("유저 아바타 없음");
+			}
 			logger.info("{}", user);
 			
 			

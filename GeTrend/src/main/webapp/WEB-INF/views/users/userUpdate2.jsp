@@ -31,10 +31,29 @@
              					action="<c:url value='update2'/>" 
              					id="updateForm" 
              					method="post"
-             					v-on:submit="updateUser" >
+             					v-on:submit="updateUser"
+             					enctype="multipart/form-data" >
              				
              				<div class="contaniner-fluid text-center bg-sub">	
 								<p>${user.user_name}</p>
+							</div>
+							
+							<c:choose>
+								<c:when test="${user.user_profile == null}">
+									<div class="form-label-group">
+										<img class="img-thumbnail rounded-circle" id="avatarPreview" alt="" />
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="form-label-group">
+										<img class="img-thumbnail rounded-circle" id="avatarPreview" src="${user.user_profile}" />
+									</div>
+								</c:otherwise>
+							</c:choose>
+							
+							<div class="form-label-group custom-file">
+								<input class="custom-file-input" type="file" id="userAvatar" name="userAvatar" />
+								<label class="custom-file-label" for="userAvatar">Choose your avatar file...</label>
 							</div>
 							
 							<div class="form-label-group">
@@ -109,6 +128,23 @@ $(function(){
 
 	$("#userDelete").click(function() {
 		$(location).attr('href', "<c:url value='deleteUser'/>" + "?user_email=" + $("#user_email").val());
+	});
+
+	$("#userAvatar").change(function(event) {
+		var files = event.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(file) {
+				if(!file.type.match("image.*")) {
+					alert("확장자는 이미지 확장자만 가능합니다");
+					return;
+				};
+			var reader = new FileReader();
+			reader.onload = function(event) {
+				$("#avatarPreview").attr("src", event.target.result);
+			};
+			reader.readAsDataURL(file);
+		});
 	});
 });
 </script>

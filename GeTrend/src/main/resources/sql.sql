@@ -205,3 +205,8 @@ select sysdate from dual;
 select mango_time from mango_stores;
 select to_char(sysdate, 'HH24') from dual;
 select to_char(sysdate, 'dy') from dual;
+
+select
+    distinct store_cate1
+from
+    stores;

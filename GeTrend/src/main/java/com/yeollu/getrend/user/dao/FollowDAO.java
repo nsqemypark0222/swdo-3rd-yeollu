@@ -62,7 +62,6 @@ public class FollowDAO {
 			e.printStackTrace();
 		}
 		return cnt;
-		}
 	}
 	
 	
@@ -87,4 +86,5 @@ public class FollowDAO {
 		}
 		return list;
 	}
+}
 

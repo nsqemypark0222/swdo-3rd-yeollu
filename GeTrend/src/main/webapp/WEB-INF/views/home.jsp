@@ -24,6 +24,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'>
+<link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
 </head>
 <body>
 
@@ -146,14 +147,15 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     	 범위 선택</button>
     	<button type="button"  class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
     	조회 하기</button>  
-    	
-   			
    		</div>  	 
 	</div>
-	
 </div>	
-
-  	<!-- <div class="">
+		<!-- 로딩이미지 -->
+    	<div class="wrap-loading display-none">
+    		<div><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" /></div>
+		</div>
+		
+   <div class="">
 		<p>
 			<button type="button"  class="btn btn-warning" onclick="selectOverlay('POLYGON')">범위 선택</button>
 		</p>
@@ -162,7 +164,10 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	   	</p>
 	   	<div id="print">
 	   	</div>
-   </div> -->
+   </div> 
+      	
+      	
+     
       	
   		<!-- 추천 가게 리스트 출력 -->
    		<div id="istoreList" class="istoreList">
@@ -305,8 +310,8 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	</footer>
 
 <script type="text/javascript">
-		$(function() {
 
+		$(function() {
 			function search(points) {
 				$.ajax({
 					url: "<c:url value='/search' />",
@@ -314,6 +319,12 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify(points),
 					dataType: "json",
+					beforeSend:function(){
+						$('.wrap-loading').removeClass('display-none');
+					},
+					complete:function(){
+						$('.wrap-loading').addClass('display-none');
+					},
 					success: function(result) {
 						alert("성공");
 						printMarker(result);

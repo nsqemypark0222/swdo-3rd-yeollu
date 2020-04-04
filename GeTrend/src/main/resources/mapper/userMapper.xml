@@ -25,9 +25,21 @@ update
 set
 	user_pw =#{user_pw}
 	,user_name =#{user_name}
+	,user_profile =#{user_profile}
 where
 	user_email =#{user_email}
 </update>
+
+<update id="updateSocialUser" parameterType="user">
+update
+	users
+set
+	user_name =#{user_name}
+	,user_profile =#{user_profile}
+where
+	user_email =#{user_email}
+</update>
+
 <delete id="deleteUser" parameterType="string">
 delete from
 	users

@@ -88,6 +88,7 @@ public class MypageController {
 				int likeCheck = likeDAO.likeSelectByEmailStoreno(like);
 				if(likeCheck == 1) hashMap.put("LIKE", true);
 				else hashMap.put("LIKE", false);
+				
 			}
 			model.addAttribute("replyList",replyList);	
 			
@@ -100,7 +101,6 @@ public class MypageController {
 			model.addAttribute("follow", followDAO.countFollow(user.getUser_email()));
 			model.addAttribute("follower", followDAO.countFollower(user.getUser_email()));
 			ArrayList<HashMap<String, Object>> replyList = replyDAO.replyListByEmail(user.getUser_email());
-	
 			//좋아요한 가게인지 확인
 			for (HashMap<String, Object> hashMap : replyList) {
 				LikeVO like = new LikeVO();
@@ -109,6 +109,8 @@ public class MypageController {
 				int likeCheck = likeDAO.likeSelectByEmailStoreno(like);
 				if(likeCheck == 1) hashMap.put("LIKE", true);
 				else hashMap.put("LIKE", false);
+				
+
 			}
 			model.addAttribute("replyList",replyList);
 			
@@ -212,6 +214,7 @@ public class MypageController {
 				int likeCheck = likeDAO.likeSelectByEmailStoreno(like);
 				if(likeCheck == 1) hashMap.put("LIKE", true);
 				else hashMap.put("LIKE", false);
+			
 			}
 			model.addAttribute("replyList",replyList);	
 			logger.info("mypageLikedStore replyList {}",replyList);
@@ -233,6 +236,7 @@ public class MypageController {
 				int likeCheck = likeDAO.likeSelectByEmailStoreno(like);
 				if(likeCheck == 1) hashMap.put("LIKE", true);
 				else hashMap.put("LIKE", false);
+				
 			}
 			model.addAttribute("replyList",replyList);
 			logger.info("replyList {}",replyList);
@@ -263,6 +267,15 @@ public class MypageController {
 		model.addAttribute("follow", followDAO.countFollow(user_email));
 		model.addAttribute("follower", followDAO.countFollower(user_email));
 		ArrayList<HashMap<String, Object>> replyList = replyDAO.replyListByEmail(user_email);
+		//좋아요한 가게인지 확인
+		for (HashMap<String, Object> hashMap : replyList) {
+			LikeVO like = new LikeVO();
+			like.setStore_no((String)hashMap.get("STORE_NO"));
+			like.setUser_email((String)hashMap.get("USER_EMAIL"));
+			int likeCheck = likeDAO.likeSelectByEmailStoreno(like);
+			if(likeCheck == 1) hashMap.put("LIKE", true);
+			else hashMap.put("LIKE", false);
+		}		
 		model.addAttribute("replyList",replyList);	
 	
 		return "mypage/mypage";

@@ -31,7 +31,7 @@ public class CrawlController {
 	private StoreDAO storeDAO;
 	
 	@Autowired
-	private MangoStoreDAO mangoStoreInfoDAO;
+	private MangoStoreDAO mangoStoreDAO;
 
 	@RequestMapping(value = "/crawlForm", method = RequestMethod.GET)
 	public String crawlForm() {
@@ -55,7 +55,8 @@ public class CrawlController {
 	public String mango_plate_crawl() {
 		long startTime = System.currentTimeMillis();
 		
-		ArrayList<StoreVO> __list = storeDAO.selectAllStores();
+		
+//		ArrayList<StoreVO> __list = storeDAO.selectAllStores();
 //		int i = 0;
 //		for(StoreVO store : __list) {
 //			try {
@@ -83,55 +84,55 @@ public class CrawlController {
 //			
 //			logger.info("i : " + i);
 //		}
-		ArrayList<StoreVO> _list = new ArrayList<StoreVO>(__list.subList(0, __list.size()));
-		logger.info("총 사이즈 : {}", __list.size());
-		
-		for(int i = 0; i < _list.size(); i += 5) {
-			logger.info("{}", i);
-			logger.info("{}", i + 5);
-			
-			ArrayList<StoreVO> list = new ArrayList<StoreVO>(_list.subList(i, i + 5));
-			ArrayList<MangoStoreVO> mangoStoreList = new ArrayList<MangoStoreVO>();
-			ArrayList<CrawlerExecutorForMango> crawlerExecutorForMangoList = new ArrayList<CrawlerExecutorForMango>();
-			
-			for(StoreVO store : list) {
-				try {
-					CrawlerExecutorForMango crawlerExecutorForMango = new CrawlerExecutorForMango();
-					crawlerExecutorForMango.setStore(store);
-					new Thread(crawlerExecutorForMango, "crawling : " + store.getStore_name()).start();
-					crawlerExecutorForMangoList.add(crawlerExecutorForMango);
-				} catch (Exception e) {
-					continue;
-				}
-			}
-			for(CrawlerExecutorForMango crawlerExecutorForMango : crawlerExecutorForMangoList) {
-				mangoStoreList.add(crawlerExecutorForMango.getMangoStore());
-			}
-			for(MangoStoreVO mangoStore : mangoStoreList) {
-				try {
-					logger.info("{}", mangoStore.getStore_no());
-					int cnt = mangoStoreInfoDAO.insertMangoStore(mangoStore);
-					if(cnt > 0) {
-						logger.info("추가 성공");
-					} else {
-						logger.info("추가 실패");
-					}
-				} catch (Exception e) {
-					continue;
-				}
-			}
-			try {
-				Thread.sleep(10000);
-				Runtime.getRuntime().exec("taskkill /f /im chromedriver.exe /t");
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//		ArrayList<StoreVO> _list = new ArrayList<StoreVO>(__list.subList(0, __list.size()));
+//		logger.info("총 사이즈 : {}", __list.size());
+//		
+//		for(int i = 0; i < _list.size(); i += 5) {
+//			logger.info("{}", i);
+//			logger.info("{}", i + 5);
+//			
+//			ArrayList<StoreVO> list = new ArrayList<StoreVO>(_list.subList(i, i + 5));
+//			ArrayList<MangoStoreVO> mangoStoreList = new ArrayList<MangoStoreVO>();
+//			ArrayList<CrawlerExecutorForMango> crawlerExecutorForMangoList = new ArrayList<CrawlerExecutorForMango>();
+//			
+//			for(StoreVO store : list) {
+//				try {
+//					CrawlerExecutorForMango crawlerExecutorForMango = new CrawlerExecutorForMango();
+//					crawlerExecutorForMango.setStore(store);
+//					new Thread(crawlerExecutorForMango, "crawling : " + store.getStore_name()).start();
+//					crawlerExecutorForMangoList.add(crawlerExecutorForMango);
+//				} catch (Exception e) {
+//					continue;
+//				}
+//			}
+//			for(CrawlerExecutorForMango crawlerExecutorForMango : crawlerExecutorForMangoList) {
+//				mangoStoreList.add(crawlerExecutorForMango.getMangoStore());
+//			}
+//			for(MangoStoreVO mangoStore : mangoStoreList) {
+//				try {
+//					logger.info("{}", mangoStore.getStore_no());
+//					int cnt = mangoStoreInfoDAO.insertMangoStore(mangoStore);
+//					if(cnt > 0) {
+//						logger.info("추가 성공");
+//					} else {
+//						logger.info("추가 실패");
+//					}
+//				} catch (Exception e) {
+//					continue;
+//				}
+//			}
+//			try {
+//				Thread.sleep(10000);
+//				Runtime.getRuntime().exec("taskkill /f /im chromedriver.exe /t");
+//				Thread.sleep(5000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 		
 		
 		long endTime = System.currentTimeMillis();

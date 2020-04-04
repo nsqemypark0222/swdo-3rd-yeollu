@@ -11,6 +11,7 @@ drop table stores;
 --drop table stores cascade constraints;
 drop table insta_replys;
 
+
 create table users(
     user_email              varchar2(50)            primary key
     , user_pw               varchar2(200)           not null
@@ -18,6 +19,7 @@ create table users(
     , user_type             varchar2(10)
     , user_profile          varchar2(1000)
 );
+insert into users(user_email,user_pw,user_name)values('wldus9656@gmail.com','moon','moon');
 
 
 
@@ -98,8 +100,6 @@ reply_no 		number 	primary key
 ,reply_indate	 date default sysdate
 ,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
 );
-
-
 
 
 commit;
@@ -186,15 +186,22 @@ where
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
 select
-    m.mango_time, m.mango_break_time
+    s.store_name, s.store_no, m.mango_time, m.mango_break_time
 from
     stores s, mango_stores m, insta_locations l
 where
     s.store_no = m.store_no
     and s.store_no = l.store_no;
     
+select
+    s.store_name, s.store_no, m.mango_time, m.mango_break_time, m.mango_holiday
+from
+    stores s, mango_stores m
+where
+    s.store_no = m.store_no
+    and m.mango_time is not null;
+    
 select sysdate from dual;
 select mango_time from mango_stores;
 select to_char(sysdate, 'HH24') from dual;
 select to_char(sysdate, 'dy') from dual;
-

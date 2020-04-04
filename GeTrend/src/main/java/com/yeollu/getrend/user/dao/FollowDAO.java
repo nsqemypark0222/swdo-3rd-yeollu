@@ -62,7 +62,6 @@ public class FollowDAO {
 			e.printStackTrace();
 		}
 		return cnt;
-
 	}
 	
 	
@@ -76,6 +75,7 @@ public class FollowDAO {
 		}
 		return list;
 	}
+	
 	public ArrayList<HashMap<String, Object>> selectFollower(String follows_following){
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		try {
@@ -87,3 +87,4 @@ public class FollowDAO {
 		return list;
 	}
 }
+

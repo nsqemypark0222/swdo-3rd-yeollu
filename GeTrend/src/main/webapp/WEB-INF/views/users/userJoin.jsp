@@ -22,7 +22,6 @@
 <script>
 
 $(function(){
-	
 	$("#cancel").click(function(){
 		location.href="<c:url value='/'/>";
 	});

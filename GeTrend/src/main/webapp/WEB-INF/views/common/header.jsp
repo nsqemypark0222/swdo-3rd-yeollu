@@ -16,6 +16,10 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 <link href='<c:url value="/resources/css/header.css"/>' rel="stylesheet" media="all">
+<<<<<<< HEAD
+<!-- 부트스트랩 아이콘 -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -25,16 +29,11 @@
 	.ui-autocomplete .highlight {color: orange;}
 </style>
 
-
 <title>Header</title>
 </head>	
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-   		<a class="navbar-brand" id="navbar-brand"  href="<c:url value='/'/>" >GeTrend</a>
-		<div class="input-group">
-			<form class="form-inline" >
-	 			<div class="col-md-9">
+	
     				<input class="form-control mr-sm-2" type="text" id="searchInput" name="searchInput" placeholder="Search">
     			</div>
     		</form>
@@ -165,6 +164,5 @@
 	    });
 	});
 </script>
-
 </body>
 </html>

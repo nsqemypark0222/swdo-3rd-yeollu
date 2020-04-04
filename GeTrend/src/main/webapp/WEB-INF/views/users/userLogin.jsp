@@ -12,6 +12,7 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 $(function(){
 	$("#cancel").click(function(){
@@ -131,4 +132,34 @@ $(function(){
 	
 
 </body>
+<script>
+const userLogin = new Vue({
+	el:'#userLogin',
+	data:{
+		Login:false,
+		user_email:'',
+		user_pw:'',
+		remember:false
+	},
+	methods:{
+		userLogin(){
+			this.Login = !this.Login;
+			if(!this.user_email){
+				user_email.focus();
+				return false;
+			}else if(!this.validEmail(this.user_email)){
+				return false;
+			}
+			if(!this.user_pw){
+				return false;
+			}
+		},
+		validEmail: function(user_email){
+			var re =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(user_email);
+		}	
+	}
+});
+
+</script>
 </html>

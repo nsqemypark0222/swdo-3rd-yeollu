@@ -19,6 +19,7 @@ create table users(
     , user_type             varchar2(10)
     , user_profile          varchar2(1000)
 );
+insert into users(user_email,user_pw,user_name)values('wldus9656@gmail.com','moon','moon');
 
 
 

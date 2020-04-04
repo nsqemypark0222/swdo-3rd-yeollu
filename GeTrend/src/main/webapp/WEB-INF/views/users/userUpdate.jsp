@@ -35,7 +35,11 @@ $(function(){
 
 	var user_email = $("#user_email").val();
 	$("#UserDelete").click(function(){
+<<<<<<< HEAD
+		$(location).attr('href',"DeleteUser?user_email="+ user_email);	
+=======
 		$(location).attr('href',"deleteUser?user_email="+user_email);	
+>>>>>>> 884bb3b642b5f10a3f31cde73728f9b0bac6ff50
 	});
 });
 </script>
@@ -68,7 +72,11 @@ $(function(){
 		                <label for="user_email">이메일 </label>
 		              </div>
 		              <div class="form-label-group">
+<<<<<<< HEAD
+		                <input type="password" id="user_pw" class="form-control" value="${user.user_pw}"placeholder="Password" v-model="user_pw" required>
+=======
 		                <input type="password" id="user_pw" class="form-control" placeholder="Password" v-model="user_pw" required>
+>>>>>>> 884bb3b642b5f10a3f31cde73728f9b0bac6ff50
 		                <label for="user_pw">Password</label>
 		              </div>
 		               <div class="form-label-group">
@@ -80,10 +88,16 @@ $(function(){
 		                <label for="user_name">닉네임 </label>
 		              </div>
 		        
+<<<<<<< HEAD
+		              <button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">Update Info</button>
+		              <button class="btn btn-lg btn-warning btn-block text-uppercase" id="cancel"type="reset">취소</button>
+		              <button class="btn btn-lg btn-warning btn-block text-uppercase" id="UserDelete" type="submit">회원탈퇴</button>
+=======
 		              <button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit" id="update">Update Info</button>
 		              <button class="btn btn-lg btn-warning btn-block text-uppercase" id="cancel" >취소</button>
 		              <button class="btn btn-lg btn-warning btn-block text-uppercase" id="UserDelete">회원탈퇴</button>
 
+>>>>>>> 884bb3b642b5f10a3f31cde73728f9b0bac6ff50
 		
 		              		<hr class="my-4">
 	          			</form>

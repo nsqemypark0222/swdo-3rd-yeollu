@@ -355,5 +355,11 @@ public class UserController {
 			}
 			return "redirect:/";
 		}
-	
+		//인스타 스토어 이동 테스트 
+		@RequestMapping(value="/istore_test", method=RequestMethod.GET)
+		public String istore_test() {
+			logger.info("인스타 스토어 이동 테스트 ");
+			return "/users/istore_test";
+		}
+
 }

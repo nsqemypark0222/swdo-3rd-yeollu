@@ -16,7 +16,6 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 <link href='<c:url value="/resources/css/header.css"/>' rel="stylesheet" media="all">
-<<<<<<< HEAD
 <!-- 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
 integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -32,31 +31,64 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <title>Header</title>
 </head>	
 <body>
-
-	
-    				<input class="form-control mr-sm-2" type="text" id="searchInput" name="searchInput" placeholder="Search">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+   		<a class="navbar-brand" id="navbar-brand"  href="<c:url value='/'/>" >GeTrend</a>
+		<div class="input-group">
+			<form class="form-inline" >
+	 			<div class="col-md-9">
+	 			  <input class="form-control mr-sm-2" type="text" id="searchInput" name="searchInput" placeholder="Search">
     			</div>
     		</form>
-    		
-    		<c:if test="${session.user_email != null }">
-            <div class="menu_list">
-  				<ul class="nav jus">
-  			    	<li class="nav-item">
-  			        	<input type="button" class="btn btn-light" value="내 방" />
+            	<div class="menu_list">
+  			     	<ul class="nav jus">
+  			     	<c:if test="${session.user_email != null }">		     	
+  			        <li class="nav-item">
+  			          <input type="button" class="btn btn-light" id="mypage" value="내 방">
   			        </li>
   			        <li class="nav-item">
-  			        	<input type="button" class="btn btn-light" value="Logout" />
+  			          <input type="button" class="btn btn-light" value="Logout">
   			        </li>
   			        <li class="nav-item">
-                  		<a class="nav-link" href="#">
-                  			<img class="profile" style="border-radius: 60px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" width="30px" height="30px"  >
-  			          	</a>
+	                  <a class="nav-link" href="users/userUpdate">
+	                  <img class="profile" style="border-radius: 60px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" width="30px" height="30px"  >
+  			          </a>
   			        </li>
-				</ul>
-			</div>
-            </c:if>	  
-		</div>
-	</nav>
+  			        </c:if>
+  			        <li>
+  			        <a href="<c:url value="/users/userJoin"/>">
+  			          <input type="button" class="btn btn-light" id="userJoin" value="회원가입">
+  			          </a>
+  			        </li>
+  			        <li>
+  			        	<a href="<c:url value="/users/userLogin"/>">
+  			          <input type="button" class="btn btn-light" id="userLogin" value="로그인">
+  			          </a>
+  			        </li>
+  			      </ul>
+	    		<c:if test="${session.user_email != null }">
+	            <div class="menu_list">
+	  				<ul class="nav jus">
+	  			    	<li class="nav-item">
+	  			        	<input type="button" class="btn btn-light" value="내 방" />
+	  			        </li>
+	  			        <li class="nav-item">
+	  			        	<input type="button" class="btn btn-light" value="Logout" />
+	  			        </li>
+	  			        <li class="nav-item">
+	                  		<a class="nav-link" href="#">
+	                  			<img class="profile" style="border-radius: 60px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" width="30px" height="30px"  >
+	  			          	</a>
+	  			        </li>
+					</ul>
+				</div>
+	            </c:if>	 
+              </div>
+             	  
+		</div>	 
+</nav>
+	
+    	 
+
 	
 	
 <script type="text/javascript">

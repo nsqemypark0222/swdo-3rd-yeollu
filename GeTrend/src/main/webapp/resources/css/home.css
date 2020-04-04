@@ -1,48 +1,19 @@
 @charset "UTF-8";
 
-.column1{
-  float: left;
-  width: 15%;
-  padding: 10px;
 
-}
-
-.column-content{
-  float: left;
-  width: 65%;
-  padding: 10px;
-
-}
-.column-side{
-      width: 260px;
-        padding: 20px;
-        margin-bottom: 20px;
-        float: right;
-        border: 1px solid #bcbcbc;
-}
-@media only screen and (min-width: 769px)
-.column-side {
-    position: relative;
-    right: 0;
-    height: 100%;
-    width: 400px;
-    background-color: #f6f6f6;
-
-}
 .modal-title{
 	  text-align: center;
 }
-.rounded{
-	width:380px; 
-	height:380px;
-}
+
+
 .istoreList{
+	margin-top:1%;
 	position: relative;
  	 width: 420px;
 }
 
 #istoreList{
-	margin-left:16%;
+	margin-left:3%;
 }
 
 .overlay1 {
@@ -88,6 +59,7 @@
   text-align: center;
 }
 
+
 @media (max-width: 767px) {
 		
 			.navbar input[type='text'] {
@@ -101,6 +73,9 @@
 			nav li{
 				width:100%;
 			}
+			.rounded float left{
+			
+			}
 			#map{
 				width: 100%; 
 				height: 350px; 
@@ -109,9 +84,8 @@
 			#category{
 				position: absolute;
 				top: 3%; 
-				
 				left: 1%;
-				z-index: 400;
+				z-index: 10;
 			}
 
 			#opentime{
@@ -124,13 +98,13 @@
 				position:absolute; 
 				top: 3%; 
 				left:50%; 
-				z-index: 400;
+				z-index: 10;
 			}
 			#drawingMap{
 				position:absolute;
 				top: 3%; 
 				left:75%; 
-				z-index: 400;
+				z-index: 10;
 			}
 		
 }
@@ -154,26 +128,26 @@
 			position: absolute;
 			top: 3%; 
 			left: 1%;
-			z-index: 400;
+			z-index: 10;
 		}
 
 		#opentime{
 			 position: absolute;
 			 top: 3%; 
 			 left: 25%; 
-			z-index: 400;
+			z-index: 10;
 			}
 			#selectOverlay{
 				position:absolute; 
 				top: 3%; 
 				left:60%; 
-				z-index: 400;
+				z-index: 10;
 			}
 			#drawingMap{
 				position:absolute;
 				top: 3%; 
 				left:85%; 
-				z-index: 400;
+				z-index: 10;
 			}
 			
 }
@@ -185,67 +159,94 @@
 				width: 850px; 
 				height: 400px; 
 				margin-top:5%; 
-				margin-left:8%;
 			}
 			#category{
 				position: absolute;
 				top: 3%; 
 				left: 1%;
-				z-index: 400;
+				z-index: 10;
 			}
 			#opentime{
 				 position: absolute;
 				 top: 3%; 
 				 left: 20%; 
-				z-index: 400;
+				z-index: 10;
 			}
 			#selectOverlay{
 				position:absolute; 
 				top: 3%; 
 				left:70%; 
-				z-index: 400;
+				z-index: 10;
 			}
 			#drawingMap{
 				position:absolute;
 				top: 3%; 
 				left:88%; 
-				z-index: 400;
+				z-index: 10;
 			}
 		}
 @media (min-width: 1200px) {
-
+		.column-container{
+	 		width: 1440px;
+	        margin: 10px auto;
+	        padding: 0;
+	     /*    border: 1px solid #bcbcbc; */
+		}
+	
+		.column-content{
+	 		width: 900px;
+	        padding: 0;
+	        margin-bottom: 20px;
+	  
+/* 	        border: 1px solid #bcbcbc;
+ */		}
+	/* 	.column-side{
+	      width: 500px;
+	        padding: 20px;
+	        margin-bottom: 20px;
+	        float: right;
+	        border: 1px solid #bcbcbc;
+		} */
+		.column-side {
+		    width: 25%;
+		    height: 100%;
+		    float:right;
+		    position: relative;
+		   	margin-bottom: 20px;
+		   
+		}
+		
 		#map{
-			width: 850px; 
+			width: 100%; 
 			height: 400px; 
-			margin-top:1%; 
-			margin-left:15%;
+			margin-top:3%; 
 			}
 		#category{
 			position: absolute;
 			top: 3%; 
 			left: 1%;
-			z-index: 400;
+			z-index: 10;
 		}
 
 		#opentime{
 			 position: absolute;
 			 top: 3%; 
 			 left: 14%; 
-			z-index: 400;
+			z-index: 10;
 		}
 		#selectOverlay{
 			position:absolute; 
 			top:3%; 
 			left:75%; 
-			z-index: 400;
+			z-index: 10;
 		}
 		#drawingMap{
 			position:absolute;
 			top: 3%; 
 			left:88%; 
-			z-index: 400;
+			z-index: 10;
 		}
 		
-		
+	
 }
 		

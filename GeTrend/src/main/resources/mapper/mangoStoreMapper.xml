@@ -30,6 +30,22 @@ insert into
 	)
 </insert>
 
+<select id="selectAllMangoStores" resultType="mangoStore">
+select
+	store_no
+	, mango_tel
+	, mango_kind
+	, mango_price
+	, mango_parking
+	, mango_time
+	, mango_break_time
+	, mango_last_order
+	, mango_holiday
+	, mango_indate
+from
+	mango_stores
+</select>
+
 <select id="selectMangoStoreByStoreNo" parameterType="string" resultType="mangoStore">
 select
 	store_no
@@ -46,6 +62,52 @@ from
 	mango_stores
 where
 	store_no = #{store_no}
+</select>
+
+<select id="selectMangoStoreByMangoDay" parameterType="mangoDay" resultType="mangoStore">
+select
+	m.store_no
+	, m.mango_tel
+	, m.mango_kind
+	, m.mango_price
+	, m.mango_parking
+	, m.mango_time
+	, m.mango_break_time
+	, m.mango_last_order
+	, m.mango_holiday
+	, m.mango_indate
+	, d.mango_sun
+	, d.mango_mon
+	, d.mango_tue
+	, d.mango_wed
+	, d.mango_thu
+	, d.mango_fri
+	, d.mango_sat
+from
+	mango_stores m, mango_days d
+where
+	m.store_no = d.store_no
+	<if test="mango_sun != null">
+	and d.mango_sun = #{mango_sun}
+	</if>
+	<if test="mango_mon != null">
+	and d.mango_mon = #{mango_mon}
+	</if>
+	<if test="mango_tue != null">
+	and d.mango_tue = #{mango_tue}
+	</if>
+	<if test="mango_wed != null">
+	and d.mango_wed = #{mango_wed}
+	</if>
+	<if test="mango_thu != null">
+	and d.mango_thu = #{mango_thu}
+	</if>
+	<if test="mango_fri != null">
+	and d.mango_fri = #{mango_fri}
+	</if>
+	<if test="mango_sat != null">
+	and d.mango_sat = #{mango_sat}
+	</if>
 </select>
 
 </mapper>

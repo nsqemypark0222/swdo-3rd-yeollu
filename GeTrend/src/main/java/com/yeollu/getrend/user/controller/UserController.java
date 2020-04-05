@@ -279,10 +279,28 @@ public class UserController {
 		logger.info("회원정보 수정 시작");
 		if(!userAvatar.isEmpty()) {
 			logger.info("유저 아바타 있음");
+			UserVO _user = dao.selectEmail(user.getUser_email());
+			if(!(_user.getUser_profile() == null || _user.getUser_profile().equals(""))) {
+				ProfileImageHandler profileImageHandler = new ProfileImageHandler();
+				if(profileImageHandler.delete(_user.getUser_profileId())) {
+					logger.info("기존 이미지 삭제 성공");
+				} else {
+					logger.info("기존 이미지 삭제 실패");
+				}
+			}
 			logger.info("{}", userAvatar.getOriginalFilename());
-			String url = ProfileImageHandler.requestUpload(userAvatar);
-			logger.info("{}", url);
-			user.setUser_profile(url);
+			ProfileImageHandler profileImageHandler = new ProfileImageHandler();
+			if(profileImageHandler.upload(userAvatar)) {
+				logger.info("이미지 추가 성공");
+				String user_profileId = profileImageHandler.getPublicId();
+				String user_profile = profileImageHandler.getUrl();
+				logger.info("user_profileId : {}", user_profileId);
+				logger.info("user_profile : {}", user_profile);
+				user.setUser_profileId(user_profileId);
+				user.setUser_profile(user_profile);
+			} else {
+				logger.info("이미지 추가 실패");
+			}
 		} else {
 			logger.info("유저 아바타 없음");
 		}
@@ -310,6 +328,7 @@ public class UserController {
 		}
 		return "redirect:/";
 	}
+	
 	//회원탈퇴 
 	@RequestMapping(value="deleteUser", method=RequestMethod.GET)
 	public String deleteUser(String user_email, HttpSession session) {
@@ -317,14 +336,29 @@ public class UserController {
 		session.removeAttribute("loginemail");
 		session.removeAttribute("loginname");
 		
+		UserVO user = dao.selectEmail(user_email);
+		String publicId = user.getUser_profileId();
+		
 		int cnt = dao.deleteUser(user_email);
 	
 		if(cnt> 0) {
 			logger.info("삭제 성공");
+			ProfileImageHandler profileImageHandler = new ProfileImageHandler();
+			if(profileImageHandler.delete(publicId)) {
+				logger.info("이미지 파일 삭제 성공");
+			}
 		}else {
 			logger.info("삭제 실패");
 		}
 		return "redirect:/";
 	}
 	
+	
+	
+		//인스타 스토어 이동 테스트 
+		@RequestMapping(value="/istore_test", method=RequestMethod.GET)
+		public String istore_test() {
+			logger.info("인스타 스토어 이동 테스트 ");
+			return "/users/istore_test";
+		}
 }

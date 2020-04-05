@@ -154,4 +154,17 @@ public class StoreDAO {
 		
 		return list;
 	}
+	
+	public ArrayList<StoreVO> selectStoresByStoreCate1(ArrayList<String> categoryValues) {
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.selectStoresByStoreCate1(categoryValues);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }

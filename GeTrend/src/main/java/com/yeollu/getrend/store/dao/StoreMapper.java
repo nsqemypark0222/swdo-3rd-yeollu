@@ -10,6 +10,7 @@ public interface StoreMapper {
 	public ArrayList<StoreVO> selectStoresWithMangoStores();
 	public InstaStoreVO selectInstaStore(String store_no);
 	public ArrayList<StoreVO> searchStoresByTerm(String term);
+	public ArrayList<StoreVO> selectStoresByStoreCate1(String store_cate1);
 	public ArrayList<String> autoStoreName();
 	public ArrayList<String> autoStoreAdr1_01();
 	public ArrayList<String> autoStoreAdr1_02();

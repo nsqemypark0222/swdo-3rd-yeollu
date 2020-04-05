@@ -52,7 +52,61 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		      <!--  음식 카테고리 모달 body -->
 		       <div class="modal-body">
 		           	<h3>소상공인 db 음식 종류</h3>
-		           	<div class="form-check-inline">
+		           	<div class="custom-control custom-checkbox mb-3">
+		           		<input type="checkbox" 
+	                			class="custom-control-input" 
+	                			id="sel1" 
+	                			name="sel1" 
+	                			value="한식">
+	                	<label class="custom-control-label" for="sel1">한식</label>
+	                	
+	                	<input type="checkbox" 
+	                			class="custom-control-input" 
+	                			id="sel2" 
+	                			name="sel2" 
+	                			value="양식">
+	                	<label class="custom-control-label" for="sel2">양식</label>
+	                	
+	                	<input type="checkbox" 
+	                			class="custom-control-input" 
+	                			id="sel3" 
+	                			name="sel3" 
+	                			value="중식">
+	                	<label class="custom-control-label" for="sel3">중식</label>
+	                	
+	                	<input type="checkbox" 
+	                			class="custom-control-input" 
+	                			id="sel4" 
+	                			name="sel4" 
+	                			value="일식/수산물">
+	                	<label class="custom-control-label" for="sel4">일식/수산물</label>
+	                	
+	                	<input type="checkbox" 
+	                			class="custom-control-input" 
+	                			id="sel5" 
+	                			name="sel5" 
+	                			value="카페/디저트">
+	                	<label class="custom-control-label" for="sel5">카페/디저트</label>
+	                	
+	                	<input type="checkbox" 
+	                			class="custom-control-input" 
+	                			id="sel6" 
+	                			name="sel6" 
+	                			value="치킨/피자/패스트푸드">
+	                	<label class="custom-control-label" for="sel6">치킨/피자/패스트푸드</label>
+	                	
+	                	<input type="checkbox" 
+	                			class="custom-control-input" 
+	                			id="sel7" 
+	                			name="sel7" 
+	                			value="기타">
+	                	<label class="custom-control-label" for="sel7">기타</label>
+		           	</div>
+		           	
+		           	
+		           	
+		           	
+		           	<!-- <div class="form-check-inline">
 					  <label class="form-check-label">
 					    <input type="radio" class="form-check-input" name="optradio">한식
 					  </label>
@@ -62,16 +116,31 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					    <input type="radio" class="form-check-input" name="optradio">양식
 					  </label>
 					</div>
-					<div class="form-check-inline disabled">
+					<div class="form-check-inline">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" >일식
+					    <input type="radio" class="form-check-input" name="optradio" >중식
 					  </label>
 					</div>
-					<div class="form-check-inline disabled">
+					<div class="form-check-inline">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" >디저트
+					    <input type="radio" class="form-check-input" name="optradio" >일식/수산물
 					  </label>
 					</div>
+					<div class="form-check-inline">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" >카페/디저트
+					  </label>
+					</div>
+					<div class="form-check-inline">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" >치킨/피자/패스트푸드
+					  </label>
+					</div>
+					<div class="form-check-inline">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" >기타
+					  </label>
+					</div> -->
 		       </div>
 		     	<!-- 음식 카테고리 모달 footer -->
 		        <div class="modal-footer">
@@ -163,6 +232,8 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	   	<div id="print">
 	   	</div>
    </div> -->
+   <div id="print">
+   </div>
       	
   		<!-- 추천 가게 리스트 출력 -->
    		<div id="istoreList" class="istoreList">

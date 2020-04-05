@@ -50,7 +50,6 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
-//		new ProfileImageHandler().upload();
 		
 		
 		
@@ -64,8 +63,8 @@ public class HomeController {
 		long startTime = System.currentTimeMillis();
 		
 //		DB에 저장된 모든 상가 리스트를 가져옴
-		ArrayList<StoreVO> list = storeDAO.selectAllStores();
-//		ArrayList<StoreVO> list = storeDAO.selectStoresWithMangoStores();
+//		ArrayList<StoreVO> list = storeDAO.selectAllStores();
+		ArrayList<StoreVO> list = storeDAO.selectStoresByStoreCate1("한식");
 		
 		
 		ArrayList<StoreVO> selectedList = new ArrayList<StoreVO>();

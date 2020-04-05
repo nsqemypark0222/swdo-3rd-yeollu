@@ -3,7 +3,6 @@ drop sequence seq_searched_stores;
 drop table searched_stores;
 drop table insta_locations;
 drop table mango_stores;
-drop table mango_stores;
 drop table follows;
 drop table likes;
 drop table users;
@@ -205,3 +204,10 @@ select sysdate from dual;
 select mango_time from mango_stores;
 select to_char(sysdate, 'HH24') from dual;
 select to_char(sysdate, 'dy') from dual;
+
+select
+    *
+from
+    stores
+where
+    store_cate1 = 'ÇÑ½Ä';

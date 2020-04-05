@@ -66,6 +66,19 @@ public class StoreDAO {
 		return list;
 	}
 	
+	public ArrayList<StoreVO> selectStoresByStoreCate1(String store_cate1) {
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.selectStoresByStoreCate1(store_cate1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	public ArrayList<String> autoStoreName(){
 		ArrayList<String> list = new ArrayList<String>();
 		

@@ -18,6 +18,7 @@ create table users(
     , user_name             varchar2(30)            not null
     , user_type             varchar2(10)
     , user_profile          varchar2(1000)
+    , user_profileId        varchar2(50)
 );
 insert into users(user_email,user_pw,user_name)values('wldus9656@gmail.com','moon','moon');
 
@@ -205,3 +206,8 @@ select sysdate from dual;
 select mango_time from mango_stores;
 select to_char(sysdate, 'HH24') from dual;
 select to_char(sysdate, 'dy') from dual;
+
+select
+    distinct store_cate1
+from
+    stores;

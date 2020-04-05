@@ -40,12 +40,12 @@
 							
 							<c:choose>
 								<c:when test="${user.user_profile == null}">
-									<div class="form-label-group">
+									<div class="form-label-group text-center">
 										<img class="img-thumbnail rounded-circle" id="avatarPreview" alt="" />
 									</div>
 								</c:when>
 								<c:otherwise>
-									<div class="form-label-group">
+									<div class="form-label-group text-center">
 										<img class="img-thumbnail rounded-circle" id="avatarPreview" src="${user.user_profile}" />
 									</div>
 								</c:otherwise>

@@ -25,8 +25,10 @@ update
 set
 	user_pw =#{user_pw}
 	,user_name =#{user_name}
+	<if test="user_profile != null and user_profileId != null">
 	,user_profile =#{user_profile}
 	,user_profileId =#{user_profileId}
+	</if>
 where
 	user_email =#{user_email}
 </update>
@@ -36,8 +38,10 @@ update
 	users
 set
 	user_name =#{user_name}
+	<if test="user_profile != null and user_profileId != null">
 	,user_profile =#{user_profile}
 	,user_profileId =#{user_profileId}
+	</if>
 where
 	user_email =#{user_email}
 </update>

@@ -1,7 +1,11 @@
 package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,16 +20,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yeollu.getrend.crawler.CrawlerExecutor;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
+import com.yeollu.getrend.store.dao.MangoDayDAO;
 import com.yeollu.getrend.store.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
+import com.yeollu.getrend.store.util.preprocess.core.DayOfTheWeekCategorizer;
 import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
+import com.yeollu.getrend.store.vo.ReqParmVO;
 import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
+import com.yeollu.getrend.store.vo.MangoDayVO;
 import com.yeollu.getrend.store.vo.MangoStoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 import com.yeollu.getrend.user.util.ProfileImageHandler;
@@ -46,26 +54,33 @@ public class HomeController {
 	
 	@Autowired
 	private MangoStoreDAO mangoStoreDAO;
+	
+	@Autowired
+	private MangoDayDAO mangoDayDAO;
 		
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
-//		new ProfileImageHandler().upload();
-		
-		
 		
 		return "home";
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
-	public ArrayList<InstaStoreInfoVO> search(@RequestBody ArrayList<Point> points) {
+	public ArrayList<InstaStoreInfoVO> search(@RequestBody ReqParmVO reqParm) {
 		logger.info("search");
+		ArrayList<Point> points = reqParm.getPoints();
+		ArrayList<String> categoryValues = reqParm.getCategoryValues();
+		ArrayList<String> opentimeValues = reqParm.getOpentimeValues();
+		logger.info("points : {}", points);
+		logger.info("categoryValues : {}", categoryValues);
+		logger.info("opentimeValues : {}", opentimeValues);
+		
 		long startTime = System.currentTimeMillis();
 		
 //		DB에 저장된 모든 상가 리스트를 가져옴
-		ArrayList<StoreVO> list = storeDAO.selectAllStores();
-//		ArrayList<StoreVO> list = storeDAO.selectStoresWithMangoStores();
+//		ArrayList<StoreVO> list = storeDAO.selectAllStores();
+		ArrayList<StoreVO> list = storeDAO.selectStoresByStoreCate1(categoryValues);
+		logger.info("list size : {}", list.size());
 		
 		
 		ArrayList<StoreVO> selectedList = new ArrayList<StoreVO>();
@@ -105,6 +120,32 @@ public class HomeController {
 		}
 		logger.info("{}", instaStoreList);
 		
+//		MangoDayVO mangoDay = new MangoDayVO();
+//		for(String str : opentimeValues) {
+//			switch (str) {
+//			case "일":
+//				mangoDay.setMango_sun("1");
+//				break;
+//			case "월":
+//				mangoDay.setMango_mon("1");
+//				break;
+//			case "화":
+//				mangoDay.setMango_tue("1");
+//				break;
+//			case "수":
+//				mangoDay.setMango_wed("1");
+//				break;
+//			case "목":
+//				mangoDay.setMango_thu("1");
+//				break;
+//			case "금":
+//				mangoDay.setMango_fri("1");
+//				break;
+//			case "토":
+//				mangoDay.setMango_sat("1");
+//				break;
+//			}
+//		}
 		
 //		망고플레이트 정보 추가
 		ArrayList<MangoStoreVO> mangoStoreList = new ArrayList<MangoStoreVO>();

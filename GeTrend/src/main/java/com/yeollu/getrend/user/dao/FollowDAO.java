@@ -53,6 +53,7 @@ public class FollowDAO {
 			e.printStackTrace();
 		}return cnt;
 	}
+	
 	public int countFollower(String user_email){
 		int cnt = 0;
 		try {
@@ -62,6 +63,10 @@ public class FollowDAO {
 			e.printStackTrace();
 		}
 		return cnt;
+<<<<<<< HEAD
+		
+=======
+>>>>>>> 073902e39fec15d9747f78ee594f348a958db86f
 	}
 	
 	
@@ -86,5 +91,10 @@ public class FollowDAO {
 		}
 		return list;
 	}
+<<<<<<< HEAD
+	}
+	
+=======
 }
+>>>>>>> 073902e39fec15d9747f78ee594f348a958db86f
 

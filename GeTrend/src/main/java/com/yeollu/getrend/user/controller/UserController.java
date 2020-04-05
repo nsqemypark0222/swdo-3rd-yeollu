@@ -352,4 +352,61 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+<<<<<<< HEAD
+	
+	
+	
+	
+	
+	
+	
+	
+	//회원정보 수정 페이지 이동
+		@RequestMapping(value="/userUpdate2", method=RequestMethod.GET)
+		public String userUpdate2(HttpSession session, Model model) {
+			logger.info("회원정보수정 페이지");
+			String user_email = (String)session.getAttribute("loginemail");
+			logger.info("user_email : {}", user_email);
+			UserVO user = dao.selectEmail(user_email);
+			logger.info("user : {}", user);
+
+			model.addAttribute("user", user);
+			return "/users/userUpdate2";
+		}
+		//회원정보 수정
+		@RequestMapping(value="/update2", method=RequestMethod.POST)
+		public String update2(UserVO user, HttpSession session){
+			logger.info("{}", user);
+			
+			
+			int cnt = 0;
+			if(user.getUser_type().equals("LOCAL")) {
+				String inputPw = user.getUser_pw();
+				String pw = passEncoder.encode(inputPw);
+				user.setUser_pw(pw);
+				logger.info(inputPw);
+				logger.info(pw);
+				cnt = dao.updateUser(user);
+			} else {
+				cnt = dao.updateSocialUser(user);
+			}
+			
+			logger.info("{}",cnt);
+			if(cnt>0) {
+				logger.info("수정성공");
+				session.setAttribute("loginname", user.getUser_name());
+			}else {
+				logger.info("수정실패");
+			}
+			return "redirect:/";
+		}
+		//인스타 스토어 이동 테스트 
+		@RequestMapping(value="/istore_test", method=RequestMethod.GET)
+		public String istore_test() {
+			logger.info("인스타 스토어 이동 테스트 ");
+			return "/users/istore_test";
+		}
+
+=======
+>>>>>>> 073902e39fec15d9747f78ee594f348a958db86f
 }

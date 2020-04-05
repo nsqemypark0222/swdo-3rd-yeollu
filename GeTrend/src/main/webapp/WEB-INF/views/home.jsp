@@ -14,6 +14,11 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 073902e39fec15d9747f78ee594f348a958db86f
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -24,19 +29,20 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'>
+<link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
 </head>
 <body>
 
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
-	<div class="column1"></div>
+<div class="column-container">
 	<!-- column-content시작 -->
-	<div class="column-content">
+ <div class="column-content">
 	<!-- 지도와의 간격 div-->
 	<div id="space">
-	<!-- 카카오맵 -->
-	<div class="container-fluid">
+	<div class="container" >
+	<div class="col" >
 	<div id="map">
 	<!-- 지도 위의 버튼 1 음식 카테고리 -->
 	<div class="btn-modal">
@@ -146,14 +152,19 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     	 범위 선택</button>
     	<button type="button"  class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
     	조회 하기</button>  
-    	
-   			
    		</div>  	 
 	</div>
-	
+<<<<<<< HEAD
+	</div>
+	</div>	
+=======
 </div>	
-
-  	<!-- <div class="">
+		<!-- 로딩이미지 -->
+    	<div class="wrap-loading display-none">
+    		<div><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" /></div>
+		</div>
+		
+   <div class="">
 		<p>
 			<button type="button"  class="btn btn-warning" onclick="selectOverlay('POLYGON')">범위 선택</button>
 		</p>
@@ -162,61 +173,62 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	   	</p>
 	   	<div id="print">
 	   	</div>
-   </div> -->
+   </div> 
       	
+      	
+     
+      	
+>>>>>>> 073902e39fec15d9747f78ee594f348a958db86f
   		<!-- 추천 가게 리스트 출력 -->
+  	
    		<div id="istoreList" class="istoreList">
-   		<ul class="list-group list-group-horizontal">
-   			<li class="list-group-item">
-   				<img src="resources/img/ok.jpg" alt="sampleTest" class="rounded float left" >
-   		   		<div class="istore1">
-   		   		<div class="overlay1">
-   				<div class="text" style="color:white;">동명동 추천 가게</div>
-  				</div>
-  				</div>
-   			</li>
-   		
-   			<li class="list-group-item">
-   				<div class="istore2">
-   				<img src="resources/img/ok.jpg" alt="sampleTest" class="rounded float left">
-   		   		 <div class="overlay2">
-   				<div class="text">양림동 추천 가게</div>
-  				</div>
-  				</div>
-   			</li>
-  	  		</ul>	
+	   		<ul class="list-group list-group-horizontal">
+	   			<li class="list-group-item">
+	   				<img src="resources/img/ok.jpg" alt="동명동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
+	   		   		<div class="istore1">
+	   		   		<div class="overlay1">
+	   				<div class="text" style="color:white;">동명동 추천 가게</div>
+	  				</div>
+	  				</div>
+	   			</li>		
+	   			<li class="list-group-item">
+	   				<div class="istore2">
+	   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
+	   		   		 <div class="overlay2">
+	   				<div class="text">
+	   					<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+	   				</div>
+	  				</div>
+	  				</div>
+	   			</li>
+	  	  	</ul>	
   		</div>
-  		</div>		
-  
+ </div>
+
 	<!-- 사이드 컬럼  시작 -->
    	<div class="column-side">
-   		<div id="istore" class="istore">
-   		<ul class="list-group list-group-horizontal">
-   			<li class="list-group-item">
-   				<img src="resources/img/firework.jpg" alt="sampleTest" class="rounded float-right" >
-   		   		<div class="istore1">
-   		   		<div class="overlay1">
-   				<div class="text" style="color:white;">오늘의 추천 가게</div>
-  				</div>
-  				</div>
-   			</li>
-   			<li class="list-group-item">
-   				<div class="istore2">
-   				<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right">
-   		   		 <div class="overlay2">
-   				<div class="text">내일의 추천 가게</div>
-  				</div>
-  				</div>
-   			</li>
-   				<li class="list-group-item">
-   				<div class="istore2">
-   				<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right">
-   		   		 <div class="overlay2">
-   				<div class="text">이번주 추천 가게</div>
-  				</div>
-  				</div>
-   			</li>
-  	  		</ul>	
+   		<div class="row">
+	   		<div id="istore" class="istore">
+	   		<h3 style="text-align:center;">주목Trend</h3>
+	   		<ul class="list-group">
+	   			<li class="list-group-item">
+	   				<div class="istore2">
+	   				<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+	   		   		 <div class="overlay2">
+	   				<div class="text">내일의 추천 가게</div>
+	  				</div>
+	  				</div>
+	   			</li>
+	   				<li class="list-group-item">
+	   				<div class="istore2">
+	   				<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+	   		   		 <div class="overlay2">
+	   				<div class="text">이번주 추천 가게</div>
+	  				</div>
+	  				</div>
+	   			</li>
+	  	  		</ul>	
+	  		</div>
   		</div>
   	</div>
 
@@ -296,16 +308,16 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
 	<a href="<c:url value='/users/follow'/>">follow</a>
-
+</div>
 
 	
-	<footer>
+<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
 
 <script type="text/javascript">
-		$(function() {
 
+		$(function() {
 			function search(points) {
 				$.ajax({
 					url: "<c:url value='/search' />",
@@ -313,6 +325,12 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify(points),
 					dataType: "json",
+					beforeSend:function(){
+						$('.wrap-loading').removeClass('display-none');
+					},
+					complete:function(){
+						$('.wrap-loading').addClass('display-none');
+					},
 					success: function(result) {
 						alert("성공");
 						printMarker(result);

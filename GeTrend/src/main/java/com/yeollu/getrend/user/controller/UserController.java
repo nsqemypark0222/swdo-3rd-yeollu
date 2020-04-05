@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yeollu.getrend.user.dao.FollowDAO;
 import com.yeollu.getrend.user.dao.UserDAO;
+import com.yeollu.getrend.user.util.FileService;
 import com.yeollu.getrend.user.util.MailService;
+import com.yeollu.getrend.user.util.ProfileImageHandler;
 import com.yeollu.getrend.user.vo.FollowVO;
 import com.yeollu.getrend.user.vo.UserVO;
 import com.yeollu.getrend.util.PropertiesUtil;
@@ -272,20 +275,36 @@ public class UserController {
 	}
 	//회원정보 수정
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(UserVO user){
+	public String update(UserVO user, HttpSession session, MultipartFile userAvatar){
+		logger.info("회원정보 수정 시작");
+		if(!userAvatar.isEmpty()) {
+			logger.info("유저 아바타 있음");
+			logger.info("{}", userAvatar.getOriginalFilename());
+			String url = ProfileImageHandler.requestUpload(userAvatar);
+			logger.info("{}", url);
+			user.setUser_profile(url);
+		} else {
+			logger.info("유저 아바타 없음");
+		}
 		logger.info("{}", user);
 		
-		String inputPw = user.getUser_pw();
 		
-		String pw = passEncoder.encode(inputPw);
-		user.setUser_pw(pw);
-		logger.info(inputPw);
-		logger.info(pw);
+		int cnt = 0;
+		if(user.getUser_type().equals("LOCAL")) {
+			String inputPw = user.getUser_pw();
+			String pw = passEncoder.encode(inputPw);
+			user.setUser_pw(pw);
+			logger.info(inputPw);
+			logger.info(pw);
+			cnt = dao.updateUser(user);
+		} else {
+			cnt = dao.updateSocialUser(user);
+		}
 		
-		int cnt = dao.updateUser(user);
 		logger.info("{}",cnt);
 		if(cnt>0) {
 			logger.info("수정성공");
+			session.setAttribute("loginname", user.getUser_name());
 		}else {
 			logger.info("수정실패");
 		}
@@ -308,6 +327,7 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+<<<<<<< HEAD
 	
 	
 	
@@ -362,4 +382,6 @@ public class UserController {
 			return "/users/istore_test";
 		}
 
+=======
+>>>>>>> 073902e39fec15d9747f78ee594f348a958db86f
 }

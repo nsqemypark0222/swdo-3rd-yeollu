@@ -14,8 +14,11 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 073902e39fec15d9747f78ee594f348a958db86f
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -26,6 +29,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'>
+<link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
 </head>
 <body>
 
@@ -148,12 +152,33 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     	 범위 선택</button>
     	<button type="button"  class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
     	조회 하기</button>  
-    	
-   			
    		</div>  	 
 	</div>
+<<<<<<< HEAD
 	</div>
 	</div>	
+=======
+</div>	
+		<!-- 로딩이미지 -->
+    	<div class="wrap-loading display-none">
+    		<div><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" /></div>
+		</div>
+		
+   <div class="">
+		<p>
+			<button type="button"  class="btn btn-warning" onclick="selectOverlay('POLYGON')">범위 선택</button>
+		</p>
+		<p class="getdata"> 
+	   		<button type="button"  class="btn btn-outline-warning" onclick="getDataFromDrawingMap()">조회 하기</button>
+	   	</p>
+	   	<div id="print">
+	   	</div>
+   </div> 
+      	
+      	
+     
+      	
+>>>>>>> 073902e39fec15d9747f78ee594f348a958db86f
   		<!-- 추천 가게 리스트 출력 -->
   	
    		<div id="istoreList" class="istoreList">
@@ -254,7 +279,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			<c:when test="${sessionScope.loginemail != null}">
 				${sessionScope.loginname}님 환영합니다!<br/>
 				<a href="users/userUpdate">회원정보 수정</a>
-				<a href="users/userUpdate2">회원정보 수정2</a>
 				
 				
 				
@@ -292,8 +316,8 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	</footer>
 
 <script type="text/javascript">
-		$(function() {
 
+		$(function() {
 			function search(points) {
 				$.ajax({
 					url: "<c:url value='/search' />",
@@ -301,6 +325,12 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify(points),
 					dataType: "json",
+					beforeSend:function(){
+						$('.wrap-loading').removeClass('display-none');
+					},
+					complete:function(){
+						$('.wrap-loading').addClass('display-none');
+					},
 					success: function(result) {
 						alert("성공");
 						printMarker(result);

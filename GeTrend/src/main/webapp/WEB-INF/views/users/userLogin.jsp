@@ -34,27 +34,54 @@ $(function(){
 						<div class="row">
 							<div class="col-md-9 col-lg-8 mx-auto">
 								<h3 class="login-heading mb-4">LOGIN</h3>
-							 	<form action="login" method="post">
+							 	<form action="login" 
+							 			method="post"
+							 			id="loginForm"
+							 			v-on:submit="login" >
 							 		<div class="form-label-group">
-					                	<input type="email" id="user_email" name="user_email" value="${rememberemail}" class="form-control"  required autofocus>
+					                	<input type="email" 
+					                			id="user_email" 
+					                			name="user_email" 
+					                			class="form-control"  
+					                			v-model="user_email" 
+		                						ref="user_email"
+					                			required autofocus>
 					                	<label for="inputEmail">E-mail address</label>
-					                </div>
-					                <div class="form-label-group">
-					                	<input type="password" name="user_pw" id="user_pw" class="form-control" required>
-					                	<label for="inputPassword">Password</label>
-					                </div>
-					                 <div class="custom-control custom-checkbox mb-3">
-					                	<input type="checkbox" class="custom-control-input" id="remember" name="remember" value="1">
-					                	<label class="custom-control-label" for="remember">Remember E-mail</label>
-					                	
-					                	<a id="linkjoin" href="<c:url value='/users/userJoin'/>">회원가입</a>
+					                	<small>{{ emailValidation }}</small>
 					                </div>
 					                
-					                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" id="login">Sign in</button>
+					                <div class="form-label-group">
+					                	<input type="password" 
+					                			name="user_pw" 
+					                			id="user_pw" 
+					                			class="form-control" 
+					                			v-model="user_pw" 
+		                						ref="user_pw"
+					                			required>
+					                	<label for="inputPassword">Password</label>
+					                	<small>{{ passwordValidation }}</small>
+					                </div>
+					                
+					                 <div class="custom-control custom-checkbox mb-3">
+					                	<input type="checkbox" 
+					                			class="custom-control-input" 
+					                			id="remember" 
+					                			name="remember" 
+					                			value="1">
+					                	<label class="custom-control-label" for="remember">Remember E-mail</label>
+					                	
+					                	<a id="linkjoin" href="<c:url value='userJoin'/>">회원가입</a>
+					                </div>
+					                
+					                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" >Sign in</button>
 							 	</form>
+							 	
 							 	<div id="socialbtn">
-					            	<div id="kakaoIdLogin"><a id="kakao-login-btn"></a></div>
-					            	<div id="naverIdLogin"></div>  <!-- 버튼이 들어갈 위치 선언. ID는 반드시 지정된 값으로 설정하여야 합니다.-->
+					            	<div id="kakaoIdLogin">
+					            		<a id="kakao-login-btn"></a>
+					            	</div>
+					            	<div id="naverIdLogin">
+					            	</div>  <!-- 버튼이 들어갈 위치 선언. ID는 반드시 지정된 값으로 설정하여야 합니다.-->
 					            	<div style="clear:both;"></div>
 					           </div>
 							</div>
@@ -74,16 +101,11 @@ $(function(){
 	<a href="http://developers.kakao.com/logout"></a>
 	
 	
-
-	
-	
-	
-	
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId(
 			{
-				clientId: 'mhTruKtoEj6RAeMJZQfY',
-				callbackUrl: "http://localhost:8880/getrend/users/callback",
+				clientId: '<spring:eval expression="@naver['CLIENT_ID']" />',
+				callbackUrl: '<spring:eval expression="@naver['CALLBACK_URL']" />',
 				loginButton: {color: "green", type: 3, height: 49} /* 로그인 버튼의 타입을 지정 */
 			}
 	);
@@ -128,38 +150,45 @@ $(function(){
 	});
 	//]]>
 </script>
-                
-	
 
 </body>
 <script>
-const userLogin = new Vue({
-	el:'#userLogin',
-	data:{
-		Login:false,
-		user_email:'',
-		user_pw:'',
-		remember:false
-	},
-	methods:{
-		userLogin(){
-			this.Login = !this.Login;
-			if(!this.user_email){
-				user_email.focus();
-				return false;
-			}else if(!this.validEmail(this.user_email)){
-				return false;
-			}
-			if(!this.user_pw){
-				return false;
+	const loginForm = new Vue({
+		el: "#loginForm",
+		data: {
+			user_email: "${rememberemail}",
+			user_pw: "",
+			reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
+		},
+		computed: {
+			emailValidation: function() {
+				if(this.user_email === "") {
+					user_email.focus();
+					return '이메일을 입력하세요';
+				}
+				if(!(this.reg.test(this.user_email))) {
+					user_email.focus();
+					return '이메일 형식에 맞게 입력하세요';
+				}
+				return '';
+			},
+			passwordValidation: function() {
+				if(this.user_pw === "") {
+					user_pw.focus();
+					return '비밀번호를 입력하세요';
+				} else if(this.user_pw.length <= 3 || this.user_pw.length > 10){
+					user_pw.focus();
+					return '비밀번호는 4~10 글자를 입력하세요';
+				}
+				return '';
 			}
 		},
-		validEmail: function(user_email){
-			var re =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-			return re.test(user_email);
-		}	
-	}
-});
+		methods: {
+			login: function() {
+
+			}
+		}
+	});
 
 </script>
 </html>

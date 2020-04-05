@@ -34,10 +34,9 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	</header>
 <div class="column-container">
 	<!-- column-content시작 -->
-	<div class="column-content">
+ <div class="column-content">
 	<!-- 지도와의 간격 div-->
 	<div id="space">
-	<!-- 카카오맵 -->
 	<div class="container" >
 	<div class="col" >
 	<div id="map">
@@ -154,61 +153,39 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
    		</div>  	 
 	</div>
 	</div>
-</div>	
-
-  	<!-- <div class="">
-		<p>
-			<button type="button"  class="btn btn-warning" onclick="selectOverlay('POLYGON')">범위 선택</button>
-		</p>
-		<p class="getdata"> 
-	   		<button type="button"  class="btn btn-outline-warning" onclick="getDataFromDrawingMap()">조회 하기</button>
-	   	</p>
-	   	<div id="print">
-	   	</div>
-   </div> -->
-      	
+	</div>	
   		<!-- 추천 가게 리스트 출력 -->
   	
    		<div id="istoreList" class="istoreList">
-   		<ul class="list-group list-group-horizontal">
-   			<li class="list-group-item">
-   				<img src="resources/img/ok.jpg" alt="동명동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
-   		   		<div class="istore1">
-   		   		<div class="overlay1">
-   				<div class="text" style="color:white;">동명동 추천 가게</div>
-  				</div>
-  				</div>
-   			</li>
-   		
-   			<li class="list-group-item">
-   				<div class="istore2">
-   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
-   		   		 <div class="overlay2">
-   				<div class="text">
-   					<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
-   				</div>
-  				</div>
-  				</div>
-   			</li>
-  	  		</ul>	
+	   		<ul class="list-group list-group-horizontal">
+	   			<li class="list-group-item">
+	   				<img src="resources/img/ok.jpg" alt="동명동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
+	   		   		<div class="istore1">
+	   		   		<div class="overlay1">
+	   				<div class="text" style="color:white;">동명동 추천 가게</div>
+	  				</div>
+	  				</div>
+	   			</li>		
+	   			<li class="list-group-item">
+	   				<div class="istore2">
+	   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
+	   		   		 <div class="overlay2">
+	   				<div class="text">
+	   					<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+	   				</div>
+	  				</div>
+	  				</div>
+	   			</li>
+	  	  	</ul>	
   		</div>
  </div>
-  			
-  
+
 	<!-- 사이드 컬럼  시작 -->
    	<div class="column-side">
    		<div class="row">
 	   		<div id="istore" class="istore">
 	   		<h3 style="text-align:center;">주목Trend</h3>
 	   		<ul class="list-group">
-	   	<!-- 		<li class="list-group-item">
-	   				<img src="resources/img/firework.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;"  >
-	   		   		<div class="istore1">
-	   		   		<div class="overlay1">
-	   				<div class="text" style="color:white;">오늘의 추천 가게</div>
-	  				</div>
-	  				</div>
-	   			</li> -->
 	   			<li class="list-group-item">
 	   				<div class="istore2">
 	   				<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">

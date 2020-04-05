@@ -187,33 +187,20 @@
 		}
 @media (min-width: 1200px) {
 		.column-container{
-	 		width: 1440px;
+	 		width: 69%;
 	        margin: 10px auto;
 	        padding: 0;
-	     /*    border: 1px solid #bcbcbc; */
 		}
 	
-		.column-content{
-	 		width: 900px;
-	        padding: 0;
-	        margin-bottom: 20px;
-	  
-/* 	        border: 1px solid #bcbcbc;
- */		}
-	/* 	.column-side{
-	      width: 500px;
-	        padding: 20px;
-	        margin-bottom: 20px;
-	        float: right;
-	        border: 1px solid #bcbcbc;
-		} */
-		.column-side {
-		    width: 25%;
-		    height: 100%;
-		    float:right;
-		    position: relative;
-		   	margin-bottom: 20px;
-		   
+	.column-content{
+	 	width: 900px;
+	    float:left;
+	}
+	.column-side{
+  		width: 400px;
+  		padding: 5px;
+        margin-bottom: 20px;
+        float: right;
 		}
 		
 		#map{

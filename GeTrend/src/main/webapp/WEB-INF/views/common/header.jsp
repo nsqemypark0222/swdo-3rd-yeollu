@@ -82,8 +82,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 					</ul>
 				</div>
 	            </c:if>	 
-              </div>
-             	  
+              </div>     	  
 		</div>	 
 </nav>
 	

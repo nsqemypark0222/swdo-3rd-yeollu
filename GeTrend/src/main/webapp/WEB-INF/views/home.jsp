@@ -39,191 +39,132 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			<div class="container" >
 				<div class="col" >
 					<div id="map">
-						<!-- 지도 위의 버튼 1 음식 카테고리 -->
-						<!-- Button trigger modal -->
-						<button type="button" id="category" class="btn btn-dark" data-toggle="modal" data-target="#categoryModal">음식 카테고리</button>
-						
-						<!-- CategoryModal -->
-						<div class="modal fade" id="categoryModal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<!-- 음식 카테고리 모달 header -->
-									<div class="modal-header">
-										<h4 class="modal-title">음식 카테고리</h4>
-           								<button type="button" class="close" data-dismiss="modal">&times;</button>
-									</div>
-									<!-- 음식 카테고리 모달 body -->
-      								<div class="modal-body">
-      									<h3>음식 종류</h3>
-           								<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
-			 								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="categotyChk" value="양식" checked="checked">양식
-			  								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="categotyChk" value="일식/수산물" checked="checked">일식/수산물
-			  								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="categotyChk" value="중식" checked="checked">중식
-			  								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="categotyChk" value="카페/디저트" checked="checked">카페/디저트
-			  								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="categotyChk" value="치킨/피자/패스트푸드" checked="checked">치킨/피자/패스트푸드
-			  								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="categotyChk" value="기타" checked="checked">기타
-			  								</label>
-										</div>
-      								</div>
-      								<!-- 음식 카테고리 모달 footer -->
-       								<div class="modal-footer">
-       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
-        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
-       								</div>
-								</div>
-							</div>
-						</div>
-						
-						<!-- 지도 위의 버튼 2 음식 카테고리 -->
-						<!-- Button trigger modal -->
-						<button type="button" id="opentime" class="btn btn-warning" data-toggle="modal" data-target="#opentimeModal">영업 확인</button>
-						
-						<!-- CategoryModal -->
-						<div class="modal fade" id="opentimeModal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<!-- 영업 확인 모달 header -->
-									<div class="modal-header">
-										<h4 class="modal-title">영업 확인</h4>
-           								<button type="button" class="close" data-dismiss="modal">&times;</button>
-									</div>
-									<!-- 영업 확인 모달 body -->
-      								<div class="modal-body">
-      									<h3>식당 영업 요일별 확인</h3>
-           								<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="일" checked="checked">일
-			 								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="월" checked="checked">월
-			  								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="화" checked="checked">화
-			  								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="수" checked="checked">수
-			  								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="목" checked="checked">목
-			  								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="금" checked="checked">금
-			  								</label>
-										</div>
-										<div class="form-check">
-			  								<label class="form-check-label">
-			    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="토" checked="checked">토
-			  								</label>
-										</div>
-      								</div>
-      								<!-- 영업 확인 모달 footer -->
-       								<div class="modal-footer">
-       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
-        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
-       								</div>
-								</div>
-							</div>
-						</div>
-						
-						<!-- 
 						<div class="btn-modal">
-							<input type="button" class="btn btn-dark" id="category" data-toggle="modal" data-target="#myModal" value="음식 카테고리">
-         					<div class="modal fade" id="myModal">
-           						<div class="modal-dialog">
-           							<div class="modal-content">
-										<div class="mol-header">
-	         								<h4 class="modal-title">음식 카테고리</h4>
+							<!-- 지도 위의 버튼 1 음식 카테고리 -->
+							<!-- Button trigger modal -->
+							<button type="button" id="category" class="btn btn-dark" data-toggle="modal" data-target="#categoryModal">카테고리</button>
+							
+							<!-- CategoryModal -->
+							<div class="modal fade" id="categoryModal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- 음식 카테고리 모달 header -->
+										<div class="modal-header">
+											<h4 class="modal-title">음식 카테고리</h4>
 	           								<button type="button" class="close" data-dismiss="modal">&times;</button>
-	     								</div>
+										</div>
+										<!-- 음식 카테고리 모달 body -->
 	      								<div class="modal-body">
-	           								<h3>음식 종류</h3>
-	           								<div class="form-check-inline">
+	      									<h3>음식 종류</h3>
+	           								<div class="form-check">
 				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" >한식
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
 				 								</label>
 											</div>
-											<div class="form-check-inline">
+											<div class="form-check">
 				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" >양식
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="양식" checked="checked">양식
 				  								</label>
 											</div>
-										</div>
-        								<div class="modal-footer">
-	        								<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="일식/수산물" checked="checked">일식/수산물
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="중식" checked="checked">중식
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="카페/디저트" checked="checked">카페/디저트
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="치킨/피자/패스트푸드" checked="checked">치킨/피자/패스트푸드
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="기타" checked="checked">기타
+				  								</label>
+											</div>
+	      								</div>
+	      								<!-- 음식 카테고리 모달 footer -->
+	       								<div class="modal-footer">
+	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
 	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
-	        							</div>
-   	 								</div>
-   								</div>
-   	 						</div>
-   	 					</div>
-    	
+	       								</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
 						<div class="btn-modal">
-    	  					<input type="button" class="btn btn-warning" id="opentime" data-toggle="modal" data-target="#opentime" value="영업확인 " >
-         		 			<div class="modal fade" id="opentime">
-           						<div class="modal-dialog">
-           							<div class="modal-content">
-										<div class="mol-header">
-		        							<h4 class="modal-title">영업 확인</h4>
-		           							<button type="button" class="close" data-dismiss="modal">&times;</button>
-		     							</div>
-		       							<div class="modal-body" id="opentime">
-		          							<h3>식당 영업 요일별 확인</h3>
-		          							<div class="form-check-inline">
-					  							<label class="form-check-label">
-					    							<input type="checkbox" class="form-check-input" >월
-					  							</label>
+							<!-- 지도 위의 버튼 2 음식 카테고리 -->
+							<!-- Button trigger modal -->
+							<button type="button" id="opentime" class="btn btn-warning" data-toggle="modal" data-target="#opentimeModal">영업 확인</button>
+							
+							<!-- CategoryModal -->
+							<div class="modal fade" id="opentimeModal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- 영업 확인 모달 header -->
+										<div class="modal-header">
+											<h4 class="modal-title">영업 확인</h4>
+	           								<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<!-- 영업 확인 모달 body -->
+	      								<div class="modal-body">
+	      									<h3>식당 영업 요일별 확인</h3>
+	           								<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="일" checked="checked">일
+				 								</label>
 											</div>
-											<div class="form-check-inline">
-					  							<label class="form-check-label">
-					    							<input type="checkbox" class="form-check-input" >화
-					 							</label>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="월" checked="checked">월
+				  								</label>
 											</div>
-		       							</div>
-		        						<div class="modal-footer">
-		        							<button type="button" class="btn btn-warning" data-dismiss="modal">확인</button>
-		        							<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-		        						</div>
-		        					</div>
-    	 						</div>
-    						</div>
-    	 				</div>
-    	 				 -->
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="화" checked="checked">화
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="수" checked="checked">수
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="목" checked="checked">목
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="금" checked="checked">금
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="토" checked="checked">토
+				  								</label>
+											</div>
+	      								</div>
+	      								<!-- 영업 확인 모달 footer -->
+	       								<div class="modal-footer">
+	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
+	       								</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
     	 				<button type="button"  class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')">
     	 				범위 선택</button>
     					<button type="button"  class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	

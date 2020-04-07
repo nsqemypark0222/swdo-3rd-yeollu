@@ -81,14 +81,14 @@
 				height: 350px; 
 				margin-top:8%; 
 			}	
-			#category{
+			#btn_category{
 				position: absolute;
 				top: 3%; 
 				left: 1%;
 				z-index: 10;
 			}
 
-			#opentime{
+			#btn_opentime{
 				 position: absolute;
 				 top: 3%; 
 				 left: 25%; 
@@ -124,14 +124,14 @@
 			margin-top:3%; 
 			
 			}	
-		#category{
+		#btn_category{
 			position: absolute;
 			top: 3%; 
 			left: 1%;
 			z-index: 10;
 		}
 
-		#opentime{
+		#btn_opentime{
 			 position: absolute;
 			 top: 3%; 
 			 left: 25%; 
@@ -160,13 +160,13 @@
 				height: 400px; 
 				margin-top:5%; 
 			}
-			#category{
+			#btn_category{
 				position: absolute;
 				top: 3%; 
 				left: 1%;
 				z-index: 10;
 			}
-			#opentime{
+			#btn_opentime{
 				 position: absolute;
 				 top: 3%; 
 				 left: 20%; 
@@ -208,14 +208,13 @@
 			height: 400px; 
 			margin-top:3%; 
 			}
-		#category{
+		#btn_category{
 			position: absolute;
 			top: 3%; 
 			left: 1%;
 			z-index: 10;
 		}
-
-		#opentime{
+		#btn_opentime{
 			 position: absolute;
 			 top: 3%; 
 			 left: 14%; 

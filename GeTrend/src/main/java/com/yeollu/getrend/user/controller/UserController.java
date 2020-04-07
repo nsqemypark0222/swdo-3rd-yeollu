@@ -326,10 +326,7 @@ public class UserController {
 		}
 		return "redirect:/";
 	}
-	
-<<<<<<< HEAD
-	
-	
+
 	
 	
 	
@@ -381,7 +378,4 @@ public class UserController {
 			logger.info("인스타 스토어 이동 테스트 ");
 			return "/users/istore_test";
 		}
-
-=======
->>>>>>> 073902e39fec15d9747f78ee594f348a958db86f
 }

@@ -12,13 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>[ Home | GeTrend ]</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 073902e39fec15d9747f78ee594f348a958db86f
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -38,62 +32,65 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	</header>
 <div class="column-container">
 	<!-- column-content시작 -->
- <div class="column-content">
+			<!-- 로딩이미지 -->
+    	<div class="wrap-loading display-none">
+    		<div><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" /></div>
+		</div>
+		<!--  컨텐트 시작 -->
+ 	<div class="column-content">
 	<!-- 지도와의 간격 div-->
 	<div id="space">
 	<div class="container" >
 	<div class="col" >
 	<div id="map">
 	<!-- 지도 위의 버튼 1 음식 카테고리 -->
-	<div class="btn-modal">
-		<input type="button" class="btn btn-dark" id="category" data-toggle="modal" data-target="#myModal" value="category">
-          <div class="modal fade" id="myModal">
-           <div class="modal-dialog">
-           <div class="modal-content">
-			<!-- 음식 카테고리 모달 헤더 -->
-			<div class="mol-header">
-		         <h4 class="modal-title"> Category</h4>
-		           <button type="button" class="close" data-dismiss="modal">&times;</button>
-		     </div>
-		      <!--  음식 카테고리 모달 body -->
-		       <div class="modal-body">
-		           	<h3>소상공인 db 음식 종류</h3>
-		           	<div class="form-check-inline">
-					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio">한식
-					  </label>
-					</div>
-					<div class="form-check-inline">
-					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio">양식
-					  </label>
-					</div>
-					<div class="form-check-inline disabled">
-					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" >일식
-					  </label>
-					</div>
-					<div class="form-check-inline disabled">
-					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" >디저트
-					  </label>
-					</div>
-		       </div>
-		     	<!-- 음식 카테고리 모달 footer -->
-		        <div class="modal-footer">
-		        <button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
-		        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-		        </div>
-    	 	</div>
-    		</div>
-    	 </div>
-    	</div>
-    	
-    	<!-- 지도 위의 버튼 2 영업 확인 -->
-    	  <input type="button" class="btn btn-warning" id="opentime" data-toggle="modal" data-target="#myModal" value="영업확인 " >
+		<div class="btn-modal">
+			<input type="button" class="btn btn-dark" id="btn_category" data-toggle="modal" data-target="#category" value="category">
+	          <div class="modal fade" id="category">
+	           <div class="modal-dialog">
+	           <div class="modal-content">
+				<!-- 음식 카테고리 모달 헤더 -->
+				<div class="mol-header">
+			         <h4 class="modal-title"> Category</h4>
+			           <button type="button" class="close" data-dismiss="modal">&times;</button>
+			     </div>
+			      <!--  음식 카테고리 모달 body -->
+			       <div class="modal-body">
+			           	<h3>소상공인 db 음식 종류</h3>
+			           	<div class="form-check-inline">
+						  <label class="form-check-label">
+						    <input type="radio" class="form-check-input" name="optradio">한식
+						  </label>
+						</div>
+						<div class="form-check-inline">
+						  <label class="form-check-label">
+						    <input type="radio" class="form-check-input" name="optradio">양식
+						  </label>
+						</div>
+						<div class="form-check-inline disabled">
+						  <label class="form-check-label">
+						    <input type="radio" class="form-check-input" name="optradio" >일식
+						  </label>
+						</div>
+						<div class="form-check-inline disabled">
+						  <label class="form-check-label">
+						    <input type="radio" class="form-check-input" name="optradio" >디저트
+						  </label>
+						</div>
+			       </div>
+			     	<!-- 음식 카테고리 모달 footer -->
+			        <div class="modal-footer">
+			        <button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+			        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+			        </div>
+	    	 	</div>
+	    		</div>
+	    	 </div>
+	    <!-- 지도 위의 버튼 2 영업 확인 -->
+    	  <input type="button" class="btn btn-warning" id="btn-opentime" data-toggle="modal" data-target="#opentime" value="영업확인 " >
           <div class="modal fade" id="opentime">
            <div class="modal-dialog">
-           <div class="modal-content" id="opentime">
+           <div class="modal-content">
 				<!-- 영업확인  모달 헤더 -->
 			<div class="mol-header">
 		         <h4 class="modal-title"> 영업 확인</h4>
@@ -143,44 +140,24 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		        <div class="modal-footer">
 		        <button type="button" class="btn btn-warning" data-dismiss="modal">확인</button>
 		        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-		        </div>
-		        
+		        </div>   
     	 	</div>
     		</div>
     	 </div>
+	    </div>
+	    	
+
     	 <button type="button"  class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')">
     	 범위 선택</button>
     	<button type="button"  class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
     	조회 하기</button>  
    		</div>  	 
 	</div>
-<<<<<<< HEAD
 	</div>
-	</div>	
-=======
-</div>	
-		<!-- 로딩이미지 -->
-    	<div class="wrap-loading display-none">
-    		<div><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" /></div>
-		</div>
-		
-   <div class="">
-		<p>
-			<button type="button"  class="btn btn-warning" onclick="selectOverlay('POLYGON')">범위 선택</button>
-		</p>
-		<p class="getdata"> 
-	   		<button type="button"  class="btn btn-outline-warning" onclick="getDataFromDrawingMap()">조회 하기</button>
-	   	</p>
-	   	<div id="print">
-	   	</div>
-   </div> 
-      	
-      	
-     
-      	
->>>>>>> 073902e39fec15d9747f78ee594f348a958db86f
-  		<!-- 추천 가게 리스트 출력 -->
-  	
+	</div>
+	<!-- map div 끝 -->	
+	
+	<!-- 추천 가게 리스트 출력 -->
    		<div id="istoreList" class="istoreList">
 	   		<ul class="list-group list-group-horizontal">
 	   			<li class="list-group-item">
@@ -203,13 +180,28 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	   			</li>
 	  	  	</ul>	
   		</div>
- </div>
+</div>	
+	<!-- content 끝 -->
+		
+<!--    <div class="">
+		<p>
+			<button type="button"  class="btn btn-warning" onclick="selectOverlay('POLYGON')">범위 선택</button>
+		</p>
+		<p class="getdata"> 
+	   		<button type="button"  class="btn btn-outline-warning" onclick="getDataFromDrawingMap()">조회 하기</button>
+	   	</p>
+	   	<div id="print">
+	   	</div>
+   </div>  -->
+      	
+  		
+ 
 
 	<!-- 사이드 컬럼  시작 -->
    	<div class="column-side">
    		<div class="row">
 	   		<div id="istore" class="istore">
-	   		<h3 style="text-align:center;">주목Trend</h3>
+	   		<h5 style="text-align:center;">주목Trend</h5>
 	   		<ul class="list-group">
 	   			<li class="list-group-item">
 	   				<div class="istore2">
@@ -231,7 +223,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	  		</div>
   		</div>
   	</div>
-
+</div>
    						
 
    	<div id="desc">

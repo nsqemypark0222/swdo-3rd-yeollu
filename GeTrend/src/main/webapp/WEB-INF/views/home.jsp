@@ -14,12 +14,13 @@
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@api['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
+
+
+
+
 <style>
 .space{
  margin-top:80%;
@@ -160,23 +161,14 @@
 		</c:choose>	
 	</div>
 	
-<<<<<<< HEAD
-	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
-=======
->>>>>>> 2945408709fc29cedbd4df537c2ae3b335d4a773
+
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
 	<a href="<c:url value='/users/follow'/>">follow</a>
 
 	</div>
 
-<<<<<<< HEAD
-	<a href="users/follow">follow</a>
-=======
 
-
->>>>>>> 2945408709fc29cedbd4df537c2ae3b335d4a773
-	
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>

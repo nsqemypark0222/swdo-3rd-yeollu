@@ -97,6 +97,33 @@ order by
 	store_no asc
 </select>
 
+<select id="selectStoresByStoreCate1" parameterType="list" resultType="store">
+select
+	store_no
+	, store_name
+	, store_name2
+	, store_cate1
+	, store_cate2
+	, store_adr
+	, store_adr1
+	, store_adr2
+	, store_x
+	, store_y
+from
+	stores
+<choose>
+	<when test="list.size != 0">
+where
+	store_cate1 in
+	<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+		#{item}
+	</foreach>
+	</when>
+</choose>
+order by
+	store_no asc
+</select>
+
 <select id="selectInstaStore" parameterType="string" resultType="instaStore">
 select
 	s.store_no

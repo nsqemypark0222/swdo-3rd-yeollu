@@ -1,5 +1,7 @@
 package com.yeollu.getrend.store.util.preprocess.core;
 
+import java.util.regex.Pattern;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,5 +13,19 @@ public class StringPreprocessor {
         String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
         str = str.replaceAll(match, "");
         return str;
+	}
+	
+	public static boolean isHangul(String str) {
+		if(Pattern.matches("^[ㄱ-ㅎ가-힣]*$", str)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean isDigit(String str) {
+		if(Character.isDigit(str.charAt(0))) {
+			return true;
+		}
+		return false;
 	}
 }

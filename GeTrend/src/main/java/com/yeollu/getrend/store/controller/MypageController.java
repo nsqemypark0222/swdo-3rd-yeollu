@@ -42,7 +42,7 @@ public class MypageController {
 	
 	@RequestMapping(value = "/modalTest", method = RequestMethod.GET)
 	public String modalTest(Model model,HttpSession session) {
-		return "modal_test";
+		return "mypage/follow_modal";
 	
 	}
 	

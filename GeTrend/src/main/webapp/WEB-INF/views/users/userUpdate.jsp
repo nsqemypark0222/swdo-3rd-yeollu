@@ -18,130 +18,179 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link href='<c:url value="/resources/css/userUpdate.css"/>' rel="stylesheet" media="all">
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+	<div class="container">
+    	<div class="row">
+      		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        		<div class="card card-signin my-5">
+          			<div class="card-body">
+            			<h5 class="card-title text-center">회원 수정</h5>
+             			<form class="update" 
+             					action="<c:url value='update'/>" 
+             					id="updateForm" 
+             					method="post"
+             					v-on:submit="updateUser"
+             					enctype="multipart/form-data" >
+             				
+             				<div class="contaniner-fluid text-center bg-sub">	
+								<p>${user.user_name}</p>
+							</div>
+							
+							<c:choose>
+								<c:when test="${user.user_profile == null}">
+									<div class="form-label-group text-center">
+										<img class="img-thumbnail rounded-circle" id="avatarPreview" alt="" />
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="form-label-group text-center">
+										<img class="img-thumbnail rounded-circle" id="avatarPreview" src="${user.user_profile}" />
+									</div>
+								</c:otherwise>
+							</c:choose>
+							
+							<div class="form-label-group custom-file">
+								<input class="custom-file-input" type="file" id="userAvatar" name="userAvatar" />
+								<label class="custom-file-label" for="userAvatar">Choose your avatar image...</label>
+							</div>
+							
+							<div class="form-label-group">
+		                		<input type="email"
+		                				id="user_email"
+		                				name="user_email" 
+		                				class="form-control" 
+		                				v-model="user_email" 
+		                				ref="user_email"
+		                				placeholder="user_email" 
+		                				readonly="readonly" 
+		                				required autofocus />
+		                		<label for="user_email">이메일</label>
+		              		</div>
+		              		
+		              		<div class="form-label-group" v-if="${user.user_type == 'LOCAL'}">
+		                		<input type="password"
+		                				id="user_pw" 
+		                				name="user_pw"
+		                				class="form-control" 
+		                				v-model="user_pw" 
+		                				ref="user_pw"
+		                				placeholder="Password" 
+		                				required />
+		                		<label for="user_pw">비밀번호</label>
+		                		<small>{{ passwordValidation }}</small>
+		              		</div>
+		              		
+		               		<div class="form-label-group" v-if="${user.user_type == 'LOCAL'}">
+		                		<input type="password" 
+		                				id="pwCheck"
+		                				name="pwCheck" 
+		                				class="form-control" 
+		                				v-model="pwCheck" 
+		                				ref="pwCheck"
+		                				placeholder="pwCheck" 
+		                				required />
+		                		<label for="pwCheck">비밀번호 확인</label>
+		                		<small>{{ pwCheckValidation }}</small>
+		              		</div>
+		              		
+		              		<div class="form-label-group">
+		                		<input type="text" 
+		                				id="user_name" 
+		                				name="user_name" 
+		                				class="form-control" 
+		                				v-model="user_name" 
+		                				ref="user_name"
+		                				placeholder="user_name" 
+		                				required />
+		                		<label for="user_name">닉네임 </label>
+		              		</div>
+		              		
+		              		<input type="hidden" id="user_type" name="user_type" v-model="user_type" />
+		              		
+		              		<button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">회원정보수정</button>
+		              		<button class="btn btn-lg btn-warning btn-block text-uppercase" type="reset" id="cancel" >취소</button>
+		              		<button class="btn btn-lg btn-warning btn-block text-uppercase" type="reset" id="userDelete" >회원탈퇴</button>
+	          			</form>
+	          		</div>
+	        	</div>
+	      	</div>
+    	</div>
+	</div>
+</body>
+
 <script>
 $(function(){
-	  $("#upload").change(function(){
-	   if(this.files && this.files[0]) {
-	    var reader = new FileReader;
-	    reader.onload = function(data) {
-	     $(".select_img img").attr("src", data.target.result).width(200);
-	    }
-	    reader.readAsDataURL(this.files[0]);
-	   }
-	  });
-	})
-
-$(function(){
-	$("#cancel").click(function(){
-		$(location).attr('href',"<c:url value='/'/>");
+	$("#cancel").click(function() {
+		$(location).attr('href', "<c:url value='/'/>");
 	});
 
-	var user_email = $("#user_email").val();
-	$("#UserDelete").click(function(){
-		$(location).attr('href',"deleteUser?user_email="+user_email);	
+	$("#userDelete").click(function() {
+		$(location).attr('href', "<c:url value='deleteUser'/>" + "?user_email=" + $("#user_email").val());
+	});
+
+	$("#userAvatar").change(function(event) {
+		var files = event.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(file) {
+				if(!file.type.match("image.*")) {
+					alert("확장자는 이미지 확장자만 가능합니다");
+					return;
+				};
+			var reader = new FileReader();
+			reader.onload = function(event) {
+				$("#avatarPreview").attr("src", event.target.result);
+			};
+			reader.readAsDataURL(file);
+		});
 	});
 });
 </script>
-</head>
-<body>
- <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">회원 수정</h5>
-             <form class="update" method="post" id="userUpdate">
-				<input type="file" id="upload" name="upload">
-					<div class="select_img"  style="text-align: left;">
-						<img src="" class="rounded-circle" id="upload" />
-					</div>
-					<c:if test="${sessionScope.user_email != null}">
-						<div class="select_img" class="rounded-circle" style="text-align: left;">
-							<img alt="file" style="width: 200px;"src="/img/${user}">
-						</div>
-					</c:if>
-						<input type="file" id="upload" name="upload" accept="image/gif, image/jpeg, image/png">
-					<div class="contaniner-fluid text-center bg-sub">	
-						<p>${user.user_name}</p>
-					</div>	
-						
-		              <div class="form-label-group">
-		                <input type="email" id="user_email" class="form-control" value="${user.user_email}"  placeholder="user_email" readonly="readonly" required autofocus>
-		                <label for="user_email">이메일 </label>
-		              </div>
-		              <div class="form-label-group">
-		                <input type="password" id="user_pw" class="form-control" placeholder="Password" v-model="user_pw" required>
-		                <label for="user_pw">Password</label>
-		              </div>
-		               <div class="form-label-group">
-		                <input type="password" id="pwCheck" class="form-control" placeholder="pwCheck" v-model="pwCheck" required>
-		                <label for="pwCheck">비밀번호 확인</label>
-		              </div>
-		              <div class="form-label-group">
-		                <input type="text" name="user_name" id="user_name" class="form-control" value="${user.user_name}" v-model="user_name" placeholder="user_name" required>
-		                <label for="user_name">닉네임 </label>
-		              </div>
-		        
-		              <button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit" id="update">Update Info</button>
-		              <button class="btn btn-lg btn-warning btn-block text-uppercase" id="cancel" >취소</button>
-		              <button class="btn btn-lg btn-warning btn-block text-uppercase" id="UserDelete">회원탈퇴</button>
-		
-		              <hr class="my-4">
-		          
-		        </form>
-		          </div>
-		        </div>
-		      </div>
-		    </div>
-</div>
-</body>
 <script>
-/* function formCheck() {
-	
-	var user_pw = $('#user_pw').val();
-	var pwCheck = $('#pwCheck').val();
-
-	if(user_pw.length <= 3 || user_pw.length > 10) {
-		alert("비밀번호는 4~10 글자를 입력하세요");
-		return false;
-	}
-	if(user_pw !== pwCheck) {
-		alert("비밀번호가 일치하지 않습니다");
-		return false;
-	}
-	return true;
-} */
-//Vue로 수정 user_pw, user_name,pwCheck 
- 	const userUpdate = new Vue({
-		el:'#userUpdate',
-		data:{
-			user_pw:'',
-			user_name:'',
-			pwCheck:''
+	const updateForm = new Vue({
+		el: "#updateForm",
+		data: {
+			user_email: "${user.user_email}",
+			user_pw: "",
+			pwCheck: "",
+			user_type: "${user.user_type}",
+			user_name: "${user.user_name}"
 		},
-		methods:{
-			userUpdate(){
-				this.Update = !this.Update;
-				if(!this.user_pw){
-					user_pw.focus();
-					return false;
-				}else if(this.user_pw.length <= 3 || this.user_pw.length > 10){
-					alert("비밀번호는 4~10 글자를 입력하세요");
-					user_pw.focus();
-					return false;
-				 } 
-				if(!this.pwCheck){
-					pwCheck.focus();
-					return false;
+		computed: {
+			passwordValidation: function() {
+				if(this.user_type === "LOCAL") {
+					if(this.user_pw === "") {
+						user_pw.focus();
+						return '비밀번호를 입력하세요';
+					} else if(this.user_pw.length <= 3 || this.user_pw.length > 10){
+						user_pw.focus();
+						return '비밀번호는 4~10 글자를 입력하세요';
+					} 
 				}
-				if(this.user_pw != this.pwCheck){
-					alert("비밀번호가 일치하지 않습니다.");
-					return false;
-				}		
-				return true;
+				return '';
+			},
+			pwCheckValidation: function() {
+				if(this.user_type === "LOCAL") {
+					if(this.pwCheck  === "") {
+						pwCheck.focus();
+						return '비밀번호 확인을 입력하세요';
+					}
+					if(this.user_pw !== this.pwCheck) {
+						pwCheck.focus();
+						return '비밀번호가 일치하지 않습니다';
+					}
+				}
+				return '';
+			}
+		},
+		methods: {
+			updateUser: function() {
+				
 			}
 		}
-	 });
+	});
  
 </script>
 </html>

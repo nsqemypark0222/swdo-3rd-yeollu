@@ -1,9 +1,7 @@
 package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
-import java.util.Locale;
- 
- 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,6 +106,10 @@ public class AutocompleteController {
 			MangoStoreVO mangoStore = new MangoStoreVO();
 			mangoStore = mangoStoreDAO.selectMangoStoreByStoreNo(instaStore.getStore_no());
 			mangoStoreList.add(mangoStore);
+		}
+		
+		if(instaStoreList.size() > 3) {
+			instaStoreList = new ArrayList<InstaStoreVO> (instaStoreList.subList(0, 3));
 		}
 		
 		ArrayList<String> locationList = new ArrayList<String>();

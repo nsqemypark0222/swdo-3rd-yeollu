@@ -8,15 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- 반응형 웹 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>[ Home | GeTrend ]</title>
-
-
-<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@api['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
+<<<<<<< HEAD
 
 
 
@@ -27,75 +31,235 @@
 }
 
 </style>
+=======
+<link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'>
+<link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
+>>>>>>> e95a1efc2cb37b35b61e73247dd683c3e84f08a6
 </head>
 <body>
-
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
-	<div id="space">
-	<div id="map" style="width: 850px; height: 400px; margin-top:5%; margin-left:15%;">
-		<input type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal" value="Category Test" 
-		style="position: absolute;top: 11px; left: 1%; z-index: 400;">
-          <div class="modal" id="myModal">
-           <div class="modal-dialog">
-           <div class="modal-content">
-			<!-- 음식 카테고리 모달 헤더 -->
-			<div class="mol-header">
-		         <h4 class="modal-title">Category</h4>
-		           <button type="button" class="close" data-dismiss="modal">&times;</button>
-		     </div>
-		      <!--  음식 카테고리 모달 body -->
-		       <div class="modal-body">
-		           	소상공인 db 음식 종류
-		       </div>
-		        
-		     	<!-- 음식 카테고리 모달 footer -->
-		        <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-		        </div>
-    	 	</div>
-    		</div>
-    	 </div>
-    	 
-    	  <input type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" value="영업확인 Test" 
-    	  style="position: absolute;top: 11px; left: 18%; z-index: 400;">
-          <div class="modal" id="myModal">
-           <div class="modal-dialog">
-           <div class="modal-content">
-				<!-- 영업확인  모달 헤더 -->
-			<div class="mol-header">
-		         <h4 class="modal-title">영업 확인</h4>
-		           <button type="button" class="close" data-dismiss="modal">&times;</button>
-		     </div>
-		      <!--  영업확인  모달 body -->
-		       <div class="modal-body">
-		          	식당 영업 요일별 확인 
-		       </div>
-		        
-		     	<!-- 영업확인 모달 footer -->
-		        <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-		        </div>
-		        
-    	 	</div>
-    		</div>
-    	 </div>
-	</div>
-	 
-  
-	<p>
-		<button onclick="selectOverlay('POLYGON')">범위 선택</button>
-	</p>
 	
-	<p class="getdata">
-   		<button onclick="getDataFromDrawingMap()">조회 하기</button>
-   	</p>
-   	
-   	<div id="print">
-   	
-   	</div>
-   	
+<div class="column-container">
+	<!-- column-content시작 -->
+	<div class="column-content">
+		<!-- 지도와의 간격 div-->
+		<div id="space">
+			<div class="container" >
+				<div class="col" >
+					<div id="map">
+						<div class="btn-modal">
+							<!-- 지도 위의 버튼 1 음식 카테고리 -->
+							<!-- Button trigger modal -->
+							<button type="button" id="category" class="btn btn-dark" data-toggle="modal" data-target="#categoryModal">카테고리</button>
+							
+							<!-- CategoryModal -->
+							<div class="modal fade" id="categoryModal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- 음식 카테고리 모달 header -->
+										<div class="modal-header">
+											<h4 class="modal-title">음식 카테고리</h4>
+	           								<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<!-- 음식 카테고리 모달 body -->
+	      								<div class="modal-body">
+	      									<h3>음식 종류</h3>
+	           								<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
+				 								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="양식" checked="checked">양식
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="일식/수산물" checked="checked">일식/수산물
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="중식" checked="checked">중식
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="카페/디저트" checked="checked">카페/디저트
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="치킨/피자/패스트푸드" checked="checked">치킨/피자/패스트푸드
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="기타" checked="checked">기타
+				  								</label>
+											</div>
+	      								</div>
+	      								<!-- 음식 카테고리 모달 footer -->
+	       								<div class="modal-footer">
+	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
+	       								</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="btn-modal">
+							<!-- 지도 위의 버튼 2 음식 카테고리 -->
+							<!-- Button trigger modal -->
+							<button type="button" id="opentime" class="btn btn-warning" data-toggle="modal" data-target="#opentimeModal">영업 확인</button>
+							
+							<!-- CategoryModal -->
+							<div class="modal fade" id="opentimeModal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- 영업 확인 모달 header -->
+										<div class="modal-header">
+											<h4 class="modal-title">영업 확인</h4>
+	           								<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<!-- 영업 확인 모달 body -->
+	      								<div class="modal-body">
+	      									<h3>식당 영업 요일별 확인</h3>
+	           								<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="일" checked="checked">일
+				 								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="월" checked="checked">월
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="화" checked="checked">화
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="수" checked="checked">수
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="목" checked="checked">목
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="금" checked="checked">금
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="토" checked="checked">토
+				  								</label>
+											</div>
+	      								</div>
+	      								<!-- 영업 확인 모달 footer -->
+	       								<div class="modal-footer">
+	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
+	       								</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+    	 				<button type="button"  class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')">
+    	 				범위 선택</button>
+    					<button type="button"  class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
+    					조회 하기</button>  
+   					</div>  	 
+				</div>
+			</div>
+		</div>
+		
+		<!-- 추천 가게 리스트 출력 -->
+   		<div id="istoreList" class="istoreList">
+			<ul class="list-group list-group-horizontal">
+	   			<li class="list-group-item">
+	   				<img src="resources/img/ok.jpg" alt="동명동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
+   		   			<div class="istore1">
+   		   				<div class="overlay1">
+   							<div class="text" style="color:white;">동명동 추천 가게</div>
+  						</div>
+  					</div>
+	   			</li>		
+	   			<li class="list-group-item">
+	   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
+	   				<div class="istore2">
+	   		   			<div class="overlay2">
+	   						<div class="text">
+	   							<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+	   						</div>
+	  					</div>
+	  				</div>
+	   			</li>
+	  	  	</ul>	
+  		</div>
+	</div>
+	
+	<!-- 사이드 컬럼 시작 -->
+   	<div class="column-side">
+   		<div class="row">
+	   		<div id="istore" class="istore">
+	   			<h3 style="text-align:center;">주목Trend</h3>
+	   			<ul class="list-group">
+	   				<li class="list-group-item">
+	   					<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+	   					<div class="istore2">
+	   		   		 		<div class="overlay2">
+	   							<div class="text">내일의 추천 가게</div>
+	  						</div>
+	  					</div>
+	   				</li>
+	   				<li class="list-group-item">
+		   				<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+	   					<div class="istore2">
+	   		   		 		<div class="overlay2">
+	   							<div class="text">이번주 추천 가게</div>
+	  						</div>
+  						</div>
+	   				</li>
+	  	  		</ul>	
+	  		</div>
+  		</div>
+  	</div>
+</div>
+<!-- 로딩이미지 -->
+<div class="wrap-loading display-none">
+  	<div>
+  		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" />
+  	</div>
+</div>
+		
+<!--    <div class="">
+		<p>
+			<button type="button"  class="btn btn-warning" onclick="selectOverlay('POLYGON')">범위 선택</button>
+		</p>
+		<p class="getdata"> 
+	   		<button type="button"  class="btn btn-outline-warning" onclick="getDataFromDrawingMap()">조회 하기</button>
+	   	</p>
+	   	<div id="print">
+	   	</div>
+   </div>  -->
+   <div id="print"></div>
+
+  	
+
+	
+
+   						
 
    	<div id="desc">
    	
@@ -135,19 +299,16 @@
    			</tr>
    		</table>
    	</div>
-   	
-   	<div id="imageContainer">
-   	
-   	</div>
 
-   	
 
-   	
    	<div>
 		<c:choose>
 			<c:when test="${sessionScope.loginemail != null}">
 				${sessionScope.loginname}님 환영합니다!<br/>
 				<a href="users/userUpdate">회원정보 수정</a>
+				
+				
+				
 				<a href="users/logout">로그아웃</a>
 				<a href="users/kakaoshare">공유하기</a>
 				<a href="reply/replyForm">댓글달기</a>
@@ -156,11 +317,14 @@
 			<c:otherwise>
 				<a href="users/userJoin">회원가입</a>
 				<a href="users/userLogin">로그인</a>
+				<a href="users/userUpdate">회원 수정</a>
 				
 			</c:otherwise>
 		</c:choose>	
 	</div>
+
 	
+<<<<<<< HEAD
 
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
@@ -170,19 +334,63 @@
 
 
 	<footer>
+=======
+	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
+	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
+	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
+	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
+	<a href="users/follow">follow</a>
+	
+
+	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
+	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
+	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
+	<a href="<c:url value='/users/follow'/>">follow</a>
+
+
+	
+<footer>
+>>>>>>> e95a1efc2cb37b35b61e73247dd683c3e84f08a6
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
 
 <script type="text/javascript">
-		$(function() {
 
+		$(function() {
+			
 			function search(points) {
+				let categoryValues = [];
+
+				$("input[name=categotyChk]:checked").each(function() {
+					categoryValues.push($(this).val());
+				});
+				console.log(categoryValues);
+
+				let opentimeValues = [];
+
+				$("input[name=opentimeChk]:checked").each(function() {
+					opentimeValues.push($(this).val());
+				});
+				console.log(opentimeValues);
+
+				let reqParm = {
+					"points": points,
+					"categoryValues": categoryValues,
+					"opentimeValues": opentimeValues
+				};
+				
 				$.ajax({
 					url: "<c:url value='/search' />",
 					type: "post",
 					contentType: "application/json; charset=utf-8",
-					data: JSON.stringify(points),
+					data: JSON.stringify(reqParm),
 					dataType: "json",
+					beforeSend:function(){
+						$('.wrap-loading').removeClass('display-none');
+					},
+					complete:function(){
+						$('.wrap-loading').addClass('display-none');
+					},
 					success: function(result) {
 						alert("성공");
 						printMarker(result);
@@ -245,10 +453,6 @@
 
 		const map = new kakao.maps.Map(mapContainer, mapOption);
 
-
-
-
-		
 		const printMarker = (result) => {
 			
 			// 마커를 표시할 위치와 title 객체 배열입니다
@@ -340,6 +544,16 @@
 	        const printContainer = document.getElementById("print");
 	        printContainer.innerHTML = row;
 			search(points);
+	   };
+
+	   const setCenter = (lat, lng) => {
+		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
+		   map.setCenter(moveLatLng);
+	   };
+
+	   const panTo = (lat, lng) => {
+		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
+		   map.panTo(moveLatLng);
 	   };
 		
 </script>

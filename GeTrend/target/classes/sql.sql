@@ -3,7 +3,7 @@ drop sequence seq_searched_stores;
 drop table searched_stores;
 drop table insta_locations;
 drop table mango_stores;
-drop table mango_stores;
+drop table mango_days;
 drop table follows;
 drop table likes;
 drop table users;
@@ -11,13 +11,17 @@ drop table stores;
 --drop table stores cascade constraints;
 drop table insta_replys;
 
+
+
 create table users(
     user_email              varchar2(50)            primary key
     , user_pw               varchar2(200)           not null
     , user_name             varchar2(30)            not null
     , user_type             varchar2(10)
     , user_profile          varchar2(1000)
+    , user_profileId        varchar2(50)
 );
+insert into users(user_email,user_pw,user_name)values('wldus9656@gmail.com','moon','moon');
 
 
 
@@ -99,10 +103,25 @@ reply_no 		number 	primary key
 ,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
 );
 
-
+-- sqlldr userid=hr/hr control='C:\Users\user\Desktop\mango_days_control.ctl'
+create table mango_days (
+    store_no        varchar2(200)       primary key
+    , mango_sun     char(1)
+    , mango_mon     char(1)
+    , mango_tue     char(1)
+    , mango_wed     char(1)
+    , mango_thu     char(1)
+    , mango_fri     char(1)
+    , mango_sat     char(1)
+    , mango_indate  date                default sysdate
+    , constraint fk2_mango_days foreign key (store_no) references stores(store_no)
+);
 
 
 commit;
+commit;
+commit;
+
 
 
 
@@ -126,6 +145,7 @@ select * from searched_stores;
 select * from mango_stores order by store_no asc;
 select count(*) from mango_stores; 
 select * from follows;
+select * from mango_days;
 --------------------------------------------------------------------------------------------------------------------------------
 select
     s.store_no
@@ -186,15 +206,10 @@ where
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
 select
-    m.mango_time, m.mango_break_time
+    s.store_name, s.store_no, m.mango_time, m.mango_break_time
 from
     stores s, mango_stores m, insta_locations l
 where
     s.store_no = m.store_no
     and s.store_no = l.store_no;
-    
-select sysdate from dual;
-select mango_time from mango_stores;
-select to_char(sysdate, 'HH24') from dual;
-select to_char(sysdate, 'dy') from dual;
 

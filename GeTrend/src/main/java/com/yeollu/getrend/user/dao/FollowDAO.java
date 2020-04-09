@@ -53,6 +53,7 @@ public class FollowDAO {
 			e.printStackTrace();
 		}return cnt;
 	}
+	
 	public int countFollower(String user_email){
 		int cnt = 0;
 		try {
@@ -76,6 +77,7 @@ public class FollowDAO {
 		}
 		return list;
 	}
+	
 	public ArrayList<HashMap<String, Object>> selectFollower(String follows_following){
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		try {
@@ -85,5 +87,9 @@ public class FollowDAO {
 			e.printStackTrace();
 		}
 		return list;
+
 	}
+	
 }
+
+

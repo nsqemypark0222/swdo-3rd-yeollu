@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yeollu.getrend.user.dao.FollowDAO;
 import com.yeollu.getrend.user.dao.UserDAO;
+import com.yeollu.getrend.user.util.FileService;
 import com.yeollu.getrend.user.util.MailService;
+import com.yeollu.getrend.user.util.ProfileImageHandler;
 import com.yeollu.getrend.user.vo.FollowVO;
 import com.yeollu.getrend.user.vo.UserVO;
 import com.yeollu.getrend.util.PropertiesUtil;
@@ -139,7 +142,7 @@ public class UserController {
 		logger.info(inputPw);
 		logger.info(pw);
 		
-		user.setUser_type("local");
+		user.setUser_type("LOCAL");
 		int cnt = dao.join(user);
 		if(cnt>0) logger.info("가입 성공");
 		else logger.info("가입 실패");
@@ -272,24 +275,60 @@ public class UserController {
 	}
 	//회원정보 수정
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(UserVO user){
+	public String update(UserVO user, HttpSession session, MultipartFile userAvatar){
+		logger.info("회원정보 수정 시작");
+		if(!userAvatar.isEmpty()) {
+			logger.info("유저 아바타 있음");
+			UserVO _user = dao.selectEmail(user.getUser_email());
+			if(!(_user.getUser_profile() == null || _user.getUser_profile().equals(""))) {
+				ProfileImageHandler profileImageHandler = new ProfileImageHandler();
+				if(profileImageHandler.delete(_user.getUser_profileId())) {
+					logger.info("기존 이미지 삭제 성공");
+				} else {
+					logger.info("기존 이미지 삭제 실패");
+				}
+			}
+			logger.info("{}", userAvatar.getOriginalFilename());
+			ProfileImageHandler profileImageHandler = new ProfileImageHandler();
+			if(profileImageHandler.upload(userAvatar)) {
+				logger.info("이미지 추가 성공");
+				String user_profileId = profileImageHandler.getPublicId();
+				String user_profile = profileImageHandler.getUrl();
+				logger.info("user_profileId : {}", user_profileId);
+				logger.info("user_profile : {}", user_profile);
+				user.setUser_profileId(user_profileId);
+				user.setUser_profile(user_profile);
+			} else {
+				logger.info("이미지 추가 실패");
+			}
+		} else {
+			logger.info("유저 아바타 없음");
+		}
 		logger.info("{}", user);
 		
-		String inputPw = user.getUser_pw();
-		String pw = passEncoder.encode(inputPw);
-		user.setUser_pw(pw);
-		logger.info(inputPw);
-		logger.info(pw);
 		
-		int cnt = dao.updateUser(user);
+		int cnt = 0;
+		if(user.getUser_type().equals("LOCAL")) {
+			String inputPw = user.getUser_pw();
+			String pw = passEncoder.encode(inputPw);
+			user.setUser_pw(pw);
+			logger.info(inputPw);
+			logger.info(pw);
+			cnt = dao.updateUser(user);
+		} else {
+			cnt = dao.updateSocialUser(user);
+		}
+		
 		logger.info("{}",cnt);
 		if(cnt>0) {
 			logger.info("수정성공");
+			session.setAttribute("loginname", user.getUser_name());
 		}else {
 			logger.info("수정실패");
 		}
 		return "redirect:/";
 	}
+	
 	//회원탈퇴 
 	@RequestMapping(value="deleteUser", method=RequestMethod.GET)
 	public String deleteUser(String user_email, HttpSession session) {
@@ -297,14 +336,29 @@ public class UserController {
 		session.removeAttribute("loginemail");
 		session.removeAttribute("loginname");
 		
+		UserVO user = dao.selectEmail(user_email);
+		String publicId = user.getUser_profileId();
+		
 		int cnt = dao.deleteUser(user_email);
 	
 		if(cnt> 0) {
 			logger.info("삭제 성공");
+			ProfileImageHandler profileImageHandler = new ProfileImageHandler();
+			if(profileImageHandler.delete(publicId)) {
+				logger.info("이미지 파일 삭제 성공");
+			}
 		}else {
 			logger.info("삭제 실패");
 		}
 		return "redirect:/";
 	}
 	
+	
+	
+		//인스타 스토어 이동 테스트 
+		@RequestMapping(value="/istore_test", method=RequestMethod.GET)
+		public String istore_test() {
+			logger.info("인스타 스토어 이동 테스트 ");
+			return "/users/istore_test";
+		}
 }

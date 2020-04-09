@@ -16,6 +16,9 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 <link href='<c:url value="/resources/css/header.css"/>' rel="stylesheet" media="all">
+<!-- 부트스트랩 아이콘 -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -25,39 +28,57 @@
 	.ui-autocomplete .highlight {color: orange;}
 </style>
 
-
 <title>Header</title>
 </head>	
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" id="navbar-brand"  href="<c:url value='/'/>" >GeTrend</a>
+	<div class="input-group">
+		<form class="form-inline" >
+	 		<div class="col-md-9">
+	 			<input class="form-control mr-sm-2" type="text" id="searchInput" name="searchInput" placeholder="Search">
+    		</div>
+    	</form>
+        <div class="menu_list">
+  			<ul class="nav jus">
+  			<c:choose>
+  				<c:when test="${sessionScope.loginemail != null}">
+  					<li class="nav-item">
+  						<a href="<c:url value="/mypage/mypageForm"/>">
+	  			    		<input type="button" class="btn btn-light" id="mypage" value="내 방">
+ 			    		</a>
+	  			    </li>
+	  			    <li class="nav-item">
+	  			    	<a href="<c:url value="/users/logout"/>">
+	  			        	<input type="button" class="btn btn-light" value="Logout">
+	  			        </a>
+	  			    </li>
+	  			    <li class="nav-item">
+		                <a class="nav-link" href="<c:url value='/users/userUpdate'/>">
+		                	<img class="profile" style="border-radius: 60px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" width="30px" height="30px"  >
+	  			        </a>
+	  			    </li>
+  				</c:when>
+  				<c:otherwise>
+  					<li>
+	  			        <a href="<c:url value="/users/userJoin"/>">
+	  			        	<input type="button" class="btn btn-light" id="userJoin" value="회원가입">
+	  			        </a>
+	  			    </li>
+	  			    <li>
+	  			        <a href="<c:url value="/users/userLogin"/>">
+	  			        	<input type="button" class="btn btn-light" id="userLogin" value="로그인">
+	  			        </a>
+	  			    </li>
+  				</c:otherwise>
+  			</c:choose>
+  			</ul> 
+    	</div>     	  
+	</div>	 
+</nav>
+	
+    	 
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-   		<a class="navbar-brand" id="navbar-brand"  href="<c:url value='/'/>" >GeTrend</a>
-		<div class="input-group">
-			<form class="form-inline" >
-	 			<div class="col-md-9">
-    				<input class="form-control mr-sm-2" type="text" id="searchInput" name="searchInput" placeholder="Search">
-    			</div>
-    		</form>
-    		
-    		<c:if test="${session.user_email != null }">
-            <div class="menu_list">
-  				<ul class="nav jus">
-  			    	<li class="nav-item">
-  			        	<input type="button" class="btn btn-light" value="내 방" />
-  			        </li>
-  			        <li class="nav-item">
-  			        	<input type="button" class="btn btn-light" value="Logout" />
-  			        </li>
-  			        <li class="nav-item">
-                  		<a class="nav-link" href="#">
-                  			<img class="profile" style="border-radius: 60px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" width="30px" height="30px"  >
-  			          	</a>
-  			        </li>
-				</ul>
-			</div>
-            </c:if>	  
-		</div>
-	</nav>
 	
 	
 <script type="text/javascript">
@@ -121,6 +142,7 @@
 						printMarker(result);
 						console.log(result);
 						$(result).each(function(index, item) {
+							panTo(item.instaStore.store_y, item.instaStore.store_x);
 							$("#table").append(
 								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
 										+ "<td>" + item.instaStore.store_name + "</td>"
@@ -164,6 +186,5 @@
 	    });
 	});
 </script>
-
 </body>
 </html>

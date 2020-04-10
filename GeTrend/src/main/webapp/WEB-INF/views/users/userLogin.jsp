@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>login</title>
-<script src='<c:url value="/resources/js/naverLogin_implicit-1.0.3.js"/>'></script>
 
 <link rel="stylesheet" href='<c:url value="/resources/css/login.css"/>'>
 <link rel="stylesheet" href='<c:url value="/resources/css/bootstrap.min.css"/>'>
@@ -15,15 +14,7 @@
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-$(function(){
-	$("#cancel").click(function(){
-		$(location).attr('href',"<c:url value='/'/>");
-	});
 
-
-});
-</script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -79,18 +70,19 @@ $(function(){
 					                
 					                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" >Sign in</button>
 							 	</form>
-							 	
-							 	<div id="socialbtn">
-					            	<div id="kakaoIdLogin">
-					            		<a id="kakao-login-btn"></a>
-					            	</div>
-					            	<div id="naverIdLogin">
-					            		<a id="naver-custom-login-btn">
-					            			
+
+							 	<div id="socialbtn" class="row">
+					            	<div id="kakaoIdLogin" class="col">
+					            		<a id="kakao-custom-login-btn">
+					            			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/c_scale,w_226/v1586494683/kakao_login_btn_bkouot.png">
 					            		</a>
-					            	</div>  <!-- 버튼이 들어갈 위치 선언. ID는 반드시 지정된 값으로 설정하여야 합니다.-->
-					            	<div style="clear:both;"></div>
-					           </div>
+					            	</div>
+					            	<div id="naverIdLogin" class="col">
+					            		<a id="naver-custom-login-btn">
+					            			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/c_scale,w_226/v1586494631/naver_login_btn_toztto.png">
+					            		</a>
+					            	</div>
+					            </div>
 							</div>
 						</div>
 					</div>
@@ -113,54 +105,63 @@ $(function(){
 			{
 				clientId: '<spring:eval expression="@naver['CLIENT_ID']" />',
 				callbackUrl: '<spring:eval expression="@naver['CALLBACK_URL']" />',
-				loginButton: {color: "green", type: 3, height: 49} /* 로그인 버튼의 타입을 지정 */
+				//loginButton: {color: "green", type: 3, height: 49} /* 로그인 버튼의 타입을 지정 */
 			}
 	);
 			
 	/* 설정정보를 초기화하고 연동을 준비 */
 	naverLogin.init();
-
-	console.log(naverLogin);
-</script>
-
-<script type='text/javascript'>
-	//<![CDATA[
+	
 	// 사용할 앱의 JavaScript 키를 설정해 주세요.
 	Kakao.init('<spring:eval expression="@kakao['KAKAOLOGIN_APPKEY']" />');
-	// 카카오 로그인 버튼을 생성합니다.
-	Kakao.Auth.createLoginButton({
-		
-		container: '#kakao-login-btn',
-	  	success: function(authObj) {
-			Kakao.API.request({
-				url:'/v2/user/me',
-				success:function(res){
-					
-					var kakaoLogin = document.getElementById("kakao");
-		  			console.log(kakaoLogin.childNodes);
-		  			var kakaoId = kakaoLogin.childNodes[1];
-		  			var kakaonickname = kakaoLogin.childNodes[3];
-		  			var kakaoemail = kakaoLogin.childNodes[5];
-		  			kakaoId.value = res.id;
-		  			kakaonickname.value = res.properties.nickname;
-		  			kakaoemail.value =res.kakao_account.email;
-		  			console.log(kakaoId.value);
-		  			console.log(kakaonickname.value);
-		  			console.log(kakaoemail.value);
-		  			console.log(authObj.access_token);
-		
-		  			kakaoLogin.submit();
-				}	
-			})	
-		},
-		fail: function(err) {
-			   alert(JSON.stringify(err));
-		}
-	});
-	//]]>
 </script>
 
-</body>
+<script>
+$(function(){
+	$("#cancel").click(function(){
+		$(location).attr('href',"<c:url value='/'/>");
+	});
+
+	$("#naver-custom-login-btn").click(function() {
+		$("#naver-custom-login-btn").attr("href", naverLogin.generateAuthorizeUrl());
+	});
+
+	$("#kakao-custom-login-btn").click(function() {
+		Kakao.Auth.login({
+			
+		  	success: function(authObj) {
+				Kakao.API.request({
+					url:'/v2/user/me',
+					success:function(res){
+						
+						var kakaoLogin = document.getElementById("kakao");
+			  			console.log(kakaoLogin.childNodes);
+			  			var kakaoId = kakaoLogin.childNodes[1];
+			  			var kakaonickname = kakaoLogin.childNodes[3];
+			  			var kakaoemail = kakaoLogin.childNodes[5];
+			  			kakaoId.value = res.id;
+			  			kakaonickname.value = res.properties.nickname;
+			  			kakaoemail.value =res.kakao_account.email;
+			  			console.log(kakaoId.value);
+			  			console.log(kakaonickname.value);
+			  			console.log(kakaoemail.value);
+			  			console.log(authObj.access_token);
+			
+			  			kakaoLogin.submit();
+					}	
+				})	
+			},
+			fail: function(err) {
+				   alert(JSON.stringify(err));
+			}
+		});
+	});
+
+
+});
+</script>
+
+
 <script>
 	const loginForm = new Vue({
 		el: "#loginForm",
@@ -200,4 +201,5 @@ $(function(){
 	});
 
 </script>
+</body>
 </html>

@@ -14,6 +14,8 @@
 		<typeAlias type="com.yeollu.getrend.store.vo.LikeVO" alias="like"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.MangoStoreVO" alias="mangoStore"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.MangoDayVO" alias="mangoDay"/>	
+		<typeAlias type="com.yeollu.getrend.store.vo.MangoTimeVO" alias="mangoTime"/>	
+		<typeAlias type="com.yeollu.getrend.store.vo.MangoStoreInfoVO" alias="mangoStoreInfo"/>	
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml"/>
@@ -25,5 +27,6 @@
 		<mapper resource="mapper/likeMapper.xml"/>
 		<mapper resource="mapper/mangoStoreMapper.xml"/>
 		<mapper resource="mapper/mangoDayMapper.xml"/>
+		<mapper resource="mapper/mangoTimeMapper.xml"/>
 	</mappers>
 </configuration>

@@ -22,19 +22,24 @@ import com.yeollu.getrend.crawler.CrawlerExecutor;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.MangoDayDAO;
 import com.yeollu.getrend.store.dao.MangoStoreDAO;
+import com.yeollu.getrend.store.dao.MangoTimeDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
 import com.yeollu.getrend.store.util.preprocess.core.DayOfTheWeekCategorizer;
 import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
+import com.yeollu.getrend.store.util.preprocess.core.StringPreprocessor;
+import com.yeollu.getrend.store.util.preprocess.core.TimeCategorizer;
 import com.yeollu.getrend.store.vo.ReqParmVO;
 import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.MangoDayVO;
+import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
 import com.yeollu.getrend.store.vo.MangoStoreVO;
+import com.yeollu.getrend.store.vo.MangoTimeVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 import com.yeollu.getrend.user.util.ProfileImageHandler;
 
@@ -57,9 +62,13 @@ public class HomeController {
 
 	@Autowired
 	private MangoDayDAO mangoDayDAO;
+	
+	@Autowired
+	private MangoTimeDAO mangoTimeDAO;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		
 
 		return "home";
 	}
@@ -74,6 +83,8 @@ public class HomeController {
 		logger.info("points : {}", points);
 		logger.info("categoryValues : {}", categoryValues);
 		logger.info("opentimeValues : {}", opentimeValues);
+		
+		
 
 		long startTime = System.currentTimeMillis();
 
@@ -119,40 +130,22 @@ public class HomeController {
 		}
 		logger.info("{}", instaStoreList);
 
-		// MangoDayVO mangoDay = new MangoDayVO();
-		// for(String str : opentimeValues) {
-		// switch (str) {
-		// case "일":
-		// mangoDay.setMango_sun("1");
-		// break;
-		// case "월":
-		// mangoDay.setMango_mon("1");
-		// break;
-		// case "화":
-		// mangoDay.setMango_tue("1");
-		// break;
-		// case "수":
-		// mangoDay.setMango_wed("1");
-		// break;
-		// case "목":
-		// mangoDay.setMango_thu("1");
-		// break;
-		// case "금":
-		// mangoDay.setMango_fri("1");
-		// break;
-		// case "토":
-		// mangoDay.setMango_sat("1");
-		// break;
-		// }
-		// }
-
 		// 망고플레이트 정보 추가
-		ArrayList<MangoStoreVO> mangoStoreList = new ArrayList<MangoStoreVO>();
-		for (InstaStoreVO instaStore : instaStoreList) {
-			MangoStoreVO mangoStore = new MangoStoreVO();
-			mangoStore = mangoStoreDAO.selectMangoStoreByStoreNo(instaStore.getStore_no());
-			mangoStoreList.add(mangoStore);
+		ArrayList<MangoStoreInfoVO> mangoStoreInfoList = new ArrayList<MangoStoreInfoVO>();
+		for(InstaStoreVO instaStore : instaStoreList) {
+			MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
+			mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNo(instaStore.getStore_no());
+			mangoStoreInfoList.add(mangoStoreInfo);
 		}
+		
+		
+//		// 망고플레이트 정보 추가
+//		ArrayList<MangoStoreVO> mangoStoreList = new ArrayList<MangoStoreVO>();
+//		for (InstaStoreVO instaStore : instaStoreList) {
+//			MangoStoreVO mangoStore = new MangoStoreVO();
+//			mangoStore = mangoStoreDAO.selectMangoStoreByStoreNo(instaStore.getStore_no());
+//			mangoStoreList.add(mangoStore);
+//		}
 
 		// if(instaStoreList.size() > 3) {
 		// instaStoreList = new ArrayList<InstaStoreVO> (instaStoreList.subList(0, 3));
@@ -183,7 +176,8 @@ public class HomeController {
 			for (int i = 0; i < instaStoreList.size(); i++) {
 				InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
 				instaStoreInfo.setInstaStore(instaStoreList.get(i));
-				instaStoreInfo.setMangoStore(mangoStoreList.get(i));
+//				instaStoreInfo.setMangoStore(mangoStoreList.get(i));
+				instaStoreInfo.setMangoStoreInfo(mangoStoreInfoList.get(i));
 
 				if (instaImageList.size() > i) {
 					instaStoreInfo.setInstaImage(instaImageList.get(i));

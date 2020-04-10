@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>login</title>
+<script src='<c:url value="/resources/js/naverLogin_implicit-1.0.3.js"/>'></script>
+
 <link rel="stylesheet" href='<c:url value="/resources/css/login.css"/>'>
 <link rel="stylesheet" href='<c:url value="/resources/css/bootstrap.min.css"/>'>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -18,6 +20,8 @@ $(function(){
 	$("#cancel").click(function(){
 		$(location).attr('href',"<c:url value='/'/>");
 	});
+
+
 });
 </script>
 </head>
@@ -81,6 +85,9 @@ $(function(){
 					            		<a id="kakao-login-btn"></a>
 					            	</div>
 					            	<div id="naverIdLogin">
+					            		<a id="naver-custom-login-btn">
+					            			
+					            		</a>
 					            	</div>  <!-- 버튼이 들어갈 위치 선언. ID는 반드시 지정된 값으로 설정하여야 합니다.-->
 					            	<div style="clear:both;"></div>
 					           </div>
@@ -112,6 +119,8 @@ $(function(){
 			
 	/* 설정정보를 초기화하고 연동을 준비 */
 	naverLogin.init();
+
+	console.log(naverLogin);
 </script>
 
 <script type='text/javascript'>

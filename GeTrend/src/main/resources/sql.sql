@@ -4,6 +4,7 @@ drop table searched_stores;
 drop table insta_locations;
 drop table mango_stores;
 drop table mango_days;
+drop table mango_times;
 drop table follows;
 drop table likes;
 drop table users;
@@ -103,7 +104,7 @@ reply_no 		number 	primary key
 ,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
 );
 
--- sqlldr userid=hr/hr control='C:\Users\user\Desktop\mango_days_control.ctl'
+/-- sqlldr userid=hr/hr control='C:\Users\user\Desktop\mango_days_control.ctl'
 create table mango_days (
     store_no        varchar2(200)       primary key
     , mango_sun     char(1)
@@ -114,9 +115,20 @@ create table mango_days (
     , mango_fri     char(1)
     , mango_sat     char(1)
     , mango_indate  date                default sysdate
-    , constraint fk2_mango_days foreign key (store_no) references stores(store_no)
+    , constraint fk1_mango_days foreign key (store_no) references stores(store_no)
 );
 
+-- sqlldr userid=hr/hr control='C:\Users\user\Desktop\mango_times_control.ctl'
+create table mango_times (
+     store_no        varchar2(200)       primary key
+    , mango_start    varchar2(20)
+    , mango_end      varchar2(20)
+    , mango_indate   date                default sysdate
+    , constraint fk1_mango_times foreign key (store_no) references stores(store_no)
+);
+
+
+select * from mango_times;
 
 commit;
 commit;
@@ -208,8 +220,33 @@ where
 select
     s.store_name, s.store_no, m.mango_time, m.mango_break_time
 from
-    stores s, mango_stores m, insta_locations l
+    stores s, mango_stores m
 where
     s.store_no = m.store_no
-    and s.store_no = l.store_no;
+    and m.mango_time is not null;
+    
+
+select * from mango_times;
+
+select * from mango_days;
+
+select
+    m.store_no
+    , m.mango_tel
+    , m.mango_price
+    , m.mango_parking
+    , t.mango_start
+    , t.mango_end
+    , d.mango_sun
+    , d.mango_mon
+    , d.mango_tue
+    , d.mango_wed
+    , d.mango_thu
+    , d.mango_fri
+    , d.mango_sat
+from
+    mango_stores m, mango_times t, mango_days d
+where
+    m.store_no = t.store_no
+    and m.store_no = d.store_no;
 

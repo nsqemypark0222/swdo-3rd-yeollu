@@ -6,5 +6,6 @@ import lombok.Data;
 public class InstaStoreInfoVO {
 	private InstaStoreVO instaStore;
 	private InstaImageVO instaImage;
-	private MangoStoreVO mangoStore;
+//	private MangoStoreVO mangoStore;
+	private MangoStoreInfoVO mangoStoreInfo;
 }

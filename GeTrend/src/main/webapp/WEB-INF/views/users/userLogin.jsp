@@ -72,7 +72,7 @@
 					                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" >Sign in</button>
 							 	</form>
 
-							 	<div id="socialbtn" class="row">
+							 	<div id="socialbtn" class="row mx-auto">
 					            	<div id="kakaoIdLogin" class="col">
 					            		<a id="kakao-custom-login-btn">
 					            			<img class="img-fluid center-block" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586494683/kakao_login_btn_bkouot.png">

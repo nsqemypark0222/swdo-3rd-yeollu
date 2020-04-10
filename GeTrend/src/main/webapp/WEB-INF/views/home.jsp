@@ -342,12 +342,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	</div>
 
 	
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 53ebfc84f5c02452e043ad42a3ac9bc8549bab07
 	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
@@ -357,14 +351,10 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 
 	
 
-<footer>
-<<<<<<< HEAD
+	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
-=======
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-</footer>
->>>>>>> 53ebfc84f5c02452e043ad42a3ac9bc8549bab07
+
 
 <script type="text/javascript">
 

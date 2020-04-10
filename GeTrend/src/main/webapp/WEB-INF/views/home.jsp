@@ -399,7 +399,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 						console.log(result);
 						$(result).each(function(index, item) {
 							$("#table").append(
-								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
+									"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
 										+ "<td>" + item.instaStore.store_name + "</td>"
 										+ "<td>" + item.instaStore.store_name2 + "</td>"
 										+ "<td>" + item.instaStore.store_cate1 + "</td>"

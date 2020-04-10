@@ -129,12 +129,10 @@ $(function(){
 
 	$("#kakao-custom-login-btn").click(function() {
 		Kakao.Auth.login({
-			
 		  	success: function(authObj) {
 				Kakao.API.request({
 					url:'/v2/user/me',
 					success:function(res){
-						
 						var kakaoLogin = document.getElementById("kakao");
 			  			console.log(kakaoLogin.childNodes);
 			  			var kakaoId = kakaoLogin.childNodes[1];
@@ -157,11 +155,8 @@ $(function(){
 			}
 		});
 	});
-
-
 });
 </script>
-
 
 <script>
 	const loginForm = new Vue({
@@ -200,7 +195,6 @@ $(function(){
 			}
 		}
 	});
-
 </script>
 </body>
 </html>

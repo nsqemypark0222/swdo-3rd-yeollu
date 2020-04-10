@@ -169,24 +169,24 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
    					</div>  	 
 				</div>
 			</div>
-		</div>
-		
 		<!-- 추천 가게 리스트 출력 -->
    		<div id="istoreList" class="istoreList">
 			<ul class="list-group list-group-horizontal">
 	   			<li class="list-group-item">
-	   				<img src="resources/img/ok.jpg" alt="동명동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
+	   				<img src="resources/img/ok.jpg" alt="동명동 추천 가게 " class="rounded float left"  >
    		   			<div class="istore1">
    		   				<div class="overlay1">
-   							<div class="text" style="color:white;">동명동 추천 가게</div>
+   							<div class="text" style="color:white;">
+   								<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+   							</div>
   						</div>
   					</div>
 	   			</li>		
 	   			<li class="list-group-item">
-	   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
+	   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left"  >
 	   				<div class="istore2">
 	   		   			<div class="overlay2">
-	   						<div class="text">
+	   						<div class="text" style="color:white;">
 	   							<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
 	   						</div>
 	  					</div>
@@ -194,8 +194,11 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	   			</li>
 	  	  	</ul>	
   		</div>
-	</div>
+		</div>
+		
 	
+</div>
+<!-- 컨텐츠 컬럼 종료 -->	
 	<!-- 사이드 컬럼 시작 -->
    	<div class="column-side">
    		<div class="row">
@@ -238,16 +241,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   	</div>
 </div>
 		
-<!--    <div class="">
-		<p>
-			<button type="button"  class="btn btn-warning" onclick="selectOverlay('POLYGON')">범위 선택</button>
-		</p>
-		<p class="getdata"> 
-	   		<button type="button"  class="btn btn-outline-warning" onclick="getDataFromDrawingMap()">조회 하기</button>
-	   	</p>
-	   	<div id="print">
-	   	</div>
-   </div>  -->
+
    <div id="print"></div>
 
   	

@@ -15,6 +15,7 @@
 <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
+
 </head>
 <body>
 	<div class="container-fluid">
@@ -74,12 +75,12 @@
 							 	<div id="socialbtn" class="row">
 					            	<div id="kakaoIdLogin" class="col">
 					            		<a id="kakao-custom-login-btn">
-					            			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/c_scale,w_226/v1586494683/kakao_login_btn_bkouot.png">
+					            			<img class="img-fluid center-block" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586494683/kakao_login_btn_bkouot.png">
 					            		</a>
 					            	</div>
 					            	<div id="naverIdLogin" class="col">
 					            		<a id="naver-custom-login-btn">
-					            			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/c_scale,w_226/v1586494631/naver_login_btn_toztto.png">
+					            			<img class="img-fluid center-block" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586504578/naver_login_btn_wokame.png">
 					            		</a>
 					            	</div>
 					            </div>

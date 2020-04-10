@@ -80,7 +80,7 @@
 					            	</div>
 					            	<div id="naverIdLogin" class="col">
 					            		<a id="naver-custom-login-btn">
-					            			<img class="img-fluid center-block" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586504578/naver_login_btn_wokame.png">
+					            			<img class="img-fluid center-block" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586507185/naver_login_btn_omkvf5.png">
 					            		</a>
 					            	</div>
 					            </div>

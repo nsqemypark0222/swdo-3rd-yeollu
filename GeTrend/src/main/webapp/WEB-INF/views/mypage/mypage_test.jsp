@@ -188,7 +188,7 @@ ${store_name} , ${store_no}
 <hr>
 
 	<a href="/getrend/mypage/mypageSession">내 방 가기</a>
-	<a href="/getrend/mypage/modalTest">모달 테스트</a>
+	<a href="/getrend/mypage/modalTest">팔로우 모달</a>
 <hr>
 
 

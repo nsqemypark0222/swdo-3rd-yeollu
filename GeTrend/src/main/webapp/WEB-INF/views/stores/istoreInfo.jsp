@@ -34,6 +34,18 @@
 					${istore.instaStore.store_adr} <br />
 					${istore.instaStore.store_adr1} <br />
 				</div>
+				<div id="socialbtn" class="row mx-auto">
+	            	<div id="kakaoIdLogin" class="col-md-6">
+	            		<a id="kakao-custom-login-btn">
+	            			<img class="img-fluid" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586494683/kakao_login_btn_bkouot.png">
+	            		</a>
+	            	</div>
+	            	<div id="naverIdLogin" class="col-md-6">
+	            		<a id="naver-custom-login-btn">
+	            			<img class="img-fluid" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586507185/naver_login_btn_omkvf5.png">
+	            		</a>
+	            	</div>
+	            </div>
 			</div>
 			<div class="col-md-6">
 				<div class="card mb-3">

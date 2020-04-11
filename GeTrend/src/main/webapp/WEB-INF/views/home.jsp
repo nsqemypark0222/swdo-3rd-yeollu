@@ -161,9 +161,9 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 								</div>
 							</div>
 							
-	    	 				<button type="button"  class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')">
+	    	 				<button type="button" class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')" value="on">
 	    	 				범위 선택</button>
-	    					<button type="button"  class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
+	    					<button type="button" class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
 	    					조회 하기</button>  
 	   					</div>  	 
 					</div>
@@ -176,7 +176,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   			<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
   				<div id="istoreList" class="istoreList">
 		  			<ul class="list-group list-group-horizontal">
-		  				<li>asd</li>
+		  				<li></li>
 		  			</ul>
 		  		</div>
   			</c:when>
@@ -392,6 +392,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				});
 			}
 			searchFunc = search;
+
 		});
 
 		function search(points) {
@@ -472,11 +473,19 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		const manager = new kakao.maps.drawing.DrawingManager(options);
 
 		// 버튼 클릭 시 호출되는 핸들러 입니다
-  		selectOverlay = type => {
-	    	// 그리기 중이면 그리기를 취소합니다
-	   		manager.cancel();
-	    	// 클릭한 그리기 요소 타입을 선택합니다
-	    	manager.select(kakao.maps.drawing.OverlayType[type]);
+  		const selectOverlay = (type) => {
+  	  		let btn = document.getElementById("selectOverlay");
+  	  		if(btn.value === 'on') {
+  	  			btn.value = 'off';
+  	  			btn.innerHTML = '선택 취소';
+		    	// 클릭한 그리기 요소 타입을 선택합니다
+		    	manager.select(kakao.maps.drawing.OverlayType[type]);
+	  	  	} else {
+	  	  		btn.value = 'on';
+	  	 		btn.innerHTML = '범위 선택';
+		  		// 그리기 중이면 그리기를 취소합니다
+		   		manager.cancel();
+		  	}
   		};
 
 	   // 가져오기 버튼을 클릭하면 호출되는 핸들러 함수입니다
@@ -485,14 +494,14 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	        const data = manager.getData();
 	                
 	        let points = [];
-	        let row = "";
+	        //let row = "";
 	        for(let i in data.polygon[0].points) {
 				const point = {
 			        	x: data.polygon[0].points[i]["x"],
 			        	y: data.polygon[0].points[i]["y"]
 			    };
 				points.push(point);
-				row += "<p>위도 : " + point["x"] + " 경도 : " + point["y"] + "</p>";
+				//row += "<p>위도 : " + point["x"] + " 경도 : " + point["y"] + "</p>";
 			}
 	        //const printContainer = document.getElementById("print");
 	        //printContainer.innerHTML = row;

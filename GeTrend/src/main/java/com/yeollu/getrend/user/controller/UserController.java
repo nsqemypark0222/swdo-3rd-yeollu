@@ -259,6 +259,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginemail");
 		session.removeAttribute("loginname");
+		session.invalidate();
 		logger.info("로그아웃");
 		return "redirect:/";
 	}

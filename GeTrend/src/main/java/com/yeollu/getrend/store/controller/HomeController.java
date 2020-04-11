@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +77,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
-	public ArrayList<InstaStoreInfoVO> search(@RequestBody ReqParmVO reqParm) {
+	public ArrayList<InstaStoreInfoVO> search(@RequestBody ReqParmVO reqParm, HttpSession session) {
 		logger.info("search");
 		long startTime = System.currentTimeMillis();
 		
@@ -174,6 +176,7 @@ public class HomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		session.setAttribute("istores", instaStoreInfoList);
 
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;
@@ -181,5 +184,4 @@ public class HomeController {
 
 		return instaStoreInfoList;
 	}
-
 }

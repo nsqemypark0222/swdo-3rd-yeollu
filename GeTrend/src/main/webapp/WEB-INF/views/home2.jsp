@@ -172,24 +172,11 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   		</div>
   		
   		<!-- 추천 가게 리스트 출력 -->
-  		<c:choose>
-  			<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
-  				<div id="istoreList" class="istoreList">
-		  			<ul class="list-group list-group-horizontal">
-		  				<li>asd</li>
-		  			</ul>
-		  		</div>
-  			</c:when>
-  			<c:otherwise>
-  				<div id="istoreList" class="istoreList">
-		  			<ul class="list-group list-group-horizontal">
-		  				
-		  			</ul>
-		  		</div>
-  			</c:otherwise>
-  		</c:choose>
-  		
-  	</div>
+  		<div id="istoreList" class="istoreList">
+  			<ul class="list-group list-group-horizontal">
+  				
+  			</ul>
+  		</div>
 		
 		<!-- 추천 가게 리스트 출력 -->
 <%--    		<div id="istoreList" class="istoreList">
@@ -212,11 +199,11 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	  				</div>
 	   			</li>
 	  	  	</ul>	
-  		</div> 
-	</div>--%>
+  		</div> --%>
+	</div>
 	
 	<!-- 사이드 컬럼 시작 -->
-   <%-- 	<div class="column-side">
+   	<div class="column-side">
    		<div class="row">
 	   		<div id="istore" class="istore">
 	   			<h3 style="text-align:center;">주목Trend</h3>
@@ -241,10 +228,10 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		   			</li>
 		  	  	</ul>	
 	  		</div>
-		</div> --%>
+		</div>
 		
 		<!-- 사이드 컬럼 시작 -->
-	   	<!-- <div class="column-side">
+	   	<div class="column-side">
 	   		<div class="row">
 		   		<div id="istore" class="istore">
 		   			<h3 style="text-align:center;">주목Trend</h3>
@@ -269,7 +256,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		  		</div>
 	  		</div>
 	  	</div>
-	</div> -->
+	</div>
 	<!-- 로딩이미지 -->
 	<div class="wrap-loading display-none">
 	  	<div>
@@ -287,6 +274,56 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	   	<div id="print">
 	   	</div>
    </div>  -->
+   <div id="print"></div>
+
+  	
+
+	
+
+   						
+
+   	<div id="desc">
+   	
+   	</div>
+   	
+
+   	<div>
+   		<table id="table" border="1">
+   			<tr>
+   				<th>store_no</th>
+   				<th>store_name</th>
+   				<th>store_name2</th>
+   				<th>store_cate1</th>
+   				<th>store_cate2</th>
+   				<th>store_adr</th>
+   				<th>store_adr1</th>
+   				<th>store_adr2</th>
+   				<th>store_x</th>
+   				<th>store_y</th>
+   				<th>profile_url</th>
+   			</tr>
+   		</table>
+   	</div>
+   	
+   	<div>
+   		<table id="mangoTable" border="1">
+   			<tr>
+   				<th>store_no</th>
+   				<th>mango_tel</th>
+   				<th>mango_price</th>
+   				<th>mango_parking</th>
+   				<th>mango_start</th>
+   				<th>mango_end</th>
+   				<th>mango_sun</th>
+   				<th>mango_mon</th>
+   				<th>mango_tue</th>
+   				<th>mango_wed</th>
+   				<th>mango_thu</th>
+   				<th>mango_fri</th>
+   				<th>mango_sat</th>
+   			</tr>
+   		</table>
+   	</div>
 
 
    	<div>
@@ -317,6 +354,9 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
 	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
 	<a href="<c:url value='/users/follow'/>">follow</a>
+
+
+	
 
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
@@ -365,26 +405,44 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 						printMarker(result);
 						console.log(result);
 						$(result).each(function(index, item) {
-							$("#istoreList > ul").append(
-									'<li class="list-group-item">'
-										+ '<div class="istore1">'
-											+ '<div class="overlay1">'
-												+ '<div class="text" style="color:white;">' + item.instaStore.store_adr +'</div>'
-											+ '</div>'
-										+ '</div>'
-									+ '</li>'
-									+ '<li class="list-group-item">'
-									+ '<img src="' + item.instaImage.repImg + '" + alt="' + item.instaStore.store_adr + '" class="rounded float left" style=" width:380px; height:310px;" />'
-										+ '<div class="istore2">'
-											+ '<div class="overlay2">'
-												+ '<div class="text">'
-													+ '<a href=' + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '"/>' + '>' + item.instaStore.store_name + '</a>'
-												+ '</div>'
-											+ '</div>'
-										+ '</div>'
-									+ '</li>'
+							$("#table").append(
+									"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
+										+ "<td>" + item.instaStore.store_name + "</td>"
+										+ "<td>" + item.instaStore.store_name2 + "</td>"
+										+ "<td>" + item.instaStore.store_cate1 + "</td>"
+										+ "<td>" + item.instaStore.store_cate2 + "</td>"
+										+ "<td>" + item.instaStore.store_adr + "</td>"
+										+ "<td>" + item.instaStore.store_adr1 + "</td>"
+										+ "<td>" + item.instaStore.store_adr2 + "</td>"
+										+ "<td>" + item.instaStore.store_x + "</td>"
+										+ "<td>" + item.instaStore.store_y + "</td>"
+										+ '<td><img src=' + item.instaImage.repImg + ' /></td>' + "</tr>"
 							);
+							$("#mangoTable").append(
+									"<tr>" + "<td>" + item.mangoStoreInfo.store_no + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_tel + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_price + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_parking + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_start+ "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_end + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_sun + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_mon + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_tue + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_wed + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_thu + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_fri + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_sat + "</td>" + "</tr>"
+							);
+							$(item.instaImage.postImgList).each(function(idx, itm) {
+								$("#imageContainer").append(
+										"<div name='imgPanel'>"
+											+ '<img src=' + itm.imgUrl + ' />'
+											+ '<b>' + itm.like + '</b>'
+								);
+							});
+							$('#imageContainer').append("<hr />");
 						});
+						
 			        },
 			        error: function(request, status, error){
 			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
@@ -392,6 +450,8 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				});
 			}
 			searchFunc = search;
+
+			
 		});
 
 		function search(points) {
@@ -494,8 +554,8 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				points.push(point);
 				row += "<p>위도 : " + point["x"] + " 경도 : " + point["y"] + "</p>";
 			}
-	        //const printContainer = document.getElementById("print");
-	        //printContainer.innerHTML = row;
+	        const printContainer = document.getElementById("print");
+	        printContainer.innerHTML = row;
 			search(points);
 	   };
 

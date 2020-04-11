@@ -176,7 +176,27 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   			<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
   				<div id="istoreList" class="istoreList">
 		  			<ul class="list-group list-group-horizontal">
-		  				<li></li>
+		  				<c:forEach var="item" items="${istores}">
+		  					<li class="list-group-item">
+			   		   			<div class="istore1">
+			   		   				<div class="overlay1">
+			   							<div class="text" style="color:white;">
+			   								${item.instaStore.store_adr}
+			   							</div>
+			  						</div>
+			  					</div>
+				   			</li>
+				   			<li class="list-group-item">
+				   				<img src="${item.instaImage.repImg}" alt="${item.instaStore.store_adr}" class="rounded float left" style="	width:380px; height:310px;" >
+				   				<div class="istore2">
+				   		   			<div class="overlay2">
+				   						<div class="text">
+				   							<a href='<c:url value="/stores/istoreInfo?store_no=${item.instaStore.store_no}" />'>${item.instaStore.store_name}</a>
+				   						</div>
+				  					</div>
+				  				</div>
+				   			</li>	
+		  				</c:forEach>
 		  			</ul>
 		  		</div>
   			</c:when>
@@ -276,18 +296,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	  		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" />
 	  	</div>
 	</div>
-		
-<!--    <div class="">
-		<p>
-			<button type="button"  class="btn btn-warning" onclick="selectOverlay('POLYGON')">범위 선택</button>
-		</p>
-		<p class="getdata"> 
-	   		<button type="button"  class="btn btn-outline-warning" onclick="getDataFromDrawingMap()">조회 하기</button>
-	   	</p>
-	   	<div id="print">
-	   	</div>
-   </div>  -->
-
 
    	<div>
 		<c:choose>
@@ -378,7 +386,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 										+ '<div class="istore2">'
 											+ '<div class="overlay2">'
 												+ '<div class="text">'
-													+ '<a href=' + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '"/>' + '>' + item.instaStore.store_name + '</a>'
+													+ '<a href=' + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + '>' + item.instaStore.store_name + '</a>'
 												+ '</div>'
 											+ '</div>'
 										+ '</div>'

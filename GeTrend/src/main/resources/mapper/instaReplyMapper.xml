@@ -51,6 +51,7 @@ select
 	,s.store_no as store_no 
 	,s.store_name as store_name
 	,s.store_adr as store_adr
+	,s.store_cate1 as store_cate1
 	,r.user_email as user_email
 	,r.reply_contents as reply_contents
 	,r.reply_star as reply_star

@@ -44,7 +44,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
   			<c:choose>
   				<c:when test="${sessionScope.loginemail != null}">
   					<li class="nav-item">
-  						<a href="<c:url value="/mypage/mypageForm"/>">
+  						<a href="<c:url value="/mypage/mypageSession"/>">
 	  			    		<input type="button" class="btn btn-light" id="mypage" value="내 방">
  			    		</a>
 	  			    </li>

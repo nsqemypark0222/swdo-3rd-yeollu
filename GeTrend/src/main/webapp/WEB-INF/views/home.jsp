@@ -20,7 +20,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
-<<<<<<< HEAD
 
 
 
@@ -31,10 +30,8 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 }
 
 </style>
-=======
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'>
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
->>>>>>> e95a1efc2cb37b35b61e73247dd683c3e84f08a6
 </head>
 <body>
 	<header>
@@ -324,33 +321,16 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	</div>
 
 	
-<<<<<<< HEAD
 
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
 	<a href="<c:url value='/users/follow'/>">follow</a>
 
-	</div>
-
-
-	<footer>
-=======
-	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
-	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
-	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
 	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
-	<a href="users/follow">follow</a>
-	
-
-	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
-	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
-	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
-	<a href="<c:url value='/users/follow'/>">follow</a>
 
 
 	
 <footer>
->>>>>>> e95a1efc2cb37b35b61e73247dd683c3e84f08a6
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
 

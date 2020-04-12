@@ -1,137 +1,175 @@
-<!DOCTYPE HTML>
-<!--
-	Snapshot by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Snapshot by TEMPLATED</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="resources/assets/css/main.css" />
-	</head>
-	<body>
-		<div class="page-wrap">
+<head>
+<meta charset="UTF-8">
+<title>[ mypage test ]</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-			<!-- Nav -->
-				<nav id="nav">
-					<ul>
-						<li><a href="index.html" class="active"><span class="icon fa-home"></span></a></li>
-						<li><a href="gallery.html"><span class="icon fa-camera-retro"></span></a></li>
-						<li><a href="generic.html"><span class="icon fa-file-text-o"></span></a></li>
-					</ul>
-				</nav>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<style>
 
-			<!-- Main -->
-				<section id="main">
+.pageTitle {position: fixed; left: 0; top: 0; width: 100%; height: 52px; line-height: 52px; color: #fff; text-align: center; background: #111;}
+article {padding: 52px 3% 0;}
+article .block {padding: 20px; min-height: 500px;}
+article .block p {line-height: 22px; color: #000; font-size: 16px; font-weight: 600;}
 
-					<!-- Banner -->
-						<section id="banner">
-							<div class="inner">
-								<h1>Hey, I'm Snapshot</h1>
-								<p>A fully responsive gallery template by <a href="https://templated.co">TEMPLATED</a></p>
-								<ul class="actions">
-									<li><a href="#galleries" class="button alt scrolly big">Continue</a></li>
-								</ul>
-							</div>
-						</section>
 
-					<!-- Gallery -->
-						<section id="galleries">
+</style>
 
-							<!-- Photo Galleries -->
-								<div class="gallery">
-									<header class="special">
-										<h2>What's New</h2>
-									</header>
-									<div class="content">
-										<div class="media">
-											<a href="images/fulls/01.jpg"><img src="images/thumbs/01.jpg" alt="" title="This right here is a caption." /></a>
-										</div>
-										<div class="media">
-											<a href="images/fulls/05.jpg"><img src="images/thumbs/05.jpg" alt="" title="This right here is a caption." /></a>
-										</div>
-										<div class="media">
-											<a href="images/fulls/09.jpg"><img src="images/thumbs/09.jpg" alt="" title="This right here is a caption." /></a>
-										</div>
-										<div class="media">
-											<a href="images/fulls/02.jpg"><img src="images/thumbs/02.jpg" alt="" title="This right here is a caption." /></a>
-										</div>
-										<div class="media">
-											<a href="images/fulls/06.jpg"><img src="images/thumbs/06.jpg" alt="" title="This right here is a caption." /></a>
-										</div>
-										<div class="media">
-											<a href="images/fulls/10.jpg"><img src="images/thumbs/10.jpg" alt="" title="This right here is a caption." /></a>
-										</div>
-										<div class="media">
-											<a href="images/fulls/03.jpg"><img src="images/thumbs/03.jpg" alt="" title="This right here is a caption." /></a>
-										</div>
-										<div class="media">
-											<a href="images/fulls/07.jpg"><img src="images/thumbs/07.jpg" alt="" title="This right here is a caption." /></a>
-										</div>
-									</div>
-									<footer>
-										<a href="gallery.html" class="button big">Full Gallery</a>
-									</footer>
-								</div>
-						</section>
+<script type="text/javascript">
+//Javascript
+var count = 0;
+//스크롤 바닥 감지
+window.onscroll = function(e) {
+    //추가되는 임시 콘텐츠
+    //window height + window scrollY 값이 document height보다 클 경우,
+    if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    	//실행할 로직 (콘텐츠 추가)
+        count++;
+        var addContent = '<div class="block"><p>'+ count +'번째로 추가된 콘텐츠</p></div>';
+        //article에 추가되는 콘텐츠를 append
+        $('article').append(addContent);
+    }
+};
 
-					<!-- Contact -->
-						<section id="contact">
-							<!-- Social -->
-								<div class="social column">
-									<h3>About Me</h3>
-									<p>Mus sed interdum nunc dictum rutrum scelerisque erat a parturient condimentum potenti dapibus vestibulum condimentum per tristique porta. Torquent a ut consectetur a vel ullamcorper a commodo a mattis ipsum class quam sed eros vestibulum quisque a eu nulla scelerisque a elementum vestibulum.</p>
-									<p>Aliquet dolor ultricies sem rhoncus dolor ullamcorper pharetra dis condimentum ullamcorper rutrum vehicula id nisi vel aptent orci litora hendrerit penatibus erat ad sit. In a semper velit eleifend a viverra adipiscing a phasellus urna praesent parturient integer ultrices montes parturient suscipit posuere quis aenean. Parturient euismod ultricies commodo arcu elementum suspendisse id dictumst at ut vestibulum conubia quisque a himenaeos dictum proin dis purus integer mollis parturient eros scelerisque dis libero parturient magnis.</p>
-									<h3>Follow Me</h3>
-									<ul class="icons">
-										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-									</ul>
-								</div>
+</script>
 
-							<!-- Form -->
-								<div class="column">
-									<h3>Get in Touch</h3>
-									<form action="#" method="post">
-										<div class="field half first">
-											<label for="name">Name</label>
-											<input name="name" id="name" type="text" placeholder="Name">
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input name="email" id="email" type="email" placeholder="Email">
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="6" placeholder="Message"></textarea>
-										</div>
-										<ul class="actions">
-											<li><input value="Send Message" class="button" type="submit"></li>
-										</ul>
-									</form>
-								</div>
+<body>
 
-						</section>
 
-					<!-- Footer -->
-						<footer id="footer">
-							<div class="copyright">
-								&copy; Untitled Design: <a href="https://templated.co/">TEMPLATED</a>. Images: <a href="https://unsplash.com/">Unsplash</a>.
-							</div>
-						</footer>
-				</section>
+<!-- HTML -->
+<header>                
+    <h1 class="pageTitle">Infinity scroll</h1>
+</header>
+<article>
+    <div class="block">
+        <p>
+			sdfasdf
+        </p>
+    </div>
+    <div class="block">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem mollitia accusamus sequi ipsa, rerum nam laboriosam, ipsam aperiam deleniti beatae expedita id quisquam veritatis corporis, voluptates ducimus molestiae eum adipisci.
+        </p>
+    </div>
+    <!-- 반복 -->
+</article>
+
+
+	
+<div class="row">
+	<div class="col">
+		<div class="mypage_replies">	
+			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+				<div class="carousel-inner">
+					<c:forEach var="reply" items="${replyList}" varStatus="status">
+						<c:choose>
+							<c:when test="${status.first}">
+								<div class="carousel-item active">
+		 							<div class="card flex-md-row mb-4 shadow-sm h-md-250 ">
+										<div class="card-body d-flex flex-column align-items-start">     
+		  									 <div class="reply_outer">						          
+		    									<div class="reply_inner01">		          
+		     										<strong class="d-inline-block mb-2" style="color:#FF8A00;">
+														<a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}"><img class="reply_user_profile" src="<c:url value='/resources/img/profile_default_2.png'/>" alt="프로필 사진"></a>
+															<div class="reply_user_name"><a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}" style="color:#FF8A00;">${reply.USER_NAME}</a></div>
+		 											</strong>
+												</div>						          
+		  										<div class="reply_inner02">
+		 											<h3 class="mb-0">
+		   												<a class="text-dark" href="#">${reply.STORE_NAME}</a>
+															<c:choose>
+																<c:when test="${reply.LIKE}">
+																	<input type="image"  class="reply_heart_on"  src="<c:url value='/resources/img/heart_click.png'/>">
+																</c:when>
+																<c:otherwise>
+																	<input type="image" class="reply_heart_off"    src="<c:url value='/resources/img/heart_unclick.png'/>">
+																</c:otherwise>							
+															</c:choose>						
+														<input type="image"  class="reply_map"src="<c:url value='/resources/img/place.png'/>">			            		            
+													</h3>
+		
+													<div class="mb-1 text-muted"> <span class="starMake">${reply.REPLY_STAR}</span></div>
+													<p class="card-text mb-auto">${reply.REPLY_CONTENTS}</p>		          
+													<div class="mb-1 text-muted">${reply.REPLY_INDATE}</div>
+		         								</div>		       
+		  									   </div>	        
+		   								 </div>
+									</div> 			
+								</div>			
+						   </c:when>
+						<c:otherwise>
+							<div class="carousel-item">
+								<div class="card flex-md-row mb-4 shadow-sm h-md-250">
+									<div class="card-body d-flex flex-column align-items-start">     
+						  			   <div class="reply_outer">						          
+						    				<div class="reply_inner01">		          
+						     					<strong class="d-inline-block mb-2" style="color:#FF8A00;">
+													<a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}"><img class="reply_user_profile" src="<c:url value='/resources/img/profile_default_2.png'/>" alt="프로필 사진"></a>
+													<div class="reply_user_name"><a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}" style="color:#FF8A00;">${reply.USER_NAME}</a></div>
+						 						</strong>
+											</div>						          
+						  					<div class="reply_inner02">
+						 						<h3 class="mb-0">
+							   						<a class="text-dark" href="#">${reply.STORE_NAME}</a>
+													<c:choose>
+														<c:when test="${reply.LIKE}">
+															<input type="image"  class="reply_heart_on"  src="<c:url value='/resources/img/heart_click.png'/>">
+														</c:when>
+														<c:otherwise>
+															<input type="image" class="reply_heart_off"    src="<c:url value='/resources/img/heart_unclick.png'/>">
+														</c:otherwise>							
+													</c:choose>						
+													<input type="image"  class="reply_map"src="<c:url value='/resources/img/place.png'/>">			            		            
+												</h3>
+						
+												<div class="mb-1 text-muted"> <span class="starMake">${reply.REPLY_STAR}</span></div>
+												<p class="card-text mb-auto">${reply.REPLY_CONTENTS}</p>		          
+												<div class="mb-1 text-muted">${reply.REPLY_INDATE}</div>
+						         			</div>		       
+						   			  </div>	        
+						          </div>
+						      </div> 
+						   </div>
+						</c:otherwise>	
+					</c:choose>
+				</c:forEach>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+			  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			  <span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+			  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			  <span class="sr-only">Next</span>
+			</a>
+		  </div>
 		</div>
+	</div>
+</div>	
 
-		<!-- Scripts -->
-			<script src="resources/assets/js/jquery.min.js"></script>
-			<script src="resources/assets/js/jquery.poptrox.min.js"></script>
-			<script src="resources/assets/js/jquery.scrolly.min.js"></script>
-			<script src="resources/assets/js/skel.min.js"></script>
-			<script src="resources/assets/js/util.js"></script>
-			<script src="resources/assets/js/main.js"></script>
 
-	</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
 </html>

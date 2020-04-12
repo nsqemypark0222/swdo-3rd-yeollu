@@ -32,212 +32,212 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		<div class="column-content">
 			<!-- 지도와의 간격 div-->
 			<div id="space">
-				<div class="container" >
-					<div class="col" >
-						<div id="map">
-							<div class="btn-modal">
-								<!-- 지도 위의 버튼 1 음식 카테고리 -->
-								<!-- Button trigger modal -->
-								<button type="button" id="category" class="btn btn-dark" data-toggle="modal" data-target="#categoryModal">카테고리</button>
-								
-								<!-- CategoryModal -->
-								<div class="modal fade" id="categoryModal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<!-- 음식 카테고리 모달 header -->
-											<div class="modal-header">
-												<h4 class="modal-title">음식 카테고리</h4>
-		           								<button type="button" class="close" data-dismiss="modal">&times;</button>
-											</div>
-											<!-- 음식 카테고리 모달 body -->
-		      								<div class="modal-body">
-		      									<h3>음식 종류</h3>
-		           								<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
-					 								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="양식" checked="checked">양식
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="일식/수산물" checked="checked">일식/수산물
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="중식" checked="checked">중식
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="카페/디저트" checked="checked">카페/디저트
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="치킨/피자/패스트푸드" checked="checked">치킨/피자/패스트푸드
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="기타" checked="checked">기타
-					  								</label>
-												</div>
-		      								</div>
-		      								<!-- 음식 카테고리 모달 footer -->
-		       								<div class="modal-footer">
-		       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
-		        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
-		       								</div>
+				<div class="col" >
+					<div id="map">
+						<div class="btn-modal">
+							<!-- 지도 위의 버튼 1 음식 카테고리 -->
+							<!-- Button trigger modal -->
+							<button type="button" id="category" class="btn btn-dark" data-toggle="modal" data-target="#categoryModal">카테고리</button>
+							
+							<!-- CategoryModal -->
+							<div class="modal fade" id="categoryModal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- 음식 카테고리 모달 header -->
+										<div class="modal-header">
+											<h4 class="modal-title">음식 카테고리</h4>
+	           								<button type="button" class="close" data-dismiss="modal">&times;</button>
 										</div>
+										<!-- 음식 카테고리 모달 body -->
+	      								<div class="modal-body">
+	      									<h3>음식 종류</h3>
+	           								<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
+				 								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="양식" checked="checked">양식
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="일식/수산물" checked="checked">일식/수산물
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="중식" checked="checked">중식
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="카페/디저트" checked="checked">카페/디저트
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="치킨/피자/패스트푸드" checked="checked">치킨/피자/패스트푸드
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="기타" checked="checked">기타
+				  								</label>
+											</div>
+	      								</div>
+	      								<!-- 음식 카테고리 모달 footer -->
+	       								<div class="modal-footer">
+	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
+	       								</div>
 									</div>
 								</div>
 							</div>
+						</div>
+						
+						<div class="btn-modal">
+							<!-- 지도 위의 버튼 2 음식 카테고리 -->
+							<!-- Button trigger modal -->
+							<button type="button" id="opentime" class="btn btn-warning" data-toggle="modal" data-target="#opentimeModal">영업 확인</button>
 							
-							<div class="btn-modal">
-								<!-- 지도 위의 버튼 2 음식 카테고리 -->
-								<!-- Button trigger modal -->
-								<button type="button" id="opentime" class="btn btn-warning" data-toggle="modal" data-target="#opentimeModal">영업 확인</button>
-								
-								<!-- CategoryModal -->
-								<div class="modal fade" id="opentimeModal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<!-- 영업 확인 모달 header -->
-											<div class="modal-header">
-												<h4 class="modal-title">영업 확인</h4>
-		           								<button type="button" class="close" data-dismiss="modal">&times;</button>
-											</div>
-											<!-- 영업 확인 모달 body -->
-		      								<div class="modal-body">
-		      									<h3>식당 영업 요일별 확인</h3>
-		           								<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="일" checked="checked">일
-					 								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="월" checked="checked">월
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="화" checked="checked">화
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="수" checked="checked">수
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="목" checked="checked">목
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="금" checked="checked">금
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="토" checked="checked">토
-					  								</label>
-												</div>
-		      								</div>
-		      								<!-- 영업 확인 모달 footer -->
-		       								<div class="modal-footer">
-		       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
-		        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
-		       								</div>
+							<!-- CategoryModal -->
+							<div class="modal fade" id="opentimeModal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- 영업 확인 모달 header -->
+										<div class="modal-header">
+											<h4 class="modal-title">영업 확인</h4>
+	           								<button type="button" class="close" data-dismiss="modal">&times;</button>
 										</div>
+										<!-- 영업 확인 모달 body -->
+	      								<div class="modal-body">
+	      									<h3>식당 영업 요일별 확인</h3>
+	           								<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="일" checked="checked">일
+				 								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="월" checked="checked">월
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="화" checked="checked">화
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="수" checked="checked">수
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="목" checked="checked">목
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="금" checked="checked">금
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="토" checked="checked">토
+				  								</label>
+											</div>
+	      								</div>
+	      								<!-- 영업 확인 모달 footer -->
+	       								<div class="modal-footer">
+	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
+	       								</div>
 									</div>
 								</div>
 							</div>
-							
-	    	 				<button type="button" class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')" value="on">
-	    	 				범위 선택</button>
-	    					<button type="button" class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
-	    					조회 하기</button>  
-	   					</div>  	 
-					</div>
+						</div>
+						
+    	 				<button type="button" class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')" value="on">
+    	 				범위 선택</button>
+    					<button type="button" class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
+    					조회 하기</button>  
+   					</div>
+   					<!-- map 끝 -->
 				</div>
 			</div>
 			
 			<!-- 추천 가게 리스트 출력 -->
-	  		<div class="row">
-	  			<div id="space">
-	  			<div id="istore" class="istore">
-	  				<h3 style="text-align:center;">주목Trend</h3>
-	  				<ul class="list-group list-group-horizontal">
-	  					<li class="list-group-item">
-			   				<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
-			   				<div class="istore2">
-			   		   		 	<div class="overlay2">
-			   						<div class="text">내일의 추천 가게</div>
-			  					</div>
-			  				</div>
-			   			</li>
-	  					<li class="list-group-item">
-				   			<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
-			   				<div class="istore2">
-			   		   		 	<div class="overlay2">
-			   						<div class="text">이번주 추천 가게</div>
-			  					</div>
-		  					</div>
-			   			</li>
-	  				</ul>
-	  			</div>
-	  			</div>
-	  		</div>
+	  		<div id="istoreList" class="istoreList">
+				<ul class="list-group list-group-horizontal">
+					<li class="list-group-item">
+				   		<img src="resources/img/bluebottle.jpg" alt="양림동 추천 가게 " class="rounded float left" >
+				   		<div class="istore1">
+				   			<div class="overlay1">
+				   				<div class="text" style="color:white;">동명동 추천 가게</div>
+				  			</div>
+				  		</div>
+					</li>		
+					<li class="list-group-item">
+					   	<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left">
+				   		<div class="istore2">
+				   			<div class="overlay2">
+				   				<div class="text">
+				   					<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+				   				</div>
+				  			</div>
+				  		</div>
+					</li>
+				</ul>	
+			</div>
+			 <!-- 추천 스토어 종료-->	
+		</div>
 			
-			
-  		</div>
   		
   		<!-- 사이드 컬럼 시작 -->
   		<div class="column-side">
-	  		<c:choose>
-	  			<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
-	  				<div id="istoreList" class="istoreList">
-			  			<ul class="list-group">
-			  				<c:forEach var="item" items="${istores}">
-			  					<li class="list-group-item">
-				   		   			<div class="istore1">
-				   		   				<div class="overlay1">
-				   							<div class="text" style="color:white;">
-				   								${item.instaStore.store_adr}
-				   							</div>
-				  						</div>
-				  					</div>
-					   			</li>
-					   			<li class="list-group-item">
-					   				<img src="${item.instaImage.repImg}" alt="${item.instaStore.store_adr}" class="rounded float left" style="width:380px; height:310px;" >
-					   				<div class="istore2">
-					   		   			<div class="overlay2">
-					   						<div class="text">
-					   							<a href='<c:url value="/stores/istoreInfo?store_no=${item.instaStore.store_no}" />'>${item.instaStore.store_name}</a>
-					   						</div>
-					  					</div>
-					  				</div>
-					   			</li>
-			  				</c:forEach>
-			  			</ul>
-			  		</div>
-	  			</c:when>
-	  			<c:otherwise>
-	  				<div id="istoreList" class="istoreList">
-			  			<ul class="list-group">
-			  				
-			  			</ul>
-			  		</div>
-	  			</c:otherwise>
-	  		</c:choose>
+  			<div class="row">
+  				<div id="istore" class="istore">
+			  		<c:choose>
+			  			<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
+			  				<div id="istoreList" class="istoreList">
+					  			<ul class="list-group">
+					  				<c:forEach var="item" items="${istores}">
+					  					<li class="list-group-item">
+						   		   			<div class="istore1">
+						   		   				<div class="overlay1">
+						   							<div class="text" style="color:white;">
+						   								${item.instaStore.store_adr}
+						   							</div>
+						  						</div>
+						  					</div>
+							   			</li>
+							   			<li class="list-group-item">
+							   				<img src="${item.instaImage.repImg}" alt="${item.instaStore.store_adr}" class="rounded float left" style="width:380px; height:310px;" >
+							   				<div class="istore2">
+							   		   			<div class="overlay2">
+							   						<div class="text">
+							   							<a href='<c:url value="/stores/istoreInfo?store_no=${item.instaStore.store_no}" />'>${item.instaStore.store_name}</a>
+							   						</div>
+							  					</div>
+							  				</div>
+							   			</li>
+					  				</c:forEach>
+					  			</ul>
+					  		</div>
+			  			</c:when>
+			  			<c:otherwise>
+			  				<div id="istoreList" class="istoreList">
+					  			<ul class="list-group">
+					  				
+					  			</ul>
+					  		</div>
+			  			</c:otherwise>
+			  		</c:choose>
+		  		</div>
+	  		</div>
   		</div>
   	</div>
 
@@ -284,7 +284,9 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	</div>
 	
 <script type="text/javascript">
+
 		$(function() {
+
 			function init() {
 				if(navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function(position) {
@@ -292,6 +294,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 						const callback = function(result, status) {
 							if(status === kakao.maps.services.Status.OK) {
 								let adr = result[0].address.address_name;
+
 								$.ajax({
 									url: "<c:url value='/recommend' />",
 									type: "get",
@@ -309,27 +312,34 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 								});
 							}
 						}
+
 						geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);
 						
 					});
 				}
 			}
+
 			function search(points) {
 				let categoryValues = [];
+
 				$("input[name=categotyChk]:checked").each(function() {
 					categoryValues.push($(this).val());
 				});
 				console.log(categoryValues);
+
 				let opentimeValues = [];
+
 				$("input[name=opentimeChk]:checked").each(function() {
 					opentimeValues.push($(this).val());
 				});
 				console.log(opentimeValues);
+
 				let reqParm = {
 					"points": points,
 					"categoryValues": categoryValues,
 					"opentimeValues": opentimeValues
 				};
+
 				$.ajax({
 					url: "<c:url value='/search' />",
 					type: "post",
@@ -382,8 +392,11 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				});
 			}
 			searchFunc = search;
+
 			init();
+
 		});
+
 		function search(points) {
 			searchFunc(points);
 		};
@@ -393,7 +406,9 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				center: new kakao.maps.LatLng(35.15113, 126.924584),
 				level: 1 // 지도의 확대 레벨
 		};
+
 		const map = new kakao.maps.Map(mapContainer, mapOption);
+
 		const printMarker = (result) => {
 			
 			// 마커를 표시할 위치와 title 객체 배열입니다
@@ -406,13 +421,18 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				}
 				positions.push(posotion);
 			}
+
 			// 마커 이미지의 이미지 주소입니다
 			const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
 			for(let i = 0; i < positions.length; i++) {
+
 				// 마커 이미지의 이미지 크기 입니다
 				const imageSize = new kakao.maps.Size(24, 35);
+
 				// 마커 이미지를 생성합니다    
 			    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+
 			 	// 마커를 생성합니다
 			    const marker = new kakao.maps.Marker({
 			        map: map, // 마커를 표시할 지도
@@ -422,6 +442,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			    });
 			}
 		};
+
 		const options = {
 		        // Drawing Manager를 생성할 때 사용할 옵션입니다
 				map: map, // Drawing Manager로 그리기 요소를 그릴 map 객체입니다
@@ -443,12 +464,15 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		          	hintStrokeOpacity: 0.5
 		        }
 		};
+
 		// 위에 작성한 옵션으로 Drawing Manager를 생성합니다
 		const manager = new kakao.maps.drawing.DrawingManager(options);
+
 		manager.addListener('drawend', function(data) {
 			document.getElementById("selectOverlay").value = 'on';
 			document.getElementById("selectOverlay").innerHTML = '범위 선택';
 		});
+
 		// 버튼 클릭 시 호출되는 핸들러 입니다
   		const selectOverlay = (type) => {
   	  		let btn = document.getElementById("selectOverlay");
@@ -464,6 +488,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		   		manager.cancel();
 		  	}
   		};
+
 	   // 가져오기 버튼을 클릭하면 호출되는 핸들러 함수입니다
 	   const getDataFromDrawingMap = () => {
 		   // Drawing Manager에서 그려진 데이터 정보를 가져옵니다
@@ -479,10 +504,12 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			}
 			search(points);
 	   };
+
 	   const setCenter = (lat, lng) => {
 		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
 		   map.setCenter(moveLatLng);
 	   };
+
 	   const panTo = (lat, lng) => {
 		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
 		   map.panTo(moveLatLng);

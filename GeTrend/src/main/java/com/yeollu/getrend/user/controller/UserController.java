@@ -259,11 +259,8 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginemail");
 		session.removeAttribute("loginname");
-<<<<<<< HEAD
 		session.removeAttribute("istores");
 		session.removeAttribute("recommendIStores");
-=======
->>>>>>> 0c6458edecdc4f1cebab37e0ef720fa62110c8bc
 		logger.info("로그아웃");
 		return "redirect:/";
 	}

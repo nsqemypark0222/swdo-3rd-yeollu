@@ -47,8 +47,12 @@ public class CrawlerExecutor implements Runnable {
 				}
 			}
 		}
-		logger.info("{}", instaImage);
-		return instaImage;
+		if(instaImage != null) {
+			logger.info("{}", instaImage);
+			return instaImage;
+		} else {
+			return null;
+		}
 	}
 	
 	public static void killChromeDriver() {

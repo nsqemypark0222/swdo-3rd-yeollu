@@ -13,7 +13,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing,services'></script>
+<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -169,77 +169,160 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					</div>
 				</div>
 			</div>
-			
-			<!-- 추천 가게 리스트 출력 -->
-	  		<div class="row">
-	  			<div id="space">
-	  			<div id="istore" class="istore">
-	  				<h3 style="text-align:center;">주목Trend</h3>
-	  				<ul class="list-group list-group-horizontal">
-	  					<li class="list-group-item">
-			   				<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
-			   				<div class="istore2">
-			   		   		 	<div class="overlay2">
-			   						<div class="text">내일의 추천 가게</div>
-			  					</div>
-			  				</div>
-			   			</li>
-	  					<li class="list-group-item">
-				   			<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
-			   				<div class="istore2">
-			   		   		 	<div class="overlay2">
-			   						<div class="text">이번주 추천 가게</div>
-			  					</div>
-		  					</div>
-			   			</li>
-	  				</ul>
-	  			</div>
-	  			</div>
-	  		</div>
-			
-			
   		</div>
   		
-  		<!-- 사이드 컬럼 시작 -->
-  		<div class="column-side">
-	  		<c:choose>
-	  			<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
-	  				<div id="istoreList" class="istoreList">
-			  			<ul class="list-group">
-			  				<c:forEach var="item" items="${istores}">
-			  					<li class="list-group-item">
-				   		   			<div class="istore1">
-				   		   				<div class="overlay1">
-				   							<div class="text" style="color:white;">
-				   								${item.instaStore.store_adr}
-				   							</div>
-				  						</div>
+  		<!-- 추천 가게 리스트 출력 -->
+  		<c:choose>
+  			<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
+  				<div id="istoreList" class="istoreList">
+		  			<ul class="list-group list-group-horizontal">
+		  				<c:forEach var="item" items="${istores}">
+		  					<li class="list-group-item">
+			   		   			<div class="istore1">
+			   		   				<div class="overlay1">
+			   							<div class="text" style="color:white;">
+			   								${item.instaStore.store_adr}
+			   							</div>
+			  						</div>
+			  					</div>
+				   			</li>
+				   			<li class="list-group-item">
+				   				<img src="${item.instaImage.repImg}" alt="${item.instaStore.store_adr}" class="rounded float left" style="width:380px; height:310px;" >
+				   				<div class="istore2">
+				   		   			<div class="overlay2">
+				   						<div class="text">
+				   							<a href='<c:url value="/stores/istoreInfo?store_no=${item.instaStore.store_no}" />'>${item.instaStore.store_name}</a>
+				   						</div>
 				  					</div>
-					   			</li>
-					   			<li class="list-group-item">
-					   				<img src="${item.instaImage.repImg}" alt="${item.instaStore.store_adr}" class="rounded float left" style="width:380px; height:310px;" >
-					   				<div class="istore2">
-					   		   			<div class="overlay2">
-					   						<div class="text">
-					   							<a href='<c:url value="/stores/istoreInfo?store_no=${item.instaStore.store_no}" />'>${item.instaStore.store_name}</a>
-					   						</div>
-					  					</div>
-					  				</div>
-					   			</li>
-			  				</c:forEach>
-			  			</ul>
-			  		</div>
-	  			</c:when>
-	  			<c:otherwise>
-	  				<div id="istoreList" class="istoreList">
-			  			<ul class="list-group">
-			  				
-			  			</ul>
-			  		</div>
-	  			</c:otherwise>
-	  		</c:choose>
-  		</div>
+				  				</div>
+				   			</li>	
+		  				</c:forEach>
+		  			</ul>
+		  		</div>
+  			</c:when>
+  			<c:otherwise>
+  				<div id="istoreList" class="istoreList">
+		  			<ul class="list-group list-group-horizontal">
+		  				
+		  			</ul>
+		  		</div>
+  			</c:otherwise>
+  		</c:choose>
+  		
+  		
   	</div>
+  	
+	<!-- 사이드 컬럼 시작 -->
+  	<div class="column-side">
+  		<div class="row">
+  			<div id="istore" class="istore">
+  				<h3 style="text-align:center;">주목Trend</h3>
+  					<ul class="list-group list-group-horizontal">
+  						<li class="list-group-item">
+		   					<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+		   					<div class="istore2">
+		   		   		 		<div class="overlay2">
+		   							<div class="text">내일의 추천 가게</div>
+		  						</div>
+		  					</div>
+		   				</li>
+  						<li class="list-group-item">
+			   				<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+		   					<div class="istore2">
+		   		   		 		<div class="overlay2">
+		   							<div class="text">이번주 추천 가게</div>
+		  						</div>
+	  						</div>
+		   				</li>
+  					</ul>
+  			</div>
+  		</div>
+  	</div>  	
+  	
+  	
+  	
+  	
+  	
+		
+		<!-- 추천 가게 리스트 출력 -->
+<%--    		<div id="istoreList" class="istoreList">
+			<ul class="list-group list-group-horizontal">
+	   			<li class="list-group-item">
+   		   			<div class="istore1">
+   		   				<div class="overlay1">
+   							<div class="text" style="color:white;">동명동 추천 가게</div>
+  						</div>
+  					</div>
+	   			</li>		
+	   			<li class="list-group-item">
+	   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
+	   				<div class="istore2">
+	   		   			<div class="overlay2">
+	   						<div class="text">
+	   							<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+	   						</div>
+	  					</div>
+	  				</div>
+	   			</li>
+	  	  	</ul>	
+  		</div> 
+	</div>--%>
+	
+	<!-- 사이드 컬럼 시작 -->
+   <%-- 	<div class="column-side">
+   		<div class="row">
+	   		<div id="istore" class="istore">
+	   			<h3 style="text-align:center;">주목Trend</h3>
+	   			<ul class="list-group">
+	   				<li class="list-group-item">
+	   					<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+	   					<div class="istore2">
+	   		   		 		<div class="overlay2">
+	   							<div class="text">내일의 추천 가게</div>
+	  						</div>
+	  					</div>
+		   			</li>		
+		   			<li class="list-group-item">
+		   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left" style="	width:380px; height:310px;" >
+		   				<div class="istore2">
+		   		   			<div class="overlay2">
+		   						<div class="text">
+		   							<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+		   						</div>
+		  					</div>
+		  				</div>
+		   			</li>
+		  	  	</ul>	
+	  		</div>
+		</div> --%>
+		
+		<!-- 사이드 컬럼 시작 -->
+	   	<!-- <div class="column-side">
+	   		<div class="row">
+		   		<div id="istore" class="istore">
+		   			<h3 style="text-align:center;">주목Trend</h3>
+		   			<ul class="list-group">
+		   				<li class="list-group-item">
+		   					<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+		   					<div class="istore2">
+		   		   		 		<div class="overlay2">
+		   							<div class="text">내일의 추천 가게</div>
+		  						</div>
+		  					</div>
+		   				</li>
+		   				<li class="list-group-item">
+			   				<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+		   					<div class="istore2">
+		   		   		 		<div class="overlay2">
+		   							<div class="text">이번주 추천 가게</div>
+		  						</div>
+	  						</div>
+		   				</li>
+		  	  		</ul>	
+		  		</div>
+	  		</div>
+	  	</div>
+	</div> -->
 
    	<div>
 		<c:choose>
@@ -286,38 +369,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <script type="text/javascript">
 
 		$(function() {
-
-			function init() {
-				if(navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(function(position) {
-						const geocoder = new kakao.maps.services.Geocoder();
-						const callback = function(result, status) {
-							if(status === kakao.maps.services.Status.OK) {
-								let adr = result[0].address.address_name;
-
-								$.ajax({
-									url: "<c:url value='/recommend' />",
-									type: "get",
-									contentType: "application/json; charset=utf-8",
-									data: {
-										"adr": adr,
-									},
-									dataType: "json",
-									success: function(result) {
-										console.log(result);
-									},
-									error: function(request, status, error){
-							            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
-							        }
-								});
-							}
-						}
-
-						geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);
-						
-					});
-				}
-			}
 
 			function search(points) {
 				let categoryValues = [];
@@ -392,8 +443,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				});
 			}
 			searchFunc = search;
-
-			init();
 
 		});
 

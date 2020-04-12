@@ -27,6 +27,7 @@ import com.yeollu.getrend.store.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.MangoTimeDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
+import com.yeollu.getrend.store.util.map.core.LocationDistance;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
 import com.yeollu.getrend.store.util.preprocess.core.DayOfTheWeekCategorizer;
@@ -69,9 +70,7 @@ public class HomeController {
 	private MangoTimeDAO mangoTimeDAO;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		
-
+	public String home(HttpSession session, Model model) {
 		return "home";
 	}
 
@@ -171,11 +170,13 @@ public class HomeController {
 				} else {
 					instaStoreInfo.setInstaImage(null);
 				}
+				logger.info("instaStoreInfo name : {}", instaStoreInfo.getInstaStore().getStore_name());
 				instaStoreInfoList.add(instaStoreInfo);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.info("instaStoreInfoList size : {}", instaStoreInfoList.size());
 		session.setAttribute("istores", instaStoreInfoList);
 
 		long endTime = System.currentTimeMillis();
@@ -184,4 +185,113 @@ public class HomeController {
 
 		return instaStoreInfoList;
 	}
+	
+	@RequestMapping(value = "/recommend", method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<InstaStoreInfoVO> recommend(HttpSession session, @RequestParam(value = "adr") String adr) {
+		logger.info("adr : {}", adr);
+		if(session.getAttribute("recommendIStores") != null) {
+			return (ArrayList<InstaStoreInfoVO>) session.getAttribute("recommendIStores");
+		}
+		
+		String store_adr = "";
+		String[] temps = adr.split(" ");
+		for(String str : temps) {
+			if(str.contains("동")) {
+				store_adr = str;
+				break;
+			}
+		}
+		logger.info("store_adr : {}", store_adr);
+		
+		
+		// DB에 저장된 모든 상가들 중 접속한 동에 속한 상가 리스트만 가져옴
+		ArrayList<StoreVO> storeList = storeDAO.selectStoresByStoreAdr(store_adr);
+		
+		ArrayList<StoreVO> selectedStoreList = new ArrayList<StoreVO>();
+		if(storeList.size() > 3) {
+			selectedStoreList = new ArrayList<StoreVO>(storeList.subList(0, 3));
+		} else {
+			selectedStoreList = storeList;
+		}
+		logger.info("selectedStoreList size : {}", selectedStoreList.size());
+		
+		
+		// 인스타그램에 쿼리스트링을 보내 상가의 위치 정보 수집하여 location_id를 하나 리턴받아
+		// InstaStore 객체 생성하여 instaStoreList에 수집
+		ArrayList<InstaStoreVO> instaStoreList = new ArrayList<InstaStoreVO>();
+		for (StoreVO store : selectedStoreList) {
+			String location_id = QueryStringSender.send(store);
+			if (location_id == null || location_id.equals("")) {
+			} else {
+				if (!instaLocationDAO.isExistedInstaLocation(location_id)) {
+					InstaLocationVO instaLocation = new InstaLocationVO();
+					instaLocation.setLocation_id(location_id);
+					instaLocation.setStore_no(store.getStore_no());
+					instaLocationDAO.insertInstaLocation(instaLocation);
+				}
+				InstaStoreVO instaStore = storeDAO.selectInstaStore(store.getStore_no());
+				if (instaStore != null) {
+					instaStore.setLocation_id(location_id);
+					instaStoreList.add(instaStore);
+				}
+			}
+		}
+		
+		ArrayList<String> opentimeValues = new ArrayList<String>();
+		opentimeValues.add("일");
+		opentimeValues.add("월");
+		opentimeValues.add("화");
+		opentimeValues.add("수");
+		opentimeValues.add("목");
+		opentimeValues.add("금");
+		opentimeValues.add("토");
+
+		// 망고플레이트 정보 추가 + 크롤링 요청할 로케이션 아이디 리스트 생성
+		ArrayList<MangoStoreInfoVO> mangoStoreInfoList = new ArrayList<MangoStoreInfoVO>();
+		ArrayList<String> locationList = new ArrayList<String>();
+		for(InstaStoreVO instaStore : instaStoreList) {
+			MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
+			mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNo(instaStore.getStore_no(), opentimeValues);
+			mangoStoreInfoList.add(mangoStoreInfo);
+			locationList.add(instaStore.getLocation_id());
+		}
+
+		// 인스타그램 크롤링 요청
+		ArrayList<InstaImageVO> instaImageList = new ArrayList<InstaImageVO>();
+		ArrayList<CrawlerExecutor> crawlerExecutorList = new ArrayList<CrawlerExecutor>();
+		for (String location : locationList) {
+			CrawlerExecutor crawlerExecutor = new CrawlerExecutor();
+			crawlerExecutor.setLocation(location);
+			new Thread(crawlerExecutor, "crawling :  " + location).start();
+			crawlerExecutorList.add(crawlerExecutor);
+		}
+		for (CrawlerExecutor crawlerExecutor : crawlerExecutorList) {
+			instaImageList.add(crawlerExecutor.getInstaImage());
+		}
+		CrawlerExecutor.killChromeDriver();
+
+		// View로 보낼 최종 객체 리스트
+		ArrayList<InstaStoreInfoVO> instaStoreInfoList = new ArrayList<InstaStoreInfoVO>();
+		try {
+			for (int i = 0; i < instaStoreList.size(); i++) {
+				InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
+				instaStoreInfo.setInstaStore(instaStoreList.get(i));
+				instaStoreInfo.setMangoStoreInfo(mangoStoreInfoList.get(i));
+
+				if (instaImageList.size() > i) {
+					instaStoreInfo.setInstaImage(instaImageList.get(i));
+				} else {
+					instaStoreInfo.setInstaImage(null);
+				}
+				instaStoreInfoList.add(instaStoreInfo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		session.setAttribute("recommendIStores", instaStoreInfoList);
+		
+		return instaStoreInfoList;
+	}
+	
 }

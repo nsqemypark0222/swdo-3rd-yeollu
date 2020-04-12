@@ -293,7 +293,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 									type: "get",
 									contentType: "application/json; charset=utf-8",
 									data: {
-										"adr": adr,
+										"adr": adr
 									},
 									dataType: "json",
 									success: function(result) {

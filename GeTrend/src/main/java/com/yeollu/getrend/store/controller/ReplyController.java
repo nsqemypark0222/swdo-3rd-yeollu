@@ -31,7 +31,7 @@ public class ReplyController {
 	}
 	
 	//등록
-	@RequestMapping(value = "replyWrite", method = RequestMethod.GET)
+	@RequestMapping(value = "/replyWrite", method = RequestMethod.GET)
 	@ResponseBody
 	public void replyWrite(InstaReplyVO reply, HttpSession session) {
 		logger.info("{}", reply);
@@ -39,28 +39,37 @@ public class ReplyController {
 		logger.info(user_email);
 		reply.setUser_email(user_email);
 		
-		reply.setStore_no("25523615");
-		dao.replyWrite(reply);
+		//reply.setStore_no("25523615");
+		int cnt = dao.replyWrite(reply);
+		if(cnt > 0) {
+			logger.info("댓글 등록 성공");
+		} else {
+			logger.info("댓글 등록 실패");
+		}
 	}
 	
 	//삭제
-	@RequestMapping(value = "replyRemove", method = RequestMethod.GET)
+	@RequestMapping(value = "/replyRemove", method = RequestMethod.GET)
 	@ResponseBody
 	public void replyRemove(InstaReplyVO reply, HttpSession session) {
 		logger.info("{}", reply);
 		String user_email = (String)session.getAttribute("loginemail");
 		reply.setUser_email(user_email);
 		int cnt = dao.replyRemove(reply);
-		logger.info("삭제 {}", cnt);
+		if(cnt > 0) {
+			logger.info("댓글 삭제 성공");
+		} else {
+			logger.info("댓글 삭제 실패");
+		}
 		
 		
 	}
 	
 	//리스트
-	@RequestMapping(value = "replyList", method = RequestMethod.GET)
+	@RequestMapping(value = "/replyList", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<HashMap<String,Object>> list(InstaReplyVO reply, HttpSession session) {
-		reply.setStore_no("25523615");
+		//reply.setStore_no("25523615");
 		String loginemail = (String)session.getAttribute("loginemail");
 		ArrayList<HashMap<String,Object>> rlist = dao.replyList(reply);
 		for (HashMap<String, Object> hashMap : rlist) {

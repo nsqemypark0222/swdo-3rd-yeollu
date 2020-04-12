@@ -79,4 +79,17 @@ public class LikeDAO {
 		return cnt;
 	}
 	
+	public boolean isExistedLike(LikeVO like) {
+		boolean result = false;
+		try {
+			LikeMapper mapper = session.getMapper(LikeMapper.class);
+			if(mapper.isExistedLike(like).equals("true")) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

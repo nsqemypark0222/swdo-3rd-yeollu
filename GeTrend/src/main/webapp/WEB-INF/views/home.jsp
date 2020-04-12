@@ -32,7 +32,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		<div class="column-content">
 			<!-- 지도와의 간격 div-->
 			<div id="space">
-				<div class="container" >
 					<div class="col" >
 						<div id="map">
 							<div class="btn-modal">
@@ -161,14 +160,49 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 								</div>
 							</div>
 							
-	    	 				<button type="button" class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')" value="on">
+	    	 				<button type="button"  class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')">
 	    	 				범위 선택</button>
-	    					<button type="button" class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
-	    					조회 하기</button>  
-	   					</div>  	 
+	    					<button type="button"  class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
+	    					조회 하기</button> 
+	    		
+						
+	   					</div> 
+	   					<!-- map 끝 --> 	 
+	   					<!-- 로딩이미지 -->
+						<div class="wrap-loading display-none">
+						  	<div>
+						  		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" />
+						  	</div>
+						</div>
+	   					<!-- 추천 스토어 시작 -->
+	   					<!-- 추천 가게 리스트 출력 -->
+			    	<div id="istoreList" class="istoreList">
+							<ul class="list-group list-group-horizontal">
+					   			<li class="list-group-item">
+				   		 			<img src="resources/img/bluebottle.jpg" alt="양림동 추천 가게 " class="rounded float left" >
+				   		   			<div class="istore1">
+				   		   				<div class="overlay1">
+				   							<div class="text" style="color:white;">동명동 추천 가게</div>
+				  						</div>
+				  					</div>
+					   			</li>		
+					   			<li class="list-group-item">
+					   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left">
+					   				<div class="istore2">
+					   		   			<div class="overlay2">
+					   						<div class="text">
+					   							<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+					   						</div>
+					  					</div>
+					  				</div>
+					   			</li>
+					  	  	</ul>	
+				  		</div>
+	   					<!-- 추천 스토어 종료-->
 					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
 			
 			<!-- 추천 가게 리스트 출력 -->
 	  		<div class="row">
@@ -240,6 +274,45 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	  		</c:choose>
   		</div>
   	</div>
+				<!-- 사이드 컬럼 시작 -->
+   	<div class="column-side">
+   		<div class="row">
+	   		<div id="istore" class="istore">
+	   			<h3 style="text-align:center;">주목Trend</h3>
+	   			<ul class="list-group">
+	   				<li class="list-group-item">
+	   					<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+	   					<div class="istore2">
+	   		   		 		<div class="overlay2">
+	   							<div class="text">내일의 추천 가게</div>
+	  						</div>
+	  					</div>
+		   			</li>		
+		   			<li class="list-group-item">
+		   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left" style="width:100%; height:100%;">
+		   				<div class="istore2">
+		   		   			<div class="overlay2">
+		   						<div class="text">
+		   							<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+		   						</div>
+		  					</div>
+		  				</div>
+		   			</li>
+		   			<li class="list-group-item">
+		   				<img src="resources/img/cup.jpg" alt="양림동 추천 가게 " class="rounded float left" style="width:100%; height:100%;">
+		   				<div class="istore2">
+		   		   			<div class="overlay2">
+		   						<div class="text">
+		   							<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+		   						</div>
+		  					</div>
+		  				</div>
+		   			</li>
+		  	  	</ul>	
+	  		</div>
+		</div>
+	</div>
+
 
    	<div>
 		<c:choose>
@@ -264,6 +337,9 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	</div>
 
 	
+
+
+
 	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
@@ -272,9 +348,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	
 	
 
-	<footer>
-		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-	</footer>
 
 	<!-- 로딩이미지 -->
 	<div class="wrap-loading display-none">
@@ -282,7 +355,13 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	  		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" />
 	  	</div>
 	</div>
+
 	
+
+<footer>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</footer>
+
 <script type="text/javascript">
 
 		$(function() {
@@ -385,6 +464,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 									+ '</li>'
 							);
 						});
+						
 			        },
 			        error: function(request, status, error){
 			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
@@ -394,7 +474,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			searchFunc = search;
 
 			init();
-
 		});
 
 		function search(points) {
@@ -474,19 +553,11 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		});
 
 		// 버튼 클릭 시 호출되는 핸들러 입니다
-  		const selectOverlay = (type) => {
-  	  		let btn = document.getElementById("selectOverlay");
-  	  		if(btn.value === 'on') {
-  	  			btn.value = 'off';
-  	  			btn.innerHTML = '선택 취소';
-		    	// 클릭한 그리기 요소 타입을 선택합니다
-		    	manager.select(kakao.maps.drawing.OverlayType[type]);
-	  	  	} else {
-	  	  		btn.value = 'on';
-	  	 		btn.innerHTML = '범위 선택';
-		  		// 그리기 중이면 그리기를 취소합니다
-		   		manager.cancel();
-		  	}
+  		selectOverlay = type => {
+	    	// 그리기 중이면 그리기를 취소합니다
+	   		manager.cancel();
+	    	// 클릭한 그리기 요소 타입을 선택합니다
+	    	manager.select(kakao.maps.drawing.OverlayType[type]);
   		};
 
 	   // 가져오기 버튼을 클릭하면 호출되는 핸들러 함수입니다
@@ -502,6 +573,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			    };
 				points.push(point);
 			}
+	        const printContainer = document.getElementById("print");
 			search(points);
 	   };
 

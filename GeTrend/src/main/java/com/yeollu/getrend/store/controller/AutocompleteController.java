@@ -106,7 +106,7 @@ public class AutocompleteController {
 		ArrayList<MangoStoreInfoVO> mangoStoreInfoList = new ArrayList<MangoStoreInfoVO>();
 		for(InstaStoreVO instaStore : instaStoreList) {
 			MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
-//			mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNo(instaStore.getStore_no());
+			mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNo(instaStore.getStore_no());
 			mangoStoreInfoList.add(mangoStoreInfo);
 		}
 		

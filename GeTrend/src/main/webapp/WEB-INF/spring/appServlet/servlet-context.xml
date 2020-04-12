@@ -3,10 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
@@ -29,15 +27,5 @@
 	
 	<util:properties id="kakao" location="classpath:properties/kakao.properties"></util:properties>
 	<util:properties id="naver" location="classpath:properties/naver.properties"></util:properties>
-	
-	<beans:bean id="loginInterceptor" class="com.yeollu.getrend.interceptor.LoginInterceptor">
-	</beans:bean>
-	
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/*"/>
-			<beans:ref bean="loginInterceptor"/>
-		</mvc:interceptor>
-	</mvc:interceptors>
 	
 </beans:beans>

@@ -72,7 +72,7 @@
 					                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" >Sign in</button>
 							 	</form>
 
-							 	<div id="socialbtn" class="row mx-auto">
+							 	<div id="socialbtn" class="row">
 					            	<div id="kakaoIdLogin" class="col">
 					            		<a id="kakao-custom-login-btn">
 					            			<img class="img-fluid center-block" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586494683/kakao_login_btn_bkouot.png">
@@ -80,7 +80,7 @@
 					            	</div>
 					            	<div id="naverIdLogin" class="col">
 					            		<a id="naver-custom-login-btn">
-					            			<img class="img-fluid center-block" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586507185/naver_login_btn_omkvf5.png">
+					            			<img class="img-fluid center-block" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586504578/naver_login_btn_wokame.png">
 					            		</a>
 					            	</div>
 					            </div>
@@ -129,10 +129,12 @@ $(function(){
 
 	$("#kakao-custom-login-btn").click(function() {
 		Kakao.Auth.login({
+			
 		  	success: function(authObj) {
 				Kakao.API.request({
 					url:'/v2/user/me',
 					success:function(res){
+						
 						var kakaoLogin = document.getElementById("kakao");
 			  			console.log(kakaoLogin.childNodes);
 			  			var kakaoId = kakaoLogin.childNodes[1];
@@ -155,8 +157,11 @@ $(function(){
 			}
 		});
 	});
+
+
 });
 </script>
+
 
 <script>
 	const loginForm = new Vue({
@@ -195,6 +200,7 @@ $(function(){
 			}
 		}
 	});
+
 </script>
 </body>
 </html>

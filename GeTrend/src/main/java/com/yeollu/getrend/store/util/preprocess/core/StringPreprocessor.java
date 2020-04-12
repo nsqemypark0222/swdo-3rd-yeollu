@@ -28,4 +28,16 @@ public class StringPreprocessor {
 		}
 		return false;
 	}
+	
+	public static boolean isTime(String str) {
+		String match = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
+		if(Pattern.matches(match, str)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static String removeSpace(String str) {
+		return str.replaceAll(" ", "");
+	}
 }

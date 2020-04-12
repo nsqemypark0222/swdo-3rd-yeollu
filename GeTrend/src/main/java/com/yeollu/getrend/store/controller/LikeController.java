@@ -31,8 +31,14 @@ public class LikeController {
 	public void likeInsert(LikeVO like, HttpSession session) {
 		like.setUser_email((String)session.getAttribute("loginemail"));
 		logger.info("likeInsert {}",like);
-		int cnt = likeDAO.likeInsert(like);
-		logger.info("likeInsert cnt {}",cnt);
+		
+		if(likeDAO.isExistedLike(like)) {
+			logger.info("이미 추가됨");
+			return;
+		} else {
+			int cnt = likeDAO.likeInsert(like);
+			logger.info("likeInsert cnt {}",cnt);
+		}
 	}
 	
 	@RequestMapping(value = "/likeDelete", method = RequestMethod.POST)

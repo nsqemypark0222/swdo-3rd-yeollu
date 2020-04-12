@@ -62,5 +62,15 @@ where
 	user_email = #{user_email}	
 </select>
 
+<select id="isExistedLike" parameterType="like" resultType="string">
+select
+	decode(count(*), 0, 'false', 'true') as result
+from
+	likes
+where
+	user_email = #{user_email}
+	and store_no = #{store_no}
+</select>
+
 </mapper>
 

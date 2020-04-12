@@ -176,9 +176,9 @@ table {
 
 @media (max-width: 767px) {
 	#kakaoIdLogin {
-	float: left;
-	margin-right:1px;	
-	width: 226px;
+		float: left;
+		margin-right:1px;	
+		width: 226px;
 	}
 	#naverIdLogin {
 		float: left;	
@@ -192,4 +192,14 @@ table {
 #login{
 	background-color:#ffc107;
 	border-color:#ffc107;
+}
+
+.img-fluid {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+    right: 0;
+	width: 100%;
+	height: auto;
 }

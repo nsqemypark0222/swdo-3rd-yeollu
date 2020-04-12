@@ -11,4 +11,5 @@ public interface LikeMapper {
 	public ArrayList<HashMap<String, Object>> likeSelectByEmail(String user_email);//가게리스트 모달
 	public int likeSelectByEmailStoreno(LikeVO like);//좋아요한 가게인지 체크
 	public int likeStoreCountByEmail(String user_email);//좋아하는 가게수
+	public String isExistedLike(LikeVO like);
 }

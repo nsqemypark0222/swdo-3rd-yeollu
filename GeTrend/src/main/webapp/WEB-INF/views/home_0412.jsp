@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+     <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -13,25 +13,12 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing,services'></script>
+<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
-<<<<<<< HEAD
-
-
-
-
-<style>
-.space{
- margin-top:80%;
-}
-
-</style>
-=======
->>>>>>> ae1db89aead11e5c76032a1f03aa36f287db6e5b
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'>
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
 </head>
@@ -45,7 +32,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		<div class="column-content">
 			<!-- 지도와의 간격 div-->
 			<div id="space">
-				<div class="container" >
 					<div class="col" >
 						<div id="map">
 							<div class="btn-modal">
@@ -174,81 +160,145 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 								</div>
 							</div>
 							
-	    	 				<button type="button" class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')" value="on">
+	    	 				<button type="button"  class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')">
 	    	 				범위 선택</button>
-	    					<button type="button" class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
-	    					조회 하기</button>  
-	   					</div>  	 
-						<!-- map 끝 -->
+	    					<button type="button"  class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
+	    					조회 하기</button> 
+	    		
 						
-						<!-- 추천 스토어 시작 -->
-						<!-- 추천 가게 리스트 출력 -->
-						<div id="istoreList" class="istoreList">
-			  				<ul class="list-group list-group-horizontal">
-			  					<li class="list-group-item">
-					   				<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
-					   				<div class="istore2">
-					   		   		 	<div class="overlay2">
-					   						<div class="text">내일의 추천 가게</div>
-					  					</div>
-					  				</div>
-					   			</li>
-			  					<li class="list-group-item">
-						   			<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
-					   				<div class="istore2">
-					   		   		 	<div class="overlay2">
-					   						<div class="text">이번주 추천 가게</div>
-					  					</div>
-				  					</div>
-					   			</li>
-			  				</ul>
-			  			</div>
-			  			<!-- 추천 스토어 종료-->
-					</div>
-				</div>
-			</div>
-  		</div>
-  		
-  		<!-- 사이드 컬럼 시작 -->
-  		<div class="column-side">
-	  		<c:choose>
-	  			<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
-	  				<div id="istoreList" class="istoreList">
-			  			<ul class="list-group">
-			  				<c:forEach var="item" items="${istores}">
-			  					<li class="list-group-item">
+	   					</div> 
+	   					<!-- map 끝 --> 	 
+	   					<!-- 로딩이미지 -->
+						<div class="wrap-loading display-none">
+						  	<div>
+						  		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" />
+						  	</div>
+						</div>
+	   					<!-- 추천 스토어 시작 -->
+	   					<!-- 추천 가게 리스트 출력 -->
+			    	<div id="istoreList" class="istoreList">
+							<ul class="list-group list-group-horizontal">
+					   			<li class="list-group-item">
+				   		 			<img src="resources/img/bluebottle.jpg" alt="양림동 추천 가게 " class="rounded float left" >
 				   		   			<div class="istore1">
 				   		   				<div class="overlay1">
-				   							<div class="text" style="color:white;">
-				   								${item.instaStore.store_adr}
-				   							</div>
+				   							<div class="text" style="color:white;">동명동 추천 가게</div>
 				  						</div>
 				  					</div>
-					   			</li>
+					   			</li>		
 					   			<li class="list-group-item">
-					   				<img src="${item.instaImage.repImg}" alt="${item.instaStore.store_adr}" class="rounded float left" style="width:380px; height:310px;" >
+					   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left">
 					   				<div class="istore2">
 					   		   			<div class="overlay2">
 					   						<div class="text">
-					   							<a href='<c:url value="/stores/istoreInfo?store_no=${item.instaStore.store_no}" />'>${item.instaStore.store_name}</a>
+					   							<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
 					   						</div>
 					  					</div>
 					  				</div>
 					   			</li>
-			  				</c:forEach>
-			  			</ul>
-			  		</div>
-	  			</c:when>
-	  			<c:otherwise>
-	  				<div id="istoreList" class="istoreList">
-			  			<ul class="list-group">
-			  				
-			  			</ul>
-			  		</div>
-	  			</c:otherwise>
-	  		</c:choose>
+					  	  	</ul>	
+				  		</div>
+	   					<!-- 추천 스토어 종료-->
+					</div>
+				</div>
+			</div>
+				<!-- 사이드 컬럼 시작 -->
+   	<div class="column-side">
+   		<div class="row">
+	   		<div id="istore" class="istore">
+	   			<h3 style="text-align:center;">주목Trend</h3>
+	   			<ul class="list-group">
+	   				<li class="list-group-item">
+	   					<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+	   					<div class="istore2">
+	   		   		 		<div class="overlay2">
+	   							<div class="text">내일의 추천 가게</div>
+	  						</div>
+	  					</div>
+		   			</li>		
+		   			<li class="list-group-item">
+		   				<img src="resources/img/ok.jpg" alt="양림동 추천 가게 " class="rounded float left" style="width:100%; height:100%;">
+		   				<div class="istore2">
+		   		   			<div class="overlay2">
+		   						<div class="text">
+		   							<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+		   						</div>
+		  					</div>
+		  				</div>
+		   			</li>
+		   			<li class="list-group-item">
+		   				<img src="resources/img/cup.jpg" alt="양림동 추천 가게 " class="rounded float left" style="width:100%; height:100%;">
+		   				<div class="istore2">
+		   		   			<div class="overlay2">
+		   						<div class="text">
+		   							<a href="<c:url value='/users/istore_test'/>">양림동 추천 가게</a>
+		   						</div>
+		  					</div>
+		  				</div>
+		   			</li>
+		  	  	</ul>	
+	  		</div>
+		</div>
+	</div>
   		</div>
-  	</div>
+		
+					
+
+
+	
+		
+
+   <div id="print"></div>
+
+  	
+
+	
+
+   						
+
+   	<div id="desc">
+   	
+   	</div>
+   	
+
+   	<div>
+   		<table id="table" border="1">
+   			<tr>
+   				<th>store_no</th>
+   				<th>store_name</th>
+   				<th>store_name2</th>
+   				<th>store_cate1</th>
+   				<th>store_cate2</th>
+   				<th>store_adr</th>
+   				<th>store_adr1</th>
+   				<th>store_adr2</th>
+   				<th>store_x</th>
+   				<th>store_y</th>
+   				<th>profile_url</th>
+   			</tr>
+   		</table>
+   	</div>
+   	
+   	<div>
+   		<table id="mangoTable" border="1">
+   			<tr>
+   				<th>store_no</th>
+   				<th>mango_tel</th>
+   				<th>mango_price</th>
+   				<th>mango_parking</th>
+   				<th>mango_start</th>
+   				<th>mango_end</th>
+   				<th>mango_sun</th>
+   				<th>mango_mon</th>
+   				<th>mango_tue</th>
+   				<th>mango_wed</th>
+   				<th>mango_thu</th>
+   				<th>mango_fri</th>
+   				<th>mango_sat</th>
+   			</tr>
+   		</table>
+   	</div>
+
 
    	<div>
 		<c:choose>
@@ -273,69 +323,25 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	</div>
 
 	
-<<<<<<< HEAD
-
-	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
-	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
-	<a href="<c:url value='/users/follow'/>">follow</a>
-
-	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
 
 
-	
-<footer>
-=======
+
 	<a href="<c:url value='/likes/likeForm'/>">좋아요 테스트</a>
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
 	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
 	<a href="<c:url value='/users/follow'/>">follow</a>
-	
+
+
 	
 
-	<footer>
->>>>>>> ae1db89aead11e5c76032a1f03aa36f287db6e5b
+<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-	</footer>
+</footer>
 
-	<!-- 로딩이미지 -->
-	<div class="wrap-loading display-none">
-	  	<div>
-	  		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" />
-	  	</div>
-	</div>
-	
 <script type="text/javascript">
 		$(function() {
-			function init() {
-				if(navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(function(position) {
-						const geocoder = new kakao.maps.services.Geocoder();
-						const callback = function(result, status) {
-							if(status === kakao.maps.services.Status.OK) {
-								let adr = result[0].address.address_name;
-								$.ajax({
-									url: "<c:url value='/recommend' />",
-									type: "get",
-									contentType: "application/json; charset=utf-8",
-									data: {
-										"adr": adr
-									},
-									dataType: "json",
-									success: function(result) {
-										console.log(result);
-									},
-									error: function(request, status, error){
-							            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
-							        }
-								});
-							}
-						}
-						geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);
-						
-					});
-				}
-			}
+			
 			function search(points) {
 				let categoryValues = [];
 				$("input[name=categotyChk]:checked").each(function() {
@@ -352,51 +358,62 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					"categoryValues": categoryValues,
 					"opentimeValues": opentimeValues
 				};
+				
 				$.ajax({
 					url: "<c:url value='/search' />",
 					type: "post",
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify(reqParm),
 					dataType: "json",
-					beforeSend: function() {
+					beforeSend:function(){
 						$('.wrap-loading').removeClass('display-none');
-						$('.wrap-loading').on('scroll touchmove mousewheel', function(event) {
-							event.preventDefault();
-						  	event.stopPropagation();
-						  	return false;
-						});
 					},
-					complete: function() {
+					complete:function(){
 						$('.wrap-loading').addClass('display-none');
-						$('.wrap-loading').off('scroll touchmove mousewheel');
 					},
 					success: function(result) {
 						alert("성공");
 						printMarker(result);
 						console.log(result);
-						$(".column-side > #istoreList > ul").empty();
-						
 						$(result).each(function(index, item) {
-							$(".column-side > #istoreList > ul").append(
-									'<li class="list-group-item">'
-										+ '<div class="istore1">'
-											+ '<div class="overlay1">'
-												+ '<div class="text" style="color:white;">' + item.instaStore.store_adr +'</div>'
-											+ '</div>'
-										+ '</div>'
-									+ '</li>'
-									+ '<li class="list-group-item">'
-									+ '<img src="' + item.instaImage.repImg + '" + alt="' + item.instaStore.store_adr + '" class="rounded float left" style="width:380px; height:310px;" />'
-										+ '<div class="istore2">'
-											+ '<div class="overlay2">'
-												+ '<div class="text">'
-													+ '<a href=' + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + '>' + item.instaStore.store_name + '</a>'
-												+ '</div>'
-											+ '</div>'
-										+ '</div>'
-									+ '</li>'
+							$("#table").append(
+								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
+										+ "<td>" + item.instaStore.store_name + "</td>"
+										+ "<td>" + item.instaStore.store_name2 + "</td>"
+										+ "<td>" + item.instaStore.store_cate1 + "</td>"
+										+ "<td>" + item.instaStore.store_cate2 + "</td>"
+										+ "<td>" + item.instaStore.store_adr + "</td>"
+										+ "<td>" + item.instaStore.store_adr1 + "</td>"
+										+ "<td>" + item.instaStore.store_adr2 + "</td>"
+										+ "<td>" + item.instaStore.store_x + "</td>"
+										+ "<td>" + item.instaStore.store_y + "</td>"
+										+ '<td><img src=' + item.instaImage.repImg + ' /></td>' + "</tr>"
 							);
+							$("#mangoTable").append(
+									"<tr>" + "<td>" + item.mangoStoreInfo.store_no + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_tel + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_price + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_parking + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_start+ "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_end + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_sun + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_mon + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_tue + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_wed + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_thu + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_fri + "</td>"
+										+ "<td>" + item.mangoStoreInfo.mango_sat + "</td>" + "</tr>"
+							);
+							$(item.instaImage.postImgList).each(function(idx, itm) {
+								$("#imageContainer").append(
+										"<div name='imgPanel'>"
+											+ '<img src=' + itm.imgUrl + ' />'
+											+ '<b>' + itm.like + '</b>'
+								);
+							});
+							$('#imageContainer').append("<hr />");
 						});
+						
 			        },
 			        error: function(request, status, error){
 			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
@@ -404,7 +421,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				});
 			}
 			searchFunc = search;
-			init();
+			
 		});
 		function search(points) {
 			searchFunc(points);
@@ -428,6 +445,12 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				}
 				positions.push(posotion);
 			}
+			/* let positions = [
+				{
+					title: '카카오',
+					latlng: new kakao.maps.LatLng(35.15113, 126.924584)
+				}
+			]; */
 			// 마커 이미지의 이미지 주소입니다
 			const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 			for(let i = 0; i < positions.length; i++) {
@@ -467,24 +490,12 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		};
 		// 위에 작성한 옵션으로 Drawing Manager를 생성합니다
 		const manager = new kakao.maps.drawing.DrawingManager(options);
-		manager.addListener('drawend', function(data) {
-			document.getElementById("selectOverlay").value = 'on';
-			document.getElementById("selectOverlay").innerHTML = '범위 선택';
-		});
 		// 버튼 클릭 시 호출되는 핸들러 입니다
-  		const selectOverlay = (type) => {
-  	  		let btn = document.getElementById("selectOverlay");
-  	  		if(btn.value === 'on') {
-  	  			btn.value = 'off';
-  	  			btn.innerHTML = '선택 취소';
-		    	// 클릭한 그리기 요소 타입을 선택합니다
-		    	manager.select(kakao.maps.drawing.OverlayType[type]);
-	  	  	} else {
-	  	  		btn.value = 'on';
-	  	 		btn.innerHTML = '범위 선택';
-		  		// 그리기 중이면 그리기를 취소합니다
-		   		manager.cancel();
-		  	}
+  		selectOverlay = type => {
+	    	// 그리기 중이면 그리기를 취소합니다
+	   		manager.cancel();
+	    	// 클릭한 그리기 요소 타입을 선택합니다
+	    	manager.select(kakao.maps.drawing.OverlayType[type]);
   		};
 	   // 가져오기 버튼을 클릭하면 호출되는 핸들러 함수입니다
 	   const getDataFromDrawingMap = () => {
@@ -492,13 +503,17 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	        const data = manager.getData();
 	                
 	        let points = [];
+	        let row = "";
 	        for(let i in data.polygon[0].points) {
 				const point = {
 			        	x: data.polygon[0].points[i]["x"],
 			        	y: data.polygon[0].points[i]["y"]
 			    };
 				points.push(point);
+				row += "<p>위도 : " + point["x"] + " 경도 : " + point["y"] + "</p>";
 			}
+	        const printContainer = document.getElementById("print");
+	        printContainer.innerHTML = row;
 			search(points);
 	   };
 	   const setCenter = (lat, lng) => {

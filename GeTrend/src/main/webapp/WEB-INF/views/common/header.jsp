@@ -23,10 +23,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<style>
-	li:nth-of-type(n+10) { display: none; }
-	.ui-autocomplete .highlight {color: orange;}
-</style>
 
 <title>Header</title>
 </head>	
@@ -55,7 +51,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	  			    </li>
 	  			    <li class="nav-item">
 		                <a class="nav-link" href="<c:url value='/users/userUpdate'/>">
-		                	<img class="profile" style="border-radius: 60px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" width="30px" height="30px"  >
+		                	<img class="profile" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" >
 	  			        </a>
 	  			    </li>
   				</c:when>

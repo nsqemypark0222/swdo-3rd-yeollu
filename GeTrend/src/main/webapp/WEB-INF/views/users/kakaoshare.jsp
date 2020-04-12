@@ -18,6 +18,7 @@
   //<![CDATA[
     // // 사용할 앱의 JavaScript 키를 설정해 주세요.
     Kakao.init('<spring:eval expression="@kakao['KAKAOLOGIN_APPKEY']" />');
+    
     // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
     function sendLink() {
       Kakao.Link.sendDefault({

@@ -1,8 +1,10 @@
 package com.yeollu.getrend.store.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.yeollu.getrend.store.vo.MangoDayVO;
+import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
 import com.yeollu.getrend.store.vo.MangoStoreVO;
 
 public interface MangoStoreMapper {
@@ -10,4 +12,7 @@ public interface MangoStoreMapper {
 	public ArrayList<MangoStoreVO> selectAllMangoStores();
 	public MangoStoreVO selectMangoStoreByStoreNo(String store_no);
 	public ArrayList<MangoStoreVO> selectMangoStoreByMangoDay(MangoDayVO mangoDay);
+//	public MangoStoreInfoVO selectMangoStoreInfoByStoreNo(String store_no);
+	public MangoStoreInfoVO selectMangoStoreInfoByStoreNo(HashMap<String, String> map);
+	public MangoStoreInfoVO selectMangoStoreInfoByDays(HashMap<String, String> map);
 }

@@ -20,6 +20,7 @@ import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
+import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
 import com.yeollu.getrend.store.vo.MangoStoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
@@ -101,12 +102,20 @@ public class AutocompleteController {
 		}
 		logger.info("{}", instaStoreList);
 		
-		ArrayList<MangoStoreVO> mangoStoreList = new ArrayList<MangoStoreVO>();
+		// 망고플레이트 정보 추가
+		ArrayList<MangoStoreInfoVO> mangoStoreInfoList = new ArrayList<MangoStoreInfoVO>();
 		for(InstaStoreVO instaStore : instaStoreList) {
-			MangoStoreVO mangoStore = new MangoStoreVO();
-			mangoStore = mangoStoreDAO.selectMangoStoreByStoreNo(instaStore.getStore_no());
-			mangoStoreList.add(mangoStore);
+			MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
+//			mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNo(instaStore.getStore_no());
+			mangoStoreInfoList.add(mangoStoreInfo);
 		}
+		
+//		ArrayList<MangoStoreVO> mangoStoreList = new ArrayList<MangoStoreVO>();
+//		for(InstaStoreVO instaStore : instaStoreList) {
+//			MangoStoreVO mangoStore = new MangoStoreVO();
+//			mangoStore = mangoStoreDAO.selectMangoStoreByStoreNo(instaStore.getStore_no());
+//			mangoStoreList.add(mangoStore);
+//		}
 		
 		if(instaStoreList.size() > 3) {
 			instaStoreList = new ArrayList<InstaStoreVO> (instaStoreList.subList(0, 3));
@@ -135,7 +144,8 @@ public class AutocompleteController {
 			for(int i = 0; i < instaStoreList.size(); i++) {
 				InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
 				instaStoreInfo.setInstaStore(instaStoreList.get(i));
-				instaStoreInfo.setMangoStore(mangoStoreList.get(i));
+//				instaStoreInfo.setMangoStore(mangoStoreList.get(i));
+				instaStoreInfo.setMangoStoreInfo(mangoStoreInfoList.get(i));
 				
 				if(instaImageList.size() > i) {
 					instaStoreInfo.setInstaImage(instaImageList.get(i));					

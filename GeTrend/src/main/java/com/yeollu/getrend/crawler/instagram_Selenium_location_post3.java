@@ -141,7 +141,8 @@ public class instagram_Selenium_location_post3 {
 			ArrayList<String> srcsetList = new ArrayList<String>();
 			for (int j = 0; j < 10 ; j++) {
 				try {
-					String img_srcset = list_01.get(j).getAttribute("srcset").split(" ")[0];
+//					String img_srcset = list_01.get(j).getAttribute("srcset").split(" ")[0];
+					String img_srcset = list_01.get(j).getAttribute("src").split(" ")[0];
 	       			if(img_srcset != null && !img_srcset.equals("")) {
 	       				System.out.println(j + 1 + "번 img srcset : " + img_srcset);	
 	       				srcsetList.add(img_srcset);

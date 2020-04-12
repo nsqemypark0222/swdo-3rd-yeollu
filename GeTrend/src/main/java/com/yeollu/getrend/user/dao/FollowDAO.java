@@ -87,9 +87,9 @@ public class FollowDAO {
 			e.printStackTrace();
 		}
 		return list;
-
+	}
 	}
 	
-}
+
 
 

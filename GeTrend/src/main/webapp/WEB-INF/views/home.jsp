@@ -1,4 +1,4 @@
-     <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -166,38 +166,34 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	    					<button type="button" class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
 	    					조회 하기</button>  
 	   					</div>  	 
+						<!-- map 끝 -->
+						
+						<!-- 추천 스토어 시작 -->
+						<!-- 추천 가게 리스트 출력 -->
+						<div id="istoreList" class="istoreList">
+			  				<ul class="list-group list-group-horizontal">
+			  					<li class="list-group-item">
+					   				<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+					   				<div class="istore2">
+					   		   		 	<div class="overlay2">
+					   						<div class="text">내일의 추천 가게</div>
+					  					</div>
+					  				</div>
+					   			</li>
+			  					<li class="list-group-item">
+						   			<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
+					   				<div class="istore2">
+					   		   		 	<div class="overlay2">
+					   						<div class="text">이번주 추천 가게</div>
+					  					</div>
+				  					</div>
+					   			</li>
+			  				</ul>
+			  			</div>
+			  			<!-- 추천 스토어 종료-->
 					</div>
 				</div>
 			</div>
-			
-			<!-- 추천 가게 리스트 출력 -->
-	  		<div class="row">
-	  			<div id="space">
-	  			<div id="istore" class="istore">
-	  				<h3 style="text-align:center;">주목Trend</h3>
-	  				<ul class="list-group list-group-horizontal">
-	  					<li class="list-group-item">
-			   				<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
-			   				<div class="istore2">
-			   		   		 	<div class="overlay2">
-			   						<div class="text">내일의 추천 가게</div>
-			  					</div>
-			  				</div>
-			   			</li>
-	  					<li class="list-group-item">
-				   			<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
-			   				<div class="istore2">
-			   		   		 	<div class="overlay2">
-			   						<div class="text">이번주 추천 가게</div>
-			  					</div>
-		  					</div>
-			   			</li>
-	  				</ul>
-	  			</div>
-	  			</div>
-	  		</div>
-			
-			
   		</div>
   		
   		<!-- 사이드 컬럼 시작 -->
@@ -352,10 +348,10 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 						alert("성공");
 						printMarker(result);
 						console.log(result);
-						$("#istoreList > ul").empty();
+						$(".column-side > #istoreList > ul").empty();
 						
 						$(result).each(function(index, item) {
-							$("#istoreList > ul").append(
+							$(".column-side > #istoreList > ul").append(
 									'<li class="list-group-item">'
 										+ '<div class="istore1">'
 											+ '<div class="overlay1">'

@@ -291,7 +291,7 @@ function follow(user_email){
    font-size: 15px;
    font-weight: bold;
    width:70px; 
-   height:40px;
+   height:30px;
    border: none;
    color:#000;
    text-align: center;
@@ -302,7 +302,7 @@ function follow(user_email){
 }
 
 #followBtn:hover {
-    background-color: #FAAC58;
+    color: #FF8A00;
 }
 
 #unfollowBtn{
@@ -311,7 +311,7 @@ function follow(user_email){
    font-size: 14px;
    font-weight: bold;
    width:70px; 
-   height:40px;
+   height:30px;
    border: none;
    color:#FF8A00;
    text-align: center;

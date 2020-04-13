@@ -21,258 +21,268 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 
 
-<style>
-.space {
-	margin-top:80%;
-}
-</style>
-
-<link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'>
+<link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'> 
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
+
+<style type="text/css">
+
+</style>
 </head>
 <body>
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
 	
-	<div class="column-container">
-		<!-- column-content시작 -->
-		<div class="column-content">
-			<!-- 지도와의 간격 div-->
-			<div id="space">
-				<div class="container" >
-					<div class="col" >
-						<div id="map">
-							<div class="btn-modal">
-								<!-- 지도 위의 버튼 1 음식 카테고리 -->
-								<!-- Button trigger modal -->
-								<button type="button" id="category" class="btn btn-dark" data-toggle="modal" data-target="#categoryModal">카테고리</button>
-								
-								<!-- CategoryModal -->
-								<div class="modal fade" id="categoryModal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<!-- 음식 카테고리 모달 header -->
-											<div class="modal-header">
-												<h4 class="modal-title">음식 카테고리</h4>
-		           								<button type="button" class="close" data-dismiss="modal">&times;</button>
-											</div>
-											<!-- 음식 카테고리 모달 body -->
-		      								<div class="modal-body">
-		      									<h3>음식 종류</h3>
-		           								<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
-					 								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="양식" checked="checked">양식
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="일식/수산물" checked="checked">일식/수산물
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="중식" checked="checked">중식
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="카페/디저트" checked="checked">카페/디저트
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="치킨/피자/패스트푸드" checked="checked">치킨/피자/패스트푸드
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="기타" checked="checked">기타
-					  								</label>
-												</div>
-		      								</div>
-		      								<!-- 음식 카테고리 모달 footer -->
-		       								<div class="modal-footer">
-		       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
-		        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
-		       								</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-1">
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<!-- map 시작 -->
+					<div id="map">
+						<div class="btn-modal">
+							<!-- 지도 위의 버튼 1 음식 카테고리 -->
+							<!-- Button trigger modal -->
+							<button type="button" id="category" class="btn btn-dark" data-toggle="modal" data-target="#categoryModal">카테고리</button>
+							
+							<!-- CategoryModal -->
+							<div class="modal fade" id="categoryModal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- 음식 카테고리 모달 header -->
+										<div class="modal-header">
+											<h4 class="modal-title">음식 카테고리</h4>
+	           								<button type="button" class="close" data-dismiss="modal">&times;</button>
 										</div>
+										<!-- 음식 카테고리 모달 body -->
+	      								<div class="modal-body">
+	      									<h3>음식 종류</h3>
+	           								<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
+				 								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="양식" checked="checked">양식
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="일식/수산물" checked="checked">일식/수산물
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="중식" checked="checked">중식
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="카페/디저트" checked="checked">카페/디저트
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="치킨/피자/패스트푸드" checked="checked">치킨/피자/패스트푸드
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="기타" checked="checked">기타
+				  								</label>
+											</div>
+	      								</div>
+	      								<!-- 음식 카테고리 모달 footer -->
+	       								<div class="modal-footer">
+	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
+	       								</div>
 									</div>
 								</div>
 							</div>
-							
-							<div class="btn-modal">
-								<!-- 지도 위의 버튼 2 음식 카테고리 -->
-								<!-- Button trigger modal -->
-								<button type="button" id="opentime" class="btn btn-warning" data-toggle="modal" data-target="#opentimeModal">영업 확인</button>
-								
-								<!-- CategoryModal -->
-								<div class="modal fade" id="opentimeModal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<!-- 영업 확인 모달 header -->
-											<div class="modal-header">
-												<h4 class="modal-title">영업 확인</h4>
-		           								<button type="button" class="close" data-dismiss="modal">&times;</button>
-											</div>
-											<!-- 영업 확인 모달 body -->
-		      								<div class="modal-body">
-		      									<h3>식당 영업 요일별 확인</h3>
-		           								<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="일" checked="checked">일
-					 								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="월" checked="checked">월
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="화" checked="checked">화
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="수" checked="checked">수
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="목" checked="checked">목
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="금" checked="checked">금
-					  								</label>
-												</div>
-												<div class="form-check">
-					  								<label class="form-check-label">
-					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="토" checked="checked">토
-					  								</label>
-												</div>
-		      								</div>
-		      								<!-- 영업 확인 모달 footer -->
-		       								<div class="modal-footer">
-		       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
-		        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
-		       								</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-	    	 				<button type="button" class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')" value="on">
-	    	 				범위 선택</button>
-	    					<button type="button" class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
-	    					조회 하기</button>  
-	   					</div>  	 
-						<!-- map 끝 -->
+						</div>
 						
-						<!-- 추천 스토어 시작 -->
-						<!-- 추천 가게 리스트 출력 -->
-						<div id="istoreList" class="istoreList">
-			  				<ul class="list-group list-group-horizontal">
-			  					<li class="list-group-item">
-					   				<img src="resources/img/corn.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
-					   				<div class="istore2">
-					   		   		 	<div class="overlay2">
-					   						<div class="text">내일의 추천 가게</div>
-					  					</div>
-					  				</div>
-					   			</li>
-			  					<li class="list-group-item">
-						   			<img src="resources/img/bluebottle.jpg" alt="sampleTest" class="rounded float-right" style="width:100%; height:100%;">
-					   				<div class="istore2">
-					   		   		 	<div class="overlay2">
-					   						<div class="text">이번주 추천 가게</div>
-					  					</div>
-				  					</div>
-					   			</li>
-			  				</ul>
-			  			</div>
-			  			<!-- 추천 스토어 종료-->
+						<div class="btn-modal">
+							<!-- 지도 위의 버튼 2 음식 카테고리 -->
+							<!-- Button trigger modal -->
+							<button type="button" id="opentime" class="btn btn-warning" data-toggle="modal" data-target="#opentimeModal">영업 확인</button>
+							
+							<!-- CategoryModal -->
+							<div class="modal fade" id="opentimeModal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- 영업 확인 모달 header -->
+										<div class="modal-header">
+											<h4 class="modal-title">영업 확인</h4>
+	           								<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<!-- 영업 확인 모달 body -->
+	      								<div class="modal-body">
+	      									<h3>식당 영업 요일별 확인</h3>
+	           								<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="일" checked="checked">일
+				 								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="월" checked="checked">월
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="화" checked="checked">화
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="수" checked="checked">수
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="목" checked="checked">목
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="금" checked="checked">금
+				  								</label>
+											</div>
+											<div class="form-check">
+				  								<label class="form-check-label">
+				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="토" checked="checked">토
+				  								</label>
+											</div>
+	      								</div>
+	      								<!-- 영업 확인 모달 footer -->
+	       								<div class="modal-footer">
+	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
+	       								</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+    	 				<button type="button" class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')" value="on">
+    	 				범위 선택</button>
+    					<button type="button" class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
+    					조회 하기</button>
+					</div>
+					<!-- map 종료 -->
+				</div>
+				
+				<div class="row">
+					<!-- 추천 스토어 시작 -->
+					<div id="carouselRecommendedStores" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+					    	<li data-target="#carouselRecommendedStores" data-slide-to="0" class="active"></li>
+					    	<li data-target="#carouselRecommendedStores" data-slide-to="1"></li>
+					    	<li data-target="#carouselRecommendedStores" data-slide-to="2"></li>
+					  	</ol>
+					  	<div class="carousel-inner">
+					    	<div class="carousel-item active">
+					      		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776397/brooke-lark-pGM4sjt_BdQ-unsplash_yiapqg.jpg" class="d-block img-fluid" alt="...">
+				      			<div class="carousel-caption d-none d-md-block">
+					        		<h5>First slide label</h5>
+					        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+					      		</div>
+					    	</div>
+				    		<div class="carousel-item">
+					      		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776563/dan-gold-4_jhDO54BYg-unsplash_qcxerf.jpg" class="d-block img-fluid" alt="...">
+					      		<div class="carousel-caption d-none d-md-block">
+					        		<h5>Second slide label</h5>
+					        		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					      		</div>
+					    	</div>
+					    	<div class="carousel-item">
+					      		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776555/ariel-kwon-OvqJ4LaLo20-unsplash_ebjrxe.jpg" class="d-block img-fluid" alt="...">
+					      		<div class="carousel-caption d-none d-md-block">
+					        		<h5>Third slide label</h5>
+					        		<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+					      		</div>
+					  		</div>
+					  	</div>
+					  	<a class="carousel-control-prev" href="#carouselRecommendedStores" role="button" data-slide="prev">
+					  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					  		<span class="sr-only">Previous</span>
+					  	</a>
+					  	<a class="carousel-control-next" href="#carouselRecommendedStores" role="button" data-slide="next">
+					    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					    	<span class="sr-only">Next</span>
+					  	</a>
+					</div>
+					<!-- 추천 스토어 종료 -->
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="row">
+					<div class="istore-container scrollbar scrollbar-warning">
+						<c:choose>
+							<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
+								<c:forEach var="istore" items="${istores}">
+									<div id="carouselSearchedStores_${istore.instaStore.store_no}" class="carousel slide" data-ride="carousel">
+										<ol class="carousel-indicators">
+											<c:forEach var="item" items="${istore.instaImage.postImgList}" varStatus="status">
+												<c:choose>
+													<c:when test="${status.first}">
+														<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" class="active" ></li>
+													</c:when>
+													<c:otherwise>
+														<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" ></li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</ol>
+										<div class="carousel-inner">
+											<c:forEach var="item" items="${istore.instaImage.postImgList}" varStatus="status">
+												<c:choose>
+													<c:when test="${status.first}">
+														<div class="carousel-item active">
+												      		<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+											      			<div class="carousel-caption d-none d-md-block">
+												        		<h5>${istore.instaStore.store_name}</h5>
+												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+												      		</div>
+												    	</div>
+													</c:when>
+													<c:otherwise>
+														<div class="carousel-item">
+												      		<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+											      			<div class="carousel-caption d-none d-md-block">
+												        		<h5>${istore.instaStore.store_name}</h5>
+												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+												      		</div>
+												    	</div>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</div>
+										<a class="carousel-control-prev" href="#carouselSearchedStores_${istore.instaStore.store_no}" role="button" data-slide="prev">
+									  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									  		<span class="sr-only">Previous</span>
+									  	</a>
+									  	<a class="carousel-control-next" href="#carouselSearchedStores_${istore.instaStore.store_no}" role="button" data-slide="next">
+									    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									    	<span class="sr-only">Next</span>
+									  	</a>
+									</div>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+							
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>
-  		</div>
-  		
-  		<!-- 사이드 컬럼 시작 -->
-  		<div class="column-side">
-	  		<c:choose>
-	  			<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
-	  				<div id="istoreList" class="istoreList">
-			  			<ul class="list-group">
-			  				<c:forEach var="item" items="${istores}">
-			  					<li class="list-group-item">
-				   		   			<div class="istore1">
-				   		   				<div class="overlay1">
-				   							<div class="text" style="color:white;">
-				   								${item.instaStore.store_adr}
-				   							</div>
-				  						</div>
-				  					</div>
-					   			</li>
-					   			<li class="list-group-item">
-					   				<img src="${item.instaImage.repImg}" alt="${item.instaStore.store_adr}" class="rounded float left" style="width:380px; height:310px;" >
-					   				<div class="istore2">
-					   		   			<div class="overlay2">
-					   						<div class="text">
-					   							<a href='<c:url value="/stores/istoreInfo?store_no=${item.instaStore.store_no}" />'>${item.instaStore.store_name}</a>
-					   						</div>
-					  					</div>
-					  				</div>
-					   			</li>
-			  				</c:forEach>
-			  			</ul>
-			  		</div>
-	  			</c:when>
-	  			<c:otherwise>
-	  				<div id="istoreList" class="istoreList">
-			  			<ul class="list-group">
-			  				
-			  			</ul>
-			  		</div>
-	  			</c:otherwise>
-	  		</c:choose>
-  		</div>
-  	</div>
-
-   	<div>
-		<c:choose>
-			<c:when test="${sessionScope.loginemail != null}">
-				${sessionScope.loginname}님 환영합니다!<br/>
-				<a href="users/userUpdate">회원정보 수정</a>
-				
-				
-				
-				<a href="users/logout">로그아웃</a>
-				<a href="users/kakaoshare">공유하기</a>
-				<a href="reply/replyForm">댓글달기</a>
-				<a href="<c:url value='/mypage/mypageForm'/>">팔로우, 댓글, 좋아요 테스트</a>	
-			</c:when>
-			<c:otherwise>
-				<a href="users/userJoin">회원가입</a>
-				<a href="users/userLogin">로그인</a>
-				<a href="users/userUpdate">회원 수정</a>
-				
-			</c:otherwise>
-		</c:choose>	
+			<div class="col-md-1">
+			</div>
+		</div>
 	</div>
-
-	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
-	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
-	<a href="<c:url value='/users/follow'/>">follow</a>
-
-	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
-
 
 	
 	
@@ -288,8 +298,11 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	  	</div>
 	</div>
 	
+
+	
 <script type="text/javascript">
 		$(function() {
+			
 			function init() {
 				if(navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function(position) {
@@ -356,30 +369,54 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					success: function(result) {
 						alert("성공");
 						printMarker(result);
-						console.log(result);
-						$(".column-side > #istoreList > ul").empty();
-						
+
+						$(".istore-container").empty();
+
+						let str = "";
 						$(result).each(function(index, item) {
-							$(".column-side > #istoreList > ul").append(
-									'<li class="list-group-item">'
-										+ '<div class="istore1">'
-											+ '<div class="overlay1">'
-												+ '<div class="text" style="color:white;">' + item.instaStore.store_adr +'</div>'
-											+ '</div>'
-										+ '</div>'
-									+ '</li>'
-									+ '<li class="list-group-item">'
-									+ '<img src="' + item.instaImage.repImg + '" + alt="' + item.instaStore.store_adr + '" class="rounded float left" style="width:380px; height:310px;" />'
-										+ '<div class="istore2">'
-											+ '<div class="overlay2">'
-												+ '<div class="text">'
-													+ '<a href=' + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + '>' + item.instaStore.store_name + '</a>'
-												+ '</div>'
-											+ '</div>'
-										+ '</div>'
-									+ '</li>'
-							);
+							str += '<div id="carouselSearchedStores_' + item.instaStore.store_no + '" class="carousel slide" data-ride="carousel">';
+							str += 		'<ol class="carousel-indicators">';
+							for(let i = 0; i < item.instaImage.postImgList.length; i++) {
+								if(i === 0) {
+									str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" class="active" ></li>';
+								} else {
+									str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" ></li>';
+								}
+							}
+							str += 		'</ol>';
+							str += 		'<div class="carousel-inner">';
+							for(let i = 0; i < item.instaImage.postImgList.length; i++) {
+								if(i === 0) {
+									str += '<div class="carousel-item active">';
+									str +=		'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		'<div class="carousel-caption d-none d-md-block">';
+									str +=			'<h5>' + item.instaStore.store_name + '</h5>';
+									str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+									str +=		'</div>';
+						      		str += '</div>';
+								} else {
+									str += '<div class="carousel-item">';
+									str +=		'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		'<div class="carousel-caption d-none d-md-block">';
+									str +=			'<h5>' + item.instaStore.store_name + '</h5>';
+									str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+									str +=		'</div>';
+						      		str += '</div>';
+								}
+							}
+							str += 		'</div>';
+							str += 		'<a class="carousel-control-prev" href="#carouselSearchedStores_' + item.instaStore.store_no + '" role="button" data-slide="prev">';
+							str +=			'<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+							str +=			'<span class="sr-only">Previous</span>';
+							str +=		'</a>';
+							str +=		'<a class="carousel-control-next" href="#carouselSearchedStores_' + item.instaStore.store_no + '" role="button" data-slide="next">';
+							str +=			'<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+							str +=			'<span class="sr-only">Next</span>';
+							str +=		'</a>';
+							str += '</div>';
 						});
+						console.log(str);
+						$(".istore-container").append(str);
 			        },
 			        error: function(request, status, error){
 			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);

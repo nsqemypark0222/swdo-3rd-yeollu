@@ -577,8 +577,8 @@ function follow(user_email){
 												</div>						          
 													<div class="reply_inner02">
 														<h3 class="mb-0">
-															<a class="text-dark" href="#">${reply.STORE_NAME}</a>					
-															<input type="image"  class="reply_map"src="<c:url value='/resources/img/place.png'/>">			            		            
+															<a class="text-dark" href="/getrend/stores/istoreInfo?store_no=${reply.STORE_NO}">${reply.STORE_NAME}</a>					
+															<a href="https://map.kakao.com/link/to/${reply.STORE_NAME},${reply.STORE_Y},${reply.STORE_X}"><input type="image"  class="reply_map"src="<c:url value='/resources/img/place.png'/>"></a>
 														</h3>			
 													<div class="mb-1 text-muted"> <span class="starMake">${reply.REPLY_STAR}</span></div>
 													<p class="card-text mb-auto">${reply.REPLY_CONTENTS}</p>		          

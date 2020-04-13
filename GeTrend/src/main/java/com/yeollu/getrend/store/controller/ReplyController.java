@@ -60,9 +60,7 @@ public class ReplyController {
 			logger.info("댓글 삭제 성공");
 		} else {
 			logger.info("댓글 삭제 실패");
-		}
-		
-		
+		}	
 	}
 	
 	//리스트

@@ -55,11 +55,11 @@ $(function(){
 	$(".starMake").each(function(index,item){
 		var star = $(this).text();
 		
-		if(star == 0.5) $(this).html("<img style='width:10px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>");
+		if(star == 0.5) $(this).html("<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>");
 		else if(star == 1) $(this).html("<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>");
 		else if(star == 1.5) {
 			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-				temp += "<img style='width:10px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+				temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
 				$(this).html(temp);
 		}
 		else if(star == 2) {
@@ -70,7 +70,7 @@ $(function(){
 		else if(star == 2.5) {
 			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
 			    temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-				temp += "<img style='width:10px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+				temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
 			$(this).html(temp);
 		}
 		else if(star == 3) {
@@ -83,7 +83,7 @@ $(function(){
 			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
 			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
 			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:10px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
 			$(this).html(temp);
 		}
 		else if(star == 4) {
@@ -98,7 +98,7 @@ $(function(){
 			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
 			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
 			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:10px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
 			$(this).html(temp);
 		}
 		else if(star == 5) {
@@ -165,7 +165,7 @@ function likeStore(user_email){
 			$(".mypage_list_table").children().html('');
 			if(result.length == 0){			
 				var temp = '<td style="width : 750px;">';
-					temp += '<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/" alt="프로필 사진"></div>';													
+					temp += '<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/nostore.png" alt="프로필 사진"></div>';													
 					temp += '<div style="width : 750px; font-size:14px; text-align:center;">관심있는 가게가 아직 없습니다</div>';
 					temp += '</td>';
 					 $(".mypage_list_table").children().append(temp);
@@ -193,7 +193,7 @@ function follower(user_email){
 			$(".mypage_list_table").children().html('');
 			if(result.length == 0){			
 				var temp = '<td style="width : 750px;">';
-					temp += '<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/" alt="프로필 사진"></div>';													
+					temp += '<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/nofollow.png" alt="프로필 사진"></div>';													
 					temp += '<div style="width : 750px; font-size:14px; text-align:center;">팔로워가 아직 없습니다</div>';
 					temp += '</td>';
 					 $(".mypage_list_table").children().append(temp);
@@ -224,7 +224,7 @@ function follow(user_email){
 			$(".mypage_list_table").children().html('');
 			if(result.length == 0){			
 				var temp = '<td style="width : 750px;">';
-					temp += '<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/" alt="프로필 사진"></div>';													
+					temp += '<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/nofollow.png" alt="프로필 사진"></div>';													
 					temp += '<div style="width : 750px; font-size:14px; text-align:center;">팔로우가 아직 없습니다</div>';
 					temp += '</td>';
 					 $(".mypage_list_table").children().append(temp);
@@ -514,7 +514,7 @@ function follow(user_email){
 	   <div class="col">
 			<div class="mypage_list">
 				<div class="row">
-				<div class="col" style="padding-top:25px;"><button class="btn btn-outline-warning btn-sm" onclick="leftArrow()">◁</button></div>
+				<div class="col" style="padding-top:25px;"><input type="image" style="width : 25px; float:left;" src="/getrend/resources/img/left-arrow.png"  onclick="leftArrow()"></div>
 				<div class="col-10" >	
 					<div class="scroll"> 
 					<div id="scroll_box" style="width: 800px; height: 100px; overflow-x: hidden; overflow-y: hidden; " >
@@ -524,7 +524,7 @@ function follow(user_email){
 								<c:choose>
 									<c:when test="${empty likeList}">
 									<td style="width : 750px;">
-										<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/'+ item.USER_PROFILE +'" alt="프로필 사진"></div>													
+										<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/nostore.png" alt="프로필 사진"></div>													
 										<div style="width : 750px; font-size:14px; text-align:center;">관심있는 가게가 아직 없습니다</div>
 									</td>
 									</c:when>
@@ -536,26 +536,16 @@ function follow(user_email){
 											</td>
 										</c:forEach>
 									</c:otherwise>
-								</c:choose>
-							
-								
+								</c:choose>							
 							</tr>
 						</table>
 						
 					</div>
 					</div>
 				</div>	
-				<div class="col" style="padding-top:25px;"><button  class="btn btn-outline-warning btn-sm"  onclick="rightArrow()">▷</button></div>
+				<div class="col" style="padding-top:25px;"><input type="image" style="width : 25px; float: right;" src="/getrend/resources/img/right-arrow.png"  onclick="rightArrow()"></div>
 				</div>
 			</div>
-		</div>	
-	</div>
-	
-	<div class="row">
-		<div class="col">
-			<div class="mapDiv">
-				지도
-			</div>		
 		</div>	
 	</div>
 
@@ -566,7 +556,7 @@ function follow(user_email){
 				<c:when test="${empty replyList}">
 					<div class="noReply">
 						<div style="position:relative;">
-						<img src="/getrend/resources/img/cate/others.png" style="position:relative; width : 100px; left:100px;" alt="댓글없음"><br><br><br>
+						<img src="/getrend/resources/img/noreply.png" style="position:relative; width : 100px; left:100px;" alt="댓글없음"><br><br><br>
 						 <div style="text-align : center;"><h6>남긴 댓글이 아직 없습니다</h6></div>
 						 </div>
 					</div>

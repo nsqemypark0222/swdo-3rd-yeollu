@@ -244,7 +244,9 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 														<div class="carousel-item active">
 												      		<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
 											      			<div class="carousel-caption d-none d-md-block">
-												        		<h5>${istore.instaStore.store_name}</h5>
+												        		<h5>
+											      					<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>${istore.instaStore.store_name}</a>
+												        		</h5>
 												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 												      		</div>
 												    	</div>
@@ -253,7 +255,9 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 														<div class="carousel-item">
 												      		<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
 											      			<div class="carousel-caption d-none d-md-block">
-												        		<h5>${istore.instaStore.store_name}</h5>
+											      				<h5>
+											      					<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>${istore.instaStore.store_name}</a>
+												        		</h5>
 												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 												      		</div>
 												    	</div>
@@ -390,16 +394,20 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 									str += '<div class="carousel-item active">';
 									str +=		'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
 									str +=		'<div class="carousel-caption d-none d-md-block">';
-									str +=			'<h5>' + item.instaStore.store_name + '</h5>';
-									str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+									str += 		'<h5>';
+									str +=			"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>" + item.instaStore.store_name + '</a>'
+									str +=		'</h5>';
+									str +=		'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
 									str +=		'</div>';
 						      		str += '</div>';
 								} else {
 									str += '<div class="carousel-item">';
 									str +=		'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
 									str +=		'<div class="carousel-caption d-none d-md-block">';
-									str +=			'<h5>' + item.instaStore.store_name + '</h5>';
-									str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+									str += 		'<h5>';
+									str +=			"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>" + item.instaStore.store_name + '</a>'
+									str +=		'</h5>';
+									str +=		'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
 									str +=		'</div>';
 						      		str += '</div>';
 								}
@@ -415,7 +423,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 							str +=		'</a>';
 							str += '</div>';
 						});
-						console.log(str);
+						//console.log(str);
 						$(".istore-container").append(str);
 			        },
 			        error: function(request, status, error){

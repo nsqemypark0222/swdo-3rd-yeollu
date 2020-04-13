@@ -13,6 +13,11 @@ public class UserDAO {
 	
 	public int join(UserVO user) {
 		int cnt = 0;
+		
+		if(user.getUser_profile() == null) {
+			user.setUser_profile("https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586757006/user_alnoxs.png");
+			user.setUser_profileId("1586757006");
+		}
 		try {
 			UserMapper mapper = session.getMapper(UserMapper.class);
 			cnt = mapper.join(user);

@@ -20,12 +20,13 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 
-<style>
-.space{
- margin-top:80%;
-}
 
+<style>
+.space {
+	margin-top:80%;
+}
 </style>
+
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'>
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
 </head>
@@ -265,7 +266,17 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			</c:otherwise>
 		</c:choose>	
 	</div>
+
+	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
+	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
+	<a href="<c:url value='/users/follow'/>">follow</a>
+
+	<a href="<c:url value='/mypage/mypageForm'/>">mypage 테스트</a>
+
+
 	
+	
+
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
@@ -286,7 +297,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 						const callback = function(result, status) {
 							if(status === kakao.maps.services.Status.OK) {
 								let adr = result[0].address.address_name;
-								$.ajax({
+								/* $.ajax({
 									url: "<c:url value='/recommend' />",
 									type: "get",
 									contentType: "application/json; charset=utf-8",
@@ -300,7 +311,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 									error: function(request, status, error){
 							            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
 							        }
-								});
+								}); */
 							}
 						}
 						geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);

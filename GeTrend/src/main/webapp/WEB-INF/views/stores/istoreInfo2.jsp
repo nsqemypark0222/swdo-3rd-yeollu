@@ -88,30 +88,30 @@
 			</div>
 			<div class="col-md-6">
 				<div class="row">
-					<div class="card mb-3">
-						<!-- <div class="card-header mb-3">
-							<h2>상세 페이지</h2>
-						</div> -->
-						<div class="card-body mb-3">
-							<div class="row no-gutters">
-								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="1" end="7" step="3">
-										<img class="rounded img-fluid" src="${item.imgUrl}">
-									</c:forEach>
-								</div>
-								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="2" end="8" step="3">
-										<img class="rounded img-fluid" src="${item.imgUrl}">
-									</c:forEach>
-								</div>
-								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="3" end="9" step="3">
-										<img class="rounded img-fluid" src="${item.imgUrl}">
-									</c:forEach>
-								</div>
+				<div class="card mb-3">
+					<!-- <div class="card-header mb-3">
+						<h2>상세 페이지</h2>
+					</div> -->
+					<div class="card-body mb-3">
+						<div class="row no-gutters">
+							<div class="col-md-4">
+								<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="1" end="7" step="3">
+									<img class="rounded img-fluid" src="${item.imgUrl}">
+								</c:forEach>
+							</div>
+							<div class="col-md-4">
+								<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="2" end="8" step="3">
+									<img class="rounded img-fluid" src="${item.imgUrl}">
+								</c:forEach>
+							</div>
+							<div class="col-md-4">
+								<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="3" end="9" step="3">
+									<img class="rounded img-fluid" src="${item.imgUrl}">
+								</c:forEach>
 							</div>
 						</div>
-						<%-- <div class="card-footer mb-3">
+					</div>
+					<%-- <div class="card-footer mb-3">
 						<div class="row no-gutters">
 							<div class="col-md-2">
 								<div class="row">
@@ -146,18 +146,9 @@
 							</div>
 						</div>
 					</div> --%>
-					</div>
+				</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	
-	<!-- 댓글 시작 -->
-	<div class="container">
-		<div class="row">
-			<table class="table">
-			
-			</table>
 		</div>
 	</div>
 	

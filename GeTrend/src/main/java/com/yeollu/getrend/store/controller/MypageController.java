@@ -283,4 +283,21 @@ public class MypageController {
 		return list;
 	}
 	
+	
+	
+	//댓글삭제
+	@RequestMapping(value = "/deleteReply", method = RequestMethod.GET)
+	public String deleteReply(InstaReplyVO reply, String user_name, HttpSession session) {
+		logger.info("{}", reply);
+		String user_email = (String)session.getAttribute("loginemail");
+		reply.setUser_email(user_email);
+		int cnt = replyDAO.replyRemove(reply);
+		if(cnt > 0) {
+			logger.info("댓글 삭제 성공");
+		} else {
+			logger.info("댓글 삭제 실패");
+		}
+		
+		return "redirect:mypage?user_name=" + user_name;
+	}
 }

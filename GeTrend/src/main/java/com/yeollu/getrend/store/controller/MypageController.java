@@ -87,7 +87,7 @@ public class MypageController {
 				switch ((String)hashMap.get("STORE_CATE1")) {
 				case "한식": 	case "닭/오리요리": case "별식/퓨전요리":case "분식": hashMap.put("CATE1", "korean.png"); hashMap.put("CATE2", "한식");break;
 				case "양식": hashMap.put("CATE1", "western.png"); hashMap.put("CATE2", "양식");break;
-				case "일식/수산물": hashMap.put("CATE1", ""); hashMap.put("CATE2", "일식/수산물");break;
+				case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 				case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 				case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
 				case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
@@ -112,7 +112,7 @@ public class MypageController {
 				switch ((String)hashMap.get("STORE_CATE1")) {
 				case "한식": 	case "닭/오리요리": case "별식/퓨전요리":case "분식": hashMap.put("CATE1", "korean.png"); hashMap.put("CATE2", "한식");break;
 				case "양식": hashMap.put("CATE1", "western.png"); hashMap.put("CATE2", "양식");break;
-				case "일식/수산물": hashMap.put("CATE1", ""); hashMap.put("CATE2", "일식/수산물");break;
+				case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 				case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 				case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
 				case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
@@ -137,7 +137,7 @@ public class MypageController {
 				switch ((String)hashMap.get("STORE_CATE1")) {
 				case "한식": 	case "닭/오리요리": case "별식/퓨전요리":case "분식": hashMap.put("CATE1", "korean.png"); hashMap.put("CATE2", "한식");break;
 				case "양식": hashMap.put("CATE1", "western.png"); hashMap.put("CATE2", "양식");break;
-				case "일식/수산물": hashMap.put("CATE1", ""); hashMap.put("CATE2", "일식/수산물");break;
+				case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 				case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 				case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
 				case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
@@ -157,12 +157,11 @@ public class MypageController {
 				else hashMap.put("LIKE", false);
 				
 				
-				
 				//category 구분
 				switch ((String)hashMap.get("STORE_CATE1")) {
 				case "한식": 	case "닭/오리요리": case "별식/퓨전요리":case "분식": hashMap.put("CATE1", "korean.png"); hashMap.put("CATE2", "한식");break;
 				case "양식": hashMap.put("CATE1", "western.png"); hashMap.put("CATE2", "양식");break;
-				case "일식/수산물": hashMap.put("CATE1", ""); hashMap.put("CATE2", "일식/수산물");break;
+				case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 				case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 				case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
 				case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
@@ -204,7 +203,7 @@ public class MypageController {
 			switch ((String)hashMap.get("STORE_CATE1")) {
 			case "한식": 	case "닭/오리요리": case "별식/퓨전요리":case "분식": hashMap.put("CATE1", "korean.png"); hashMap.put("CATE2", "한식");break;
 			case "양식": hashMap.put("CATE1", "western.png"); hashMap.put("CATE2", "양식");break;
-			case "일식/수산물": hashMap.put("CATE1", ""); hashMap.put("CATE2", "일식/수산물");break;
+			case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 			case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 			case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
 			case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
@@ -230,7 +229,7 @@ public class MypageController {
 			switch ((String)hashMap.get("STORE_CATE1")) {
 			case "한식": 	case "닭/오리요리": case "별식/퓨전요리":case "분식": hashMap.put("CATE1", "korean.png"); hashMap.put("CATE2", "한식");break;
 			case "양식": hashMap.put("CATE1", "western.png"); hashMap.put("CATE2", "양식");break;
-			case "일식/수산물": hashMap.put("CATE1", ""); hashMap.put("CATE2", "일식/수산물");break;
+			case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 			case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 			case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
 			case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
@@ -273,7 +272,7 @@ public class MypageController {
 			switch ((String)hashMap.get("STORE_CATE1")) {
 			case "한식": 	case "닭/오리요리": case "별식/퓨전요리":case "분식": hashMap.put("CATE1", "korean.png"); hashMap.put("CATE2", "한식");break;
 			case "양식": hashMap.put("CATE1", "western.png"); hashMap.put("CATE2", "양식");break;
-			case "일식/수산물": hashMap.put("CATE1", ""); hashMap.put("CATE2", "일식/수산물");break;
+			case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 			case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 			case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
 			case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;

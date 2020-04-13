@@ -267,7 +267,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		</c:choose>	
 	</div>
 
-
 	<a href="<c:url value='/crawl/crawlForm'/>">크롤링 테스트</a>
 	<a href="<c:url value='/autocomplete/autocompleteForm'/>">자동완성 테스트</a>
 	<a href="<c:url value='/users/follow'/>">follow</a>

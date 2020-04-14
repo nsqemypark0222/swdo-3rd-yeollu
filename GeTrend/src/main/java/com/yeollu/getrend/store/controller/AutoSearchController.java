@@ -2,6 +2,8 @@ package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,7 @@ public class AutoSearchController {
 	private MangoStoreDAO mangoStoreDAO;
 	
 	@RequestMapping(value = "autoSearch", method = RequestMethod.GET)
-	public String autoSearch(String searchInput,Model model) {
+	public String autoSearch(String searchInput,HttpSession session) {
 		logger.info(searchInput);
 		
 		
@@ -112,8 +114,7 @@ public class AutoSearchController {
 				}
 				logger.info("instaStoreInfoList size : {}", instaStoreInfoList.size());
 
-				
-				model.addAttribute("istores", instaStoreInfoList);
+				session.setAttribute("istores", instaStoreInfoList);
 				
 		return "/autosearchForm";
 	}

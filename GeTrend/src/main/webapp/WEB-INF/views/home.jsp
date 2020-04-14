@@ -185,7 +185,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					  	<div class="carousel-inner">
 					    	<div class="carousel-item active">
 					    		<a href="javascript:recommendByCategory();">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776397/brooke-lark-pGM4sjt_BdQ-unsplash_yiapqg.jpg" class="d-block img-fluid" alt="...">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586846612/redluck_y0iqfn.jpg" class="d-block img-fluid" alt="...">
 					      		</a>
 				      			<div class="carousel-caption d-none d-md-block">
 					        		<h5>우리 동네 인스타 맛집 TOP 3</h5>
@@ -194,7 +194,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					    	</div>
 				    		<div class="carousel-item">
 				    			<a href="javascript:recommendByAccessLocation();">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776563/dan-gold-4_jhDO54BYg-unsplash_qcxerf.jpg" class="d-block img-fluid" alt="...">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586846613/salad_oknvyo.jpg" class="d-block img-fluid" alt="...">
 					      		</a>
 					      		<div class="carousel-caption d-none d-md-block">
 					        		<h5>가까운 맛집 TOP 3</h5>
@@ -203,7 +203,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					    	</div>
 					    	<div class="carousel-item">
 					    		<a href="javascript:recommendByAdr();">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776555/ariel-kwon-OvqJ4LaLo20-unsplash_ebjrxe.jpg" class="d-block img-fluid" alt="...">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776563/dan-gold-4_jhDO54BYg-unsplash_qcxerf.jpg" class="d-block img-fluid" alt="...">
 					      		</a>
 					      		<div class="carousel-caption d-none d-md-block">
 					        		<h5>우리 동네 맛집 TOP 3</h5>

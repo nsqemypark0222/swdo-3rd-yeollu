@@ -174,7 +174,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					</div>
 					<!-- map 종료 -->
 				</div>
-				
 				<div class="row">
 					<!-- 추천 스토어 시작 -->
 					<div id="carouselRecommendedStores" class="carousel slide" data-ride="carousel">

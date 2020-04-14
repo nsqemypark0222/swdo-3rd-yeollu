@@ -67,7 +67,7 @@ public class ReplyController {
 	@RequestMapping(value = "/replyList", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<HashMap<String,Object>> list(InstaReplyVO reply, HttpSession session) {
-		//reply.setStore_no("25523615");
+
 		String loginemail = (String)session.getAttribute("loginemail");
 		ArrayList<HashMap<String,Object>> rlist = dao.replyList(reply);
 		for (HashMap<String, Object> hashMap : rlist) {

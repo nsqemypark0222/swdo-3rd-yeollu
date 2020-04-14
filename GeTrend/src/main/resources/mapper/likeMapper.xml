@@ -29,7 +29,9 @@ and
 select
 	s.store_no as store_no
 	,s.store_name as store_name
+	,s.store_cate1 as store_cate1
 	,l.user_email as user_email
+	,to_char(l.likes_indate,'yyyy-MM-dd') as likes_indate
 from
 	likes l, stores s
 where

@@ -5,18 +5,26 @@
 
 <mapper namespace="com.yeollu.getrend.user.dao.UserMapper">
 <insert id="join" parameterType="user">
-	insert into 
-		users(
-			user_email
-			,user_pw
-			,user_name
-			,user_type
-		)values(
-			#{user_email}
-			,#{user_pw}
-			,#{user_name}
-			,#{user_type}
-		)
+insert into 
+	users (
+		user_email
+		, user_pw
+		, user_name
+		, user_type
+		<if test="user_profile != null and user_profileId != null">
+		, user_profile
+		, user_profileId
+		</if>
+	) values (
+		#{user_email}
+		, #{user_pw}
+		, #{user_name}
+		, #{user_type}
+		<if test="user_profile != null and user_profileId != null">
+		, #{user_profile}
+		, #{user_profileId}
+		</if>
+	)
 </insert>
 
 <update id="updateUser" parameterType="user">
@@ -24,26 +32,26 @@ update
 	users
 set
 	user_pw =#{user_pw}
-	,user_name =#{user_name}
+	, user_name =#{user_name}
 	<if test="user_profile != null and user_profileId != null">
-	,user_profile =#{user_profile}
-	,user_profileId =#{user_profileId}
+	, user_profile = #{user_profile}
+	, user_profileId = #{user_profileId}
 	</if>
 where
-	user_email =#{user_email}
+	user_email = #{user_email}
 </update>
 
 <update id="updateSocialUser" parameterType="user">
 update
 	users
 set
-	user_name =#{user_name}
+	user_name = #{user_name}
 	<if test="user_profile != null and user_profileId != null">
-	,user_profile =#{user_profile}
-	,user_profileId =#{user_profileId}
+	, user_profile = #{user_profile}
+	, user_profileId = #{user_profileId}
 	</if>
 where
-	user_email =#{user_email}
+	user_email = #{user_email}
 </update>
 
 <delete id="deleteUser" parameterType="string">

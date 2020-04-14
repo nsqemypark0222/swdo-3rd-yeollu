@@ -213,7 +213,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				  					</div>
 					   			</li>
 					   			<li class="list-group-item">
-					   				<img src="${item.instaImage.repImg}" alt="${item.instaStore.store_adr}" class="rounded float left" style="width:380px; height:310px;" >
+					   				<img src="${item.instaImage.repImg}" alt="${item.instaStore.store_adr}" class="rounded float left" style="width:380px; height:310px;">
 					   				<div class="istore2">
 					   		   			<div class="overlay2">
 					   						<div class="text">
@@ -288,7 +288,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 						const callback = function(result, status) {
 							if(status === kakao.maps.services.Status.OK) {
 								let adr = result[0].address.address_name;
-								$.ajax({
+								/* $.ajax({
 									url: "<c:url value='/recommend' />",
 									type: "get",
 									contentType: "application/json; charset=utf-8",
@@ -302,7 +302,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 									error: function(request, status, error){
 							            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
 							        }
-								});
+								}); */
 							}
 						}
 						geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);

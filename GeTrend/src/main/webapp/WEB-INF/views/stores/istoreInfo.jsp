@@ -35,42 +35,90 @@
 	margin: 0px auto;
 }
 
+
 </style>
 </head>
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
 	
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6">
+	 		<!-- 이미지 슬라이더 위치  -->
+	 			<div id="carouselRecommendedStores" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+					    	<li data-target="#carouselRecommendedStores" data-slide-to="0" class="active"></li>
+					    	<li data-target="#carouselRecommendedStores" data-slide-to="1"></li>
+					    	<li data-target="#carouselRecommendedStores" data-slide-to="2"></li>
+					  	</ol>
+					  	<div class="row">
+						  	<div class="carousel-inner">
+						    	<div class="carousel-item active">
+					      				<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="1" end="7" step="3">
+											<img class="rounded img-fluid" src="${item.imgUrl}" class="d-block img-fluid" alt="...">
+										</c:forEach>
+					      			<div class="carousel-caption d-none d-md-block">
+						        		<h5>${istore.instaStore.store_name}</h5>
+						        		<p>Now Trend</p>
+						      		</div>
+						    	</div>
+					    		<div class="carousel-item">
+									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="2" end="8" step="3">
+											<img class="rounded img-fluid" src="${item.imgUrl}" class="d-block img-fluid" alt="...">
+									</c:forEach>					      		
+									<div class="carousel-caption d-none d-md-block">
+						        		<h5>${istore.instaStore.store_name}</h5>
+						        		<p>Now Trend</p>
+						      		</div>
+						    	</div>
+						    	<div class="carousel-item">
+									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="3" end="9" step="3">
+										<img class="rounded img-fluid" src="${item.imgUrl}">
+									</c:forEach>					      		
+									<div class="carousel-caption d-none d-md-block">
+						        		<h5>${istore.instaStore.store_name}</h5>
+						        		<p>Now Trend</p>
+						      		</div>
+						  		</div>
+						  	</div>
+					  	<a class="carousel-control-prev" href="#carouselRecommendedStores" role="button" data-slide="prev">
+					  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					  		<span class="sr-only">Previous</span>
+					  	</a>
+					  	<a class="carousel-control-next" href="#carouselRecommendedStores" role="button" data-slide="next">
+					    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					    	<span class="sr-only">Next</span>
+					  	</a>
+					</div>
+			</div>
+			
 				<div class="row">
-					<img class="rounded-circle" id="repImg" src="${istore.instaImage.repImg}">
-				</div>
-				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-3">
+						<h1>${istore.instaStore.store_name}</h1>
+					</div>
+					<div class="col-md-3">
 						<a id="like">
 							<i class="fas fa-heart fa-3x"></i>
 						</a>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">	
 						<a href="https://map.kakao.com/link/to/${istore.instaStore.store_name},${istore.instaStore.store_y},${istore.instaStore.store_x}">
 							<i class="fas fa-map-marker-alt fa-3x"></i>
 						</a>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">	
 						<a id="kakao-link-btn" href="javascript:sendLink()">
 							<i class="fas fa-share-alt fa-3x"></i>
 							<!-- <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/> -->
 						</a>
+					</div>	
 					</div>
 				</div>
 				<div class="row">
 					<div class="container">
 						<div class="row">
 							<div class="col-12">
-								<h1>${istore.instaStore.store_name}</h1>
 								<ul class="list-group">
 									<li class="list-group-item">${istore.instaStore.store_cate1}</li>
 									<li class="list-group-item">${istore.instaStore.store_adr1}</li>
@@ -86,69 +134,7 @@
 				</div>
 				
 			</div>
-			<div class="col-md-6">
-				<div class="row">
-					<div class="card mb-3">
-						<!-- <div class="card-header mb-3">
-							<h2>상세 페이지</h2>
-						</div> -->
-						<div class="card-body mb-3">
-							<div class="row no-gutters">
-								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="1" end="7" step="3">
-										<img class="rounded img-fluid" src="${item.imgUrl}">
-									</c:forEach>
-								</div>
-								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="2" end="8" step="3">
-										<img class="rounded img-fluid" src="${item.imgUrl}">
-									</c:forEach>
-								</div>
-								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="3" end="9" step="3">
-										<img class="rounded img-fluid" src="${item.imgUrl}">
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-						<%-- <div class="card-footer mb-3">
-						<div class="row no-gutters">
-							<div class="col-md-2">
-								<div class="row">
-									<img class="rounded-circle profileImg" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586073032/qjmvvyvokolfefdsb6k9.jpg">
-								</div>
-								<div class="row">
-									${sessionScope.loginname}
-								</div>
-							</div>
-							<div class="col-md-10">
-								<form class="form-group" id="inputForm">
-									<input type="hidden" id="store_no" name="store_no" value="${istore.instaStore.store_no}" />
-									<div class="row">
-										<div class="starRev">
-											<span class="starR1">0.5</span>
-											<span class="starR2">1</span>
-											<span class="starR1">1.5</span>
-											<span class="starR2">2</span>
-											<span class="starR1">2.5</span>
-											<span class="starR2">3</span>
-											<span class="starR1">3.5</span>
-											<span class="starR2">4</span>
-											<span class="starR1">4.5</span>
-											<span class="starR2">5</span>
-										</div>
-									</div>
-									<div class="row">
-										<textarea class="form-control" rows="5" id="reply_contents" name="reply_contents" placeholder="내용 입력"></textarea>
-										<button class="form-control" id="writeBtn">리뷰 등록</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div> --%>
-					</div>
-				</div>
-			</div>
+	
 		</div>
 	</div>
 	
@@ -158,9 +144,10 @@
 	    <div class="col">
 			<form id="inputForm" >
 		    	<input type="hidden" id="store_no" name="store_no" value="${istore.instaStore.store_no}" />
-				<table>
+				<table class="table">
 					<tr>
 						<th>리뷰</th>
+						<th colspan="3">별점</th>
 					</tr>
 						
 					<tr>
@@ -182,16 +169,15 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							<textarea id="reply_contents" name="reply_contents" placeholder="내용 입력"></textarea>
+						<td colspan="3">
+							<textarea id="reply_contents" name="reply_contents" placeholder="내용 입력" style=" width:90%; resize:none;"></textarea>
 						</td>
+					
 						<td>
-							<input type="button" id="writeBtn" value="리뷰 등록">
-						</td>
-						<td>
-							
+							<input type="button" class="btn btn-warning" id="writeBtn" value="리뷰 등록">
 						</td>
 					</tr>
+				
 				</table>
 			</form>
 		</div>
@@ -200,7 +186,7 @@
 	
 		<div class="row"> <!-- print form -->
 			<div class="col">
-				<table id="printTable">
+				<table class="table table-hover" id="printTable">
 			
 				</table>
 			</div>	

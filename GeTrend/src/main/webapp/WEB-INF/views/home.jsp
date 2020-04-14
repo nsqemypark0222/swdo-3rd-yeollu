@@ -313,21 +313,10 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 						const callback = function(result, status) {
 							if(status === kakao.maps.services.Status.OK) {
 								let adr = result[0].address.address_name;
-								/* $.ajax({
-									url: "<c:url value='/recommend' />",
-									type: "get",
-									contentType: "application/json; charset=utf-8",
-									data: {
-										"adr": adr
-									},
-									dataType: "json",
-									success: function(result) {
-										console.log(result);
-									},
-									error: function(request, status, error){
-							            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
-							        }
-								}); */
+
+								//$("#searchInput").val(adr);
+								//console.log($("#searchInput").val());
+								//$("#searchBar").submit();
 							}
 						}
 						geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);

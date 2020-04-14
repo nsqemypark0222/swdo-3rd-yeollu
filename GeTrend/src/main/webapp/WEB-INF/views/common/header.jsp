@@ -30,7 +30,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand" id="navbar-brand"  href="<c:url value='/'/>" >GeTrend</a>
 	<div class="input-group">
-		<form class="form-inline" id="searchBar" action="autoSearch" method="get" >
+		<form class="form-inline" action="autoSearch" method="get" id="searchBar">
 	 		<div class="col-md-9">
 	 			<input class="form-control mr-sm-2" type="text" id="searchInput" name="searchInput" placeholder="Search">
     		</div>
@@ -127,7 +127,9 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 
 		$("#searchInput").keydown(function (key) {    	 
 	        if(key.keyCode == 13){
-	        	
+	        	event.preventDefault();
+	        	$("#searchBar").submit();
+
 	        };
 	    });
 	});

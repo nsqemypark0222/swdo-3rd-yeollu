@@ -201,7 +201,7 @@ function follower(user_email){
 			else{
 				$(result).each(function(index, item){
 					var temp = '<td style="width : 200px;">';
-						temp += '<div style="width : 200px; text-align:center;"><a href="/getrend/mypage/mypage?user_name='+item.USER_NAME+'"><img class="reply_cate_profile" src="/getrend/resources/img/'+ item.USER_PROFILE +'" alt="프로필 사진"></a></div>';								
+						temp += '<div style="width : 200px; text-align:center;"><a href="/getrend/mypage/mypage?user_name='+item.USER_NAME+'"><img class="reply_cate_profile" src="'+ item.USER_PROFILE +'" alt="프로필 사진"></a></div>';								
 						temp += '<div style="width : 200px; font-size:14px; text-align:center;">'+item.USER_NAME+'</div>';
 						temp += '</td>';							
 				        $(".mypage_list_table").children().append(temp);

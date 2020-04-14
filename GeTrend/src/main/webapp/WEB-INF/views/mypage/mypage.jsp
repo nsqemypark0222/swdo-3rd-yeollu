@@ -201,7 +201,7 @@ function follower(user_email){
 			else{
 				$(result).each(function(index, item){
 					var temp = '<td style="width : 200px;">';
-						temp += '<div style="width : 200px; text-align:center;"><a href="/getrend/mypage/mypage?user_name='+item.USER_NAME+'"><img class="reply_cate_profile" src="/getrend/resources/img/'+ item.USER_PROFILE +'" alt="프로필 사진"></a></div>';								
+						temp += '<div style="width : 200px; text-align:center;"><a href="/getrend/mypage/mypage?user_name='+item.USER_NAME+'"><img class="reply_cate_profile" src="'+ item.USER_PROFILE +'" alt="프로필 사진"></a></div>';								
 						temp += '<div style="width : 200px; font-size:14px; text-align:center;">'+item.USER_NAME+'</div>';
 						temp += '</td>';							
 				        $(".mypage_list_table").children().append(temp);
@@ -240,11 +240,28 @@ function follow(user_email){
 			}  
 		},
 		error : function(){alert("실패");}
-	})
-	
-
-	
+	})	
 }
+
+$(function(){
+	var user_email = $("#user_email").val();
+	var login_email = $("#login_email").val();
+	if(user_email == login_email){
+		$('.table-light').hover(
+		        function () {
+		        	$(this).children().children(".deleteButton").attr("src","/getrend/resources/img/delete.png");
+		        },
+		        function () {
+		        	$(this).children().children(".deleteButton").attr("src","/getrend/resources/img/white.png");
+		        }
+		    );
+	} 
+})
+
+function deleteReply(no,user_name){
+	location.href="/getrend/mypage/deleteReply?reply_no=" + no + "&user_name=" + user_name;
+}
+
 
 </script>
 
@@ -469,6 +486,7 @@ function follow(user_email){
 	<div class="row">
 		<div class="col">
 			<input type="hidden" id="user_email" value="${user.user_email}">			
+			<input type="hidden" id="login_email" value="${sessionScope.loginemail}">			
 			<div class="mypage_profile">
 				<table class="mypage_profile_table">
 					<tr>
@@ -581,10 +599,15 @@ function follow(user_email){
 															<a href="https://map.kakao.com/link/to/${reply.STORE_NAME},${reply.STORE_Y},${reply.STORE_X}"><input type="image"  class="reply_map"src="<c:url value='/resources/img/place.png'/>"></a>
 														</h3>			
 													<div class="mb-1 text-muted"> <span class="starMake">${reply.REPLY_STAR}</span></div>
-													<p class="card-text mb-auto">${reply.REPLY_CONTENTS}</p>		          
+													<p class="card-text mb-auto" style="word-break:break-word;">${reply.REPLY_CONTENTS}</p>		          
 													<div class="mb-1 text-muted">${reply.REPLY_INDATE}</div>
-						    					 </div>		       
-											</div> 
+						    					 </div>	       
+											</div>
+											<c:if test="${reply.USER_EMAIL eq sessionScope.loginemail}">
+												<div class="deleteButton" style="float : right;">
+													<img style="width:15px;" src="/getrend/resources/img/delete.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${reply.USER_NAME}')">
+												</div> 
+											</c:if>
 										</td>	
 									 </tr>				
 								    </c:forEach>
@@ -622,6 +645,9 @@ function follow(user_email){
     </div>
   </div>
 </div>
+
+
+
 
 <footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

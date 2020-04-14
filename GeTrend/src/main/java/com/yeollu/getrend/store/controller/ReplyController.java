@@ -60,16 +60,14 @@ public class ReplyController {
 			logger.info("댓글 삭제 성공");
 		} else {
 			logger.info("댓글 삭제 실패");
-		}
-		
-		
+		}	
 	}
 	
 	//리스트
 	@RequestMapping(value = "/replyList", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<HashMap<String,Object>> list(InstaReplyVO reply, HttpSession session) {
-		//reply.setStore_no("25523615");
+
 		String loginemail = (String)session.getAttribute("loginemail");
 		ArrayList<HashMap<String,Object>> rlist = dao.replyList(reply);
 		for (HashMap<String, Object> hashMap : rlist) {

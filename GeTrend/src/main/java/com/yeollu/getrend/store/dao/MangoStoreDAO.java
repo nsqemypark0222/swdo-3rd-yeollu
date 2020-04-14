@@ -41,8 +41,8 @@ public class MangoStoreDAO {
 		return list;
 	}
 	
-	public MangoStoreVO selectMangoStoreByStoreNo(String store_no) {
-		MangoStoreVO mangoStore = new MangoStoreVO();
+	public MangoStoreInfoVO selectMangoStoreByStoreNo(String store_no) {
+		MangoStoreInfoVO mangoStore = new MangoStoreInfoVO();
 		
 		try {
 			MangoStoreMapper mapper = session.getMapper(MangoStoreMapper.class);

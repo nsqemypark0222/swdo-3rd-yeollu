@@ -84,7 +84,7 @@ public class instagram_Selenium_location_post3 {
 	public InstaImageVO location_post(String location) {
 		driver = new ChromeDriver(options);
 		logger.info("드라이버 실행 : {}", location);
-		wait = new WebDriverWait(driver, 1);
+		wait = new WebDriverWait(driver, 4);
 		
 		InstaImageVO instaImage = new InstaImageVO();
 		try {

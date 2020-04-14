@@ -184,23 +184,29 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					  	</ol>
 					  	<div class="carousel-inner">
 					    	<div class="carousel-item active">
-					      		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776397/brooke-lark-pGM4sjt_BdQ-unsplash_yiapqg.jpg" class="d-block img-fluid" alt="...">
+					    		<a href="javascript:recommendByCategory();">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586846612/redluck_y0iqfn.jpg" class="d-block img-fluid" alt="...">
+					      		</a>
 				      			<div class="carousel-caption d-none d-md-block">
-					        		<h5>First slide label</h5>
+					        		<h5>우리 동네 인스타 맛집 TOP 3</h5>
 					        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 					      		</div>
 					    	</div>
 				    		<div class="carousel-item">
-					      		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776563/dan-gold-4_jhDO54BYg-unsplash_qcxerf.jpg" class="d-block img-fluid" alt="...">
+				    			<a href="javascript:recommendByAccessLocation();">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586846613/salad_oknvyo.jpg" class="d-block img-fluid" alt="...">
+					      		</a>
 					      		<div class="carousel-caption d-none d-md-block">
-					        		<h5>Second slide label</h5>
+					        		<h5>가까운 맛집 TOP 3</h5>
 					        		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					      		</div>
 					    	</div>
 					    	<div class="carousel-item">
-					      		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776555/ariel-kwon-OvqJ4LaLo20-unsplash_ebjrxe.jpg" class="d-block img-fluid" alt="...">
+					    		<a href="javascript:recommendByAdr();">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776563/dan-gold-4_jhDO54BYg-unsplash_qcxerf.jpg" class="d-block img-fluid" alt="...">
+					      		</a>
 					      		<div class="carousel-caption d-none d-md-block">
-					        		<h5>Third slide label</h5>
+					        		<h5>우리 동네 맛집 TOP 3</h5>
 					        		<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
 					      		</div>
 					  		</div>
@@ -241,22 +247,22 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 												<c:choose>
 													<c:when test="${status.first}">
 														<div class="carousel-item active">
-												      		<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+															<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
+												      			<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+												      		</a>
 											      			<div class="carousel-caption d-none d-md-block">
-												        		<h5>
-											      					<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>${istore.instaStore.store_name}</a>
-												        		</h5>
+												        		<h5>${istore.instaStore.store_name}</h5>
 												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 												      		</div>
 												    	</div>
 													</c:when>
 													<c:otherwise>
 														<div class="carousel-item">
-												      		<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+															<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
+												      			<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+												      		</a>
 											      			<div class="carousel-caption d-none d-md-block">
-											      				<h5>
-											      					<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>${istore.instaStore.store_name}</a>
-												        		</h5>
+											      				<h5>${istore.instaStore.store_name}</h5>
 												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 												      		</div>
 												    	</div>
@@ -301,40 +307,23 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	  	</div>
 	</div>
 	
+	<div>
+		<form id="recommendByCategoryForm" action="recommendByCategory" method="get">
+			<input type="hidden" id="recommendByCategoryKeyword" name="recommendByCategoryKeyword" />
+		</form>
+	</div>
+	
+	<div>
+		<form id="recommendByAdrForm" action="recommendByAdr" method="get">
+			<input type="hidden" id="recommendByAdrKeyword" name="recommendByAdrKeyword" />
+		</form>
+	</div>
+	
 
 	
 <script type="text/javascript">
 		$(function() {
 			
-			function init() {
-				if(navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(function(position) {
-						const geocoder = new kakao.maps.services.Geocoder();
-						const callback = function(result, status) {
-							if(status === kakao.maps.services.Status.OK) {
-								let adr = result[0].address.address_name;
-								/* $.ajax({
-									url: "<c:url value='/recommend' />",
-									type: "get",
-									contentType: "application/json; charset=utf-8",
-									data: {
-										"adr": adr
-									},
-									dataType: "json",
-									success: function(result) {
-										console.log(result);
-									},
-									error: function(request, status, error){
-							            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
-							        }
-								}); */
-							}
-						}
-						geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);
-						
-					});
-				}
-			}
 			function search(points) {
 				let categoryValues = [];
 				$("input[name=categotyChk]:checked").each(function() {
@@ -391,22 +380,22 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 							for(let i = 0; i < item.instaImage.postImgList.length; i++) {
 								if(i === 0) {
 									str += '<div class="carousel-item active">';
-									str +=		'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
+									str +=			'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		'</a>';
 									str +=		'<div class="carousel-caption d-none d-md-block">';
-									str += 		'<h5>';
-									str +=			"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>" + item.instaStore.store_name + '</a>'
-									str +=		'</h5>';
-									str +=		'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+									str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+									str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
 									str +=		'</div>';
 						      		str += '</div>';
 								} else {
 									str += '<div class="carousel-item">';
-									str +=		'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
+									str +=			'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		'</a>';
 									str +=		'<div class="carousel-caption d-none d-md-block">';
-									str += 		'<h5>';
-									str +=			"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>" + item.instaStore.store_name + '</a>'
-									str +=		'</h5>';
-									str +=		'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+									str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+									str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
 									str +=		'</div>';
 						      		str += '</div>';
 								}
@@ -431,7 +420,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				});
 			}
 			searchFunc = search;
-			init();
+			
 		});
 		function search(points) {
 			searchFunc(points);
@@ -528,14 +517,52 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			}
 			search(points);
 	   };
+	   
 	   const setCenter = (lat, lng) => {
 		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
 		   map.setCenter(moveLatLng);
 	   };
+	   
 	   const panTo = (lat, lng) => {
 		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
 		   map.panTo(moveLatLng);
 	   };
+
+	   const recommendByAccessLocation = () => {
+			if(navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					const geocoder = new kakao.maps.services.Geocoder();
+					const callback = function(result, status) {
+						if(status === kakao.maps.services.Status.OK) {
+							let adr = result[0].address.address_name;
+							let store_adr = '';
+							let tmp = adr.split(' ');
+							for(let i = 0; i < tmp.length; i++) {
+								if(tmp[i].includes('동')) {
+									store_adr = tmp[i];
+									break;
+								}
+							}
+
+							$("#recommendByAdrKeyword").val(store_adr);
+							$("#recommendByAdrForm").submit();
+						}
+					}
+					geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);
+					
+				});
+			}
+		}
+
+		const recommendByCategory = () => {
+			$("#recommendByCategoryKeyword").val('한식');
+			$("#recommendByCategoryForm").submit();
+		}
+
+		const recommendByAdr = () => {
+			$("#recommendByAdrKeyword").val('동명동');
+			$("#recommendByAdrForm").submit();
+		}
 		
 </script>
 </body>

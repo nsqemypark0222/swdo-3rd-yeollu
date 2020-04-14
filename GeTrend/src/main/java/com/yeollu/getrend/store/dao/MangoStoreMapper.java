@@ -10,7 +10,7 @@ import com.yeollu.getrend.store.vo.MangoStoreVO;
 public interface MangoStoreMapper {
 	public int insertMangoStore(MangoStoreVO mangoStore);
 	public ArrayList<MangoStoreVO> selectAllMangoStores();
-	public MangoStoreVO selectMangoStoreByStoreNo(String store_no);
+	public MangoStoreInfoVO selectMangoStoreByStoreNo(String store_no);
 	public ArrayList<MangoStoreVO> selectMangoStoreByMangoDay(MangoDayVO mangoDay);
 //	public MangoStoreInfoVO selectMangoStoreInfoByStoreNo(String store_no);
 	public MangoStoreInfoVO selectMangoStoreInfoByStoreNo(HashMap<String, String> map);

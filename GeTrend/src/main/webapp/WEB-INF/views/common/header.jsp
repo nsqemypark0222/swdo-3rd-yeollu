@@ -30,9 +30,10 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand" id="navbar-brand"  href="<c:url value='/'/>" >GeTrend</a>
 	<div class="input-group">
-		<form class="form-inline" >
+		<form class="form-inline" action="autoSearch" method="get">
 	 		<div class="col-md-9">
 	 			<input class="form-control mr-sm-2" type="text" id="searchInput" name="searchInput" placeholder="Search">
+	 			<button type="submit">검색</button>
     		</div>
     	</form>
         <div class="menu_list">

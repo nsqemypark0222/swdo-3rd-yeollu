@@ -46,22 +46,27 @@ from
 	mango_stores
 </select>
 
-<select id="selectMangoStoreByStoreNo" parameterType="string" resultType="mangoStore">
+<select id="selectMangoStoreByStoreNo" parameterType="string" resultType="mangoStoreInfo">
 select
-	store_no
-	, mango_tel
-	, mango_kind
-	, mango_price
-	, mango_parking
-	, mango_time
-	, mango_break_time
-	, mango_last_order
-	, mango_holiday
-	, mango_indate
+    m.store_no
+    , m.mango_tel
+    , m.mango_price
+    , m.mango_parking
+    , t.mango_start
+    , t.mango_end
+    , d.mango_sun
+    , d.mango_mon
+    , d.mango_tue
+    , d.mango_wed
+    , d.mango_thu
+    , d.mango_fri
+    , d.mango_sat
 from
-	mango_stores
+    mango_stores m, mango_times t, mango_days d
 where
-	store_no = #{store_no}
+    m.store_no = t.store_no
+    and m.store_no = d.store_no
+    and m.store_no = #{store_no}
 </select>
 
 <select id="selectMangoStoreByMangoDay" parameterType="mangoDay" resultType="mangoStore">

@@ -242,22 +242,22 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 												<c:choose>
 													<c:when test="${status.first}">
 														<div class="carousel-item active">
-												      		<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+															<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
+												      			<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+												      		</a>
 											      			<div class="carousel-caption d-none d-md-block">
-												        		<h5>
-											      					<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>${istore.instaStore.store_name}</a>
-												        		</h5>
+												        		<h5>${istore.instaStore.store_name}</h5>
 												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 												      		</div>
 												    	</div>
 													</c:when>
 													<c:otherwise>
 														<div class="carousel-item">
-												      		<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+															<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
+												      			<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+												      		</a>
 											      			<div class="carousel-caption d-none d-md-block">
-											      				<h5>
-											      					<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>${istore.instaStore.store_name}</a>
-												        		</h5>
+											      				<h5>${istore.instaStore.store_name}</h5>
 												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 												      		</div>
 												    	</div>
@@ -392,22 +392,22 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 							for(let i = 0; i < item.instaImage.postImgList.length; i++) {
 								if(i === 0) {
 									str += '<div class="carousel-item active">';
-									str +=		'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
+									str +=			'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		'</a>';
 									str +=		'<div class="carousel-caption d-none d-md-block">';
-									str += 		'<h5>';
-									str +=			"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>" + item.instaStore.store_name + '</a>'
-									str +=		'</h5>';
-									str +=		'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+									str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+									str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
 									str +=		'</div>';
 						      		str += '</div>';
 								} else {
 									str += '<div class="carousel-item">';
-									str +=		'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
+									str +=			'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		'</a>';
 									str +=		'<div class="carousel-caption d-none d-md-block">';
-									str += 		'<h5>';
-									str +=			"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>" + item.instaStore.store_name + '</a>'
-									str +=		'</h5>';
-									str +=		'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+									str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+									str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
 									str +=		'</div>';
 						      		str += '</div>';
 								}

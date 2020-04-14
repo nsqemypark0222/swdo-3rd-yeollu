@@ -128,56 +128,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 		$("#searchInput").keydown(function (key) {    	 
 	        if(key.keyCode == 13){
 	        	event.preventDefault();
-	        	$.ajax({
-	        		url : "<c:url value='/autocomplete/keyword'/>",
-	        		type : "post",
-	        		data : {"keyword" : $("#searchInput").val()},
-	        		dataType: "json",
-					success: function(result) {
-						alert("성공");
-						printMarker(result);
-						console.log(result);
-						$(result).each(function(index, item) {
-							panTo(item.instaStore.store_y, item.instaStore.store_x);
-							$("#table").append(
-								"<tr>" + "<td>" + item.instaStore.store_no + "</td>"
-										+ "<td>" + item.instaStore.store_name + "</td>"
-										+ "<td>" + item.instaStore.store_name2 + "</td>"
-										+ "<td>" + item.instaStore.store_cate1 + "</td>"
-										+ "<td>" + item.instaStore.store_cate2 + "</td>"
-										+ "<td>" + item.instaStore.store_adr + "</td>"
-										+ "<td>" + item.instaStore.store_adr1 + "</td>"
-										+ "<td>" + item.instaStore.store_adr2 + "</td>"
-										+ "<td>" + item.instaStore.store_x + "</td>"
-										+ "<td>" + item.instaStore.store_y + "</td>"
-										+ '<td><img src=' + item.instaImage.repImg + ' /></td>' + "</tr>"
-							);
-							$("#mangoTable").append(
-									"<tr>" + "<td>" + item.mangoStore.store_no + "</td>"
-										+ "<td>" + item.mangoStore.mango_tel + "</td>"
-										+ "<td>" + item.mangoStore.mango_kind + "</td>"
-										+ "<td>" + item.mangoStore.mango_price + "</td>"
-										+ "<td>" + item.mangoStore.mango_parking + "</td>"
-										+ "<td>" + item.mangoStore.mango_time + "</td>"
-										+ "<td>" + item.mangoStore.mango_break_time + "</td>"
-										+ "<td>" + item.mangoStore.mango_last_order + "</td>"
-										+ "<td>" + item.mangoStore.mango_holiday + "</td>" + "</tr>"
-							);
-							$(item.instaImage.postImgList).each(function(idx, itm) {
-								$("#imageContainer").append(
-										"<div name='imgPanel'>"
-											+ '<img src=' + itm.imgUrl + ' />'
-											+ '<b>' + itm.like + '</b>'
-								);
-							});
-							$('#imageContainer').append("<hr />");
-						});
-						
-			        },
-			        error: function(request, status, error){
-			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
-			        }
-	        	});         	            
+	        	
 	        };
 	    });
 	});

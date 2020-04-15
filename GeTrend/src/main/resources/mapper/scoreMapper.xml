@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeollu.getrend.store.dao.ScoreMapper">
+
+<select id="selectScoreByStoreNo" parameterType="string" resultType="score">
+select
+	s.store_no as store_no
+	, count(l.user_email) as sum_of_like
+	, sum(r.reply_star) as sum_of_star
+from
+	stores s
+	, likes l
+	, insta_replys r
+where
+	s.store_no = l.store_no
+	and s.store_no = r.store_no
+	and s.store_no = #{store_no}
+group by
+	s.store_no
+</select>
+
+</mapper>
+

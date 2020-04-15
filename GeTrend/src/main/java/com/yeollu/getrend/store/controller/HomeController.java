@@ -1,11 +1,6 @@
 package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yeollu.getrend.crawler.CrawlerExecutor;
@@ -27,24 +21,16 @@ import com.yeollu.getrend.store.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.MangoTimeDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
-import com.yeollu.getrend.store.util.map.core.LocationDistance;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
-import com.yeollu.getrend.store.util.preprocess.core.DayOfTheWeekCategorizer;
 import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
-import com.yeollu.getrend.store.util.preprocess.core.StringPreprocessor;
-import com.yeollu.getrend.store.util.preprocess.core.TimeCategorizer;
-import com.yeollu.getrend.store.vo.ReqParmVO;
 import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
-import com.yeollu.getrend.store.vo.MangoDayVO;
 import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
-import com.yeollu.getrend.store.vo.MangoStoreVO;
-import com.yeollu.getrend.store.vo.MangoTimeVO;
+import com.yeollu.getrend.store.vo.ReqParmVO;
 import com.yeollu.getrend.store.vo.StoreVO;
-import com.yeollu.getrend.user.util.ProfileImageHandler;
 
 @Controller
 public class HomeController {
@@ -86,9 +72,6 @@ public class HomeController {
 		logger.info("points : {}", points);
 		logger.info("categoryValues : {}", categoryValues);
 		logger.info("opentimeValues : {}", opentimeValues);
-		
-		// DB에 저장된 모든 상가 리스트를 가져옴
-		// ArrayList<StoreVO> list = storeDAO.selectAllStores();
 		
 		// DB에 저장된 모든 상가 리스트 중에서 카테고리에 해당되는 상가들만 조회
 		ArrayList<StoreVO> storeList = storeDAO.selectStoresByStoreCate1(categoryValues);
@@ -136,7 +119,6 @@ public class HomeController {
 		ArrayList<String> locationList = new ArrayList<String>();
 		for(InstaStoreVO instaStore : instaStoreList) {
 			MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
-//			mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNo(instaStore.getStore_no());
 			mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNoAndDays(instaStore.getStore_no(), opentimeValues);
 			mangoStoreInfoList.add(mangoStoreInfo);
 			locationList.add(instaStore.getLocation_id());
@@ -162,7 +144,6 @@ public class HomeController {
 			for (int i = 0; i < instaStoreList.size(); i++) {
 				InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
 				instaStoreInfo.setInstaStore(instaStoreList.get(i));
-//				instaStoreInfo.setMangoStore(mangoStoreList.get(i));
 				instaStoreInfo.setMangoStoreInfo(mangoStoreInfoList.get(i));
 
 				if (instaImageList.size() > i) {

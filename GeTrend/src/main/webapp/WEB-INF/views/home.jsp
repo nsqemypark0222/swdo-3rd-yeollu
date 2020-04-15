@@ -188,7 +188,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586846612/redluck_y0iqfn.jpg" class="d-block img-fluid" alt="...">
 					      		</a>
 				      			<div class="carousel-caption d-none d-md-block">
-					        		<h5>우리 동네 인스타 맛집 TOP 3</h5>
+					        		<h5>한식 맛집 TOP 3</h5>
 					        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 					      		</div>
 					    	</div>
@@ -206,7 +206,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776563/dan-gold-4_jhDO54BYg-unsplash_qcxerf.jpg" class="d-block img-fluid" alt="...">
 					      		</a>
 					      		<div class="carousel-caption d-none d-md-block">
-					        		<h5>우리 동네 맛집 TOP 3</h5>
+					        		<h5>동명동 맛집 TOP 3</h5>
 					        		<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
 					      		</div>
 					  		</div>

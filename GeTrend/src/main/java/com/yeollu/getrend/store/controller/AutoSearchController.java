@@ -72,8 +72,7 @@ public class AutoSearchController {
 				ArrayList<String> locationList = new ArrayList<String>();
 				for(InstaStoreVO instaStore : instaStoreList) {
 					MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
-//					mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNo(instaStore.getStore_no());
-					mangoStoreInfo = mangoStoreDAO.selectMangoStoreByStoreNo(instaStore.getStore_no());
+					mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNo(instaStore.getStore_no());
 					mangoStoreInfoList.add(mangoStoreInfo);
 					locationList.add(instaStore.getLocation_id());
 				}

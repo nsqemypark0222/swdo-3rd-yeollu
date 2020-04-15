@@ -12,7 +12,6 @@ public interface MangoStoreMapper {
 	public ArrayList<MangoStoreVO> selectAllMangoStores();
 	public MangoStoreInfoVO selectMangoStoreByStoreNo(String store_no);
 	public ArrayList<MangoStoreVO> selectMangoStoreByMangoDay(MangoDayVO mangoDay);
-//	public MangoStoreInfoVO selectMangoStoreInfoByStoreNo(String store_no);
-	public MangoStoreInfoVO selectMangoStoreInfoByStoreNo(HashMap<String, String> map);
-	public MangoStoreInfoVO selectMangoStoreInfoByDays(HashMap<String, String> map);
+	public MangoStoreInfoVO selectMangoStoreInfoByStoreNo(String store_no);
+	public MangoStoreInfoVO selectMangoStoreInfoByStoreNoAndDays(HashMap<String, String> map);
 }

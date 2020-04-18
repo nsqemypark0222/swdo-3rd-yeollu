@@ -34,9 +34,9 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	      </a>
 	    </div>
 	    <div class="header_search">
-	    	<div class="search_border" >  				
-	  	 		<input type="text" id="searchInput"  name="searchInput" placeholder="검색어를 입력하세요">
-		 		<input type="image" id="searchInput_img" src="/getrend/resources/img/research.png">	 		
+	    	<div class="search_border" >
+  	 			<input type="text" id="searchInput"  name="searchInput" placeholder="검색어를 입력하세요">
+	 			<input type="image" id="searchInput_img" src="/getrend/resources/img/research.png">	 		
 	    	</div> 	
 	    </div>
 	    <div class="header_menu">
@@ -118,8 +118,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 		$("#searchInput").keydown(function (key) {    	 
 	        if(key.keyCode == 13){
 	        	event.preventDefault();
-	        	$("#searchBar").submit();
-
+	        	$(location).attr('href', "<c:url value='/autoSearch?searchInput=" + $("#searchInput").val() + "'/>");
 	        };
 	    });
 

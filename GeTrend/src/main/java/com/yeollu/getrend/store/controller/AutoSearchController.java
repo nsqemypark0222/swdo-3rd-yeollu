@@ -49,6 +49,7 @@ public class AutoSearchController {
 	@RequestMapping(value = "autoSearch", method = RequestMethod.GET)
 	public String autoSearch(String searchInput,HttpSession session) {
 		logger.info(searchInput);
+		long startTime = System.currentTimeMillis();
 		
 		if(session.getAttribute("istores") != null) {
 			logger.info("current istores : {}", session.getAttribute("istores"));
@@ -198,6 +199,11 @@ public class AutoSearchController {
 		
 		// 세션에 저장
 		session.setAttribute("istores", instaStoreInfoList);
+		
+		
+		long endTime = System.currentTimeMillis();
+		long diff = (endTime - startTime) / 1000;
+		logger.info("걸린 시간 : {}", diff);
 				
 		return "/autosearchForm";
 	}

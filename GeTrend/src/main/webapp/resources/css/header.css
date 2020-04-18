@@ -75,6 +75,7 @@ body, input, textarea, select, button, table {font-family: 'Nanum Gothic', Apple
 }
 .header_profile{
 	height: 50px;
+	width : 50px;
 }
 li:nth-of-type(n+10) { 
 	display: none; 

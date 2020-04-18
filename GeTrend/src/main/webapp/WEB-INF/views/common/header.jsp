@@ -49,7 +49,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 			        	LOGOUT
 			        </a>
 		               <a href="<c:url value='/users/userUpdate'/>">
-		               	<img class="header_profile" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" >
+		               	<img class="header_profile" src="/getrend/resources/img/user.png" >
 			        </a>
 			    </c:when>
 				<c:otherwise>

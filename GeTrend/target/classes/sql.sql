@@ -218,35 +218,13 @@ where
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
 select
-    s.store_name, s.store_no, m.mango_time, m.mango_break_time
+    s.store_no as store_no
+    , count(l.user_email) as sum_of_like
+    , sum(r.reply_star) as sum_of_star
 from
-    stores s, mango_stores m
+    stores s, likes l, insta_replys r
 where
-    s.store_no = m.store_no
-    and m.mango_time is not null;
-    
-
-select * from mango_times;
-
-select * from mango_days;
-
-select
-    m.store_no
-    , m.mango_tel
-    , m.mango_price
-    , m.mango_parking
-    , t.mango_start
-    , t.mango_end
-    , d.mango_sun
-    , d.mango_mon
-    , d.mango_tue
-    , d.mango_wed
-    , d.mango_thu
-    , d.mango_fri
-    , d.mango_sat
-from
-    mango_stores m, mango_times t, mango_days d
-where
-    m.store_no = t.store_no
-    and m.store_no = d.store_no;
-
+    s.store_no = l.store_no
+    and s.store_no = r.store_no
+group by
+    s.store_no;

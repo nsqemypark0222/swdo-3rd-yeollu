@@ -1,11 +1,8 @@
 package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,34 +14,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yeollu.getrend.crawler.CrawlerExecutor;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
-import com.yeollu.getrend.store.dao.MangoDayDAO;
 import com.yeollu.getrend.store.dao.MangoStoreDAO;
-import com.yeollu.getrend.store.dao.MangoTimeDAO;
-import com.yeollu.getrend.store.dao.SearchedStoreDAO;
+import com.yeollu.getrend.store.dao.ScoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
-import com.yeollu.getrend.store.util.map.core.LocationDistance;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
-import com.yeollu.getrend.store.util.preprocess.core.DayOfTheWeekCategorizer;
 import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
-import com.yeollu.getrend.store.util.preprocess.core.StringPreprocessor;
-import com.yeollu.getrend.store.util.preprocess.core.TimeCategorizer;
-import com.yeollu.getrend.store.vo.ReqParmVO;
 import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
-import com.yeollu.getrend.store.vo.MangoDayVO;
 import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
-import com.yeollu.getrend.store.vo.MangoStoreVO;
-import com.yeollu.getrend.store.vo.MangoTimeVO;
+import com.yeollu.getrend.store.vo.PostImageVO;
+import com.yeollu.getrend.store.vo.ReqParmVO;
+import com.yeollu.getrend.store.vo.ScoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
-import com.yeollu.getrend.user.util.ProfileImageHandler;
 
 @Controller
 public class HomeController {
@@ -55,30 +43,30 @@ public class HomeController {
 	private StoreDAO storeDAO;
 
 	@Autowired
-	private SearchedStoreDAO searchedDAO;
-
-	@Autowired
 	private InstaLocationDAO instaLocationDAO;
 
 	@Autowired
 	private MangoStoreDAO mangoStoreDAO;
 
 	@Autowired
-	private MangoDayDAO mangoDayDAO;
-	
-	@Autowired
-	private MangoTimeDAO mangoTimeDAO;
+	private ScoreDAO scoreDAO;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session, Model model) {
+		
 		return "home";
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<InstaStoreInfoVO> search(@RequestBody ReqParmVO reqParm, HttpSession session) {
-		logger.info("search");
+		logger.info("검색 시작");
 		long startTime = System.currentTimeMillis();
+		
+		if(session.getAttribute("istores") != null) {
+			logger.info("current istores : {}", session.getAttribute("istores"));
+			session.removeAttribute("istores");
+		}
 		
 		ArrayList<Point> points = reqParm.getPoints();
 		ArrayList<String> categoryValues = reqParm.getCategoryValues();
@@ -87,19 +75,19 @@ public class HomeController {
 		logger.info("categoryValues : {}", categoryValues);
 		logger.info("opentimeValues : {}", opentimeValues);
 		
-		// DB에 저장된 모든 상가 리스트를 가져옴
-		// ArrayList<StoreVO> list = storeDAO.selectAllStores();
 		
 		// DB에 저장된 모든 상가 리스트 중에서 카테고리에 해당되는 상가들만 조회
 		ArrayList<StoreVO> storeList = storeDAO.selectStoresByStoreCate1(categoryValues);
 		logger.info("storeList size : {}", storeList.size());
 
+		
 		// View로부터 넘겨받은 다각형의 꼭지점을 이용해 좌표상의 다각형 생성하여 판별
 		Polygon polygon = new Polygon();
 		for(Point point : points) {
 			polygon.addPoint(point);
 		}
 
+		
 		// 상가 리스트(storeList) 중에서 다각형 내부에 존재하는 상가들만 추출 => selectedStoreList
 		ArrayList<StoreVO> selectedStoreList = new ArrayList<StoreVO>();
 		for(StoreVO store : storeList) {
@@ -109,6 +97,7 @@ public class HomeController {
 		}
 		logger.info("selectedStoreList size : {}", selectedStoreList.size());
 
+		
 		// 인스타그램에 쿼리스트링을 보내 상가의 위치 정보 수집하여 location_id를 하나 리턴받아
 		// InstaStore 객체 생성하여 instaStoreList에 수집
 		ArrayList<InstaStoreVO> instaStoreList = new ArrayList<InstaStoreVO>();
@@ -131,16 +120,61 @@ public class HomeController {
 		}
 		logger.info("instaStoreList size : {}", instaStoreList.size());
 
+		
 		// 망고플레이트 정보 추가 + 크롤링 요청할 로케이션 아이디 리스트 생성
 		ArrayList<MangoStoreInfoVO> mangoStoreInfoList = new ArrayList<MangoStoreInfoVO>();
 		ArrayList<String> locationList = new ArrayList<String>();
 		for(InstaStoreVO instaStore : instaStoreList) {
 			MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
-//			mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNo(instaStore.getStore_no());
 			mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNoAndDays(instaStore.getStore_no(), opentimeValues);
 			mangoStoreInfoList.add(mangoStoreInfo);
 			locationList.add(instaStore.getLocation_id());
 		}
+		
+		
+		// 좋아요와 별점을 기반으로 스코어가 높은 순으로 정렬
+		ArrayList<ScoreVO> scoreList = new ArrayList<ScoreVO>();
+		for(InstaStoreVO instaStore : instaStoreList) {
+			ScoreVO score = scoreDAO.selectScoreByStoreNo(instaStore.getStore_no());
+			
+			if(score == null) {
+				score = new ScoreVO();
+				score.setStore_no(instaStore.getStore_no());
+				score.setSum_of_like(0);
+				score.setSum_of_star(0.0);
+			}
+			scoreList.add(score);
+		}
+		
+		Collections.sort(scoreList, new Comparator<ScoreVO>() {
+			public int compare(ScoreVO score1, ScoreVO score2) {
+				if((score1.getSum_of_like() * 100 + score1.getSum_of_like()) < (score2.getSum_of_like() * 100 + score2.getSum_of_like())) {
+					return 1;
+				} else {
+					return -1;
+				}
+				
+			};
+		});
+		
+		logger.info("instaStoreList {}", instaStoreList);
+		ArrayList<InstaStoreVO> _instaStoreList = new ArrayList<InstaStoreVO>();
+		for(int i = 0; i < scoreList.size(); i++) {
+			for(int j = 0; j < instaStoreList.size(); j++) {
+				if(scoreList.get(i).getStore_no().equals(instaStoreList.get(j).getStore_no())) {
+					_instaStoreList.add(instaStoreList.get(j));
+					break;
+				}
+			}
+		}
+		if(_instaStoreList.size() > 3) {
+			instaStoreList = new ArrayList<InstaStoreVO> (_instaStoreList.subList(0, 3));
+		} else {
+			instaStoreList = _instaStoreList;
+		}
+		logger.info("instaStoreList {}", instaStoreList);
+		
+		
 
 		// 인스타그램 크롤링 요청
 		ArrayList<InstaImageVO> instaImageList = new ArrayList<InstaImageVO>();
@@ -156,14 +190,15 @@ public class HomeController {
 		}
 		CrawlerExecutor.killChromeDriver();
 
+		
 		// View로 보낼 최종 객체 리스트
 		ArrayList<InstaStoreInfoVO> instaStoreInfoList = new ArrayList<InstaStoreInfoVO>();
 		try {
 			for (int i = 0; i < instaStoreList.size(); i++) {
 				InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
 				instaStoreInfo.setInstaStore(instaStoreList.get(i));
-//				instaStoreInfo.setMangoStore(mangoStoreList.get(i));
 				instaStoreInfo.setMangoStoreInfo(mangoStoreInfoList.get(i));
+				instaStoreInfo.setScore(scoreList.get(i));
 
 				if (instaImageList.size() > i) {
 					instaStoreInfo.setInstaImage(instaImageList.get(i));
@@ -177,11 +212,39 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		logger.info("instaStoreInfoList size : {}", instaStoreInfoList.size());
+		
+		
+		// 인스타그램 좋아요가 높은 순으로 재정렬
+		for(InstaStoreInfoVO instaStoreInfo : instaStoreInfoList) {
+			ScoreVO score = instaStoreInfo.getScore();
+			
+			int sum = 0;
+			for(PostImageVO postImage : instaStoreInfo.getInstaImage().getPostImgList()) {
+				sum += postImage.getLike();
+			}
+			score.setSum_of_insta_like(sum);
+			instaStoreInfo.setScore(score);
+		}
+		
+		Collections.sort(instaStoreInfoList, new Comparator<InstaStoreInfoVO>() {
+			public int compare(InstaStoreInfoVO instaScoreInfo1, InstaStoreInfoVO instaScoreInfo2) {
+				if(instaScoreInfo1.getScore().getSum_of_insta_like() < instaScoreInfo2.getScore().getSum_of_insta_like()) {
+					return 1;
+				} else {
+					return -1;
+				}
+				
+			};
+		});
+		
+		
+		// 세션에 저장
 		session.setAttribute("istores", instaStoreInfoList);
 
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;
 		logger.info("걸린 시간 : {}", diff);
+		logger.info("검색 종료");
 
 		return instaStoreInfoList;
 	}

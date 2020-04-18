@@ -34,9 +34,9 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	      </a>
 	    </div>
 	    <div class="header_search">
-	    	<div class="search_border">  				
-	  	 		<input type="text" id="searchInput" name="searchInput" placeholder="검색어를 입력하세요">
-		 		<input type="image" id="searchInput_img" src="/getrend/resources/img/research.png">
+	    	<div class="search_border" >  				
+	  	 		<input type="text" id="searchInput"  name="searchInput" placeholder="검색어를 입력하세요">
+		 		<input type="image" id="searchInput_img" src="/getrend/resources/img/research.png">	 		
 	    	</div> 	
 	    </div>
 	    <div class="header_menu">
@@ -110,7 +110,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	       autoFocus: false
 //	       delay: 500
 	       }).data("ui-autocomplete")._renderItem = function(ul, item) {
-			var $a = $("<b></b>").text(item.value);
+			var $a = $("<h6></h6>").text(item.value);
 			highlightText(this.term, $a);
 			return $("<li></li>").append($a).appendTo(ul);
 		};
@@ -122,7 +122,11 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 
 	        };
 	    });
+
 	});
+
+
+	
 </script>
 </body>
 </html>

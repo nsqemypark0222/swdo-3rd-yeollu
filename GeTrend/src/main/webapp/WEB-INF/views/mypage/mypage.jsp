@@ -263,7 +263,19 @@ function deleteReply(no,user_name){
 	location.href="/getrend/mypage/deleteReply?reply_no=" + no + "&user_name=" + user_name;
 }
 
-
+function moreRead(){
+	if($("#replyTable02").css("display") == 'none'){
+		$("#readMoreBtn").css("display","none");
+		$("#readMoreSpin").css("display","");
+		setTimeout(function(){ 
+			$("#readMoreSpin").css("display","none");
+			$("#replyTable01").css("display","none");
+			$("#replyTable02").css("display","");	
+			},1000);
+		
+		
+	}
+}
 </script>
 
 <style>
@@ -273,7 +285,7 @@ function deleteReply(no,user_name){
 	position: relative;
 	width: 900px;
 	height: 240px;
-	left: 300px;
+	left: 100px;
 	top: 15px;
 	border-radius:5px;
 	background-color: #FF8A00;
@@ -347,7 +359,7 @@ function deleteReply(no,user_name){
 	position: relative;
 	width: 900px;
 	height: 55px;
-	left: 300px;
+	left: 100px;
 	top : 20px;
 }
 
@@ -381,7 +393,7 @@ function deleteReply(no,user_name){
 	position: relative;
 	width: 900px;
 	height: 130px;
-	left: 300px;
+	left: 100px;
 	top : 40px;
 }
 
@@ -389,7 +401,7 @@ function deleteReply(no,user_name){
 	position: relative;
 	width: 900px;
 	height : 300px;
-	left: 300px;
+	left: 100px;
 	top: 20px;
 	background-color : gray;
 }
@@ -403,7 +415,7 @@ function deleteReply(no,user_name){
 .mypage_replies{
 	position: relative;
 	width: 900px;
-	left: 300px;
+	left: 100px;
 	top:20px;
 
 }
@@ -444,6 +456,13 @@ function deleteReply(no,user_name){
 	width : 85%;
 }
 
+.readAction{
+position: relative;
+left : 390px;
+width : 300px;
+}
+
+
 #scroll_box2{width: 900px; height: 420px; overflow-y: scroll; }
 #scroll_box2::-webkit-scrollbar {
   width: 8px;
@@ -482,7 +501,7 @@ function deleteReply(no,user_name){
 </header>
 
 
-<div class="conainter">
+<div class="container">
 	<div class="row">
 		<div class="col">
 			<input type="hidden" id="user_email" value="${user.user_email}">			
@@ -580,10 +599,10 @@ function deleteReply(no,user_name){
 					</div>
 				</c:when>
 				<c:otherwise>
-					  <div class="scroll2"> 
-						<div id="scroll_box2" >											
-							<table class="table table-hover">				
-								<c:forEach var="reply" items="${replyList}" >
+					  <div> 
+						<div>											
+							<table class="table table-hover" id="replyTable01">				
+								<c:forEach var="reply" items="${replyList}" begin="0" end="2">
 									<tr class="table-light">
 										<td>
 											<div class="reply_outer">						          
@@ -610,8 +629,42 @@ function deleteReply(no,user_name){
 											</c:if>
 										</td>	
 									 </tr>				
-								    </c:forEach>
+								    </c:forEach>    								
 						   	 </table>
+    						<div class="readAction">
+	    						<button id="readMoreBtn" class="btn btn-outline-secondary btn-lg" onclick="moreRead();"> 더보기 + </button>
+	    						<img id="readMoreSpin" src="/getrend/resources/img/Spinner.gif" style="display:none; width : 100px;">
+    						</div>
+    						<table class="table table-hover" id="replyTable02" style="display:none;">				
+								<c:forEach var="reply" items="${replyList}">
+									<tr class="table-light">
+										<td>
+											<div class="reply_outer">						          
+												<div class="reply_inner01">		          
+													<strong class="d-inline-block mb-2" style="color:#FF8A00;">
+														<img class="reply_cate_profile" src="/getrend/resources/img/cate/${reply.CATE1}" alt="프로필 사진">
+														<div class="reply_cate_name">${reply.CATE2}</div>
+													</strong>
+												</div>						          
+													<div class="reply_inner02">
+														<h3 class="mb-0">
+															<a class="text-dark" href="/getrend/stores/istoreInfo?store_no=${reply.STORE_NO}">${reply.STORE_NAME}</a>					
+															<a href="https://map.kakao.com/link/to/${reply.STORE_NAME},${reply.STORE_Y},${reply.STORE_X}"><input type="image"  class="reply_map"src="<c:url value='/resources/img/place.png'/>"></a>
+														</h3>			
+													<div class="mb-1 text-muted"> <span class="starMake">${reply.REPLY_STAR}</span></div>
+													<p class="card-text mb-auto" style="word-break:break-word;">${reply.REPLY_CONTENTS}</p>		          
+													<div class="mb-1 text-muted">${reply.REPLY_INDATE}</div>
+						    					 </div>	       
+											</div>
+											<c:if test="${reply.USER_EMAIL eq sessionScope.loginemail}">
+												<div class="deleteButton" style="float : right;">
+													<img style="width:15px;" src="/getrend/resources/img/delete.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${reply.USER_NAME}')">
+												</div> 
+											</c:if>
+										</td>	
+									 </tr>				
+								    </c:forEach>    								
+						   	 </table>		
 					    	</div>
 						</div>				    
 					</c:otherwise>

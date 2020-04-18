@@ -22,6 +22,10 @@ body, input, textarea, select, button, table {font-family: 'Nanum Gothic', Apple
 .header_img{
 	height : 50px;
 }
+.header_img:focus{
+	border : none;
+	outline:none;
+}
 .header_search{
 	height : 100px;
 	float : left;
@@ -50,6 +54,7 @@ body, input, textarea, select, button, table {font-family: 'Nanum Gothic', Apple
 	padding-left : 5px;
 	padding-top : 6px;
 }
+
 .header_menu{
 	height : 100px;
 	width : 25%;
@@ -70,6 +75,12 @@ body, input, textarea, select, button, table {font-family: 'Nanum Gothic', Apple
 }
 .header_profile{
 	height: 50px;
+}
+li:nth-of-type(n+10) { 
+	display: none; 
+}
+.ui-autocomplete .highlight {
+	color: orange;
 }
 
 @media(max-width: 1360px){

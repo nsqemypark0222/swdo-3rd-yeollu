@@ -33,7 +33,8 @@ function insertFollow(follows_following){
 
 
 
-function deleteFollow(follows_following){
+function deleteFollow(follows_following){	
+
 	$.ajax({
 		url : "/getrend/deleteFollow",
 		type : "post",
@@ -42,10 +43,10 @@ function deleteFollow(follows_following){
 			var temp = '<input type="button"  id="followBtn" value="팔로우"  onclick="insertFollow(\''+follows_following+'\');">';
 			$("#followDiv").html(temp);
 			$("#followerCnt").html("팔로워 : " + result);
-			
 		},
 		error : function(){alert("실패");}
 	})
+	
 }
 
 
@@ -626,20 +627,19 @@ function deleteReply(no,user_name){
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">언팔로우</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body text-center">
-        
-        <h5 ><img class="reply_user_profile" class="rounded-circle" src="<c:url value='/resources/img/profile_default_2.png'/>" alt="프로필 사진"></h5>
-		<p>${user.user_name}님의 팔로우를 취소하시겠어요? </p>
-
+        <br>
+        <h5><img class="reply_user_profile" class="rounded-circle" src="<c:url value='/resources/img/profile_default_2.png'/>" alt="프로필 사진"></h5>
+		<br>
+		<p style="font-size : 15px;">${user.user_name}님의 팔로우를 취소하시겠어요? </p>
+		<br>	
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-outline-warning" onclick="deleteFollow('${user.user_email}');">언 팔로우</button>
+        <button type="button" class="btn btn-outline-warning" data-dismiss="modal" onclick="deleteFollow('${user.user_email}');">팔로우 취소</button>
       </div>
     </div>
   </div>

@@ -76,13 +76,13 @@ body, input, textarea, select, button, table {font-family: 'Nanum Gothic', Apple
 	.header_container{
 		width : 100%;
 	}
-	.header_logo{width : 75%;}
-	.header_menu{width : 25%;}
+	.header_search{padding-left : 50px;}
 	.header_profile{display:none;}
-	.header_search{display:none;}
+	
 }
 
 @media (max-width: 1100px){
+	.header_search{display:none;}
 	.header_logo{width : 70%;}
 	.header_menu{width : 30%;}
 }

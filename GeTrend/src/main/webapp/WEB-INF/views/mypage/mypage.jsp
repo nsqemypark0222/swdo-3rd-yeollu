@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
 <!DOCTYPE html>
 <html>
@@ -470,6 +471,24 @@ function moreRead(){
 }
 
 
+
+@media(max-width: 1360px){
+	.container{
+		width : 100%;
+	}
+}
+
+@media (max-width: 1100px){
+	.mypage_profile{width : 100%; left:0;}
+	.mypage_buttons{width : 100%; left:0;}
+	.mypage_list{width : 100%; left:0;}
+	.mypage_replies{width : 100%; left:0;}
+}
+
+
+
+
+
 #scroll_box2{width: 900px; height: 420px; overflow-y: scroll; }
 #scroll_box2::-webkit-scrollbar {
   width: 8px;
@@ -663,10 +682,13 @@ function moreRead(){
 									 </tr>				
 								    </c:forEach>    								
 						   	 </table>
-    						<div class="readAction">
-	    						<button id="readMoreBtn" class="btn btn-outline-secondary btn-lg" onclick="moreRead();"> 더보기 + </button>
-	    						<img id="readMoreSpin" src="/getrend/resources/img/Spinner.gif" style="display:none; width : 100px;">
-    						</div>
+						   	 <c:if test="${fn:length(replyList) > 3}">
+							   	<div class="readAction">
+		    						<button id="readMoreBtn" class="btn btn-outline-secondary btn-lg" onclick="moreRead();"> 더보기 + </button>
+		    						<img id="readMoreSpin" src="/getrend/resources/img/Spinner.gif" style="display:none; width : 100px;">
+	    						</div>
+						   	 </c:if>
+    						
     						<table class="table table-hover" id="replyTable02" style="display:none;">				
 								<c:forEach var="reply" items="${replyList}">
 									<tr class="table-light">

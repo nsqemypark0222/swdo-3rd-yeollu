@@ -185,29 +185,29 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					  	</ol>
 					  	<div class="carousel-inner">
 					    	<div class="carousel-item active">
-					    		<a href="javascript:recommendByCategory();">
+					    		<a href="javascript:recommend('양림동', '양식');">
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586846612/redluck_y0iqfn.jpg" class="d-block img-fluid" alt="...">
 					      		</a>
 				      			<div class="carousel-caption d-none d-md-block">
-					        		<h5>한식 맛집 TOP 3</h5>
+					        		<h5>양림동 양식 TOP 5</h5>
 					        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 					      		</div>
 					    	</div>
 				    		<div class="carousel-item">
-				    			<a href="javascript:recommendByAccessLocation();">
+				    			<a href="javascript:recommendByAccessLocation('한식');">
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586846613/salad_oknvyo.jpg" class="d-block img-fluid" alt="...">
 					      		</a>
 					      		<div class="carousel-caption d-none d-md-block">
-					        		<h5>가까운 맛집 TOP 3</h5>
+					        		<h5>우리 동네 한식 TOP 5</h5>
 					        		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					      		</div>
 					    	</div>
 					    	<div class="carousel-item">
-					    		<a href="javascript:recommendByAdr();">
+					    		<a href="javascript:recommend('동명동', '카페/디저트');">
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776563/dan-gold-4_jhDO54BYg-unsplash_qcxerf.jpg" class="d-block img-fluid" alt="...">
 					      		</a>
 					      		<div class="carousel-caption d-none d-md-block">
-					        		<h5>동명동 맛집 TOP 3</h5>
+					        		<h5>동명동 카페/디저트 TOP 5</h5>
 					        		<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
 					      		</div>
 					  		</div>
@@ -307,17 +307,11 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	</div>
 	
 	<div>
-		<form id="recommendByCategoryForm" action="recommendByCategory" method="get">
-			<input type="hidden" id="recommendByCategoryKeyword" name="recommendByCategoryKeyword" />
+		<form id="recommendForm" action="recommend" method="get">
+			<input type="hidden" id="recommendByCategory" name="recommendByCategory" />
+			<input type="hidden" id="recommendByAdr" name="recommendByAdr" />
 		</form>
 	</div>
-	
-	<div>
-		<form id="recommendByAdrForm" action="recommendByAdr" method="get">
-			<input type="hidden" id="recommendByAdrKeyword" name="recommendByAdrKeyword" />
-		</form>
-	</div>
-	
 
 	
 <script type="text/javascript">
@@ -527,42 +521,36 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		   map.panTo(moveLatLng);
 	   };
 
-	   const recommendByAccessLocation = () => {
-			if(navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function(position) {
-					const geocoder = new kakao.maps.services.Geocoder();
-					const callback = function(result, status) {
-						if(status === kakao.maps.services.Status.OK) {
-							let adr = result[0].address.address_name;
-							let store_adr = '';
-							let tmp = adr.split(' ');
-							for(let i = 0; i < tmp.length; i++) {
-								if(tmp[i].includes('동')) {
-									store_adr = tmp[i];
-									break;
-								}
-							}
+	   const recommendByAccessLocation = (category) => {
+		   if(navigator.geolocation) {
+			   navigator.geolocation.getCurrentPosition(function(position) {
+				   const geocoder = new kakao.maps.services.Geocoder();
+				   const callback = function(result, status) {
+					   if(status === kakao.maps.services.Status.OK) {
+						   let adr = result[0].address.address_name;
+						   let store_adr = '';
+						   let tmp = adr.split(' ');
+						   for(let i = 0; i < tmp.length; i++) {
+							   if(tmp[i].includes('동')) {
+								   store_adr = tmp[i];
+								   break;
+								   }
+						   }
+						   recommend(store_adr, category);
+					   }
+				   }
+				   geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);
+			   });
+		   }
+	   }
 
-							$("#recommendByAdrKeyword").val(store_adr);
-							$("#recommendByAdrForm").submit();
-						}
-					}
-					geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);
-					
-				});
-			}
-		}
-
-		const recommendByCategory = () => {
-			$("#recommendByCategoryKeyword").val('한식');
-			$("#recommendByCategoryForm").submit();
-		}
-
-		const recommendByAdr = () => {
-			$("#recommendByAdrKeyword").val('동명동');
-			$("#recommendByAdrForm").submit();
-		}
-		
+	   const recommend = (adr, category) => {
+		   console.log(adr);
+		   console.log(category);
+		   $("#recommendByAdr").val(adr);
+		   $("#recommendByCategory").val(category);
+		   $("#recommendForm").submit();
+	   }
 </script>
 </body>
 </html>

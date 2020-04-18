@@ -128,9 +128,7 @@ public class instagram_Selenium_location_post3 {
 	        			System.out.println(j + 1 + "번 like : " + like);	
 	        			likeList.add(like);
 	        		}
-	        	} catch (TimeoutException e) {
-	        		logger.info("TimeoutException");
-				} catch (IndexOutOfBoundsException e) {
+	        	} catch (IndexOutOfBoundsException e) {
 					break;
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -168,6 +166,7 @@ public class instagram_Selenium_location_post3 {
 	       	 
 		} catch (TimeoutException e) {
 			logger.info("TimeoutException");
+			return instaImage;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

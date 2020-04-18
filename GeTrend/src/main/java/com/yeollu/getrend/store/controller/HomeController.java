@@ -38,6 +38,8 @@ import com.yeollu.getrend.store.vo.StoreVO;
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	private static final int SIZE_OF_LIST = 5;
 
 	@Autowired
 	private StoreDAO storeDAO;
@@ -121,14 +123,12 @@ public class HomeController {
 		logger.info("instaStoreList size : {}", instaStoreList.size());
 
 		
-		// 망고플레이트 정보 추가 + 크롤링 요청할 로케이션 아이디 리스트 생성
+		// 망고플레이트 정보 추가
 		ArrayList<MangoStoreInfoVO> mangoStoreInfoList = new ArrayList<MangoStoreInfoVO>();
-		ArrayList<String> locationList = new ArrayList<String>();
 		for(InstaStoreVO instaStore : instaStoreList) {
 			MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
 			mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNoAndDays(instaStore.getStore_no(), opentimeValues);
 			mangoStoreInfoList.add(mangoStoreInfo);
-			locationList.add(instaStore.getLocation_id());
 		}
 		
 		
@@ -157,7 +157,6 @@ public class HomeController {
 			};
 		});
 		
-		logger.info("instaStoreList {}", instaStoreList);
 		ArrayList<InstaStoreVO> _instaStoreList = new ArrayList<InstaStoreVO>();
 		for(int i = 0; i < scoreList.size(); i++) {
 			for(int j = 0; j < instaStoreList.size(); j++) {
@@ -167,22 +166,22 @@ public class HomeController {
 				}
 			}
 		}
-		if(_instaStoreList.size() > 3) {
-			instaStoreList = new ArrayList<InstaStoreVO> (_instaStoreList.subList(0, 3));
+		if(_instaStoreList.size() > SIZE_OF_LIST) {
+			instaStoreList = new ArrayList<InstaStoreVO> (_instaStoreList.subList(0, SIZE_OF_LIST));
 		} else {
 			instaStoreList = _instaStoreList;
 		}
-		logger.info("instaStoreList {}", instaStoreList);
+		logger.info("instaStoreList size : {}", instaStoreList.size());
 		
 		
 
 		// 인스타그램 크롤링 요청
 		ArrayList<InstaImageVO> instaImageList = new ArrayList<InstaImageVO>();
 		ArrayList<CrawlerExecutor> crawlerExecutorList = new ArrayList<CrawlerExecutor>();
-		for (String location : locationList) {
+		for (InstaStoreVO instaStore : instaStoreList) {
 			CrawlerExecutor crawlerExecutor = new CrawlerExecutor();
-			crawlerExecutor.setLocation(location);
-			new Thread(crawlerExecutor, "crawling :  " + location).start();
+			crawlerExecutor.setLocation(instaStore.getLocation_id());
+			new Thread(crawlerExecutor, "crawling :  " + instaStore.getLocation_id()).start();
 			crawlerExecutorList.add(crawlerExecutor);
 		}
 		for (CrawlerExecutor crawlerExecutor : crawlerExecutorList) {
@@ -219,8 +218,10 @@ public class HomeController {
 			ScoreVO score = instaStoreInfo.getScore();
 			
 			int sum = 0;
-			for(PostImageVO postImage : instaStoreInfo.getInstaImage().getPostImgList()) {
-				sum += postImage.getLike();
+			if(instaStoreInfo.getInstaImage().getPostImgList() != null) {
+				for(PostImageVO postImage : instaStoreInfo.getInstaImage().getPostImgList()) {
+					sum += postImage.getLike();
+				}
 			}
 			score.setSum_of_insta_like(sum);
 			instaStoreInfo.setScore(score);
@@ -233,7 +234,6 @@ public class HomeController {
 				} else {
 					return -1;
 				}
-				
 			};
 		});
 		

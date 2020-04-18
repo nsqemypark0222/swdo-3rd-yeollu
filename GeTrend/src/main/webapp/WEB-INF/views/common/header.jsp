@@ -22,70 +22,54 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 
 <link rel="stylesheet" href='<c:url value="/resources/css/header.css"/>'> 
 <title>Header</title>
-
+  
 </head>	
 
 <body>
-<<<<<<< HEAD
-
-
-<nav class="navbar  navbar-expand-lg navbar-light" style="background : #fff;" >
-  <div class="nav01">	
-    <a class="navbar-brand" id="navbar-brand"  href="<c:url value='/'/>" >GeTrend</a>
-  </div>
-  <div class="nav02">				
-		<form class="form-inline" action="autoSearch" method="get">
-			<input type="image" src="/getrend/resources/img/search.png" style="width:20px; float : right; margin-right : 20px;">
- 			<input type="text" id="searchInput" name="searchInput" placeholder="Search"  style="font-family: Prompt; ">
-=======
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" id="navbar-brand"  href="<c:url value='/'/>" >GeTrend</a>
-	<div class="input-group">
-		<form class="form-inline" action="autoSearch" method="get" id="searchBar">
-	 		<div class="col-md-9">
-	 			<input class="form-control mr-sm-2" type="text" id="searchInput" name="searchInput" placeholder="Search">
-    		</div>
->>>>>>> 87d7938e9247a08b9566f371f49b51fc1070a923
-    	</form>
-   </div> 	
-   <div class="nav03">
-	  		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-	  			<c:choose>
-	  				<c:when test="${sessionScope.loginemail != null}">
-	  					<li class="nav-item">
-	  						<a href="<c:url value="/mypage/mypageSession"/>">
-		  			    		<input type="button" class="btn" id="mypage" value="Mypage" style="font-family: Prompt; ">
-	 			    		</a>
-		  			    </li>
-		  			    <li class="nav-item">
-		  			    	<a href="<c:url value="/users/logout"/>">
-		  			        	<input type="button" class="btn" value="Logout"  style="font-family: Prompt;">
-		  			        </a>
-		  			    </li>
-		  			    <li class="nav-item">
-			                <a class="nav-link" href="<c:url value='/users/userUpdate'/>">
-			                	<img class="profile" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" >
-		  			        </a>
-		  			    </li>
-	  			   </c:when>
-	  				<c:otherwise>
-	  					<li class="nav-item">
-		  			        <a href="<c:url value="/users/userJoin"/>">
-		  			        	<input type="button" class="btn" id="userJoin" value="회원가입">
-		  			        </a>
-		  			    </li>
-		  			    <li class="nav-item">
-		  			        <a href="<c:url value="/users/userLogin"/>">
-		  			        	<input type="button" class="btn" id="userLogin" value="로그인">
-		  			        </a>
-		  			    </li>
-	  				</c:otherwise>
-	  			</c:choose>
-	  		</ul>
-	</div>  	  	
-</nav>
-	
+<div class="header_container">
+	<div class="header_row">
+	  	<div class="header_logo">
+	      <a href="<c:url value='/'/>" >
+	    	<input type="image" class="header_img" src="/getrend/resources/img/headerlogo.png"> 	
+	      </a>
+	    </div>
+	    <div class="header_search">
+	    	<div class="search_border">  				
+	  	 		<input type="text" id="searchInput" name="searchInput" placeholder="검색어를 입력하세요">
+		 		<input type="image" id="searchInput_img" src="/getrend/resources/img/research.png">
+	    	</div> 	
+	    </div>
+	    <div class="header_menu">
+			<c:choose>
+				<c:when test="${sessionScope.loginemail != null}">
+					<a href="<c:url value="/mypage/mypageSession"/>">
+			    		MYPAGE
+		   		    </a>
+			    	<a href="<c:url value="/users/logout"/>">
+			        	LOGOUT
+			        </a>
+		               <a href="<c:url value='/users/userUpdate'/>">
+		               	<img class="header_profile" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" >
+			        </a>
+			    </c:when>
+				<c:otherwise>
+			        <a href="<c:url value="/users/userJoin"/>">
+			        	JOIN
+			        </a>
+			        <a href="<c:url value="/users/userLogin"/>">
+			        	LOGIN
+			        </a>
+				</c:otherwise>
+			</c:choose>
+		  </div>
+	</div>	 	  	
+</div>	
     	 
+
+
+  
+
+
 
 	
 	

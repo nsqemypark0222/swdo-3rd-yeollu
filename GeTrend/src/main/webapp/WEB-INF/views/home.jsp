@@ -23,12 +23,14 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'> 
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
+<link rel="stylesheet" href='<c:url value="/resources/css/header.css"/>'>
 
 <style type="text/css">
 
 </style>
 </head>
 <body>
+
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
@@ -293,12 +295,10 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		</div>
 	</div>
 
-	
-	
-
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
+
 
 	<!-- 로딩이미지 -->
 	<div class="wrap-loading display-none">

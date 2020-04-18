@@ -193,7 +193,7 @@ function follower(user_email){
 			$(".mypage_list_table").children().html('');
 			if(result.length == 0){			
 				var temp = '<td style="width : 750px;">';
-					temp += '<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/nofollow.png" alt="프로필 사진"></div>';													
+					temp += '<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/resources/img/nofollow.png" alt="프로필 사진"></div>';													
 					temp += '<div style="width : 750px; font-size:14px; text-align:center;">팔로워가 아직 없습니다</div>';
 					temp += '</td>';
 					 $(".mypage_list_table").children().append(temp);
@@ -467,7 +467,6 @@ function deleteReply(no,user_name){
   -webkit-border-radius: 8px;
   border-radius: 8px;
 }
-
 
 
 </style>

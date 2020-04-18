@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
 <!DOCTYPE html>
 <html>
@@ -18,35 +19,14 @@
 <script type="text/javascript">
 
 function insertFollow(follows_following){
-	$.ajax({
-		url : "/getrend/insertFollow",
-		type : "post",
-		data : {"follows_following" : follows_following},
-		success : function(result){ 
-			var	temp = '<input type="button"  id="unfollowBtn" value="팔로잉"  data-toggle="modal" data-target="#exampleModalCenter">';
-			$("#followDiv").html(temp);
-			$("#followerCnt").html("팔로워 : " + result);
-		},
-		error : function(){alert("실패");}
-	})
+	location.href = "/getrend/insertFollow?follows_following=" + follows_following;	
+	
 }
 
 
 
 function deleteFollow(follows_following){	
-
-	$.ajax({
-		url : "/getrend/deleteFollow",
-		type : "post",
-		data :  {"follows_following" : follows_following},
-		success : function(result){ 
-			var temp = '<input type="button"  id="followBtn" value="팔로우"  onclick="insertFollow(\''+follows_following+'\');">';
-			$("#followDiv").html(temp);
-			$("#followerCnt").html("팔로워 : " + result);
-		},
-		error : function(){alert("실패");}
-	})
-	
+	location.href = "/getrend/deleteFollow?follows_following=" + follows_following;	
 }
 
 
@@ -194,7 +174,7 @@ function follower(user_email){
 			$(".mypage_list_table").children().html('');
 			if(result.length == 0){			
 				var temp = '<td style="width : 750px;">';
-					temp += '<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/resources/img/nofollow.png" alt="프로필 사진"></div>';													
+					temp += '<div style="width : 750px; text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/nofollow.png" alt="프로필 사진"></div>';													
 					temp += '<div style="width : 750px; font-size:14px; text-align:center;">팔로워가 아직 없습니다</div>';
 					temp += '</td>';
 					 $(".mypage_list_table").children().append(temp);
@@ -202,7 +182,12 @@ function follower(user_email){
 			else{
 				$(result).each(function(index, item){
 					var temp = '<td style="width : 200px;">';
-						temp += '<div style="width : 200px; text-align:center;"><a href="/getrend/mypage/mypage?user_name='+item.USER_NAME+'"><img class="reply_cate_profile" src="'+ item.USER_PROFILE +'" alt="프로필 사진"></a></div>';								
+						temp += '<div style="width : 200px; text-align:center;"><a href="/getrend/mypage/mypage?user_name='+item.USER_NAME+'">';
+						if(item.USER_PROFILE == undefined){
+						temp += '<img class="reply_cate_profile" src="/getrend/resources/img/user.png" alt="프로필 사진"></a></div>';								
+						}else{
+						temp += '<img class="reply_cate_profile" src="'+ item.USER_PROFILE +'" alt="프로필 사진"></a></div>';								
+						}
 						temp += '<div style="width : 200px; font-size:14px; text-align:center;">'+item.USER_NAME+'</div>';
 						temp += '</td>';							
 				        $(".mypage_list_table").children().append(temp);
@@ -233,7 +218,12 @@ function follow(user_email){
 			else{
             $(result).each(function(index, item){
 					var temp = '<td style="width : 200px;">';
-						temp += '<div style="width : 200px; text-align:center;"><a href="/getrend/mypage/mypage?user_name='+item.USER_NAME+'"><img class="reply_cate_profile" src="/getrend/resources/img/'+ item.USER_PROFILE +'" alt="프로필 사진"></a></div>';				
+						temp += '<div style="width : 200px; text-align:center;"><a href="/getrend/mypage/mypage?user_name='+item.USER_NAME+'">';
+						if(item.USER_PROFILE == undefined){
+						temp += '<img class="reply_cate_profile" src="/getrend/resources/img/user.png" alt="프로필 사진"></a></div>';								
+						}else{
+						temp += '<img class="reply_cate_profile" src="'+ item.USER_PROFILE +'" alt="프로필 사진"></a></div>';								
+						}
 						temp += '<div style="width : 200px; font-size:14px; text-align:center;">'+item.USER_NAME+'</div>';
 						temp += '</td>';							
 					$(".mypage_list_table").children().append(temp);
@@ -280,15 +270,11 @@ function moreRead(){
 
 <style>
 
-
 .mypage_profile{
 	position: relative;
 	width: 900px;
 	height: 240px;
 	left: 100px;
-	top: 15px;
-	border-radius:5px;
-	background-color: #FF8A00;
 }
 
 .mypage_profile_header_img{
@@ -315,6 +301,13 @@ function moreRead(){
 	font-weight: bold;
 	font-size: 30px;
 }
+.user_profile{
+	width : 120px;
+}
+.user_profile_de{
+	width : 120px;
+}
+
 
 #followBtn{
    background-color: #fff;
@@ -323,16 +316,20 @@ function moreRead(){
    width:70px; 
    height:30px;
    border: none;
-   color:#000;
+   color:#a6a6a6;
    text-align: center;
    text-decoration: none;
    display: inline-block;
    cursor: pointer;
    border-radius:20px;
 }
-
+#followBtn:focus{
+	border : none;
+	outline:none;
+}
 #followBtn:hover {
     color: #FF8A00;
+    transition:color .2s ease;
 }
 
 #unfollowBtn{
@@ -351,8 +348,13 @@ function moreRead(){
    border-radius:20px;
 }
 
+#unfollowBtn:focus{
+	border : none;
+	outline:none;
+}
 #unfollowBtn:hover {
     background-color: #fff;
+    transition:color .2s ease;
 }
 
 .mypage_buttons{
@@ -378,12 +380,18 @@ function moreRead(){
    margin: 1px;
    cursor: pointer;
 }
-
+.mypage_button:focus{
+	outline:none;
+	transition:color .2s ease;
+}
 .btn_on{
 	color:#FF8A00;
 	border-bottom : 3px solid #FF8A00;
 }
-
+.btn_on:focus{
+	outline:none;
+	transition:border-bottom .2s ease;
+}
 .btn_off{
 	color : #000;
 	border : none;
@@ -416,7 +424,7 @@ function moreRead(){
 	position: relative;
 	width: 900px;
 	left: 100px;
-	top:20px;
+	top:34px;
 
 }
 .reply_cate_profile{
@@ -457,10 +465,28 @@ function moreRead(){
 }
 
 .readAction{
-position: relative;
-left : 390px;
-width : 300px;
+	position: relative;
+	left : 390px;
+	width : 300px;
 }
+
+
+
+@media(max-width: 1360px){
+	.container{
+		width : 100%;
+	}
+}
+
+@media (max-width: 1100px){
+	.mypage_profile{width : 100%; left:0;}
+	.mypage_buttons{width : 100%; left:0;}
+	.mypage_list{width : 100%; left:0;}
+	.mypage_replies{width : 100%; left:0;}
+}
+
+
+
 
 
 #scroll_box2{width: 900px; height: 420px; overflow-y: scroll; }
@@ -509,7 +535,32 @@ width : 300px;
 			<div class="mypage_profile">
 				<table class="mypage_profile_table">
 					<tr>
-						<tr><td><a href="/getrend/users/userUpdate"><img class="user_profile" src="<c:url value='/resources/img/profile_default.png'/>" alt="프로필 사진"></a></td></tr>
+						<tr><td>
+						<c:choose>
+							<c:when test="${user.user_email != sessionScope.loginemail}">
+								<c:if test="${user.user_profile != null}">
+							        <img class="user_profile" src="${user.user_profile}" alt="프로필 사진">
+							    </c:if>
+							    <c:if test="${user.user_profile == null}">
+									<img class="user_profile_de" src="<c:url value='/resources/img/user.png'/>" alt="프로필 사진">
+							    </c:if>
+							</c:when>					
+							<c:otherwise>
+								<c:if test="${user.user_profile != null}">
+								  <a href="/getrend/users/userUpdate">
+							        <img class="user_profile" src="${user.user_profile}" alt="프로필 사진">
+							      </a>
+							    </c:if>
+							    <c:if test="${user.user_profile == null}">
+							      <a href="/getrend/users/userUpdate">
+									<img class="user_profile_de" src="<c:url value='/resources/img/user.png'/>" alt="프로필 사진">
+							      </a>
+							    </c:if>
+							</c:otherwise>
+						</c:choose>
+						</td></tr>
+						
+						
 						<tr class="mypage_profile_user_name">
 							<td>${user.user_name}</td>
 						<tr>	
@@ -520,7 +571,7 @@ width : 300px;
 											<td style="padding : 0 25px;"><div id="followDiv"><input type="button" id="unfollowBtn"  data-toggle="modal" data-target="#exampleModalCenter" value="팔로잉" ></div></td>
 									</c:when>
 									<c:otherwise>
-											<td style="padding : 0 25px;"><div id="followDiv"><input type="button" id="followBtn" value="팔로우" onclick="insertFollow('${user.user_email}');"></div></td>
+											<td style="padding : 0 25px;"><div id="followDiv"><input type="button" id="followBtn" value="팔로우"  data-toggle="modal" data-target="#followModalCenter"></div></td>
 									</c:otherwise>
 								</c:choose>
 								</c:if>
@@ -624,17 +675,20 @@ width : 300px;
 											</div>
 											<c:if test="${reply.USER_EMAIL eq sessionScope.loginemail}">
 												<div class="deleteButton" style="float : right;">
-													<img style="width:15px;" src="/getrend/resources/img/delete.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${reply.USER_NAME}')">
+													<img style="width:15px; cursor: pointer;" src="/getrend/resources/img/delete.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${reply.USER_NAME}')">
 												</div> 
 											</c:if>
 										</td>	
 									 </tr>				
 								    </c:forEach>    								
 						   	 </table>
-    						<div class="readAction">
-	    						<button id="readMoreBtn" class="btn btn-outline-secondary btn-lg" onclick="moreRead();"> 더보기 + </button>
-	    						<img id="readMoreSpin" src="/getrend/resources/img/Spinner.gif" style="display:none; width : 100px;">
-    						</div>
+						   	 <c:if test="${fn:length(replyList) > 3}">
+							   	<div class="readAction">
+		    						<button id="readMoreBtn" class="btn btn-outline-secondary btn-lg" onclick="moreRead();"> 더보기 + </button>
+		    						<img id="readMoreSpin" src="/getrend/resources/img/Spinner.gif" style="display:none; width : 100px;">
+	    						</div>
+						   	 </c:if>
+    						
     						<table class="table table-hover" id="replyTable02" style="display:none;">				
 								<c:forEach var="reply" items="${replyList}">
 									<tr class="table-light">
@@ -674,6 +728,33 @@ width : 300px;
 	</div>
 </div>
 
+<!--팔로우 Modal -->
+<div class="modal fade" id="followModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <br>
+        <c:if test="${user.user_profile != null}">
+        <h5><img class="reply_user_profile" style="width : 100px;" src="${user.user_profile}" alt="프로필 사진"></h5>
+        </c:if>
+        <c:if test="${user.user_profile == null}">
+        <h5><img class="reply_user_profile" style="width : 100px;" src="<c:url value='/resources/img/user.png'/>" alt="프로필 사진"></h5>
+        </c:if>
+		<br><br>
+		<p style="font-size : 15px;">${user.user_name}님을 팔로우하시겠어요? </p>
+		<br>	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-warning" data-dismiss="modal" onclick="insertFollow('${user.user_email}');">팔로우</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--언팔로우 Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -686,8 +767,13 @@ width : 300px;
       </div>
       <div class="modal-body text-center">
         <br>
-        <h5><img class="reply_user_profile" class="rounded-circle" src="<c:url value='/resources/img/profile_default_2.png'/>" alt="프로필 사진"></h5>
-		<br>
+        <c:if test="${user.user_profile != null}">
+        <h5><img class="reply_user_profile" style="width : 100px;" src="${user.user_profile}" alt="프로필 사진"></h5>
+        </c:if>
+        <c:if test="${user.user_profile == null}">
+        <h5><img class="reply_user_profile" style="width : 100px;" src="<c:url value='/resources/img/user.png'/>" alt="프로필 사진"></h5>
+        </c:if>
+		<br><br>
 		<p style="font-size : 15px;">${user.user_name}님의 팔로우를 취소하시겠어요? </p>
 		<br>	
       </div>

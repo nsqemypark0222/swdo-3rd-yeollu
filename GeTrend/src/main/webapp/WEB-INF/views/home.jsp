@@ -23,7 +23,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'> 
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
-<link rel="stylesheet" href='<c:url value="/resources/css/header.css"/>'>
 
 </head>
 <body>

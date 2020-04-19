@@ -85,6 +85,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 									    	<span class="sr-only">Next</span>
 									  	</a>
 									</div>
+									
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
@@ -95,6 +96,13 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				</div>
 			</div>
 			<div class="col-md-4">
+				<c:forEach var="istore" items="${istores}">
+				 <h2>${istore.instaStore.store_name}</h2>
+				 	<ul class="list-group">
+						<li class="list-group-item">${istore.instaStore.store_cate1}</li>
+						<li class="list-group-item">${istore.instaStore.store_adr1}</li>
+					</ul>
+				</c:forEach>
 			</div>
 			<div class="col-md-2">
 			</div>

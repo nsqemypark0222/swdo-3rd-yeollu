@@ -228,3 +228,4 @@ where
     and s.store_no = r.store_no
 group by
     s.store_no;
+

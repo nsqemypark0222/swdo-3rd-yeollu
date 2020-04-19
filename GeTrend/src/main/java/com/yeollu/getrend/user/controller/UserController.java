@@ -260,7 +260,6 @@ public class UserController {
 		session.removeAttribute("loginemail");
 		session.removeAttribute("loginname");
 		session.removeAttribute("istores");
-		session.removeAttribute("recommendIStores");
 		logger.info("로그아웃");
 		return "redirect:/";
 	}

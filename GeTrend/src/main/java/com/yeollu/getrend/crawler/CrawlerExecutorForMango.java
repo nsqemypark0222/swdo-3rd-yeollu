@@ -1,11 +1,13 @@
 package com.yeollu.getrend.crawler;
 
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.yeollu.getrend.mango.vo.MangoStoreVO;
 import com.yeollu.getrend.store.vo.InstaImageVO;
-import com.yeollu.getrend.store.vo.MangoStoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
 public class CrawlerExecutorForMango implements Runnable {
@@ -49,5 +51,14 @@ public class CrawlerExecutorForMango implements Runnable {
 		}
 		logger.info("{}", mangoStore);
 		return mangoStore;
+	}
+	
+	public static void killChromeDriver() {
+		try {
+			Runtime.getRuntime().exec("taskkill /f /im chromedriver.exe /t");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

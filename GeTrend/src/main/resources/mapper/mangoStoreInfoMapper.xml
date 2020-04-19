@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeollu.getrend.store.dao.MangoStoreInfoMapper">
+
+<select id="selectMangoStoreInfoByStoreNo" parameterType="string" resultType="mangoStoreInfo">
+select
+    m.store_no
+    , m.mango_tel
+    , m.mango_price
+    , m.mango_parking
+    , t.mango_start
+    , t.mango_end
+    , d.mango_sun
+    , d.mango_mon
+    , d.mango_tue
+    , d.mango_wed
+    , d.mango_thu
+    , d.mango_fri
+    , d.mango_sat
+from
+    mango_stores m, mango_times t, mango_days d
+where
+    m.store_no = t.store_no
+    and m.store_no = d.store_no
+    and m.store_no = #{store_no}
+</select>
+
+<select id="selectMangoStoreInfoByStoreNoAndDays" parameterType="map" resultType="mangoStoreInfo">
+select
+    m.store_no
+    , m.mango_tel
+    , m.mango_price
+    , m.mango_parking
+    , t.mango_start
+    , t.mango_end
+    , d.mango_sun
+    , d.mango_mon
+    , d.mango_tue
+    , d.mango_wed
+    , d.mango_thu
+    , d.mango_fri
+    , d.mango_sat
+from
+    mango_stores m, mango_times t, mango_days d
+where
+    m.store_no = t.store_no
+    and m.store_no = d.store_no
+    and m.store_no = #{store_no}
+    <if test='!mango_sun.equals("0")'>
+	and d.mango_sun = #{mango_sun}
+	</if>
+	<if test='!mango_mon.equals("0")'>
+	and d.mango_mon = #{mango_mon}
+	</if>
+	<if test='!mango_tue.equals("0")'>
+	and d.mango_tue = #{mango_tue}
+	</if>
+	<if test='!mango_wed.equals("0")'>
+	and d.mango_wed = #{mango_wed}
+	</if>
+	<if test='!mango_thu.equals("0")'>
+	and d.mango_thu = #{mango_thu}
+	</if>
+	<if test='!mango_fri.equals("0")'>
+	and d.mango_fri = #{mango_fri}
+	</if>
+	<if test='!mango_sat.equals("0")'>
+	and d.mango_sat = #{mango_sat}
+	</if>
+</select>
+
+</mapper>
+

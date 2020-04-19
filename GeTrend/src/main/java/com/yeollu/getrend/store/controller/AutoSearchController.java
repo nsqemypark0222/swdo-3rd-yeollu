@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yeollu.getrend.crawler.CrawlerExecutor;
+import com.yeollu.getrend.mango.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
-import com.yeollu.getrend.store.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.ScoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.service.StoreService;

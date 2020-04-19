@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.yeollu.getrend.store.dao.MangoDayMapper">
+<mapper namespace="com.yeollu.getrend.mango.dao.MangoDayMapper">
 
 <insert id="insertMangoDay" parameterType="mangoDay">
 insert into 
@@ -29,6 +29,22 @@ insert into
 		, to_date(#{mango_indate}, 'YYYY-MM-DD HH24:MI:SS')
 	)	
 </insert>
+
+<update id="updateMangoDay" parameterType="mangoDay">
+update
+	mango_days
+set
+	mango_sun = #{mango_sun}
+	, mango_mon = #{mango_mon}
+	, mango_tue = #{mango_tue}
+	, mango_wed = #{mango_wed}
+	, mango_thu = #{mango_thu}
+	, mango_fri = #{mango_fri}
+	, mango_sat = #{mango_sat}
+	, mango_indate = sysdate
+where
+	store_no = #{store_no}
+</update>
 
 </mapper>
 

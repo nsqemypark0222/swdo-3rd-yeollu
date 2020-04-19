@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.yeollu.getrend.crawler.CrawlerExecutor;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
-import com.yeollu.getrend.store.dao.MangoStoreDAO;
+import com.yeollu.getrend.store.dao.MangoStoreInfoDAO;
 import com.yeollu.getrend.store.dao.ScoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
@@ -37,7 +37,7 @@ public class StoreServiceImpl implements StoreService {
 	private InstaLocationDAO instaLocationDAO;
 	
 	@Autowired
-	private MangoStoreDAO mangoStoreDAO;
+	private MangoStoreInfoDAO mangoStoreInfoDAO;
 	
 	@Autowired
 	private ScoreDAO scoreDAO;
@@ -71,9 +71,9 @@ public class StoreServiceImpl implements StoreService {
 		for(InstaStoreVO instaStore : instaStoreList) {
 			MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
 			if(opentimeValues != null) {
-				mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNoAndDays(instaStore.getStore_no(), opentimeValues);
+				mangoStoreInfo = mangoStoreInfoDAO.selectMangoStoreInfoByStoreNoAndDays(instaStore.getStore_no(), opentimeValues);
 			} else {
-				mangoStoreInfo = mangoStoreDAO.selectMangoStoreInfoByStoreNo(instaStore.getStore_no());
+				mangoStoreInfo = mangoStoreInfoDAO.selectMangoStoreInfoByStoreNo(instaStore.getStore_no());
 			}
 			mangoStoreInfoList.add(mangoStoreInfo);
 		}

@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.yeollu.getrend.crawler.CrawlerExecutor;
+import com.yeollu.getrend.mango.dao.MangoStoreDAO;
+import com.yeollu.getrend.mango.vo.MangoStoreVO;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
-import com.yeollu.getrend.store.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
 import com.yeollu.getrend.store.vo.InstaImageVO;
@@ -21,7 +22,6 @@ import com.yeollu.getrend.store.vo.InstaLocationVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
-import com.yeollu.getrend.store.vo.MangoStoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
 @Controller

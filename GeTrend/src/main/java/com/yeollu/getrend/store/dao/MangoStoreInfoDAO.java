@@ -7,68 +7,18 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.yeollu.getrend.store.vo.MangoDayVO;
 import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
-import com.yeollu.getrend.store.vo.MangoStoreVO;
 
 @Repository
-public class MangoStoreDAO {
+public class MangoStoreInfoDAO {
 	
 	@Autowired
 	private SqlSession session;
-	
-	public int insertMangoStore(MangoStoreVO mangoStore) {
-		int cnt = 0;
-		
-		try {
-			MangoStoreMapper mapper = session.getMapper(MangoStoreMapper.class);
-			cnt = mapper.insertMangoStore(mangoStore);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return cnt;
-	}
-	
-	public ArrayList<MangoStoreVO> selectAllMangoStores() {
-		ArrayList<MangoStoreVO> list = new ArrayList<MangoStoreVO>();
-		try {
-			MangoStoreMapper mapper = session.getMapper(MangoStoreMapper.class);
-			list = mapper.selectAllMangoStores();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	public MangoStoreInfoVO selectMangoStoreByStoreNo(String store_no) {
-		MangoStoreInfoVO mangoStore = new MangoStoreInfoVO();
-		
-		try {
-			MangoStoreMapper mapper = session.getMapper(MangoStoreMapper.class);
-			mangoStore = mapper.selectMangoStoreByStoreNo(store_no);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return mangoStore;
-	}
-	
-	public ArrayList<MangoStoreVO> selectMangoStoreByMangoDay(MangoDayVO mangoDay) {
-		ArrayList<MangoStoreVO> list = new ArrayList<MangoStoreVO>();
-		try {
-			MangoStoreMapper mapper = session.getMapper(MangoStoreMapper.class);
-			list = mapper.selectMangoStoreByMangoDay(mangoDay);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
+
 	public MangoStoreInfoVO selectMangoStoreInfoByStoreNo(String store_no) {
 		MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
 		try {
-			MangoStoreMapper mapper = session.getMapper(MangoStoreMapper.class);
+			MangoStoreInfoMapper mapper = session.getMapper(MangoStoreInfoMapper.class);
 			mangoStoreInfo = mapper.selectMangoStoreInfoByStoreNo(store_no);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,12 +57,11 @@ public class MangoStoreDAO {
 		}
 		
 		try {
-			MangoStoreMapper mapper = session.getMapper(MangoStoreMapper.class);
+			MangoStoreInfoMapper mapper = session.getMapper(MangoStoreInfoMapper.class);
 			mangoStoreInfo = mapper.selectMangoStoreInfoByStoreNoAndDays(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mangoStoreInfo;
 	}
-
 }

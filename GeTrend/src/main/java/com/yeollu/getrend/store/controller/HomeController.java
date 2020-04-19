@@ -3,6 +3,7 @@ package com.yeollu.getrend.store.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,13 +18,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yeollu.getrend.crawler.CrawlerExecutor;
+import com.yeollu.getrend.mango.dao.MangoStoreDAO;
+import com.yeollu.getrend.mango.vo.MangoDayVO;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
-import com.yeollu.getrend.store.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.ScoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.service.StoreService;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
+import com.yeollu.getrend.store.util.preprocess.core.DayOfTheWeekCategorizer;
 import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
 import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
@@ -48,7 +51,6 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session, Model model) {
-		
 		
 		return "home";
 	}

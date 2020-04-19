@@ -18,7 +18,7 @@ public class TimeCategorizer {
 	}
 	
 	public void categorize(String str) {
-		if(str == null) {
+		if(str == null || str.length() == 0) {
 			return;
 		}
 		str = StringPreprocessor.removeSpace(str);

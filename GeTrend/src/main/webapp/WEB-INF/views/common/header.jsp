@@ -26,7 +26,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 </head>	
 
 <body>
-<<<<<<< HEAD
 
 
 <nav class="navbar  navbar-expand-lg navbar-light" style="background : #fff;" >
@@ -37,7 +36,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 		<form class="form-inline" action="autoSearch" method="get">
 			<input type="image" src="/getrend/resources/img/search.png" style="width:20px; float : right; margin-right : 20px;">
  			<input type="text" id="searchInput" name="searchInput" placeholder="Search"  style="font-family: Prompt; ">
-=======
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand" id="navbar-brand"  href="<c:url value='/'/>" >GeTrend</a>
 	<div class="input-group">
@@ -45,7 +43,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	 		<div class="col-md-9">
 	 			<input class="form-control mr-sm-2" type="text" id="searchInput" name="searchInput" placeholder="Search">
     		</div>
->>>>>>> 87d7938e9247a08b9566f371f49b51fc1070a923
     	</form>
    </div> 	
    <div class="nav03">

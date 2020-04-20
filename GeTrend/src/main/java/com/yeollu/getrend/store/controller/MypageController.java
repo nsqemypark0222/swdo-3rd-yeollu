@@ -90,7 +90,7 @@ public class MypageController {
 				case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 				case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 				case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
-				case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
+				case "치킨": case "패스트푸드": hashMap.put("CATE1", "chicken.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
 				case "기타음식업": case "뷔페":case "유흥주점":case "음식배달서비스":  hashMap.put("CATE1", "others.png");hashMap.put("CATE2", "기타");break;
 				}
 			}	
@@ -115,7 +115,7 @@ public class MypageController {
 				case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 				case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 				case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
-				case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
+				case "치킨": case "패스트푸드": hashMap.put("CATE1", "chicken.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
 				case "기타음식업": case "뷔페":case "유흥주점":case "음식배달서비스":  hashMap.put("CATE1", "others.png");hashMap.put("CATE2", "기타");break;
 				}
 			}
@@ -140,7 +140,7 @@ public class MypageController {
 				case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 				case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 				case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
-				case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
+				case "치킨": case "패스트푸드": hashMap.put("CATE1", "chicken.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
 				case "기타음식업": case "뷔페":case "유흥주점":case "음식배달서비스":  hashMap.put("CATE1", "others.png");hashMap.put("CATE2", "기타");break;
 				}
 			}	
@@ -164,7 +164,7 @@ public class MypageController {
 				case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 				case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 				case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
-				case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
+				case "치킨": case "패스트푸드": hashMap.put("CATE1", "chicken.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
 				case "기타음식업": case "뷔페":case "유흥주점":case "음식배달서비스":  hashMap.put("CATE1", "others.png");hashMap.put("CATE2", "기타");break;
 				}
 			}
@@ -206,7 +206,7 @@ public class MypageController {
 			case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 			case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 			case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
-			case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
+			case "치킨": case "패스트푸드": hashMap.put("CATE1", "chicken.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
 			case "기타음식업": case "뷔페":case "유흥주점":case "음식배달서비스":  hashMap.put("CATE1", "others.png");hashMap.put("CATE2", "기타");break;
 			}
 		}	
@@ -232,7 +232,7 @@ public class MypageController {
 			case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 			case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 			case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
-			case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
+			case "치킨": case "패스트푸드": hashMap.put("CATE1", "chicken.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
 			case "기타음식업": case "뷔페":case "유흥주점":case "음식배달서비스":  hashMap.put("CATE1", "others.png");hashMap.put("CATE2", "기타");break;
 			}
 		}		
@@ -275,7 +275,7 @@ public class MypageController {
 			case "일식/수산물": hashMap.put("CATE1", "japanese.png"); hashMap.put("CATE2", "일식/수산물");break;
 			case "중식": hashMap.put("CATE1", "chinese.png"); hashMap.put("CATE2", "중식");break;
 			case "카페": case "제과제빵떡케익":hashMap.put("CATE1", "cafe.png");hashMap.put("CATE2", "카페/디저트");break;
-			case "치킨": case "패스트푸드": hashMap.put("CATE1", "fastfood.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
+			case "치킨": case "패스트푸드": hashMap.put("CATE1", "chicken.png");hashMap.put("CATE2", "치킨/피자<br>패스트푸드");break;
 			case "기타음식업": case "뷔페":case "유흥주점":case "음식배달서비스":  hashMap.put("CATE1", "others.png");hashMap.put("CATE2", "기타");break;
 			}
 		}		

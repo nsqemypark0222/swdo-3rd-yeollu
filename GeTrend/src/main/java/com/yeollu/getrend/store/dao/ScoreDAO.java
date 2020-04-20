@@ -4,21 +4,21 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.yeollu.getrend.store.vo.MangoTimeVO;
+import com.yeollu.getrend.store.vo.ScoreVO;
 
 @Repository
-public class MangoTimeDAO {
+public class ScoreDAO {
 	@Autowired
 	private SqlSession session;
 	
-	public int insertMangoTime(MangoTimeVO mangoTime) {
-		int cnt = 0;
+	public ScoreVO selectScoreByStoreNo(String store_no) {
+		ScoreVO score = null;
 		try {
-			MangoTimeMapper mapper = session.getMapper(MangoTimeMapper.class);
-			cnt = mapper.insertMangoTime(mangoTime);
+			ScoreMapper mapper = session.getMapper(ScoreMapper.class);
+			score = mapper.selectScoreByStoreNo(store_no);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return cnt;
+		return score;
 	}
 }

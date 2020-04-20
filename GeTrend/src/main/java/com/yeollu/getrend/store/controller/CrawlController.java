@@ -14,11 +14,11 @@ import com.yeollu.getrend.crawler.CrawlerExecutor;
 import com.yeollu.getrend.crawler.CrawlerExecutorForMango;
 import com.yeollu.getrend.crawler.mango_store_info;
 import com.yeollu.getrend.crawler.mango_store_info2;
+import com.yeollu.getrend.mango.dao.MangoStoreDAO;
+import com.yeollu.getrend.mango.vo.MangoStoreVO;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
-import com.yeollu.getrend.store.dao.MangoStoreDAO;
 import com.yeollu.getrend.store.dao.SearchedStoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
-import com.yeollu.getrend.store.vo.MangoStoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
 @Controller

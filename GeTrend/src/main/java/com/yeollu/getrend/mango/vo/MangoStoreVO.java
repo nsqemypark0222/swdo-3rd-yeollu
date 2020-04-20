@@ -1,4 +1,4 @@
-package com.yeollu.getrend.store.vo;
+package com.yeollu.getrend.mango.vo;
 
 import lombok.Data;
 

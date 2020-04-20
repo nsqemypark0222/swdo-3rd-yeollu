@@ -218,14 +218,14 @@ where
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
 select
-    s.store_no
-    , count(l.USER_EMAIL) as sum_of_like
+    s.store_no as store_no
+    , count(l.user_email) as sum_of_like
     , sum(r.reply_star) as sum_of_star
 from
     stores s, likes l, insta_replys r
 where
     s.store_no = l.store_no
     and s.store_no = r.store_no
-    and s.store_cate1 = 'ÇÑ½Ä'
 group by
     s.store_no;
+

@@ -1,6 +1,7 @@
 package com.yeollu.getrend.store.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,6 +149,22 @@ public class StoreDAO {
 		try {
 			StoreMapper mapper = session.getMapper(StoreMapper.class);
 			list = mapper.selectStoresByStoreCate1(categoryValues);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<StoreVO> selectStoresByStoreAdrAndStoreCate1(String adr, String category) {
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		HashMap<String, String> hashmap = new HashMap<String, String>();
+		hashmap.put("store_adr", adr);
+		hashmap.put("store_cate1", category);
+		
+		try {
+			StoreMapper mapper = session.getMapper(StoreMapper.class);
+			list = mapper.selectStoresByStoreAdrAndStoreCate1(hashmap);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

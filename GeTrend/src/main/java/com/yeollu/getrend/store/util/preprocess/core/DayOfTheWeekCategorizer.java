@@ -22,7 +22,7 @@ public class DayOfTheWeekCategorizer {
 	}
 	
 	public void categorize(String str) {
-		if(str == null) {
+		if(str == null || str.length() == 0) {
 			resultMap.put("일", "");
 			resultMap.put("월", "");
 			resultMap.put("화", "");

@@ -1,6 +1,7 @@
 package com.yeollu.getrend.store.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
@@ -17,6 +18,8 @@ public interface StoreMapper {
 	public ArrayList<StoreVO> selectStoresByStoreAdr(String store_adr);
 
 	public ArrayList<StoreVO> selectStoresByStoreCate1(ArrayList<String> categoryValues);
+	
+	public ArrayList<StoreVO> selectStoresByStoreAdrAndStoreCate1(HashMap<String, String> hashmap);
 
 	public ArrayList<String> autoStoreName();
 

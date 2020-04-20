@@ -24,11 +24,9 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'> 
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
 
-<style type="text/css">
-
-</style>
 </head>
 <body>
+
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
@@ -184,29 +182,29 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					  	</ol>
 					  	<div class="carousel-inner">
 					    	<div class="carousel-item active">
-					    		<a href="javascript:recommendByCategory();">
+					    		<a href="javascript:recommend('양림동', '양식');">
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586846612/redluck_y0iqfn.jpg" class="d-block img-fluid" alt="...">
 					      		</a>
 				      			<div class="carousel-caption d-none d-md-block">
-					        		<h5>한식 맛집 TOP 3</h5>
+					        		<h5>양림동 양식 TOP 5</h5>
 					        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 					      		</div>
 					    	</div>
 				    		<div class="carousel-item">
-				    			<a href="javascript:recommendByAccessLocation();">
+				    			<a href="javascript:recommendByAccessLocation('한식');">
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586846613/salad_oknvyo.jpg" class="d-block img-fluid" alt="...">
 					      		</a>
 					      		<div class="carousel-caption d-none d-md-block">
-					        		<h5>가까운 맛집 TOP 3</h5>
+					        		<h5>우리 동네 한식 TOP 5</h5>
 					        		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					      		</div>
 					    	</div>
 					    	<div class="carousel-item">
-					    		<a href="javascript:recommendByAdr();">
+					    		<a href="javascript:recommend('동명동', '카페/디저트');">
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776563/dan-gold-4_jhDO54BYg-unsplash_qcxerf.jpg" class="d-block img-fluid" alt="...">
 					      		</a>
 					      		<div class="carousel-caption d-none d-md-block">
-					        		<h5>동명동 맛집 TOP 3</h5>
+					        		<h5>동명동 카페/디저트 TOP 5</h5>
 					        		<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
 					      		</div>
 					  		</div>
@@ -293,12 +291,10 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		</div>
 	</div>
 
-	
-	
-
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
+
 
 	<!-- 로딩이미지 -->
 	<div class="wrap-loading display-none">
@@ -308,262 +304,261 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	</div>
 	
 	<div>
-		<form id="recommendByCategoryForm" action="recommendByCategory" method="get">
-			<input type="hidden" id="recommendByCategoryKeyword" name="recommendByCategoryKeyword" />
+		<form id="recommendForm" action="recommend" method="get">
+			<input type="hidden" id="recommendByCategory" name="recommendByCategory" />
+			<input type="hidden" id="recommendByAdr" name="recommendByAdr" />
 		</form>
 	</div>
-	
-	<div>
-		<form id="recommendByAdrForm" action="recommendByAdr" method="get">
-			<input type="hidden" id="recommendByAdrKeyword" name="recommendByAdrKeyword" />
-		</form>
-	</div>
-	
 
+<script>
+$(function() {
 	
-<script type="text/javascript">
-		$(function() {
-			
-			function search(points) {
-				let categoryValues = [];
-				$("input[name=categotyChk]:checked").each(function() {
-					categoryValues.push($(this).val());
-				});
-				console.log(categoryValues);
-				let opentimeValues = [];
-				$("input[name=opentimeChk]:checked").each(function() {
-					opentimeValues.push($(this).val());
-				});
-				console.log(opentimeValues);
-				let reqParm = {
-					"points": points,
-					"categoryValues": categoryValues,
-					"opentimeValues": opentimeValues
-				};
-				$.ajax({
-					url: "<c:url value='/search' />",
-					type: "post",
-					contentType: "application/json; charset=utf-8",
-					data: JSON.stringify(reqParm),
-					dataType: "json",
-					beforeSend: function() {
-						$('.wrap-loading').removeClass('display-none');
-						$('.wrap-loading').on('scroll touchmove mousewheel', function(event) {
-							event.preventDefault();
-						  	event.stopPropagation();
-						  	return false;
-						});
-					},
-					complete: function() {
-						$('.wrap-loading').addClass('display-none');
-						$('.wrap-loading').off('scroll touchmove mousewheel');
-					},
-					success: function(result) {
-						alert("성공");
-						printMarker(result);
-
-						$(".istore-container").empty();
-
-						let str = "";
-						$(result).each(function(index, item) {
-							str += '<div id="carouselSearchedStores_' + item.instaStore.store_no + '" class="carousel slide" data-ride="carousel">';
-							str += 		'<ol class="carousel-indicators">';
-							for(let i = 0; i < item.instaImage.postImgList.length; i++) {
-								if(i === 0) {
-									str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" class="active" ></li>';
-								} else {
-									str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" ></li>';
-								}
-							}
-							str += 		'</ol>';
-							str += 		'<div class="carousel-inner">';
-							for(let i = 0; i < item.instaImage.postImgList.length; i++) {
-								if(i === 0) {
-									str += '<div class="carousel-item active">';
-									str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
-									str +=			'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
-									str +=		'</a>';
-									str +=		'<div class="carousel-caption d-none d-md-block">';
-									str += 			'<h5>' + item.instaStore.store_name + '</h5>';
-									str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
-									str +=		'</div>';
-						      		str += '</div>';
-								} else {
-									str += '<div class="carousel-item">';
-									str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
-									str +=			'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
-									str +=		'</a>';
-									str +=		'<div class="carousel-caption d-none d-md-block">';
-									str += 			'<h5>' + item.instaStore.store_name + '</h5>';
-									str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
-									str +=		'</div>';
-						      		str += '</div>';
-								}
-							}
-							str += 		'</div>';
-							str += 		'<a class="carousel-control-prev" href="#carouselSearchedStores_' + item.instaStore.store_no + '" role="button" data-slide="prev">';
-							str +=			'<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
-							str +=			'<span class="sr-only">Previous</span>';
-							str +=		'</a>';
-							str +=		'<a class="carousel-control-next" href="#carouselSearchedStores_' + item.instaStore.store_no + '" role="button" data-slide="next">';
-							str +=			'<span class="carousel-control-next-icon" aria-hidden="true"></span>';
-							str +=			'<span class="sr-only">Next</span>';
-							str +=		'</a>';
-							str += '</div>';
-						});
-						//console.log(str);
-						$(".istore-container").append(str);
-			        },
-			        error: function(request, status, error){
-			            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
-			        }
-				});
-			}
-			searchFunc = search;
-			
+	function search(points) {
+		let categoryValues = [];
+		$("input[name=categotyChk]:checked").each(function() {
+			categoryValues.push($(this).val());
 		});
-		function search(points) {
-			searchFunc(points);
-		};
-		
-		const mapContainer = document.getElementById("map");
-		mapOption = {
-				center: new kakao.maps.LatLng(35.15113, 126.924584),
-				level: 1 // 지도의 확대 레벨
-		};
-		const map = new kakao.maps.Map(mapContainer, mapOption);
-		const printMarker = (result) => {
-			
-			// 마커를 표시할 위치와 title 객체 배열입니다
-			let positions = [];
-			
-			for(let n in result) {
-				const posotion = {
-					title: result[n].instaStore.store_name,
-					latlng: new kakao.maps.LatLng(result[n].instaStore.store_y, result[n].instaStore.store_x)
-				}
-				positions.push(posotion);
-			}
-			// 마커 이미지의 이미지 주소입니다
-			const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-			for(let i = 0; i < positions.length; i++) {
-				// 마커 이미지의 이미지 크기 입니다
-				const imageSize = new kakao.maps.Size(24, 35);
-				// 마커 이미지를 생성합니다    
-			    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-			 	// 마커를 생성합니다
-			    const marker = new kakao.maps.Marker({
-			        map: map, // 마커를 표시할 지도
-			        position: positions[i].latlng, // 마커를 표시할 위치
-			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-			        image : markerImage // 마커 이미지 
-			    });
-			}
-		};
-		const options = {
-		        // Drawing Manager를 생성할 때 사용할 옵션입니다
-				map: map, // Drawing Manager로 그리기 요소를 그릴 map 객체입니다
-		        drawingMode: [
-		          	// drawing manager로 제공할 그리기 요소 모드입니다
-		          	kakao.maps.drawing.OverlayType.POLYGON
-		        ],
-		        // 사용자에게 제공할 그리기 가이드 툴팁입니다
-		        // 사용자에게 도형을 그릴때, 드래그할때, 수정할때 가이드 툴팁을 표시하도록 설정합니다
-		        guideTooltip: ["draw", "drag", "edit"],
-		        polygonOptions: {
-		          	draggable: true,
-		          	removable: true,
-		          	editable: true,
-		          	strokeColor: "#39f",
-		          	fillColor: "#39f",
-		          	fillOpacity: 0.5,
-		          	hintStrokeStyle: "dash",
-		          	hintStrokeOpacity: 0.5
-		        }
-		};
-		// 위에 작성한 옵션으로 Drawing Manager를 생성합니다
-		const manager = new kakao.maps.drawing.DrawingManager(options);
-		manager.addListener('drawend', function(data) {
-			document.getElementById("selectOverlay").value = 'on';
-			document.getElementById("selectOverlay").innerHTML = '범위 선택';
+//		console.log(categoryValues);
+		let opentimeValues = [];
+		$("input[name=opentimeChk]:checked").each(function() {
+			opentimeValues.push($(this).val());
 		});
-		// 버튼 클릭 시 호출되는 핸들러 입니다
-  		const selectOverlay = (type) => {
-  	  		let btn = document.getElementById("selectOverlay");
-  	  		if(btn.value === 'on') {
-  	  			btn.value = 'off';
-  	  			btn.innerHTML = '선택 취소';
-		    	// 클릭한 그리기 요소 타입을 선택합니다
-		    	manager.select(kakao.maps.drawing.OverlayType[type]);
-	  	  	} else {
-	  	  		btn.value = 'on';
-	  	 		btn.innerHTML = '범위 선택';
-		  		// 그리기 중이면 그리기를 취소합니다
-		   		manager.cancel();
-		  	}
-  		};
-	   // 가져오기 버튼을 클릭하면 호출되는 핸들러 함수입니다
-	   const getDataFromDrawingMap = () => {
-		   // Drawing Manager에서 그려진 데이터 정보를 가져옵니다
-	        const data = manager.getData();
-	                
-	        let points = [];
-	        for(let i in data.polygon[0].points) {
-				const point = {
-			        	x: data.polygon[0].points[i]["x"],
-			        	y: data.polygon[0].points[i]["y"]
-			    };
-				points.push(point);
-			}
-			search(points);
-	   };
-	   
-	   const setCenter = (lat, lng) => {
-		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
-		   map.setCenter(moveLatLng);
-	   };
-	   
-	   const panTo = (lat, lng) => {
-		   const moveLatLng = new kakao.maps.LatLng(lat, lng);
-		   map.panTo(moveLatLng);
-	   };
+//		console.log(opentimeValues);
+		let reqParm = {
+			"points": points,
+			"categoryValues": categoryValues,
+			"opentimeValues": opentimeValues
+		};
+		$.ajax({
+			url: "<c:url value='/search' />",
+			type: "post",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(reqParm),
+			dataType: "json",
+			beforeSend: function() {
+				$('.wrap-loading').removeClass('display-none');
+				$('.wrap-loading').on('scroll touchmove mousewheel', function(event) {
+					event.preventDefault();
+				  	event.stopPropagation();
+				  	return false;
+				});
+			},
+			complete: function() {
+				$('.wrap-loading').addClass('display-none');
+				$('.wrap-loading').off('scroll touchmove mousewheel');
+			},
+			success: function(result) {
+				alert("성공");
+				printMarker(result);
 
-	   const recommendByAccessLocation = () => {
-			if(navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function(position) {
-					const geocoder = new kakao.maps.services.Geocoder();
-					const callback = function(result, status) {
-						if(status === kakao.maps.services.Status.OK) {
-							let adr = result[0].address.address_name;
-							let store_adr = '';
-							let tmp = adr.split(' ');
-							for(let i = 0; i < tmp.length; i++) {
-								if(tmp[i].includes('동')) {
-									store_adr = tmp[i];
-									break;
-								}
-							}
+				$(".istore-container").empty();
 
-							$("#recommendByAdrKeyword").val(store_adr);
-							$("#recommendByAdrForm").submit();
+				let str = "";
+				$(result).each(function(index, item) {
+					str += '<div id="carouselSearchedStores_' + item.instaStore.store_no + '" class="carousel slide" data-ride="carousel">';
+					str += 		'<ol class="carousel-indicators">';
+					for(let i = 0; i < item.instaImage.postImgList.length; i++) {
+						if(i === 0) {
+							str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" class="active" ></li>';
+						} else {
+							str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" ></li>';
 						}
 					}
-					geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);
-					
+					str += 		'</ol>';
+					str += 		'<div class="carousel-inner">';
+					for(let i = 0; i < item.instaImage.postImgList.length; i++) {
+						if(i === 0) {
+							str += '<div class="carousel-item active">';
+							str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
+							str +=			'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+							str +=		'</a>';
+							str +=		'<div class="carousel-caption d-none d-md-block">';
+							str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+							str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+							str +=		'</div>';
+				      		str += '</div>';
+						} else {
+							str += '<div class="carousel-item">';
+							str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
+							str +=			'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+							str +=		'</a>';
+							str +=		'<div class="carousel-caption d-none d-md-block">';
+							str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+							str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+							str +=		'</div>';
+				      		str += '</div>';
+						}
+					}
+					str += 		'</div>';
+					str += 		'<a class="carousel-control-prev" href="#carouselSearchedStores_' + item.instaStore.store_no + '" role="button" data-slide="prev">';
+					str +=			'<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+					str +=			'<span class="sr-only">Previous</span>';
+					str +=		'</a>';
+					str +=		'<a class="carousel-control-next" href="#carouselSearchedStores_' + item.instaStore.store_no + '" role="button" data-slide="next">';
+					str +=			'<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+					str +=			'<span class="sr-only">Next</span>';
+					str +=		'</a>';
+					str += '</div>';
 				});
+				//console.log(str);
+				$(".istore-container").append(str);
+	        },
+	        error: function(request, status, error){
+	            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
+	        }
+		});
+	}
+	searchFunc = search;
+	
+});
+
+	function search(points) {
+		searchFunc(points);
+	};
+	
+	
+	
+	const mapContainer = document.getElementById("map");
+	
+	mapOption = {
+			center: new kakao.maps.LatLng(35.15113, 126.924584),
+			level: 1 // 지도의 확대 레벨
+	};
+	
+	const map = new kakao.maps.Map(mapContainer, mapOption);
+	
+	const printMarker = (result) => {
+		
+		// 마커를 표시할 위치와 title 객체 배열입니다
+		let positions = [];
+		
+		for(let n in result) {
+			const posotion = {
+				title: result[n].instaStore.store_name,
+				latlng: new kakao.maps.LatLng(result[n].instaStore.store_y, result[n].instaStore.store_x)
 			}
-		}
-
-		const recommendByCategory = () => {
-			$("#recommendByCategoryKeyword").val('한식');
-			$("#recommendByCategoryForm").submit();
-		}
-
-		const recommendByAdr = () => {
-			$("#recommendByAdrKeyword").val('동명동');
-			$("#recommendByAdrForm").submit();
+			positions.push(posotion);
 		}
 		
+		// 마커 이미지의 이미지 주소입니다
+		const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+		
+		for(let i = 0; i < positions.length; i++) {
+			// 마커 이미지의 이미지 크기 입니다
+			const imageSize = new kakao.maps.Size(24, 35);
+			// 마커 이미지를 생성합니다    
+		    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+		 	// 마커를 생성합니다
+		    const marker = new kakao.maps.Marker({
+		        map: map, // 마커를 표시할 지도
+		        position: positions[i].latlng, // 마커를 표시할 위치
+		        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+		        image : markerImage // 마커 이미지 
+		    });
+		}
+	};
+	
+	const options = {
+	        // Drawing Manager를 생성할 때 사용할 옵션입니다
+			map: map, // Drawing Manager로 그리기 요소를 그릴 map 객체입니다
+	        drawingMode: [
+	          	// drawing manager로 제공할 그리기 요소 모드입니다
+	          	kakao.maps.drawing.OverlayType.POLYGON
+	        ],
+	        // 사용자에게 제공할 그리기 가이드 툴팁입니다
+	        // 사용자에게 도형을 그릴때, 드래그할때, 수정할때 가이드 툴팁을 표시하도록 설정합니다
+	        guideTooltip: ["draw", "drag", "edit"],
+	        polygonOptions: {
+	          	draggable: true,
+	          	removable: true,
+	          	editable: true,
+	          	strokeColor: "#39f",
+	          	fillColor: "#39f",
+	          	fillOpacity: 0.5,
+	          	hintStrokeStyle: "dash",
+	          	hintStrokeOpacity: 0.5
+	        }
+	};
+	
+	// 위에 작성한 옵션으로 Drawing Manager를 생성합니다
+	const manager = new kakao.maps.drawing.DrawingManager(options);
+	manager.addListener('drawend', function(data) {
+		document.getElementById("selectOverlay").value = 'on';
+		document.getElementById("selectOverlay").innerHTML = '범위 선택';
+	});
+	
+	// 버튼 클릭 시 호출되는 핸들러 입니다
+	const selectOverlay = (type) => {
+		let btn = document.getElementById("selectOverlay");
+		if(btn.value === 'on') {
+			btn.value = 'off';
+			btn.innerHTML = '선택 취소';
+	    	// 클릭한 그리기 요소 타입을 선택합니다
+	    	manager.select(kakao.maps.drawing.OverlayType[type]);
+	  	} else {
+	  		btn.value = 'on';
+	 		btn.innerHTML = '범위 선택';
+	  		// 그리기 중이면 그리기를 취소합니다
+		   		manager.cancel();
+	  	}
+	};
+	
+	// 가져오기 버튼을 클릭하면 호출되는 핸들러 함수입니다
+	const getDataFromDrawingMap = () => {
+		// Drawing Manager에서 그려진 데이터 정보를 가져옵니다
+	    const data = manager.getData();
+	            
+	    let points = [];
+	    for(let i in data.polygon[0].points) {
+			const point = {
+		        x: data.polygon[0].points[i]["x"],
+		        y: data.polygon[0].points[i]["y"]
+			};
+			points.push(point);
+		}
+		search(points);
+	};
+	   
+	const setCenter = (lat, lng) => {
+		const moveLatLng = new kakao.maps.LatLng(lat, lng);
+		map.setCenter(moveLatLng);
+	};
+	   
+	 const panTo = (lat, lng) => {
+		const moveLatLng = new kakao.maps.LatLng(lat, lng);
+		map.panTo(moveLatLng);
+	};
+	
+	const recommendByAccessLocation = (category) => {
+		if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				const geocoder = new kakao.maps.services.Geocoder();
+				const callback = function(result, status) {
+					if(status === kakao.maps.services.Status.OK) {
+						let adr = result[0].address.address_name;
+						let store_adr = '';
+					    let tmp = adr.split(' ');
+					    for(let i = 0; i < tmp.length; i++) {
+					    	if(tmp[i].includes('동')) {
+					    		store_adr = tmp[i];
+								break;
+							}
+						}
+						recommend(store_adr, category);
+					}
+				}
+				geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);
+			});
+		}
+	}
+	
+	const recommend = (adr, category) => {
+		console.log(adr);
+		console.log(category);
+		$("#recommendByAdr").val(adr);
+	    $("#recommendByCategory").val(category);
+	    $("#recommendForm").submit();
+	}
 </script>
 </body>
 </html>

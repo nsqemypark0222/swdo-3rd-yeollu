@@ -6,159 +6,195 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>OWL CAROUSEL TEST</title>
- <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
-<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.js"></script>
-<style>
-header{
-	position:fixed !important;
-	top: 0;
-	  /* width: 100% */
-	  left: 0;
-	  right: 0;
-	 z-index:900;
+<title>[ ${istore.instaStore.store_name} | GeTrend ]</title>
+<script src="https://kit.fontawesome.com/980ba882ef.js" crossorigin="anonymous"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
+
+<link rel= "stylesheet" type="text/css" href="../resources/css/reply.css">
+
+<style type="text/css">
+#repImg {
+	display: block;
+	margin: 0px auto;
 }
-  ul.nav-menu {
-    top: 20px;
-    position: fixed;
-  }
- div.col-8 div {
-    height: 500px;
-  }
-.stretch-card>.card {
-     width: 100%;
-     min-width: 100%
- }
 
- body {
-     background-color: #f9f9fa;
-       position: relative;
- }
-/*navbar style start*/
+.profileImg {
+	display: block;
+	margin: 0px auto;
+	width: 100%;
+	height: auto;
+}
 
-/*navbar style end*/
- .flex {
-     -webkit-box-flex: 1;
-     -ms-flex: 1 1 auto;
-     flex: 1 1 auto
- }
+.fas {
+	color: rgba(255, 138, 0, 0.78);
+}
 
- @media (max-width:991.98px) {
-     .padding {
-         padding: 1.5rem
-     }
- }
+.starRev {
+	display: block;
+	margin: 0px auto;
+}
 
- @media (max-width:767.98px) {
-     .padding {
-         padding: 1rem
-     }
- }
 
- .padding {
-     padding: 3rem
- }
-
- .owl-carousel .item {
-     margin: 3px
- }
-
- .owl-carousel .item img {
-     display: block;
-     width: 100%;
-     height: auto
- }
-
- .owl-carousel .item {
-     margin: 3px
- }
-
- .owl-carousel {
-     margin-bottom: 15px
- }
 </style>
 </head>
-<header>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-</header>
-<body data-spy="scroll" data-target="#myScrollspy" data-offset="1">
-<div class="container-fluid">
- 	 <div class="row">
-	    <nav class="col-sm-3 col-4" id="myScrollspy" >
-	      <ul class="nav nav-menu flex-column">
-	        <li class="nav-item">
-	          <a class="nav-link active" href="#istorePhoto" class="dot active">가게 사진</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="#istoreInfo" class="dot">가게 정보</a>
-	        </li>
-	        <li class="nav-item dropdown">
-	          <a class="nav-link" href="#istoreReview" class="dot">가게 리뷰</a>
-	        </li>
-	         
-	      </ul>
-    </nav>
-    <div class="col-sm-9 col-8">
-	      <div id="istorePhoto">    
-	        <div class="row container-fluid">
-	            <div class="col-lg-12 grid-margin stretch-card">
-	                <div class="card">
-	                    <div class="card-body">
-	                        <h4 class="card-title">검색 결과:</h4>
-	                        <div class="owl-carousel">
-	                            <div class="item"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204140/banner_12.jpg" alt="image" /></div>
-	                            <div class="item"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204172/banner_2.jpg" alt="image" /> </div>
-	                            <div class="item"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204663/park-4174278_640.jpg" alt="image" /> </div>
-	                            <div class="item"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSR9kZRoODWR0cAXYKLvnRk5xAjPUBzsRFdquxvwcGrxrIRFQFD&usqp=CAU" alt="image" /> </div>
-	                            <div class="item"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204172/banner_2.jpg" alt="image" /> </div>
-	                            <div class="item"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRoyrY-GX2Ah2DTi3aJ5T5QliN_63dK4ujdz70nr9py-SLa9Lyb&usqp=CAU" alt="image" /> </div>
-	                            <div class="item"> <img src="https://lh3.googleusercontent.com/proxy/uBIiYJDqQvNv4KfglDRfL6CWQqZXHl-8bb-MdUvdTsTjm9fu90V2D0jmFz2KlPPWwZYirrRPxxztbJyV7B1T3iX2_BT39kj3Tvx7ad5gGAW5tWHN2fxjQdX-Z8PXuoMObHb0bcCIstwnoHVjVCo" alt="image" /> </div>
-	                            <div class="item"> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="image" /> </div>
-	                            <div class="item"> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="image" /> </div>
-	                            <div class="item"> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="image" /> </div>
-	                            <div class="item"> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="image" /> </div>
-
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	  </div>
-  
-      <div id="istoreInfo"> 
-	      	<div class="row container-fluid">
-	            <div class="col-lg-12 grid-margin stretch-card">
-	                <div class="card">
-	                    <div class="card-body">
-				        	<h1>가게 정보</h1>
-				        	<p>Try to scroll this section and look at the navigation list while scrolling!</p>
-				       </div>
-				    </div>
-				</div>        
-	      </div>
-     </div>         
-        <div id="istoreReview"> 
-	      	<div class="row container-fluid">
-	            <div class="col-lg-12 grid-margin stretch-card">
-	                <div class="card">
-	                    <div class="card-body">
-				        	<h1>가게 리뷰</h1>
-				        	<p>Try to scroll this section and look at the navigation list while scrolling!</p>
-				       </div>
-				    </div>
-				</div>        
-	      </div>
-     </div>       
-    </div>
-  </div>
-</div>
-
+	</header>
+	
+	<div class="container">
+		<div class="row">
+	 		<!-- 이미지 슬라이더 위치  -->
+	 			<div id="carouselRecommendedStores" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+					    	<li data-target="#carouselRecommendedStores" data-slide-to="0" class="active"></li>
+					    	<li data-target="#carouselRecommendedStores" data-slide-to="1"></li>
+					    	<li data-target="#carouselRecommendedStores" data-slide-to="2"></li>
+					  	</ol>
+					  	<div class="row">
+						  	<div class="carousel-inner">
+						    	<div class="carousel-item active">
+					      				<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="1" end="7" step="3">
+											<img class="rounded img-fluid" src="${item.imgUrl}" class="d-block img-fluid" alt="...">
+										</c:forEach>
+					      			<div class="carousel-caption d-none d-md-block">
+						        		<h5>${istore.instaStore.store_name}</h5>
+						        		<p>Now Trend</p>
+						      		</div>
+						    	</div>
+					    		<div class="carousel-item">
+									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="2" end="8" step="3">
+											<img class="rounded img-fluid" src="${item.imgUrl}" class="d-block img-fluid" alt="...">
+									</c:forEach>					      		
+									<div class="carousel-caption d-none d-md-block">
+						        		<h5>${istore.instaStore.store_name}</h5>
+						        		<p>Now Trend</p>
+						      		</div>
+						    	</div>
+						    	<div class="carousel-item">
+									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="3" end="9" step="3">
+										<img class="rounded img-fluid" src="${item.imgUrl}">
+									</c:forEach>					      		
+									<div class="carousel-caption d-none d-md-block">
+						        		<h5>${istore.instaStore.store_name}</h5>
+						        		<p>Now Trend</p>
+						      		</div>
+						  		</div>
+						  	</div>
+					  	<a class="carousel-control-prev" href="#carouselRecommendedStores" role="button" data-slide="prev">
+					  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					  		<span class="sr-only">Previous</span>
+					  	</a>
+					  	<a class="carousel-control-next" href="#carouselRecommendedStores" role="button" data-slide="next">
+					    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					    	<span class="sr-only">Next</span>
+					  	</a>
+					</div>
+			</div>
+			
+				<div class="row">
+					<div class="col-md-3">
+						<h1>${istore.instaStore.store_name}</h1>
+					</div>
+					<div class="col-md-3">
+						<a id="like">
+							<i class="fas fa-heart fa-3x"></i>
+						</a>
+					</div>
+					<div class="col-md-3">	
+						<a href="https://map.kakao.com/link/to/${istore.instaStore.store_name},${istore.instaStore.store_y},${istore.instaStore.store_x}">
+							<i class="fas fa-map-marker-alt fa-3x"></i>
+						</a>
+					</div>
+					<div class="col-md-3">	
+						<a id="kakao-link-btn" href="javascript:sendLink()">
+							<i class="fas fa-share-alt fa-3x"></i>
+							<!-- <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/> -->
+						</a>
+					</div>	
+					</div>
+				</div>
+				<div class="row">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<ul class="list-group">
+									<li class="list-group-item">${istore.instaStore.store_cate1}</li>
+									<li class="list-group-item">${istore.instaStore.store_adr1}</li>
+									<li class="list-group-item">${istore.mangoStoreInfo.mango_tel}</li>
+									<li class="list-group-item">${istore.mangoStoreInfo.mango_price}</li>
+									<li class="list-group-item">${istore.mangoStoreInfo.mango_parking}</li>
+									<li class="list-group-item">${istore.mangoStoreInfo.mango_start}</li>
+									<li class="list-group-item">${istore.mangoStoreInfo.mango_end}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+	
+		</div>
+	</div>
+	
+	<!-- 댓글 시작 -->
+	<div class="container">
+		<div class="row">
+	    <div class="col">
+			<form id="inputForm" >
+		    	<input type="hidden" id="store_no" name="store_no" value="${istore.instaStore.store_no}" />
+				<table class="table">
+					<tr>
+						<th>리뷰</th>
+						<th colspan="3">별점</th>
+					</tr>
+						
+					<tr>
+						<td>${sessionScope.loginname}</td>
+						<td>
+							<div class="starRev">
+							  <span class="starR1" value="0.5">별1_왼쪽</span>
+							  <span class="starR2" value="1">별1_오른쪽</span>
+							  <span class="starR1" value="1.5">별2_왼쪽</span>
+							  <span class="starR2" value="2">별2_오른쪽</span>
+							  <span class="starR1" value="2.5">별3_왼쪽</span>
+							  <span class="starR2" value="3">별3_오른쪽</span>
+							  <span class="starR1" value="3.5">별4_왼쪽</span>
+							  <span class="starR2" value="4">별4_오른쪽</span>
+							  <span class="starR1" value="4.5">별5_왼쪽</span>
+							  <span class="starR2" value="5">별5_오른쪽</span>
+							</div>
+						
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<textarea id="reply_contents" name="reply_contents" placeholder="내용 입력" style=" width:90%; resize:none;"></textarea>
+						</td>
+					
+						<td>
+							<input type="button" class="btn btn-warning" id="writeBtn" value="리뷰 등록">
+						</td>
+					</tr>
+				
+				</table>
+			</form>
+		</div>
+	</div> <!-- input form end -->
+	<hr>
+	
+		<div class="row"> <!-- print form -->
+			<div class="col">
+				<table class="table table-hover" id="printTable">
+			
+				</table>
+			</div>	
+		</div>
+		
+		
+		
+	</div>
 	
 	<form id="likeForm">
 		<input type="hidden" id="store_no" name="store_no" value="${istore.instaStore.store_no}" />
@@ -167,63 +203,10 @@ header{
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
 	
-
-
-</body>
-</html>
-
 	
-
+	
 <script type="text/javascript">
-$(document).ready(function() {
-
-	$(".owl-carousel").owlCarousel({
-
-		autoPlay: 3000,
-		items : 2,
-		itemsDesktop : [1199,3],
-		itemsDesktopSmall : [979,3],
-		center: true,
-		nav:true,
-		loop:true,
-		responsive: {
-			600: {
-			items: 2
-			}
-		}
-	});
-
-});
-</script>
-
-
-
-<!-- <script type="text/javascript">
-
-	
-		$(document).ready(function() {
-			$(".owl-carousel").owlCarousel({
-	
-				autoPlay: 3000,
-				items : 4,
-				itemsDesktop : [1199,3],
-				itemsDesktopSmall : [979,3],
-				center: true,
-				nav:true,
-				loop:true,
-				responsive: {
-					600: {
-					items: 4
-					}
-				}
-			});
-	
-		});
-	
-</script>
-<script type="text/javascript">
-
-	function printList() {
+		function printList() {
 			$.ajax({
 				url: "/getrend/reply/replyList",
 				type: "get",
@@ -335,5 +318,8 @@ $(document).ready(function() {
         	]
        	});
     }
-	//]]> 
-</script>-->
+	//]]>
+</script>
+
+</body>
+</html>

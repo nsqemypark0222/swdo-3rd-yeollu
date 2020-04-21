@@ -14,6 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel= "stylesheet" type="text/css" href="../resources/css/mypage.css">
 
 
 <script type="text/javascript">
@@ -154,7 +155,7 @@ function likeStore(user_email){
 			else{
            		 $(result).each(function(index, item){
 					var temp = '<td style="width : 200px;">';
-						temp += '<div style="width : 200px; text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/cate/'+ item.CATE1 +'" alt="프로필 사진"></div>';				
+						temp += '<div style="width : 200px; text-align:center;"><a class="text-dark" href="/getrend/stores/istoreInfo?store_no='+item.STORE_NO+'"><img class="reply_cate_profile" src="/getrend/resources/img/cate/'+ item.CATE1 +'" alt="프로필 사진"></a></div>';				
 						temp += '<div style="width : 200px; font-size:14px; text-align:center;">'+item.STORE_NAME+'</div>';
 						temp += '</td>';							
 			$(".mypage_list_table").children().append(temp);
@@ -268,254 +269,6 @@ function moreRead(){
 }
 </script>
 
-<style>
-
-.mypage_profile{
-	position: relative;
-	width: 900px;
-	height: 240px;
-	left: 100px;
-}
-
-.mypage_profile_header_img{
-	position: absolute; 
-	border-radius:5px;
-	top:0; 
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-.mypage_profile_table{
-	position: absolute;
-	width: 120px;
-	height: 180px;
-	left: 390px;
-	top: 28px;
-}
-
-.mypage_profile_user_name{
-	height: 30px;
-}
-.mypage_profile_user_name{
-	text-align : center;
-	font-weight: bold;
-	font-size: 30px;
-}
-.user_profile{
-	width : 120px;
-}
-.user_profile_de{
-	width : 120px;
-}
-
-
-#followBtn{
-   background-color: #fff;
-   font-size: 15px;
-   font-weight: bold;
-   width:70px; 
-   height:30px;
-   border: none;
-   color:#a6a6a6;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   cursor: pointer;
-   border-radius:20px;
-}
-#followBtn:focus{
-	border : none;
-	outline:none;
-}
-#followBtn:hover {
-    color: #FF8A00;
-    transition:color .2s ease;
-}
-
-#unfollowBtn{
-   background-color: #fff;
-   font-family: JejuGothic;
-   font-size: 14px;
-   font-weight: bold;
-   width:70px; 
-   height:30px;
-   border: none;
-   color:#FF8A00;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   cursor: pointer;
-   border-radius:20px;
-}
-
-#unfollowBtn:focus{
-	border : none;
-	outline:none;
-}
-#unfollowBtn:hover {
-    background-color: #fff;
-    transition:color .2s ease;
-}
-
-.mypage_buttons{
-	position: relative;
-	width: 900px;
-	height: 55px;
-	left: 100px;
-	top : 20px;
-}
-
-.mypage_button{
-
-   background-color: #fff;
-   font-weight: bold;
-   width:295px;
-   border: none;
-   color:#000;
-   padding: 15px 0;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   font-size: 15px;
-   margin: 1px;
-   cursor: pointer;
-}
-.mypage_button:focus{
-	outline:none;
-	transition:color .2s ease;
-}
-.btn_on{
-	color:#FF8A00;
-	border-bottom : 3px solid #FF8A00;
-}
-.btn_on:focus{
-	outline:none;
-	transition:border-bottom .2s ease;
-}
-.btn_off{
-	color : #000;
-	border : none;
-}
-
-.mypage_list{
-	position: relative;
-	width: 900px;
-	height: 130px;
-	left: 100px;
-	top : 40px;
-}
-
-.mapDiv{
-	position: relative;
-	width: 900px;
-	height : 300px;
-	left: 100px;
-	top: 20px;
-	background-color : gray;
-}
-
-.noReply{
-	position: relative;
-	margin : 100px 300px;
-
-}
-
-.mypage_replies{
-	position: relative;
-	width: 900px;
-	left: 100px;
-	top:34px;
-
-}
-.reply_cate_profile{
-	width: 55px;
-	height: 55px;
-	margin : 10px 10px;
-}
-
-.reply_cate_name{
-	text-align : center;
-	color : #FF8A00;
-}
-.reply_heart_on{
-	width: 28px;
-	height: 28px;
-}
-.reply_heart_off{
-	width: 25px;
-	height: 25px;
-}
-.reply_map{
-	width: 23px;
-	height: 23px;
-	margin : 3px 5px;
-}
-
-.reply_outer{
-	width : 720px;
-	margin-left : 70px;
-}
-.reply_inner01{
-	float : left;
-	width : 15%;
-}
-.reply_inner02{
-	float : left;
-	width : 85%;
-}
-
-.readAction{
-	position: relative;
-	left : 390px;
-	width : 300px;
-}
-
-
-
-@media(max-width: 1360px){
-	.container{
-		width : 100%;
-	}
-}
-
-@media (max-width: 1100px){
-	.mypage_profile{width : 100%; left:0;}
-	.mypage_buttons{width : 100%; left:0;}
-	.mypage_list{width : 100%; left:0;}
-	.mypage_replies{width : 100%; left:0;}
-}
-
-
-
-
-
-#scroll_box2{width: 900px; height: 420px; overflow-y: scroll; }
-#scroll_box2::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  border: 3px solid #fff;
-}
-#scroll_box2::-webkit-scrollbar-button:start:decrement,
-::-webkit-scrollbar-button:end:increment {
-  display: block;
-  height: 5px;
-  background: #fff;
-}
-#scroll_box2::-webkit-scrollbar-track {
-  background: #fff;
-  -webkit-border-radius: 10px;
-  border-radius:10px;
-}
-#scroll_box2::-webkit-scrollbar-thumb {
-  height: 50px;
-  width: 50px;
-  background: rgba(0,0,0,.2);
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
-}
-
-
-</style>
 
 </head>
 <body>
@@ -619,7 +372,7 @@ function moreRead(){
 									<c:otherwise>
 										<c:forEach var="list" items="${likeList}">
 											<td style="width : 200px;">
-												<div style="width : 200px;text-align:center;"><img class="reply_cate_profile" src="/getrend/resources/img/cate/${list.CATE1}" alt="프로필 사진"></div>
+												<div style="width : 200px;text-align:center;"><a class="text-dark" href="/getrend/stores/istoreInfo?store_no=${list.STORE_NO}"><img class="reply_cate_profile" src="/getrend/resources/img/cate/${list.CATE1}" alt="프로필 사진"></a></div>
 												<div style="width : 200px; font-size:14px; text-align:center;">${list.STORE_NAME}</div>								
 											</td>
 										</c:forEach>
@@ -712,7 +465,7 @@ function moreRead(){
 											</div>
 											<c:if test="${reply.USER_EMAIL eq sessionScope.loginemail}">
 												<div class="deleteButton" style="float : right;">
-													<img style="width:15px;" src="/getrend/resources/img/delete.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${reply.USER_NAME}')">
+													<img style="width:15px;cursor: pointer;" src="/getrend/resources/img/delete.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${reply.USER_NAME}')">
 												</div> 
 											</c:if>
 										</td>	

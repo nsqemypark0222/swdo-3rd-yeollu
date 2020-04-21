@@ -160,8 +160,15 @@ public class StoreServiceImpl implements StoreService {
 		for (CrawlerExecutor crawlerExecutor : crawlerExecutorList) {
 			if(crawlerExecutor.getIsExisted()) {
 				if(instaImageDAO.isRequiredUpdateInstaImage(crawlerExecutor.getStore_no())) {
+					int cnt = instaImageDAO.deleteInstaImage(crawlerExecutor.getStore_no());
+					if(cnt > 0) {
+						logger.info("업데이트를 위한 삭제 성공");
+					} else {
+						logger.info("업데이트를 위한 삭제 실패");
+					}
 					for(InstaImageVO instaImage : crawlerExecutor.getInstaImageList()) {
-						int cnt = instaImageDAO.updateInstaIamge(instaImage);
+						cnt = 0;
+						cnt = instaImageDAO.insertInstaImage(instaImage);
 						if(cnt > 0) {
 							logger.info("업데이트 성공");
 						} else {

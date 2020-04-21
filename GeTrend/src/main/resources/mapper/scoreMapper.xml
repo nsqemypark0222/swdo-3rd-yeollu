@@ -21,6 +21,14 @@ where
 group by
 	s.store_no
 </select>
+<select id="scoreAvgByStoreno" parameterType="string" resultType="int">
+select
+	nvl(avg(reply_star),0) as avg_of_star
+from
+	insta_replys
+where
+	store_no = #{store_no}
+</select>
 
 </mapper>
 

@@ -14,4 +14,6 @@ public interface InstaImageMapper {
 	public String isRequiredUpdateInstaImage(String store_no);
 	
 	public ArrayList<InstaImageVO> selectInstaImageByStoreNo(String store_no);
+	
+	public int deleteInstaImage(String store_no);
 }

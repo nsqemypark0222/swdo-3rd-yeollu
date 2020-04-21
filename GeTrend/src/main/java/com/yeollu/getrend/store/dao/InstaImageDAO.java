@@ -82,4 +82,17 @@ public class InstaImageDAO {
 		
 		return list;
 	}
+	
+	public int deleteInstaImage(String store_no) {
+		int cnt = 0;
+		
+		try {
+			InstaImageMapper mapper = session.getMapper(InstaImageMapper.class);
+			cnt = mapper.deleteInstaImage(store_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cnt;
+	}
 }

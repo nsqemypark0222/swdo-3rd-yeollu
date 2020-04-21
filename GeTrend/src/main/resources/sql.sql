@@ -135,12 +135,10 @@ create table insta_images (
     , image_url     varchar2(1000)
     , image_like    number
     , image_indate  date                default sysdate
+    , constraint fk1_insta_images foreign key (store_no) references stores(store_no)
 );
 
 create sequence seq_insta_images;
-
-select *
-from insta_images;
 
 commit;
 commit;

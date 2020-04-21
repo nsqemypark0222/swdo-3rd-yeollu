@@ -2,309 +2,366 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>[ ${istore.instaStore.store_name} | GeTrend ]</title>
-<script src="https://kit.fontawesome.com/980ba882ef.js" crossorigin="anonymous"></script>
+	<meta charset="UTF-8">
+	<title>[ ${istore.instaStore.store_name} | GeTrend ]</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
-
-<link rel= "stylesheet" type="text/css" href="../resources/css/reply.css">
-
-<style type="text/css">
-#repImg {
-	display: block;
-	margin: 0px auto;
-}
-
-.profileImg {
-	display: block;
-	margin: 0px auto;
-	width: 100%;
-	height: auto;
-}
-
-.fas {
-	color: rgba(255, 138, 0, 0.78);
-}
-
-.starRev {
-	display: block;
-	margin: 0px auto;
-}
-
-</style>
+<script src='<c:url value="/resources/js/owl.carousel.min.js"/>'></script>
+<link href='<c:url value="/resources/css/owl.carousel.css"/>' rel="stylesheet" />
+<link href='<c:url value="/resources/css/owl.theme.default.min.css"/>' rel="stylesheet" />
+<link rel= "stylesheet" type="text/css" href="../resources/css/istoreInfo.css">
 </head>
+
 <body>
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
+	<div id="wrap">
+		<section id="banner">
+			<div id="carouselRecommendedStores" class="carousel slide" data-ride="carousel">
+				<ol class="carousel-indicators">
+			    	<li data-target="#carouselRecommendedStores" data-slide-to="0" class="active"></li>
+			    	<li data-target="#carouselRecommendedStores" data-slide-to="1" ></li>
+			    	<li data-target="#carouselRecommendedStores" data-slide-to="2" ></li>
+			  	</ol>
+			  	<div class="carousel-inner">
+			    	<div class="carousel-item active">
+	      				<c:forEach var="item" items="${istore.instaImageList}" begin="1" end="7" step="3">
+							<img class="postImg rounded img-fluid" src="${item.image_url}" class="d-block img-fluid" alt="...">
+						</c:forEach>
+			    	</div>
+		    		<div class="carousel-item ">
+						<c:forEach var="item" items="${istore.instaImageList}" begin="2" end="8" step="3">
+								<img class="postImg rounded img-fluid" src="${item.image_url}" class="d-block img-fluid" alt="...">
+						</c:forEach>					      		
+			      	</div>
+			    	<div class="carousel-item">
+						<c:forEach var="item" items="${istore.instaImageList}" begin="3" end="9" step="3">
+							<img class="postImg rounded img-fluid" src="${item.image_url}">
+						</c:forEach>					      		
+			  		</div>
+			  	</div>	
+			  	<a class="carousel-control-prev" href="#carouselRecommendedStores" role="button" data-slide="prev">
+			  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			  		<span class="sr-only">Previous</span>
+			  	</a>
+			  	<a class="carousel-control-next" href="#carouselRecommendedStores" role="button" data-slide="next">
+			    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    	<span class="sr-only">Next</span>
+			  	</a>
+		   </div>
+		</section>
+		<section id="content1">
+		   <nav class="nav">
+			<hr>
+			  <div class="container">
 				<div class="row">
-					<c:forEach var="item" items="${istore.instaImageList}">
-						<c:if test="${item.image_type == 'profile'}">
-							<img class="rounded-circle" id="repImg" src="${item.image_url}">
-						</c:if>
-					</c:forEach>
+				  <div class="col">
+				    <table class="store_table">
+					   <tr>
+						  <td style="width :300px; height : 80px; border-bottom: 1px solid  #e9e9e9;">
+							<span style="font-size : 30px; color : #FF8A00;">${istore.instaStore.store_name}</span> / <span> ${scoreAvg}점</span>
+						  </td>
+						  <td  style="border-bottom: 1px solid  #e9e9e9;">
+							<input type="hidden" value="${istore.instaStore.store_no}" id="store_no">							
+							<div id="kakao_link">
+								<a id="kakao-link-btn" href="javascript:sendLink()">
+									<i class="fas fa-share-alt fa-3x"></i>
+									<!-- <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/> -->
+								</a>
+							</div>
+						 </td>
+						  <td  style="border-bottom: 1px solid  #e9e9e9; width : 70px;">
+						  <div id="like_div">
+								<c:if test="${!isExistedLike}">
+									<img onclick="insertLike();" style="width:50px; cursor: pointer;" src="/getrend/resources/img/heart_unclick.png">
+								</c:if>
+								<c:if test="${isExistedLike}">
+									<img onclick="deleteLike();" class="heart" style="width:52px; cursor: pointer;" src="/getrend/resources/img/heart_click.png">
+								</c:if>
+							</div>
+						  </td>
+					   </tr>
+				    </table>
+					<table class="store_table" >
+						<tr>
+							<td  class="store_table_td1">카테고리</td>
+							<td  class="store_table_td2">${istore.instaStore.store_cate1}</td>
+						</tr>
+						<tr>
+							<td>주소</td>
+							<td>${istore.instaStore.store_adr1}</td>
+						</tr>
+						<tr>
+							<td>전화번호</td>
+							<td>${istore.mangoStoreInfo.mango_tel}</td>
+						</tr>
+						<tr>
+							<td>가격대</td>
+							<td>${istore.mangoStoreInfo.mango_price}</td>
+						</tr>
+						<tr>
+							<td>주차</td>
+							<td>${istore.mangoStoreInfo.mango_parking}</td>
+						</tr>
+						<tr>
+							<td>시작</td>
+							<td>${istore.mangoStoreInfo.mango_start}</td>
+						</tr>
+						<tr>
+							<td>마지막</td>
+							<td>${istore.mangoStoreInfo.mango_end}</td>
+						</tr>
+					</table>
+				  </div>
+				 </div>
+			   </div>
+			</nav>
+			<article class="article_right1">
+				<div id="map" style="width: 100%; height: 100%; background-color: none;">
 				</div>
-				<div class="row">
-					<div class="col-md-4">
-						<a id="like">
-							<i class="fas fa-heart fa-3x"></i>
+			</article>
+		</section>
+
+		<section id="content2">
+			<article class="article_box1">
+			  <div class="row"> <!-- print form -->
+				<div class="col" style=" border-top: 1px solid  #e9e9e9; padding-top:20px; ">
+				    <div id="reply_title" >
+				    	<h3 >댓글( ${replyCount} )</h3>
+				    </div>	
+					<div id="reply_btn">	 
+						<a href="/getrend/stores/istoreinfo_reply?store_no=${istore.instaStore.store_no}&store_name=${istore.instaStore.store_name}">
+							<button type="button" class="btn btn-outline-warning">
+								댓글 남기기
+							</button>
 						</a>
 					</div>
-					<div class="col-md-4">
-						<a href="https://map.kakao.com/link/to/${istore.instaStore.store_name},${istore.instaStore.store_y},${istore.instaStore.store_x}">
-							<i class="fas fa-map-marker-alt fa-3x"></i>
-						</a>
-					</div>
-					<div class="col-md-4">
-						<a id="kakao-link-btn" href="javascript:sendLink()">
-							<i class="fas fa-share-alt fa-3x"></i>
-							<!-- <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/> -->
-						</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="container">
-						<div class="row">
-							<div class="col-12">
-								<h1>${istore.instaStore.store_name}</h1>
-								<ul class="list-group">
-									<li class="list-group-item">${istore.instaStore.store_cate1}</li>
-									<li class="list-group-item">${istore.instaStore.store_adr1}</li>
-									<li class="list-group-item">${istore.mangoStoreInfo.mango_tel}</li>
-									<li class="list-group-item">${istore.mangoStoreInfo.mango_price}</li>
-									<li class="list-group-item">${istore.mangoStoreInfo.mango_parking}</li>
-									<li class="list-group-item">${istore.mangoStoreInfo.mango_start}</li>
-									<li class="list-group-item">${istore.mangoStoreInfo.mango_end}</li>
-								</ul>
+					<div class="mypage_replies">
+					<c:choose>
+						<c:when test="${empty replyList}">
+							<div class="noReply">
+								  <img src="/getrend/resources/img/noreply.png" style="display:inline-block; width : 100px;" alt="댓글없음"><br><br><br>
+								  <div style="display:inline-block;"><h6>남긴 댓글이 아직 없습니다</h6></div>
 							</div>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-			<div class="col-md-6">
-				<div class="row">
-					<div class="card mb-3">
-						<!-- <div class="card-header mb-3">
-							<h2>상세 페이지</h2>
-						</div> -->
-						<div class="card-body mb-3">
-							<div class="row no-gutters">
-								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImageList}" begin="1" end="7" step="3">
-										<img class="rounded img-fluid" src="${item.image_url}">
-									</c:forEach>
-								</div>
-								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImageList}" begin="2" end="8" step="3">
-										<img class="rounded img-fluid" src="${item.image_url}">
-									</c:forEach>
-								</div>
-								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImageList}" begin="3" end="9" step="3">
-										<img class="rounded img-fluid" src="${item.image_url}">
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-						<%-- <div class="card-footer mb-3">
-						<div class="row no-gutters">
-							<div class="col-md-2">
-								<div class="row">
-									<img class="rounded-circle profileImg" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586073032/qjmvvyvokolfefdsb6k9.jpg">
-								</div>
-								<div class="row">
-									${sessionScope.loginname}
-								</div>
-							</div>
-							<div class="col-md-10">
-								<form class="form-group" id="inputForm">
-									<input type="hidden" id="store_no" name="store_no" value="${istore.instaStore.store_no}" />
-									<div class="row">
-										<div class="starRev">
-											<span class="starR1">0.5</span>
-											<span class="starR2">1</span>
-											<span class="starR1">1.5</span>
-											<span class="starR2">2</span>
-											<span class="starR1">2.5</span>
-											<span class="starR2">3</span>
-											<span class="starR1">3.5</span>
-											<span class="starR2">4</span>
-											<span class="starR1">4.5</span>
-											<span class="starR2">5</span>
-										</div>
-									</div>
-									<div class="row">
-										<textarea class="form-control" rows="5" id="reply_contents" name="reply_contents" placeholder="내용 입력"></textarea>
-										<button class="form-control" id="writeBtn">리뷰 등록</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div> --%>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- 댓글 시작 -->
-	<div class="container">
-		<div class="row">
-	    <div class="col">
-			<form id="inputForm" >
-		    	<input type="hidden" id="store_no" name="store_no" value="${istore.instaStore.store_no}" />
-				<table>
-					<tr>
-						<th>리뷰</th>
-					</tr>
-						
-					<tr>
-						<td>${sessionScope.loginname}</td>
-						<td>
-							<div class="starRev">
-							  <span class="starR1" value="0.5">별1_왼쪽</span>
-							  <span class="starR2" value="1">별1_오른쪽</span>
-							  <span class="starR1" value="1.5">별2_왼쪽</span>
-							  <span class="starR2" value="2">별2_오른쪽</span>
-							  <span class="starR1" value="2.5">별3_왼쪽</span>
-							  <span class="starR2" value="3">별3_오른쪽</span>
-							  <span class="starR1" value="3.5">별4_왼쪽</span>
-							  <span class="starR2" value="4">별4_오른쪽</span>
-							  <span class="starR1" value="4.5">별5_왼쪽</span>
-							  <span class="starR2" value="5">별5_오른쪽</span>
-							</div>
-						
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<textarea id="reply_contents" name="reply_contents" placeholder="내용 입력"></textarea>
-						</td>
-						<td>
-							<input type="button" id="writeBtn" value="리뷰 등록">
-						</td>
-						<td>
-							
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</div> <!-- input form end -->
-	<hr>
-	
-		<div class="row"> <!-- print form -->
-			<div class="col">
-				<table id="printTable">
-			
-				</table>
-			</div>	
-		</div>
-		
-		
-		
-	</div>
-	
-	<form id="likeForm">
-		<input type="hidden" id="store_no" name="store_no" value="${istore.instaStore.store_no}" />
-	</form>
+						</c:when>
+						<c:otherwise>
+							<table class="table table-hover" id="replyTable01">				
+								<c:forEach var="reply" items="${replyList}" begin="0" end="2">
+									<tr class="table-light">
+										<td>
+											<div class="reply_outer">						          
+												<div class="reply_inner01">	
+												   <a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}">	          
+														<c:if test="${reply.USER_PROFILE != null}">
+													        <img class="reply_cate_profile" src="${reply.USER_PROFILE}" alt="프로필 사진">
+													    </c:if>
+													    <c:if test="${reply.USER_PROFILE == null}">
+															<img class="reply_cate_profile" src="<c:url value='/resources/img/user.png'/>" alt="프로필 사진">
+													    </c:if>
+													</a>	
+												 </div>						          
+												 <div class="reply_inner02">
+											       <div class="reply_name">
+    											      <a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}">
+	        										   ${reply.USER_NAME}
+    												  </a> 								   
+											       </div>
+												   <div class="mb-1 text-muted"> <span class="starMake">${reply.REPLY_STAR}</span></div>
+												   <p class="card-text mb-auto" style="word-break:break-word;font-size : 15px; margin : 20px 0;">${reply.REPLY_CONTENTS}</p>		          
+												   <div class="mb-1 text-muted">${reply.REPLY_INDATE}</div>
+						    					 </div>	       
+											</div>
+											<c:if test="${reply.USER_EMAIL eq sessionScope.loginemail}">
+												<div class="deleteButton" style="float : right;">
+													<img style="width:15px; cursor: pointer;" src="/getrend/resources/img/delete.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${istore.instaStore.store_no}')">
+												</div> 
+											</c:if>
+										</td>	
+									 </tr>				
+								  </c:forEach>    								
+						   	 </table>
+						   	 <c:if test="${fn:length(replyList) > 3}">
+							   	<div class="readAction">
+		    						<button id="readMoreBtn" class="btn btn-outline-secondary btn-lg" onclick="moreRead();"> 더보기 + </button>
+		    						<img id="readMoreSpin" src="/getrend/resources/img/Spinner.gif" style="display:none; width : 100px;">
+		   						</div>
+						   	 </c:if>
+		    						
+		  						<table class="table table-hover" id="replyTable02" style="display:none;">				
+								<c:forEach var="reply" items="${replyList}">
+									<tr class="table-light">
+										<td>
+											<div class="reply_outer">						          
+												<div class="reply_inner01">
+												  <a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}">		          
+														<c:if test="${reply.USER_PROFILE != null}">
+														
+													        <img class="reply_cate_profile" src="${reply.USER_PROFILE}" alt="프로필 사진">
+													    </c:if>
+													    <c:if test="${reply.USER_PROFILE == null}">
+															<img class="reply_cate_profile" src="<c:url value='/resources/img/user.png'/>" alt="프로필 사진">
+													    </c:if>
+													 </a>
+														
+												</div>						          
+													<div class="reply_inner02">
+													<div class="reply_name">
+    											      <a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}">
+	        										   ${reply.USER_NAME}
+    												  </a> 								   
+											       </div>
+													<div class="mb-1 text-muted"> <span class="starMake">${reply.REPLY_STAR}</span></div>
+													<div class="card-text mb-auto" style="word-break:break-word; font-size : 15px;margin : 20px 0;">${reply.REPLY_CONTENTS}</div>		          
+													<div class="mb-1 text-muted">${reply.REPLY_INDATE}</div>
+						    					 </div>	       
+											</div>
+											<c:if test="${reply.USER_EMAIL eq sessionScope.loginemail}">
+												<div class="deleteButton" style="float : right;">
+													<img style="width:15px; cursor: pointer;" src="/getrend/resources/img/delete.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${istore.instaStore.store_no}')">
+												</div> 
+											</c:if>
+										</td>	
+									 </tr>				
+								 </c:forEach>     								
+						   	 </table>		
+						   </c:otherwise>
+					   </c:choose>	
+				 </div>				
+		    </div>
+	     </div>
+	   </article>
+	 </section>
+   </div>
+   
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
-	
-	
-	
+
 <script type="text/javascript">
-		function printList() {
-			$.ajax({
-				url: "/getrend/reply/replyList",
-				type: "get",
-				data: {"store_no" : $("#store_no").val()},
-				success: function(result) {
-					var output = "";
-					output += "<tr>";
-					output += "<th>별점</th>";
-					output += "<th>닉네임</th>";
-					output += "<th>리뷰</th>";
-					output += "<th>날짜</th>";
-					output += "<th></th>";
-					output += "</tr>";
-					
-					$(result).each(function(index, item) {
-						console.log(item);
-						output += "<tr>";
-						output += "<td>" + item.REPLY_STAR + "</td>";
-						output += "<td><a href='/getrend/mypage/mypage?user_name="+item.USER_NAME+"'>" + item.USER_NAME + "</a></td>";
-						output += "<td>" + item.REPLY_CONTENTS + "</td>";
-						output += "<td>" + item.REPLY_INDATE + "</td>";
-						if(item.loginemail ==item.USER_EMAIL){
-							output += "<td><input type='button' id='removeBtn' value='삭제' onclick='deleteReply("+item.REPLY_NO+")'></td>";
-						}
-						output += "</tr>";
-					});
-					
-					$("#printTable").html(output);
+function insertLike(){
+	var no = $("#store_no").val();
+		$.ajax({
+			url : "/getrend/likes/likeInsert",
+			type : "post",
+			data : {store_no : no},
+			success : function(){
+			var temp = '<img onclick="deleteLike()" class="heart" style="width:52px; cursor: pointer;" src="/getrend/resources/img/heart_click.png">';
+			 $("#like_div").html(temp);   
 				},
-				error: function() { alert("에러 발생"); }
-			});
+			error : function(){alert("실패");}
+			})
+}
+		
+function deleteLike(){
+	var no = $("#store_no").val();
+		$.ajax({
+			url : "/getrend/likes/likeDelete",
+			type : "post",
+			data : {store_no : no},
+			success : function(){
+			var temp = '<img onclick="insertLike()" class="heart" style="width:50px; cursor: pointer;" src="/getrend/resources/img/heart_unclick.png">';
+			 $("#like_div").html(temp);   
+				},
+			error : function(){alert("실패");}
+			})
+}
+//별
+$(function(){
+	$(".starMake").each(function(index,item){
+		var star = $(this).text();
+		
+		if(star == 0.5) $(this).html("<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>");
+		else if(star == 1) $(this).html("<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>");
+		else if(star == 1.5) {
+			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+				temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+				$(this).html(temp);
 		}
-
-			$(function() {
-				$("#writeBtn").on("click", function() {
-					var reply_contents = $("#reply_contents").val();
-					
-					$.ajax({
-						url: "/getrend/reply/replyWrite",
-						type: "get",
-						data: $("#inputForm").serialize(),
-						success: printList,
-						error: function() { alert("에러 발생"); }
-					});
-				});
-
-			
-
-			$('.starRev span').on("click",function(){
-				console.log($(this));
-				$(this).parent().children('span').removeClass('on');
-				$(this).addClass('on').prevAll('span').addClass('on');
-				console.log($(this).attr("value"));
-				var re = $(this).attr("value");
-				$(".starRev").children('input').remove();
-				$(".starRev").append("<input type='hidden' name='reply_star' value="+ re + ">");
-				return false;
-			});
-
-			printList();
-		});
-			
-		function deleteReply(no){
-			$.ajax({
-				url: "/getrend/reply/replyRemove",
-				type: "get",
-				data: {"reply_no": no},
-				success: printList,
-				error: function() { alert("에러 발생"); }
-			});
+		else if(star == 2) {
+			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			    temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			$(this).html(temp);
 		}
-</script>
-
+		else if(star == 2.5) {
+			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			    temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+				temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+			$(this).html(temp);
+		}
+		else if(star == 3) {
+			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+				temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+				temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			$(this).html(temp);
+		}
+		else if(star == 3.5) {
+			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+			$(this).html(temp);
+		}
+		else if(star == 4) {
+			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			$(this).html(temp);
+		}
+		else if(star == 4.5) {
+			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+			$(this).html(temp);
+		}
+		else if(star == 5) {
+			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			$(this).html(temp);
+		}
+	})
+})
+function deleteReply(reply_no,store_no){
+	location.href="/getrend/stores/deleteReply?reply_no=" + reply_no + "&store_no="+ store_no;
+}
+function moreRead(){
+	if($("#replyTable02").css("display") == 'none'){
+		$("#readMoreBtn").css("display","none");
+		$("#readMoreSpin").css("display","");
+		setTimeout(function(){ 
+			$("#readMoreSpin").css("display","none");
+			$("#replyTable01").css("display","none");
+			$("#replyTable02").css("display","");	
+			},1000);	
+	}
+}
+</script>	
 
 
 
 <script type='text/javascript'>
 	//<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('<spring:eval expression="@kakao['KAKAOLOGIN_APPKEY']" />');
+  Kakao.init('<spring:eval expression="@kakao['KAKAOLOGIN_APPKEY']" />');
     // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
     function sendLink() {
     	Kakao.Link.sendDefault({
@@ -314,7 +371,7 @@
         	content: {
           		title: "${istore.instaStore.store_name}",
           		description: "",
-          		imageUrl: document.getElementById("repImg").src,
+          		imageUrl: "",
           		link: {
             		mobileWebUrl: 'https://developers.kakao.com',
             		webUrl: 'https://developers.kakao.com'
@@ -337,6 +394,35 @@
        	});
     }
 	//]]>
+</script>
+
+<script>
+	$(function() {
+		const mapContainer = document.getElementById("map");
+		
+		mapOption = {
+			center: new kakao.maps.LatLng("${istore.instaStore.store_y}", "${istore.instaStore.store_x}"),
+			level: 1 // 지도의 확대 레벨
+		};
+
+		const map = new kakao.maps.Map(mapContainer, mapOption);
+
+		// 커스텀 오버레이에 표시할 내용입니다     
+		// HTML 문자열 또는 Dom Element 입니다 
+		const customMarker = '<a href="https://map.kakao.com/link/to/${istore.instaStore.store_name},${istore.instaStore.store_y},${istore.instaStore.store_x}"><i class="fas fa-map-marker-alt fa-3x"></i></a>';
+
+		// 커스텀 오버레이가 표시될 위치입니다 
+		const position = new kakao.maps.LatLng("${istore.instaStore.store_y}", "${istore.instaStore.store_x}");  
+
+		// 커스텀 오버레이를 생성합니다
+		const customOverlay = new kakao.maps.CustomOverlay({
+			position: position,
+			content: customMarker   
+		});
+
+		// 커스텀 오버레이를 지도에 표시합니다
+		customOverlay.setMap(map);
+	});
 </script>
 
 </body>

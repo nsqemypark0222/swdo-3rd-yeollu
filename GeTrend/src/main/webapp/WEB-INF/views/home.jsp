@@ -442,11 +442,11 @@ $(function() {
 		let positions = [];
 		
 		for(let n in result) {
-			const posotion = {
+			const position = {
 				title: result[n].instaStore.store_name,
 				latlng: new kakao.maps.LatLng(result[n].instaStore.store_y, result[n].instaStore.store_x)
 			}
-			positions.push(posotion);
+			positions.push(position);
 		}
 		
 		// 마커 이미지의 이미지 주소입니다

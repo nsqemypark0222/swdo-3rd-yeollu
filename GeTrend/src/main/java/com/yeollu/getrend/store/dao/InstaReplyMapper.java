@@ -9,6 +9,7 @@ public interface InstaReplyMapper {
 
 	public int replyWrite(InstaReplyVO reply);
 	public int replyRemove(InstaReplyVO vo);
+	public int replyCountByStoreno(String store_no);
 	public ArrayList<HashMap<String, Object>> replyList(InstaReplyVO reply);
 	public ArrayList<HashMap<String, Object>> replyListByEmail(String user_email);
 	public ArrayList<HashMap<String, Object>> replyListByFollow(String user_email);

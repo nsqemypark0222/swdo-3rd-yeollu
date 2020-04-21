@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>   
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,47 +35,51 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				<div class="row">
 					<div class="istore-container scrollbar scrollbar-warning">
 						<c:choose>
-							<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
+							<c:when test="${sessionScope.loginemail != null && istores != null}">
 								<c:forEach var="istore" items="${istores}">
 									<div id="carouselSearchedStores_${istore.instaStore.store_no}" class="carousel slide" data-ride="carousel">
 										<ol class="carousel-indicators">
-											<c:forEach var="item" items="${istore.instaImage.postImgList}" varStatus="status">
-												<c:choose>
-													<c:when test="${status.first}">
-														<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" class="active" ></li>
-													</c:when>
-													<c:otherwise>
-														<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" ></li>
-													</c:otherwise>
-												</c:choose>
+											<c:forEach var="item" items="${istore.instaImageList}" varStatus="status">
+												<c:if test="${item.image_type != 'profile' and fn:length(istore.instaImageList) > 1}">
+													<c:choose>
+														<c:when test="${status.index eq 1}">
+															<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" class="active" ></li>
+														</c:when>
+														<c:otherwise>
+															<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" ></li>
+														</c:otherwise>
+													</c:choose>
+												</c:if>
 											</c:forEach>
 										</ol>
 										<div class="carousel-inner">
-											<c:forEach var="item" items="${istore.instaImage.postImgList}" varStatus="status">
-												<c:choose>
-													<c:when test="${status.first}">
-														<div class="carousel-item active">
-															<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
-												      			<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
-												      		</a>
-											      			<div class="carousel-caption d-none d-md-block">
-												        		<h5>${istore.instaStore.store_name}</h5>
-												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-												      		</div>
-												    	</div>
-													</c:when>
-													<c:otherwise>
-														<div class="carousel-item">
-															<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
-												      			<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
-												      		</a>
-											      			<div class="carousel-caption d-none d-md-block">
-											      				<h5>${istore.instaStore.store_name}</h5>
-												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-												      		</div>
-												    	</div>
-													</c:otherwise>
-												</c:choose>
+											<c:forEach var="item" items="${istore.instaImageList}" varStatus="status">
+												<c:if test="${item.image_type != 'profile' and fn:length(istore.instaImageList) > 1}">
+													<c:choose>
+														<c:when test="${status.index eq 1}">
+															<div class="carousel-item active">
+																<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
+													      			<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+													      		</a>
+												      			<div class="carousel-caption d-none d-md-block">
+													        		<h5>${istore.instaStore.store_name}</h5>
+													        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+													      		</div>
+													    	</div>
+														</c:when>
+														<c:otherwise>
+															<div class="carousel-item">
+																<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
+													      			<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+													      		</a>
+												      			<div class="carousel-caption d-none d-md-block">
+												      				<h5>${istore.instaStore.store_name}</h5>
+													        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+													      		</div>
+													    	</div>
+														</c:otherwise>
+													</c:choose>
+												</c:if>
 											</c:forEach>
 										</div>
 										<a class="carousel-control-prev" href="#carouselSearchedStores_${istore.instaStore.store_no}" role="button" data-slide="prev">
@@ -85,7 +91,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 									    	<span class="sr-only">Next</span>
 									  	</a>
 									</div>
-									
 								</c:forEach>
 							</c:when>
 							<c:otherwise>

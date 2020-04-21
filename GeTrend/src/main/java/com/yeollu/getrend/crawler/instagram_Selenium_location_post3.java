@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 
 import com.yeollu.getrend.store.util.preprocess.core.StringPreprocessor;
 import com.yeollu.getrend.store.vo.InstaImageVO;
-import com.yeollu.getrend.store.vo.PostImageVO;
 import com.yeollu.getrend.util.PropertiesUtil;
 
 public class instagram_Selenium_location_post3 {
@@ -81,15 +80,16 @@ public class instagram_Selenium_location_post3 {
 
 	}
 		
-	public InstaImageVO location_post(String location) {
+	public ArrayList<InstaImageVO> location_post(String store_no, String location_id) {
 		driver = new ChromeDriver(options);
-		logger.info("드라이버 실행 : {}", location);
+		logger.info("드라이버 실행 : {}", location_id);
 		wait = new WebDriverWait(driver, 4);
 		
-		InstaImageVO instaImage = new InstaImageVO();
+		ArrayList<InstaImageVO> instaImageList = new ArrayList<InstaImageVO>();
+		
 		try {
 			
-			driver.get("https://www.instagram.com/explore/locations/" + location);
+			driver.get("https://www.instagram.com/explore/locations/" + location_id);
 			
 			Document doc = Jsoup.parse(driver.getPageSource());
 			
@@ -103,7 +103,12 @@ public class instagram_Selenium_location_post3 {
 			String thum = doc.selectFirst(".ECCnW").attr("src");
 //			System.out.println("대표 사진 : " + thum);
 			if(thum != null && !thum.equals("")) {
-				instaImage.setRepImg(thum);
+				InstaImageVO instaImage = new InstaImageVO();
+				instaImage.setStore_no(store_no);
+				instaImage.setImage_type("profile");
+				instaImage.setImage_url(thum);
+				instaImage.setImage_like(0);
+				instaImageList.add(instaImage);
 			}
 			
 			Actions action = new Actions(driver);
@@ -152,21 +157,20 @@ public class instagram_Selenium_location_post3 {
 				}
 	      	}
 	       	
-	       	ArrayList<PostImageVO> postImgList = new ArrayList<PostImageVO>();
-	       	for(int j = 0; j < likeList.size(); j++) {
-	       		PostImageVO postImage = new PostImageVO();
-	       		postImage.setLike(Integer.parseInt(StringPreprocessor.stringReplace(likeList.get(j))));
-	       		postImage.setImgUrl(srcsetList.get(j));
-	       		postImgList.add(postImage);
-	       	}
-	       	
-	       	instaImage.setPostImgList(postImgList);
+			for(int j = 0; j < likeList.size(); j++) {
+				InstaImageVO instaImage = new InstaImageVO();
+				instaImage.setStore_no(store_no);
+				instaImage.setImage_type("common");
+				instaImage.setImage_url(srcsetList.get(j));
+				instaImage.setImage_like(Integer.parseInt(StringPreprocessor.stringReplace(likeList.get(j))));
+				instaImageList.add(instaImage);
+			}
 	       	 
 	       	System.out.println("======================================================");
 	       	 
 		} catch (TimeoutException e) {
 			logger.info("TimeoutException");
-			return instaImage;
+			return instaImageList;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -176,6 +180,6 @@ public class instagram_Selenium_location_post3 {
 //			driver.quit();
 		}
 		
-		return instaImage;
+		return instaImageList;
 	}
 }

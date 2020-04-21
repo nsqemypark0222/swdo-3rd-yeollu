@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,6 +14,9 @@
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />'></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
 <script src='<c:url value="/resources/js/owl.carousel.min.js"/>'></script>
@@ -36,18 +40,18 @@
 			  	</ol>
 			  	<div class="carousel-inner">
 			    	<div class="carousel-item active">
-	      				<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="1" end="7" step="3">
-							<img class="postImg rounded img-fluid" src="${item.imgUrl}" class="d-block img-fluid" alt="...">
+	      				<c:forEach var="item" items="${istore.instaImageList}" begin="1" end="7" step="3">
+							<img class="postImg rounded img-fluid" src="${item.image_url}" class="d-block img-fluid" alt="...">
 						</c:forEach>
 			    	</div>
 		    		<div class="carousel-item ">
-						<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="2" end="8" step="3">
-								<img class="postImg rounded img-fluid" src="${item.imgUrl}" class="d-block img-fluid" alt="...">
+						<c:forEach var="item" items="${istore.instaImageList}" begin="2" end="8" step="3">
+								<img class="postImg rounded img-fluid" src="${item.image_url}" class="d-block img-fluid" alt="...">
 						</c:forEach>					      		
 			      	</div>
 			    	<div class="carousel-item">
-						<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="3" end="9" step="3">
-							<img class="postImg rounded img-fluid" src="${item.imgUrl}">
+						<c:forEach var="item" items="${istore.instaImageList}" begin="3" end="9" step="3">
+							<img class="postImg rounded img-fluid" src="${item.image_url}">
 						</c:forEach>					      		
 			  		</div>
 			  	</div>	
@@ -139,10 +143,8 @@
 			
 			<!-- 상세 페이지 가게 지도 -->
 			<article class="article_right1">
-				지도
-				<a href="https://map.kakao.com/link/to/${istore.instaStore.store_name},${istore.instaStore.store_y},${istore.instaStore.store_x}">
-					<i class="fas fa-map-marker-alt fa-3x"></i>
-				</a>
+				<div id="map" style="width: 100%; height: 100%; background-color: none;">
+				</div>
 			</article>
 		</section>
 		<!-- 상세페이지 망고플레이트 가게 정보 끝-->
@@ -268,8 +270,11 @@
 	</footer>
 
 <script type="text/javascript">
+<<<<<<< HEAD
 
 //가게 좋아요 
+=======
+>>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 function insertLike(){
 	var no = $("#store_no").val();
 		$.ajax({
@@ -297,10 +302,13 @@ function deleteLike(){
 			error : function(){alert("실패");}
 			})
 }
+<<<<<<< HEAD
 
 //별점 png로 구현
+=======
+//별
+>>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 $(function(){
-
 	$(".starMake").each(function(index,item){
 		var star = $(this).text();
 		
@@ -360,6 +368,7 @@ $(function(){
 		}
 	})
 })
+<<<<<<< HEAD
 
 //리플 삭제
 function deleteReply(reply_no,store_no){
@@ -367,6 +376,11 @@ function deleteReply(reply_no,store_no){
 }
 
 //더 보기 버튼
+=======
+function deleteReply(reply_no,store_no){
+	location.href="/getrend/stores/deleteReply?reply_no=" + reply_no + "&store_no="+ store_no;
+}
+>>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 function moreRead(){
 	if($("#replyTable02").css("display") == 'none'){
 		$("#readMoreBtn").css("display","none");
@@ -378,7 +392,6 @@ function moreRead(){
 			},1000);	
 	}
 }
-
 </script>	
 
 
@@ -396,7 +409,7 @@ function moreRead(){
         	content: {
           		title: "${istore.instaStore.store_name}",
           		description: "",
-          		imageUrl: "${istore.instaImage.repImg}",
+          		imageUrl: "${istore.instaImageList[0].image_url}",
           		link: {
             		mobileWebUrl: 'https://developers.kakao.com',
             		webUrl: 'https://developers.kakao.com'
@@ -419,6 +432,35 @@ function moreRead(){
        	});
     }
 	//]]>
+</script>
+
+<script>
+	$(function() {
+		const mapContainer = document.getElementById("map");
+		
+		mapOption = {
+			center: new kakao.maps.LatLng("${istore.instaStore.store_y}", "${istore.instaStore.store_x}"),
+			level: 1 // 지도의 확대 레벨
+		};
+
+		const map = new kakao.maps.Map(mapContainer, mapOption);
+
+		// 커스텀 오버레이에 표시할 내용입니다     
+		// HTML 문자열 또는 Dom Element 입니다 
+		const customMarker = '<a href="https://map.kakao.com/link/to/${istore.instaStore.store_name},${istore.instaStore.store_y},${istore.instaStore.store_x}"><i class="fas fa-map-marker-alt fa-3x"></i></a>';
+
+		// 커스텀 오버레이가 표시될 위치입니다 
+		const position = new kakao.maps.LatLng("${istore.instaStore.store_y}", "${istore.instaStore.store_x}");  
+
+		// 커스텀 오버레이를 생성합니다
+		const customOverlay = new kakao.maps.CustomOverlay({
+			position: position,
+			content: customMarker   
+		});
+
+		// 커스텀 오버레이를 지도에 표시합니다
+		customOverlay.setMap(map);
+	});
 </script>
 
 </body>

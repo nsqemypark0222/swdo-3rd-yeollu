@@ -69,7 +69,7 @@
 					                	<a id="linkjoin" href="<c:url value='userJoin'/>">회원가입</a>
 					                </div>
 					                
-					                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" >Sign in</button>
+					                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" style="background-color : #FF8A00; border : none;" type="submit" >Sign in</button>
 							 	</form>
 
 							 	<div id="socialbtn" class="row mx-auto">

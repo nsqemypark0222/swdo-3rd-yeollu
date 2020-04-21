@@ -79,7 +79,7 @@
 							<input type="hidden" value="${istore.instaStore.store_no}" id="store_no">							
 							<div id="kakao_link">
 								<a id="kakao-link-btn" href="javascript:sendLink()">
-									<i class="fas fa-share-alt fa-3x"></i>
+									<i class="fas fa-share-alt fa-3x" data-toggle="tooltip" data-placement="top" title="SNS공유"></i>
 									<!-- <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/> -->
 								</a>
 							</div>
@@ -87,10 +87,10 @@
 						  <td  style="border-bottom: 1px solid  #e9e9e9; width : 70px;">
 						  <div id="like_div">
 								<c:if test="${!isExistedLike}">
-									<img onclick="insertLike();" style="width:50px; cursor: pointer;" src="/getrend/resources/img/heart_unclick.png">
+									<i class="fa fa-heart fa-3x"  onclick="insertLike();" style="cursor: pointer; color:#d3d3d3;"  data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>
 								</c:if>
 								<c:if test="${isExistedLike}">
-									<img onclick="deleteLike();" class="heart" style="width:52px; cursor: pointer;" src="/getrend/resources/img/heart_click.png">
+									<i class="fa fa-heart fa-3x" onclick="deleteLike();"style="cursor: pointer; color:rgba(255, 138, 0, 0.78);" data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>
 								</c:if>
 							</div>
 						  </td>
@@ -259,7 +259,7 @@ function insertLike(){
 			type : "post",
 			data : {store_no : no},
 			success : function(){
-			var temp = '<img onclick="deleteLike()" class="heart" style="width:52px; cursor: pointer;" src="/getrend/resources/img/heart_click.png">';
+			var temp = '<i class="fa fa-heart fa-3x" onclick="deleteLike();"style="cursor: pointer; color:rgba(255, 138, 0, 0.78);" data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>';
 			 $("#like_div").html(temp);   
 				},
 			error : function(){alert("실패");}
@@ -273,7 +273,7 @@ function deleteLike(){
 			type : "post",
 			data : {store_no : no},
 			success : function(){
-			var temp = '<img onclick="insertLike()" class="heart" style="width:50px; cursor: pointer;" src="/getrend/resources/img/heart_unclick.png">';
+			var temp = '<i class="fa fa-heart fa-3x"onclick="insertLike();" style="cursor: pointer; color:#d3d3d3;" data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>';
 			 $("#like_div").html(temp);   
 				},
 			error : function(){alert("실패");}

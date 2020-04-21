@@ -285,28 +285,28 @@ function moreRead(){
 		<div class="col">
 			<input type="hidden" id="user_email" value="${user.user_email}">			
 			<input type="hidden" id="login_email" value="${sessionScope.loginemail}">			
-			<div class="mypage_profile">
+			<div class="mypage_profile" style="background-color : beige; border-radius:10px;">
 				<table class="mypage_profile_table">
 					<tr>
 						<tr><td>
 						<c:choose>
 							<c:when test="${user.user_email != sessionScope.loginemail}">
 								<c:if test="${user.user_profile != null}">
-							        <img class="user_profile" src="${user.user_profile}" alt="프로필 사진">
+							        <img class="user_profile"  style="border-radius:50%;" src="${user.user_profile}" alt="프로필 사진">
 							    </c:if>
 							    <c:if test="${user.user_profile == null}">
-									<img class="user_profile_de" src="<c:url value='/resources/img/user.png'/>" alt="프로필 사진">
+									<img class="user_profile_de" style="border-radius:50%;" src="<c:url value='/resources/img/user.png'/>" alt="프로필 사진">
 							    </c:if>
 							</c:when>					
 							<c:otherwise>
 								<c:if test="${user.user_profile != null}">
 								  <a href="/getrend/users/userUpdate">
-							        <img class="user_profile" src="${user.user_profile}" alt="프로필 사진">
+							        <img class="user_profile" src="${user.user_profile}" style="border-radius:50%;" alt="프로필 사진">
 							      </a>
 							    </c:if>
 							    <c:if test="${user.user_profile == null}">
 							      <a href="/getrend/users/userUpdate">
-									<img class="user_profile_de" src="<c:url value='/resources/img/user.png'/>" alt="프로필 사진">
+									<img class="user_profile_de" src="<c:url value='/resources/img/user.png'/>"  style="border-radius:50%;"alt="프로필 사진">
 							      </a>
 							    </c:if>
 							</c:otherwise>

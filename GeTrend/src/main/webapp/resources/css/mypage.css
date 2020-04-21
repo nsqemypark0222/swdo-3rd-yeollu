@@ -7,6 +7,8 @@
 	width: 900px;
 	height: 240px;
 	left: 100px;
+	background-color : beige;
+	border-radius : 10px;
 }
 
 .mypage_profile_header_img{

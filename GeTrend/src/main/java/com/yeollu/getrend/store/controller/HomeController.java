@@ -57,14 +57,9 @@ public class HomeController {
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
-	public ArrayList<InstaStoreInfoVO> search(@RequestBody ReqParmVO reqParm, HttpSession session) {
+	public ArrayList<InstaStoreInfoVO> search(@RequestBody ReqParmVO reqParm, Model model) {
 		logger.info("검색 시작");
 		long startTime = System.currentTimeMillis();
-		
-		if(session.getAttribute("istores") != null) {
-			logger.info("current istores : {}", session.getAttribute("istores"));
-			session.removeAttribute("istores");
-		}
 		
 		ArrayList<Point> points = reqParm.getPoints();
 		ArrayList<String> categoryValues = reqParm.getCategoryValues();
@@ -103,17 +98,17 @@ public class HomeController {
 		ArrayList<ScoreVO> scoreList = storeService.generateScoreList(instaStoreList);
 		instaStoreList = storeService.sortInstaStoreList(instaStoreList, scoreList);
 		
-		// 인스타그램 크롤링 요청
+		// 인스타그램 크롤링 요청 및 인스타 이미지 저장
 		ArrayList<InstaImageVO> instaImageList = storeService.requestCrawling(instaStoreList);
-
+		
 		// View로 보낼 최종 객체 리스트
 		ArrayList<InstaStoreInfoVO> instaStoreInfoList = storeService.generateInstaStoreInfoList(instaStoreList, mangoStoreInfoList, scoreList, instaImageList);
 		
 		// 인스타그램 좋아요가 높은 순으로 재정렬
 		instaStoreInfoList = storeService.sortInstaStoreInfoList(instaStoreInfoList);
 		
-		// 세션에 저장
-		session.setAttribute("istores", instaStoreInfoList);
+		// 모델에 저장
+		model.addAttribute("istores", instaStoreInfoList);
 
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;

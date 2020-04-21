@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yeollu.getrend.crawler.CrawlerExecutor;
+import com.yeollu.getrend.store.dao.InstaImageDAO;
 import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.MangoStoreInfoDAO;
 import com.yeollu.getrend.store.dao.ScoreDAO;
@@ -41,6 +42,9 @@ public class StoreServiceImpl implements StoreService {
 	
 	@Autowired
 	private ScoreDAO scoreDAO;
+	
+	@Autowired
+	private InstaImageDAO instaImageDAO;
 
 	@Override
 	public ArrayList<InstaStoreVO> generateInstaStoreList(ArrayList<StoreVO> storeList) {
@@ -132,13 +136,51 @@ public class StoreServiceImpl implements StoreService {
 		ArrayList<InstaImageVO> instaImageList = new ArrayList<InstaImageVO>();
 		ArrayList<CrawlerExecutor> crawlerExecutorList = new ArrayList<CrawlerExecutor>();
 		for (InstaStoreVO instaStore : instaStoreList) {
+			
 			CrawlerExecutor crawlerExecutor = new CrawlerExecutor();
-			crawlerExecutor.setLocation(instaStore.getLocation_id());
+			crawlerExecutor.setStore_no(instaStore.getStore_no());
+			crawlerExecutor.setLocation_id(instaStore.getLocation_id());
+			
+			// 이미 존재
+			if(instaImageDAO.isExistedInstaImage(instaStore.getStore_no())) {
+				crawlerExecutor.setIsExisted(true);
+				// 존재하지만 업데이트 필요
+				if(instaImageDAO.isRequiredUpdateInstaImage(instaStore.getStore_no())) {
+					crawlerExecutor.setIsRequiredUpdate(true);
+				} else {
+					crawlerExecutor.setIsRequiredUpdate(false);
+				}
+			} else {
+				crawlerExecutor.setIsExisted(false);
+			}
 			new Thread(crawlerExecutor, "crawling :  " + instaStore.getLocation_id()).start();
 			crawlerExecutorList.add(crawlerExecutor);
 		}
+		
 		for (CrawlerExecutor crawlerExecutor : crawlerExecutorList) {
-			instaImageList.add(crawlerExecutor.getInstaImage());
+			if(crawlerExecutor.getIsExisted()) {
+				if(instaImageDAO.isRequiredUpdateInstaImage(crawlerExecutor.getStore_no())) {
+					for(InstaImageVO instaImage : crawlerExecutor.getInstaImageList()) {
+						int cnt = instaImageDAO.updateInstaIamge(instaImage);
+						if(cnt > 0) {
+							logger.info("업데이트 성공");
+						} else {
+							logger.info("업데이트 실패");
+						}
+					}
+				}
+			} else {
+				for(InstaImageVO instaImage : crawlerExecutor.getInstaImageList()) {
+					int cnt = instaImageDAO.insertInstaImage(instaImage);
+					if(cnt > 0) {
+						logger.info("추가 성공");
+					} else {
+						logger.info("추가 실패");
+					}
+				}
+			}
+			instaImageList.addAll(instaImageDAO.selectInstaImageByStoreNo(crawlerExecutor.getStore_no()));
+//			instaImageList.addAll(crawlerExecutor.getInstaImageList());
 		}
 		CrawlerExecutor.killChromeDriver();
 		return instaImageList;
@@ -155,11 +197,18 @@ public class StoreServiceImpl implements StoreService {
 				instaStoreInfo.setInstaStore(instaStoreList.get(i));
 				instaStoreInfo.setMangoStoreInfo(mangoStoreInfoList.get(i));
 				instaStoreInfo.setScore(scoreList.get(i));
+				
+				ArrayList<InstaImageVO> _instaImageList = new ArrayList<InstaImageVO>();
+				for(InstaImageVO instaImage : instaImageList) {
+					if(instaStoreInfo.getInstaStore().getStore_no().equals(instaImage.getStore_no())) {
+						_instaImageList.add(instaImage);
+					}
+				}
 
-				if (instaImageList.size() > i) {
-					instaStoreInfo.setInstaImage(instaImageList.get(i));
+				if (_instaImageList.size() > 0) {
+					instaStoreInfo.setInstaImageList(_instaImageList);
 				} else {
-					instaStoreInfo.setInstaImage(null);
+					instaStoreInfo.setInstaImageList(null);
 				}
 //				logger.info("instaStoreInfo name : {}", instaStoreInfo.getInstaStore().getStore_name());
 				instaStoreInfoList.add(instaStoreInfo);
@@ -177,11 +226,11 @@ public class StoreServiceImpl implements StoreService {
 			ScoreVO score = instaStoreInfo.getScore();
 			
 			int sum = 0;
-			if(instaStoreInfo.getInstaImage().getPostImgList() != null) {
-				for(PostImageVO postImage : instaStoreInfo.getInstaImage().getPostImgList()) {
-					sum += postImage.getLike();
-				}
-			}
+//			if(instaStoreInfo.getInstaImage().getPostImgList() != null) {
+//				for(PostImageVO postImage : instaStoreInfo.getInstaImage().getPostImgList()) {
+//					sum += postImage.getLike();
+//				}
+//			}
 			score.setSum_of_insta_like(sum);
 			instaStoreInfo.setScore(score);
 		}

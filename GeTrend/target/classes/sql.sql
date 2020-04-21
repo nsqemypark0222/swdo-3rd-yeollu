@@ -11,6 +11,7 @@ drop table users;
 drop table stores;
 --drop table stores cascade constraints;
 drop table insta_replys;
+drop table insta_images;
 
 
 
@@ -127,8 +128,17 @@ create table mango_times (
     , constraint fk1_mango_times foreign key (store_no) references stores(store_no)
 );
 
+create table insta_images (
+    image_no        number              primary key
+    , store_no      varchar2(200)       
+    , image_type    varchar2(50)        not null
+    , image_url     varchar2(1000)
+    , image_like    number
+    , image_indate  date                default sysdate
+);
 
-select * from mango_times;
+create sequence seq_insta_images;
+
 
 commit;
 commit;

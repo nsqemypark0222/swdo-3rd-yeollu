@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -225,47 +226,51 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 				<div class="row">
 					<div class="istore-container scrollbar scrollbar-warning">
 						<c:choose>
-							<c:when test="${sessionScope.loginemail != null && sessionScope.istores != null}">
+							<c:when test="${sessionScope.loginemail != null && istores != null}">
 								<c:forEach var="istore" items="${istores}">
 									<div id="carouselSearchedStores_${istore.instaStore.store_no}" class="carousel slide" data-ride="carousel">
 										<ol class="carousel-indicators">
-											<c:forEach var="item" items="${istore.instaImage.postImgList}" varStatus="status">
-												<c:choose>
-													<c:when test="${status.first}">
-														<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" class="active" ></li>
-													</c:when>
-													<c:otherwise>
-														<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" ></li>
-													</c:otherwise>
-												</c:choose>
+											<c:forEach var="item" items="${istore.instaImageList}" varStatus="status">
+												<c:if test="${item.image_type != 'profile' and fn:length(istore.instaImageList) > 1}">
+													<c:choose>
+														<c:when test="${status.index eq 1}">
+															<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" class="active" ></li>
+														</c:when>
+														<c:otherwise>
+															<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" ></li>
+														</c:otherwise>
+													</c:choose>
+												</c:if>
 											</c:forEach>
 										</ol>
 										<div class="carousel-inner">
-											<c:forEach var="item" items="${istore.instaImage.postImgList}" varStatus="status">
-												<c:choose>
-													<c:when test="${status.first}">
-														<div class="carousel-item active">
-															<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
-												      			<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
-												      		</a>
-											      			<div class="carousel-caption d-none d-md-block">
-												        		<h5>${istore.instaStore.store_name}</h5>
-												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-												      		</div>
-												    	</div>
-													</c:when>
-													<c:otherwise>
-														<div class="carousel-item">
-															<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
-												      			<img src="${item.imgUrl}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
-												      		</a>
-											      			<div class="carousel-caption d-none d-md-block">
-											      				<h5>${istore.instaStore.store_name}</h5>
-												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-												      		</div>
-												    	</div>
-													</c:otherwise>
-												</c:choose>
+											<c:forEach var="item" items="${istore.instaImageList}" varStatus="status">
+												<c:if test="${item.image_type != 'profile' and fn:length(istore.instaImageList) > 1}">
+													<c:choose>
+														<c:when test="${status.index eq 1}">
+															<div class="carousel-item active">
+																<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
+													      			<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+													      		</a>
+												      			<div class="carousel-caption d-none d-md-block">
+													        		<h5>${istore.instaStore.store_name}</h5>
+													        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+													      		</div>
+													    	</div>
+														</c:when>
+														<c:otherwise>
+															<div class="carousel-item">
+																<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
+													      			<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+													      		</a>
+												      			<div class="carousel-caption d-none d-md-block">
+												      				<h5>${istore.instaStore.store_name}</h5>
+													        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+													      		</div>
+													    	</div>
+														</c:otherwise>
+													</c:choose>
+												</c:if>
 											</c:forEach>
 										</div>
 										<a class="carousel-control-prev" href="#carouselSearchedStores_${istore.instaStore.store_no}" role="button" data-slide="prev">
@@ -357,36 +362,40 @@ $(function() {
 				$(result).each(function(index, item) {
 					str += '<div id="carouselSearchedStores_' + item.instaStore.store_no + '" class="carousel slide" data-ride="carousel">';
 					str += 		'<ol class="carousel-indicators">';
-					for(let i = 0; i < item.instaImage.postImgList.length; i++) {
-						if(i === 0) {
-							str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" class="active" ></li>';
-						} else {
-							str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" ></li>';
+					for(let i = 0; i < item.instaImageList.length; i++) {
+						if(item.image_type !== 'profile' && item.instaImageList.length > 1) {
+							if(i === 1) {
+								str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" class="active" ></li>';
+							} else {
+								str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" ></li>';
+							}
 						}
 					}
 					str += 		'</ol>';
 					str += 		'<div class="carousel-inner">';
-					for(let i = 0; i < item.instaImage.postImgList.length; i++) {
-						if(i === 0) {
-							str += '<div class="carousel-item active">';
-							str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
-							str +=			'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
-							str +=		'</a>';
-							str +=		'<div class="carousel-caption d-none d-md-block">';
-							str += 			'<h5>' + item.instaStore.store_name + '</h5>';
-							str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
-							str +=		'</div>';
-				      		str += '</div>';
-						} else {
-							str += '<div class="carousel-item">';
-							str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
-							str +=			'<img src="' + item.instaImage.postImgList[i].imgUrl + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
-							str +=		'</a>';
-							str +=		'<div class="carousel-caption d-none d-md-block">';
-							str += 			'<h5>' + item.instaStore.store_name + '</h5>';
-							str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
-							str +=		'</div>';
-				      		str += '</div>';
+					for(let i = 0; i < item.instaImageList.length; i++) {
+						if(item.image_type !== 'profile' && item.instaImageList.length > 1) {
+							if(i === 1) {
+								str += '<div class="carousel-item active">';
+								str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
+								str +=			'<img src="' + item.instaImageList[i].image_url + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+								str +=		'</a>';
+								str +=		'<div class="carousel-caption d-none d-md-block">';
+								str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+								str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+								str +=		'</div>';
+					      		str += '</div>';
+							} else {
+								str += '<div class="carousel-item">';
+								str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
+								str +=			'<img src="' + item.instaImageList[i].image_url + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+								str +=		'</a>';
+								str +=		'<div class="carousel-caption d-none d-md-block">';
+								str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+								str +=			'<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>';
+								str +=		'</div>';
+					      		str += '</div>';
+							}
 						}
 					}
 					str += 		'</div>';

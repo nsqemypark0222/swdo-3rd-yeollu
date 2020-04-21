@@ -46,7 +46,11 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="row">
-					<img class="rounded-circle" id="repImg" src="${istore.instaImage.repImg}">
+					<c:forEach var="item" items="${istore.instaImageList}">
+						<c:if test="${item.image_type == 'profile'}">
+							<img class="rounded-circle" id="repImg" src="${item.image_url}">
+						</c:if>
+					</c:forEach>
 				</div>
 				<div class="row">
 					<div class="col-md-4">
@@ -95,18 +99,18 @@
 						<div class="card-body mb-3">
 							<div class="row no-gutters">
 								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="1" end="7" step="3">
-										<img class="rounded img-fluid" src="${item.imgUrl}">
+									<c:forEach var="item" items="${istore.instaImageList}" begin="1" end="7" step="3">
+										<img class="rounded img-fluid" src="${item.image_url}">
 									</c:forEach>
 								</div>
 								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="2" end="8" step="3">
-										<img class="rounded img-fluid" src="${item.imgUrl}">
+									<c:forEach var="item" items="${istore.instaImageList}" begin="2" end="8" step="3">
+										<img class="rounded img-fluid" src="${item.image_url}">
 									</c:forEach>
 								</div>
 								<div class="col-md-4">
-									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="3" end="9" step="3">
-										<img class="rounded img-fluid" src="${item.imgUrl}">
+									<c:forEach var="item" items="${istore.instaImageList}" begin="3" end="9" step="3">
+										<img class="rounded img-fluid" src="${item.image_url}">
 									</c:forEach>
 								</div>
 							</div>
@@ -310,7 +314,7 @@
         	content: {
           		title: "${istore.instaStore.store_name}",
           		description: "",
-          		imageUrl: "${istore.instaImage.repImg}",
+          		imageUrl: document.getElementById("repImg").src,
           		link: {
             		mobileWebUrl: 'https://developers.kakao.com',
             		webUrl: 'https://developers.kakao.com'

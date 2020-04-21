@@ -21,7 +21,6 @@ import com.yeollu.getrend.store.vo.InstaLocationVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
-import com.yeollu.getrend.store.vo.PostImageVO;
 import com.yeollu.getrend.store.vo.ScoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
@@ -187,7 +186,6 @@ public class StoreServiceImpl implements StoreService {
 				}
 			}
 			instaImageList.addAll(instaImageDAO.selectInstaImageByStoreNo(crawlerExecutor.getStore_no()));
-//			instaImageList.addAll(crawlerExecutor.getInstaImageList());
 		}
 		CrawlerExecutor.killChromeDriver();
 		return instaImageList;
@@ -217,13 +215,11 @@ public class StoreServiceImpl implements StoreService {
 				} else {
 					instaStoreInfo.setInstaImageList(null);
 				}
-//				logger.info("instaStoreInfo name : {}", instaStoreInfo.getInstaStore().getStore_name());
 				instaStoreInfoList.add(instaStoreInfo);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		logger.info("instaStoreInfoList size : {}", instaStoreInfoList.size());
 		return instaStoreInfoList;
 	}
 	
@@ -233,12 +229,13 @@ public class StoreServiceImpl implements StoreService {
 			ScoreVO score = instaStoreInfo.getScore();
 			
 			int sum = 0;
-//			if(instaStoreInfo.getInstaImage().getPostImgList() != null) {
-//				for(PostImageVO postImage : instaStoreInfo.getInstaImage().getPostImgList()) {
-//					sum += postImage.getLike();
-//				}
-//			}
+			if(instaStoreInfo.getInstaImageList() != null) {
+				for(InstaImageVO instaImage : instaStoreInfo.getInstaImageList()) {
+					sum += instaImage.getImage_like();
+				}
+			}
 			score.setSum_of_insta_like(sum);
+			logger.info("{}", score.getSum_of_insta_like());
 			instaStoreInfo.setScore(score);
 		}
 		

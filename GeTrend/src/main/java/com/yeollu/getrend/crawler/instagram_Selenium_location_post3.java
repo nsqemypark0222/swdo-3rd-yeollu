@@ -21,8 +21,6 @@ import org.slf4j.LoggerFactory;
 
 import com.yeollu.getrend.store.util.preprocess.core.StringPreprocessor;
 import com.yeollu.getrend.store.vo.InstaImageVO;
-import com.yeollu.getrend.store.vo.InstaLocationVO;
-import com.yeollu.getrend.store.vo.PostImageVO;
 import com.yeollu.getrend.util.PropertiesUtil;
 
 public class instagram_Selenium_location_post3 {

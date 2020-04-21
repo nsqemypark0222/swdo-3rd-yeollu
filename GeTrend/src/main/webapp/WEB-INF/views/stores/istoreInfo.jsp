@@ -371,7 +371,7 @@ function moreRead(){
         	content: {
           		title: "${istore.instaStore.store_name}",
           		description: "",
-          		imageUrl: "",
+          		imageUrl: "${istore.instaImageList[0].image_url}",
           		link: {
             		mobileWebUrl: 'https://developers.kakao.com',
             		webUrl: 'https://developers.kakao.com'

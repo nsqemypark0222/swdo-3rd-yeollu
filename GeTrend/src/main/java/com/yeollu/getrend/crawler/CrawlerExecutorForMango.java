@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yeollu.getrend.mango.vo.MangoStoreVO;
-import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
 public class CrawlerExecutorForMango implements Runnable {

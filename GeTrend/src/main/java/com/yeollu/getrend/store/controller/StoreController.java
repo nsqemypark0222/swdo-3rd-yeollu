@@ -34,6 +34,7 @@ public class StoreController {
 	@Autowired
 	private ScoreDAO scoreDAO;
 	
+	//상세 페이지
 	@RequestMapping(value = "/istoreInfo", method = RequestMethod.GET)
 	public String istoreInfo(String store_no, HttpSession session, Model model) {
 		logger.info("store_no : {}", store_no);
@@ -68,7 +69,7 @@ public class StoreController {
 		return "/stores/istoreInfo";
 	}
 	
-
+	//댓글 작성 jsp
 	@RequestMapping(value="istoreinfo_reply", method=RequestMethod.GET)
 	public String istoreinfo_reply(String store_name, String store_no, Model model) {
 		model.addAttribute("store_name", store_name);

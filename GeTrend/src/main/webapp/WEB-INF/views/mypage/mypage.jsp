@@ -18,20 +18,20 @@
 
 
 <script type="text/javascript">
-
+//팔로우 추가
 function insertFollow(follows_following){
 	location.href = "/getrend/insertFollow?follows_following=" + follows_following;	
 	
 }
 
 
-
+//팔로우 취소
 function deleteFollow(follows_following){	
 	location.href = "/getrend/deleteFollow?follows_following=" + follows_following;	
 }
 
 
-//별
+//별점 png로 구현
 $(function(){
 
 	$(".starMake").each(function(index,item){
@@ -95,7 +95,7 @@ $(function(){
 })
 
 
-	
+/*	
 function leftArrow(){
 	var rightPos = $('#scroll_box').scrollLeft();
 	$("#scroll_box").animate({scrollLeft: rightPos - 270}, 200);
@@ -105,8 +105,9 @@ function rightArrow(){
 	var leftPos = $('#scroll_box').scrollLeft();
 	$("#scroll_box").animate({scrollLeft: leftPos + 270}, 200);
 }
+*/
 
-
+//관심있는가게, 팔로우, 팔로워 버튼 on / off
 $(function() {
 
     $('.button-class1').click(function(){
@@ -137,7 +138,7 @@ $(function() {
 
 });
 
-
+//관심있는 가게 리스트 
 function likeStore(user_email){     
 	$.ajax({
 		url : "/getrend/mypage/likeStoreList",
@@ -166,6 +167,8 @@ function likeStore(user_email){
 	})
 	
 }
+
+//팔로워 리스트
 function follower(user_email){   
 	$.ajax({
 		url : "/getrend/mypage/followerList",
@@ -202,6 +205,8 @@ function follower(user_email){
 
 	
 }
+
+//팔로우 리스트
 function follow(user_email){    
 	$.ajax({
 		url : "/getrend/mypage/followList",
@@ -235,6 +240,7 @@ function follow(user_email){
 	})	
 }
 
+//유저 확인해서 댓글 삭제 버튼 생성
 $(function(){
 	var user_email = $("#user_email").val();
 	var login_email = $("#login_email").val();
@@ -250,10 +256,13 @@ $(function(){
 	} 
 })
 
+//댓글 삭제
 function deleteReply(no,user_name){
 	location.href="/getrend/mypage/deleteReply?reply_no=" + no + "&user_name=" + user_name;
 }
 
+
+//더보기 버튼
 function moreRead(){
 	if($("#replyTable02").css("display") == 'none'){
 		$("#readMoreBtn").css("display","none");
@@ -284,7 +293,8 @@ function moreRead(){
 	<div class="row">
 		<div class="col">
 			<input type="hidden" id="user_email" value="${user.user_email}">			
-			<input type="hidden" id="login_email" value="${sessionScope.loginemail}">			
+			<input type="hidden" id="login_email" value="${sessionScope.loginemail}">
+			<!-- 마이페이지 프로필 테이블 -->			
 			<div class="mypage_profile" style="background-color : beige; border-radius:10px;">
 				<table class="mypage_profile_table">
 					<tr>
@@ -316,7 +326,8 @@ function moreRead(){
 						
 						<tr class="mypage_profile_user_name">
 							<td>${user.user_name}</td>
-						<tr>	
+						<tr>
+						<!-- 내 페이지 아니면 팔로우버튼 생성 -->	
 							<c:if test="${sessionScope.loginemail != null}">
 								<c:if test="${user.user_email != sessionScope.loginemail}">
 								<c:choose>
@@ -336,7 +347,7 @@ function moreRead(){
 	</div>
 
 	
-	
+	<!-- 가게, 팔로우, 팔로워 리스트 버튼 3개 -->
 	<div class="row">
 		<div class="col">
 			<div class="mypage_buttons">
@@ -351,6 +362,7 @@ function moreRead(){
 		</div>
 	</div>
 
+	<!-- 버튼 디폴트 ; 관심있는 가게 리스트 -->
 	<div class="row">
 	   <div class="col">
 			<div class="mypage_list">
@@ -390,6 +402,7 @@ function moreRead(){
 		</div>	
 	</div>
 
+	<!--방 주인의 댓글 리스트  -->
 	<div class="row">
 		<div class="col">
 			<div class="mypage_replies">

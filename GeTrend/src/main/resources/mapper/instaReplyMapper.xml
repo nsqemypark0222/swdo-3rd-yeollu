@@ -43,6 +43,8 @@ from
 where
 	r.user_email = u.user_email
 	and r.store_no = #{store_no}
+order by
+	r.reply_indate desc
 </select>
 	
 <select id="replyListByEmail" parameterType="string" resultType="hashmap">
@@ -122,7 +124,14 @@ order by
 	r.reply_no desc
 </select>  
 
-
+<select id="replyCountByStoreno" parameterType="string" resultType="int">
+select
+	count(*)
+from
+	insta_replys
+where
+	store_no = #{store_no}
+</select>
 
 
 </mapper>

@@ -39,7 +39,7 @@ where
 and
 	l.user_email = #{user_email}
 order by
-	s.store_name
+	l.likes_indate desc
 </select>
 
 <select id="likeSelectByEmailStoreno" parameterType="like" resultType="int">

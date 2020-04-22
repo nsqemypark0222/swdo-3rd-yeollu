@@ -48,13 +48,10 @@ public class StoreController {
 	@Autowired
 	private ScoreDAO scoreDAO;
 	
-<<<<<<< HEAD
 	//상세 페이지
-=======
 	@Autowired
 	private InstaImageDAO instaImageDAO;
 	
->>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 	@RequestMapping(value = "/istoreInfo", method = RequestMethod.GET)
 	public String istoreInfo(String store_no, HttpSession session, Model model) {
 		logger.info("store_no : {}", store_no);

@@ -39,12 +39,13 @@ font-size:large;
 		<div class="row">
 			<div class="col-md-2">
 			</div>
-			<div class="col-md-4">
-				<div class="row">
+				<div class="col-md-8">
 					<div class="istore-container scrollbar scrollbar-warning">
 						<c:choose>
 							<c:when test="${sessionScope.loginemail != null && istores != null}">
 								<c:forEach var="istore" items="${istores}">
+								  <div class="row mb-3 rounded" style="background-color:#f7f3c8;">
+								   <div class="col-md-6">
 									<div id="carouselSearchedStores_${istore.instaStore.store_no}" class="carousel slide" data-ride="carousel">
 										<ol class="carousel-indicators">
 											<c:forEach var="item" items="${istore.instaImageList}" varStatus="status">
@@ -71,7 +72,6 @@ font-size:large;
 													      		</a>
 												      			<div class="carousel-caption d-none d-md-block">
 													        		<h5>${istore.instaStore.store_name}</h5>
-													        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 													      		</div>
 													    	</div>
 														</c:when>
@@ -82,7 +82,6 @@ font-size:large;
 													      		</a>
 												      			<div class="carousel-caption d-none d-md-block">
 												      				<h5>${istore.instaStore.store_name}</h5>
-													        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 													      		</div>
 													    	</div>
 														</c:otherwise>
@@ -99,27 +98,26 @@ font-size:large;
 									    	<span class="sr-only">Next</span>
 									  	</a>
 									</div>
+								</div>
+								 <div class="col-md-6" id="storesinfo">
+										 <span class="mb-0" >
+											 <a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />' style="color:#00233D; font-size:40px; font-weight:bold;">
+											 	${istore.instaStore.store_name}
+											 </a>
+										 </span>
+										 <hr>
+										 <div class="mb-1 text-muted">${istore.instaStore.store_cate1}</div>
+										 <p class="card-text mb-auto">${istore.instaStore.store_adr1}</p>
+								</div>
+								</div>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-							
+							 <h2>검색결과가 없습니다.</h2>
 							</c:otherwise>
 						</c:choose>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-4" id="storesinfo">
-				<c:forEach var="istore" items="${istores}">
-					 <span class="mb-0" >
-						 <a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />' style="color:#FF8A00; font-size:40px">
-						 	${istore.instaStore.store_name}
-						 </a>
-					 </span>
-					 <hr>
-					 <div class="mb-1 text-muted">${istore.instaStore.store_cate1}</div>
-					 <p class="card-text mb-auto">${istore.instaStore.store_adr1}</p>
-				</c:forEach>
-			</div>
 			<div class="col-md-2">
 			</div>
 		</div>

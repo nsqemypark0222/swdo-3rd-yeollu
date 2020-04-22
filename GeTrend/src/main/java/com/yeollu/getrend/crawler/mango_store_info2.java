@@ -33,8 +33,6 @@ public class mango_store_info2 {
 	private WebDriverWait wait;
 	
 	static {
-//		System.setProperty("webdriver.chrome.driver", "C:/stsinstall/sts-4.5.0.RELEASE/chromedriver.exe");
-//		System.setProperty("webdriver.chrome.driver", "C:/sts/sts-4.5.0.RELEASE/chromedriver.exe");
 		String driverPath = PropertiesUtil.get("util", "CHROME_DRIVER");
 		System.setProperty("webdriver.chrome.driver", driverPath);    	 	
 		options = new ChromeOptions();

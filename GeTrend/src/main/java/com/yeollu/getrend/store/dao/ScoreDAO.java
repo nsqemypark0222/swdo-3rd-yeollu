@@ -21,4 +21,15 @@ public class ScoreDAO {
 		}
 		return score;
 	}
+	
+	public int scoreAvgByStoreno(String store_no)  {
+		int cnt = 0;
+		try {
+			ScoreMapper mapper = session.getMapper(ScoreMapper.class);
+			cnt = mapper.scoreAvgByStoreno(store_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
 }

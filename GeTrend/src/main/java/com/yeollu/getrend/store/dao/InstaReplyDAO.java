@@ -78,4 +78,17 @@ public class InstaReplyDAO {
 		}
 		return rlist;
 	}
+	
+	public int replyCountByStoreno(String store_no){
+		int cnt = 0;
+		try {
+			InstaReplyMapper mapper = session.getMapper(InstaReplyMapper.class);
+			cnt = mapper.replyCountByStoreno(store_no);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+	
+	
 }

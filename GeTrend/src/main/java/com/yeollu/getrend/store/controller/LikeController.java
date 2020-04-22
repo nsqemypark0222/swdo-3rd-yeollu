@@ -25,7 +25,7 @@ public class LikeController {
 	@Autowired
 	private LikeDAO likeDAO;
 		
-	
+	//가게 좋아요
 	@RequestMapping(value = "/likeInsert", method = RequestMethod.POST)
 	@ResponseBody
 	public void likeInsert(LikeVO like, HttpSession session) {
@@ -41,6 +41,8 @@ public class LikeController {
 		}
 	}
 	
+	
+	//좋아요 취소
 	@RequestMapping(value = "/likeDelete", method = RequestMethod.POST)
 	@ResponseBody
 	public void likeDelete(LikeVO like,HttpSession session) {

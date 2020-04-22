@@ -46,28 +46,6 @@ public class MypageController {
 	
 	}
 	
-	
-	//가상 상세페이지
-	@RequestMapping(value = "/mypageForm", method = RequestMethod.GET)
-	public String mypageForm(Model model,HttpSession session) {
-		//가게 상세페이지
-		logger.info("마이페이지 테스트");
-		model.addAttribute("store_no", "25523615");
-		model.addAttribute("store_name", "스타벅스");
-		
-		
-		//내가 좋아요 누른 가게인지 체크
-		LikeVO like = new LikeVO();
-		like.setUser_email((String)session.getAttribute("loginemail"));
-		like.setStore_no("25523615");//스타벅스
-		logger.info("like {}",like);
-		int likecheck = likeDAO.likeSelectByEmailStoreno(like);
-		logger.info("likecheck {}",likecheck);
-		model.addAttribute("likecheck", likecheck);//좋아요 눌렀으면 likecheck = 1
-		return "mypage/mypage_test";
-	}
-	
-	
 	//mypage
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypage(String user_name, HttpSession session, Model model) {
@@ -186,7 +164,7 @@ public class MypageController {
 	}
 	
 	
-	
+	//내 페이지 user_name 아닌 loginemail로 접속
 	@RequestMapping(value = "/mypageSession", method = RequestMethod.GET)
 	public String mypage(HttpSession session, Model model) {
 		

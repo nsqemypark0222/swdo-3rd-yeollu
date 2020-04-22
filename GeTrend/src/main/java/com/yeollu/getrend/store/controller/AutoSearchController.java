@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -40,14 +41,9 @@ public class AutoSearchController {
 	private StoreService storeService;
 	
 	@RequestMapping(value = "autoSearch", method = RequestMethod.GET)
-	public String autoSearch(String searchInput,HttpSession session) {
+	public String autoSearch(String searchInput, Model model) {
 		logger.info(searchInput);
 		long startTime = System.currentTimeMillis();
-		
-		if(session.getAttribute("istores") != null) {
-			logger.info("current istores : {}", session.getAttribute("istores"));
-			session.removeAttribute("istores");
-		}
 		
 		ArrayList<StoreVO> storeList = storeDAO.searchStoresByTerm(searchInput);
 		logger.info("{}",storeList);
@@ -63,7 +59,7 @@ public class AutoSearchController {
 		ArrayList<ScoreVO> scoreList = storeService.generateScoreList(instaStoreList);
 		instaStoreList = storeService.sortInstaStoreList(instaStoreList, scoreList);
 
-		// 인스타그램 크롤링 요청
+		// 인스타그램 크롤링 요청 및 인스타 이미지 저장
 		ArrayList<InstaImageVO> instaImageList = storeService.requestCrawling(instaStoreList);
 
 		// View로 보낼 최종 객체 리스트
@@ -72,8 +68,8 @@ public class AutoSearchController {
 		// 인스타그램 좋아요가 높은 순으로 재정렬
 		instaStoreInfoList = storeService.sortInstaStoreInfoList(instaStoreInfoList);
 
-		// 세션에 저장
-		session.setAttribute("istores", instaStoreInfoList);
+		// 모델에 저장
+		model.addAttribute("istores", instaStoreInfoList);
 		
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;

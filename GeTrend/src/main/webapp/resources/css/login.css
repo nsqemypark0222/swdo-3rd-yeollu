@@ -188,11 +188,13 @@ table {
 }
 #linkjoin{
 	float:right;
+	color : #FF8A00;
 }
 #login{
 	background-color:#ffc107;
 	border-color:#ffc107;
 }
+<<<<<<< HEAD
 <!--배경 애니메이션 지정 -->
 @import url('https://fonts.googleapis.com/css?family=Poppins:700');
 body {
@@ -242,4 +244,16 @@ h1 {
   78%  { transform: scale(1.3) translate(0vw, 50vh) rotate(-20deg); }
   80%  { transform: scale(1.3) translate(0vw, 50vh) rotate(-20deg); }
   100% { transform: scale(1)   translate(10px, -30px); }
+=======
+
+.img-fluid {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+    right: 0;
+	width: 100%;
+	height: auto;
+	cursor : pointer;
+>>>>>>> 27b3b9400f8fe6e1752dc3d1397b41bb74154429
 }

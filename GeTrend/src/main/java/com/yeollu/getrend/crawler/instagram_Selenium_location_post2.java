@@ -126,7 +126,7 @@ public class instagram_Selenium_location_post2 {
 				String thum = doc.selectFirst(".ECCnW").attr("src");
 //				System.out.println("대표 사진 : " + thum);
 				if(thum != null && !thum.equals("")) {
-					img.setRepImg(thum);
+					//img.setRepImg(thum);
 				}
 			} catch (TimeoutException e) {
 				logger.info("TimeoutException");
@@ -187,7 +187,7 @@ public class instagram_Selenium_location_post2 {
 	       		postImgList.add(postImage);
 	       	}
 	       	
-	       	img.setPostImgList(postImgList);
+	       	//img.setPostImgList(postImgList);
 	       	 
 	       	System.out.println("======================================================");
 	       	 

@@ -128,7 +128,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	
 <script type="text/javascript">
 	$(function() {
-
+		//검색어 완성 하이라이트
 		function highlightText(text, $node) {
 			var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
 			while ((matchIndex = currentNode.data.toLowerCase().indexOf(searchText)) >= 0) {
@@ -140,7 +140,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				newSpanNode.appendChild(newTextNode);
 			}
 		}
-
+		//자동 완성
 		$("#searchInput").autocomplete({
 	           source : function( request, response ) {
 	               $.ajax({

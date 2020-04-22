@@ -17,7 +17,7 @@
 
 
 </head>
-<body>
+<body style="background-color: #003049;">
 	<div class="container-fluid">
 		<div class="row no-gutter">
 		
@@ -35,7 +35,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-md-9 col-lg-8 mx-auto">
-								<h3 class="login-heading mb-4">LOGIN</h3>
+								<h2 class="login-heading mb-4">LOGIN</h2>
 							 	<form action="login" 
 							 			method="post"
 							 			id="loginForm"

@@ -26,9 +26,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 </head>	
 
 <body>
-<<<<<<< HEAD
-
-
 <nav class="navbar  navbar-expand-lg navbar-light" style="background : #fff;" >
   <div class="nav01">	
     <a class="navbar-brand" id="navbar-brand"  href="<c:url value='/'/>" >GeTrend</a>
@@ -83,7 +80,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	</div>  	  	
 </nav>
 	
-=======
 <div class="header_container">
 	<div class="header_row">
 	  	<div class="header_logo">
@@ -121,9 +117,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 			</c:choose>
 		  </div>
 	</div>	 	  	
-</div>	
->>>>>>> 6a1cc918c4d17a2087e8cdffc8508075327bba42
-    	 
+</div>	    	 
 	
 	
 <script type="text/javascript">
@@ -183,8 +177,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 
 	});
 
-
-	
 </script>
 </body>
 </html>

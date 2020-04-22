@@ -20,7 +20,15 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
-
+<style>
+#storesinfo{
+top: 0; 
+bottom:0; 
+margin-top:auto; 
+margin-bottom:auto;
+font-size:large;
+}
+</style>
 </head>
 <body>
 	<header>
@@ -100,13 +108,16 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4" id="storesinfo">
 				<c:forEach var="istore" items="${istores}">
-				 <h2>${istore.instaStore.store_name}</h2>
-				 	<ul class="list-group">
-						<li class="list-group-item">${istore.instaStore.store_cate1}</li>
-						<li class="list-group-item">${istore.instaStore.store_adr1}</li>
-					</ul>
+					 <span class="mb-0" >
+						 <a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />' style="color:#FF8A00; font-size:40px">
+						 	${istore.instaStore.store_name}
+						 </a>
+					 </span>
+					 <hr>
+					 <div class="mb-1 text-muted">${istore.instaStore.store_cate1}</div>
+					 <p class="card-text mb-auto">${istore.instaStore.store_adr1}</p>
 				</c:forEach>
 			</div>
 			<div class="col-md-2">

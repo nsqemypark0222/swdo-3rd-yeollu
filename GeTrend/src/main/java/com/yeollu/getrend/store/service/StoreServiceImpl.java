@@ -3,6 +3,7 @@ package com.yeollu.getrend.store.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,22 +49,34 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public ArrayList<InstaStoreVO> generateInstaStoreList(ArrayList<StoreVO> storeList) {
 		ArrayList<InstaStoreVO> instaStoreList = new ArrayList<InstaStoreVO>();
+		
 		for (StoreVO store : storeList) {
-			String location_id = QueryStringSender.send(store);
-			if (location_id == null || location_id.equals("")) {
-			} else {
-				if (!instaLocationDAO.isExistedInstaLocation(location_id)) {
-					InstaLocationVO instaLocation = new InstaLocationVO();
-					instaLocation.setLocation_id(location_id);
-					instaLocation.setStore_no(store.getStore_no());
-					instaLocationDAO.insertInstaLocation(instaLocation);
+			InstaLocationVO instaLocation = instaLocationDAO.selectLocationByStoreNo(store.getStore_no());
+			if(instaLocation == null) {
+				String location_id = QueryStringSender.send(store);
+				if (location_id == null || location_id.equals("")) {
+				} else {
+					if(!instaLocationDAO.isExistedInstaLocation(location_id)) {
+						InstaLocationVO _instaLocation = new InstaLocationVO();
+						_instaLocation.setLocation_id(location_id);
+						_instaLocation.setStore_no(store.getStore_no());
+						instaLocationDAO.insertInstaLocation(_instaLocation);
+					}
+
+					InstaStoreVO instaStore = storeDAO.selectInstaStore(store.getStore_no());
+					if (instaStore != null) {
+						instaStore.setLocation_id(location_id);
+						instaStoreList.add(instaStore);
+					}
 				}
-				InstaStoreVO instaStore = storeDAO.selectInstaStore(store.getStore_no());
+			} else {
+				InstaStoreVO instaStore = storeDAO.selectInstaStore(instaLocation.getStore_no());
 				if (instaStore != null) {
-					instaStore.setLocation_id(location_id);
+					instaStore.setLocation_id(instaLocation.getLocation_id());
 					instaStoreList.add(instaStore);
 				}
 			}
+			
 		}
 		return instaStoreList;
 	}
@@ -158,7 +171,7 @@ public class StoreServiceImpl implements StoreService {
 		
 		for (CrawlerExecutor crawlerExecutor : crawlerExecutorList) {
 			if(crawlerExecutor.getIsExisted()) {
-				if(instaImageDAO.isRequiredUpdateInstaImage(crawlerExecutor.getStore_no())) {
+				if(crawlerExecutor.getIsRequiredUpdate()) {
 					int cnt = instaImageDAO.deleteInstaImage(crawlerExecutor.getStore_no());
 					if(cnt > 0) {
 						logger.info("업데이트를 위한 삭제 성공");
@@ -235,7 +248,6 @@ public class StoreServiceImpl implements StoreService {
 				}
 			}
 			score.setSum_of_insta_like(sum);
-			logger.info("{}", score.getSum_of_insta_like());
 			instaStoreInfo.setScore(score);
 		}
 		

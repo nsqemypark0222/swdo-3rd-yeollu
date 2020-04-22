@@ -25,6 +25,7 @@ insert into
 </insert>
 
 <update id="updateInstaIamge" parameterType="instaImage">
+<![CDATA[
 update
 	insta_images
 set
@@ -35,6 +36,7 @@ set
 where
 	store_no = #{store_no}
 	and image_no = #{image_no}
+]]>
 </update>
 
 <select id="isExistedInstaImage" parameterType="string" resultType="string">
@@ -56,7 +58,7 @@ from
 	insta_images
 where
 	store_no = #{store_no}
-	and sysdate - image_indate > 1/24
+	and sysdate - image_indate > 6/24
 ]]>
 </select>
 
@@ -79,10 +81,12 @@ order by
 </select>
 
 <delete id="deleteInstaImage" parameterType="string">
+<![CDATA[
 delete from
 	insta_images
 where
 	store_no = #{store_no}
+]]>
 </delete>
 
 </mapper>

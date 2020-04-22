@@ -48,7 +48,10 @@ public class StoreController {
 	@Autowired
 	private ScoreDAO scoreDAO;
 	
+<<<<<<< HEAD
 	//상세 페이지
+=======
+>>>>>>> f3cc6b6016d9e41f8f8881b456ada1627b9f0bc8
 	@Autowired
 	private InstaImageDAO instaImageDAO;
 	

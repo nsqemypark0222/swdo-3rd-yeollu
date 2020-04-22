@@ -1,18 +1,23 @@
 package com.yeollu.getrend.crawler;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +35,8 @@ public class mango_store_info2 {
 	//WebDriver
 	private WebDriver driver;
 	
-	private WebDriverWait wait;
+//	private WebDriverWait wait;
+	private FluentWait<WebDriver> wait;
 	
 	static {
 		String driverPath = PropertiesUtil.get("util", "CHROME_DRIVER");
@@ -73,9 +79,15 @@ public class mango_store_info2 {
 	}
 
 	public MangoStoreVO crawl(StoreVO store) {
-		
 	    driver = new ChromeDriver(options);  
-		wait = new WebDriverWait(driver, 4);
+//		wait = new WebDriverWait(driver, 4);
+	    wait = new FluentWait<WebDriver>(driver)
+				.withTimeout(Duration.ofSeconds(10))
+				.pollingEvery(Duration.ofMillis(5000))
+				.ignoring(NoSuchElementException.class)
+				.ignoring(TimeoutException.class)
+				.ignoring(StaleElementReferenceException.class)
+				.ignoring(WebDriverException.class);
 		
 		MangoStoreVO mangoStoreVO = new MangoStoreVO();
 		mangoStoreVO.setStore_no(store.getStore_no());
@@ -143,7 +155,7 @@ public class mango_store_info2 {
 				}
 			}//가게 설명for
 		} catch (TimeoutException e) {
-			logger.info("TimeoutException");
+			// ignore
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

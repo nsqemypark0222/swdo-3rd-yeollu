@@ -17,6 +17,7 @@
 		<typeAlias type="com.yeollu.getrend.mango.vo.MangoTimeVO" alias="mangoTime"/>	
 		<typeAlias type="com.yeollu.getrend.store.vo.MangoStoreInfoVO" alias="mangoStoreInfo"/>
 		<typeAlias type="com.yeollu.getrend.store.vo.ScoreVO" alias="score"/>
+		<typeAlias type="com.yeollu.getrend.store.vo.InstaImageVO" alias="instaImage"/>
 			
 	</typeAliases>
 	<mappers>
@@ -32,5 +33,6 @@
 		<mapper resource="mapper/mangoTimeMapper.xml"/>
 		<mapper resource="mapper/scoreMapper.xml"/>
 		<mapper resource="mapper/mangoStoreInfoMapper.xml"/>
+		<mapper resource="mapper/instaImageMapper.xml"/>
 	</mappers>
 </configuration>

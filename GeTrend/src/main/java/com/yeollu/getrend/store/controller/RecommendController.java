@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,14 +45,10 @@ public class RecommendController {
 	@RequestMapping(value = "recommend", method = RequestMethod.GET)
 	public String recommend(@RequestParam(value = "recommendByAdr") String adr
 							, @RequestParam(value = "recommendByCategory") String category
-							, HttpSession session) {
+							, Model model) {
 		logger.info("추천 시작 : {}, {}", adr, category);
 		long startTime = System.currentTimeMillis();
 		
-		if(session.getAttribute("istores") != null) {
-			logger.info("current istores : {}", session.getAttribute("istores"));
-			session.removeAttribute("istores");
-		}
 		
 		// DB에 저장된 모든 상가 리스트 중에서 법정동과 카테고리에 해당되는 상가들만 조회
 		ArrayList<StoreVO> storeList = storeDAO.selectStoresByStoreAdrAndStoreCate1(adr, category);
@@ -68,7 +65,7 @@ public class RecommendController {
 		ArrayList<ScoreVO> scoreList = storeService.generateScoreList(instaStoreList);
 		instaStoreList = storeService.sortInstaStoreList(instaStoreList, scoreList);
 
-		// 인스타그램 크롤링 요청
+		// 인스타그램 크롤링 요청 및 인스타 이미지 저장
 		ArrayList<InstaImageVO> instaImageList = storeService.requestCrawling(instaStoreList);
 
 		// View로 보낼 최종 객체 리스트
@@ -77,8 +74,8 @@ public class RecommendController {
 		// 인스타그램 좋아요가 높은 순으로 재정렬
 		instaStoreInfoList = storeService.sortInstaStoreInfoList(instaStoreInfoList);
 		
-		// 세션에 저장
-		session.setAttribute("istores", instaStoreInfoList);
+		// 모델에 저장
+		model.addAttribute("istores", instaStoreInfoList);
 		
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;

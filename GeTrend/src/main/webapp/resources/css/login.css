@@ -188,6 +188,7 @@ table {
 }
 #linkjoin{
 	float:right;
+	color : #FF8A00;
 }
 #login{
 	background-color:#ffc107;
@@ -202,4 +203,5 @@ table {
     right: 0;
 	width: 100%;
 	height: auto;
+	cursor : pointer;
 }

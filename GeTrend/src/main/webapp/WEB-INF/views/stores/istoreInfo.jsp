@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,6 +14,9 @@
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />'></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
 <script src='<c:url value="/resources/js/owl.carousel.min.js"/>'></script>
@@ -26,6 +30,7 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
 	<div id="wrap">
+		<!-- 상세페이지 인스타 사진 carousel -->
 		<section id="banner">
 			<div id="carouselRecommendedStores" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
@@ -35,18 +40,18 @@
 			  	</ol>
 			  	<div class="carousel-inner">
 			    	<div class="carousel-item active">
-	      				<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="1" end="7" step="3">
-							<img class="postImg rounded img-fluid" src="${item.imgUrl}" class="d-block img-fluid" alt="...">
+	      				<c:forEach var="item" items="${istore.instaImageList}" begin="1" end="7" step="3">
+							<img class="postImg rounded img-fluid" src="${item.image_url}" class="d-block img-fluid" alt="...">
 						</c:forEach>
 			    	</div>
 		    		<div class="carousel-item ">
-						<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="2" end="8" step="3">
-								<img class="postImg rounded img-fluid" src="${item.imgUrl}" class="d-block img-fluid" alt="...">
+						<c:forEach var="item" items="${istore.instaImageList}" begin="2" end="8" step="3">
+								<img class="postImg rounded img-fluid" src="${item.image_url}" class="d-block img-fluid" alt="...">
 						</c:forEach>					      		
 			      	</div>
 			    	<div class="carousel-item">
-						<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="3" end="9" step="3">
-							<img class="postImg rounded img-fluid" src="${item.imgUrl}">
+						<c:forEach var="item" items="${istore.instaImageList}" begin="3" end="9" step="3">
+							<img class="postImg rounded img-fluid" src="${item.image_url}">
 						</c:forEach>					      		
 			  		</div>
 			  	</div>	
@@ -60,6 +65,9 @@
 			  	</a>
 		   </div>
 		</section>
+		<!-- 상세페이지 인스타 사진 carousel 끝-->
+		
+		<!-- 상세페이지 망고플레이트 가게 정보 -->
 		<section id="content1">
 		   <nav class="nav">
 			<hr>
@@ -71,27 +79,33 @@
 						  <td style="width :300px; height : 80px; border-bottom: 1px solid  #e9e9e9;">
 							<span style="font-size : 30px; color : #FF8A00;">${istore.instaStore.store_name}</span> / <span> ${scoreAvg}점</span>
 						  </td>
+						  
+						  <!-- 카카오링크 -->
 						  <td  style="border-bottom: 1px solid  #e9e9e9;">
 							<input type="hidden" value="${istore.instaStore.store_no}" id="store_no">							
 							<div id="kakao_link">
 								<a id="kakao-link-btn" href="javascript:sendLink()">
-									<i class="fas fa-share-alt fa-3x"></i>
+									<i class="fas fa-share-alt fa-3x" data-toggle="tooltip" data-placement="top" title="SNS공유"></i>
 									<!-- <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/> -->
 								</a>
 							</div>
 						 </td>
+
+						  <!-- 가게 좋아요 버튼 -->
 						  <td  style="border-bottom: 1px solid  #e9e9e9; width : 70px;">
 						  <div id="like_div">
 								<c:if test="${!isExistedLike}">
-									<img onclick="insertLike();" style="width:50px; cursor: pointer;" src="/getrend/resources/img/heart_unclick.png">
+									<i class="fa fa-heart fa-3x"  onclick="insertLike();" style="cursor: pointer; color:#d3d3d3;"  data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>
 								</c:if>
 								<c:if test="${isExistedLike}">
-									<img onclick="deleteLike();" class="heart" style="width:52px; cursor: pointer;" src="/getrend/resources/img/heart_click.png">
+									<i class="fa fa-heart fa-3x" onclick="deleteLike();"style="cursor: pointer; color:rgba(255, 138, 0, 0.78);" data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>
 								</c:if>
-							</div>
+						   </div>
 						  </td>
 					   </tr>
 				    </table>
+				    
+				    <!-- 상세페이지 망고 플레이트 가게 정보 -->
 					<table class="store_table" >
 						<tr>
 							<td  class="store_table_td1">카테고리</td>
@@ -126,14 +140,16 @@
 				 </div>
 			   </div>
 			</nav>
+			
+			<!-- 상세 페이지 가게 지도 -->
 			<article class="article_right1">
-				지도
-				<a href="https://map.kakao.com/link/to/${istore.instaStore.store_name},${istore.instaStore.store_y},${istore.instaStore.store_x}">
-					<i class="fas fa-map-marker-alt fa-3x"></i>
-				</a>
+				<div id="map" style="width: 100%; height: 100%; background-color: none;">
+				</div>
 			</article>
 		</section>
-
+		<!-- 상세페이지 망고플레이트 가게 정보 끝-->
+		
+		<!-- 상세페이지 댓글 리스트 -->
 		<section id="content2">
 			<article class="article_box1">
 			  <div class="row"> <!-- print form -->
@@ -141,6 +157,7 @@
 				    <div id="reply_title" >
 				    	<h3 >댓글( ${replyCount} )</h3>
 				    </div>	
+				    <!-- 댓글 버튼 -->
 					<div id="reply_btn">	 
 						<a href="/getrend/stores/istoreinfo_reply?store_no=${istore.instaStore.store_no}&store_name=${istore.instaStore.store_name}">
 							<button type="button" class="btn btn-outline-warning">
@@ -192,6 +209,8 @@
 									 </tr>				
 								  </c:forEach>    								
 						   	 </table>
+						   	 
+						   	 <!-- 댓글 3개 초과 이면 더보기 버튼 생성 -->
 						   	 <c:if test="${fn:length(replyList) > 3}">
 							   	<div class="readAction">
 		    						<button id="readMoreBtn" class="btn btn-outline-secondary btn-lg" onclick="moreRead();"> 더보기 + </button>
@@ -243,6 +262,7 @@
 	     </div>
 	   </article>
 	 </section>
+	 <!-- 상세페이지 댓글 리스트 끝-->
    </div>
    
 	<footer>
@@ -250,8 +270,11 @@
 	</footer>
 
 <script type="text/javascript">
+<<<<<<< HEAD
 
-
+//가게 좋아요 
+=======
+>>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 function insertLike(){
 	var no = $("#store_no").val();
 		$.ajax({
@@ -259,13 +282,13 @@ function insertLike(){
 			type : "post",
 			data : {store_no : no},
 			success : function(){
-			var temp = '<img onclick="deleteLike()" class="heart" style="width:52px; cursor: pointer;" src="/getrend/resources/img/heart_click.png">';
+			var temp = '<i class="fa fa-heart fa-3x" onclick="deleteLike();"style="cursor: pointer; color:rgba(255, 138, 0, 0.78);" data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>';
 			 $("#like_div").html(temp);   
 				},
 			error : function(){alert("실패");}
 			})
 }
-		
+//가게 좋아요 취소		
 function deleteLike(){
 	var no = $("#store_no").val();
 		$.ajax({
@@ -273,16 +296,19 @@ function deleteLike(){
 			type : "post",
 			data : {store_no : no},
 			success : function(){
-			var temp = '<img onclick="insertLike()" class="heart" style="width:50px; cursor: pointer;" src="/getrend/resources/img/heart_unclick.png">';
+			var temp = '<i class="fa fa-heart fa-3x"onclick="insertLike();" style="cursor: pointer; color:#d3d3d3;" data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>';
 			 $("#like_div").html(temp);   
 				},
 			error : function(){alert("실패");}
 			})
 }
+<<<<<<< HEAD
 
+//별점 png로 구현
+=======
 //별
+>>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 $(function(){
-
 	$(".starMake").each(function(index,item){
 		var star = $(this).text();
 		
@@ -342,12 +368,19 @@ $(function(){
 		}
 	})
 })
+<<<<<<< HEAD
 
-
+//리플 삭제
 function deleteReply(reply_no,store_no){
 	location.href="/getrend/stores/deleteReply?reply_no=" + reply_no + "&store_no="+ store_no;
 }
 
+//더 보기 버튼
+=======
+function deleteReply(reply_no,store_no){
+	location.href="/getrend/stores/deleteReply?reply_no=" + reply_no + "&store_no="+ store_no;
+}
+>>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 function moreRead(){
 	if($("#replyTable02").css("display") == 'none'){
 		$("#readMoreBtn").css("display","none");
@@ -359,7 +392,6 @@ function moreRead(){
 			},1000);	
 	}
 }
-
 </script>	
 
 
@@ -377,7 +409,7 @@ function moreRead(){
         	content: {
           		title: "${istore.instaStore.store_name}",
           		description: "",
-          		imageUrl: "${istore.instaImage.repImg}",
+          		imageUrl: "${istore.instaImageList[0].image_url}",
           		link: {
             		mobileWebUrl: 'https://developers.kakao.com',
             		webUrl: 'https://developers.kakao.com'
@@ -400,6 +432,35 @@ function moreRead(){
        	});
     }
 	//]]>
+</script>
+
+<script>
+	$(function() {
+		const mapContainer = document.getElementById("map");
+		
+		mapOption = {
+			center: new kakao.maps.LatLng("${istore.instaStore.store_y}", "${istore.instaStore.store_x}"),
+			level: 1 // 지도의 확대 레벨
+		};
+
+		const map = new kakao.maps.Map(mapContainer, mapOption);
+
+		// 커스텀 오버레이에 표시할 내용입니다     
+		// HTML 문자열 또는 Dom Element 입니다 
+		const customMarker = '<a href="https://map.kakao.com/link/to/${istore.instaStore.store_name},${istore.instaStore.store_y},${istore.instaStore.store_x}"><i class="fas fa-map-marker-alt fa-3x"></i></a>';
+
+		// 커스텀 오버레이가 표시될 위치입니다 
+		const position = new kakao.maps.LatLng("${istore.instaStore.store_y}", "${istore.instaStore.store_x}");  
+
+		// 커스텀 오버레이를 생성합니다
+		const customOverlay = new kakao.maps.CustomOverlay({
+			position: position,
+			content: customMarker   
+		});
+
+		// 커스텀 오버레이를 지도에 표시합니다
+		customOverlay.setMap(map);
+	});
 </script>
 
 </body>

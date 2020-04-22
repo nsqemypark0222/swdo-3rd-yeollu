@@ -2,6 +2,7 @@ package com.yeollu.getrend.crawler;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,15 @@ public class CrawlerExecutor implements Runnable {
 	
 	private instagram_Selenium_location_post3 crawler;
 	
-	private String location;
+	private String store_no;
 	
-	private InstaImageVO instaImage;
+	private String location_id;
+	
+	private boolean isExisted = false;
+	
+	private boolean isRequiredUpdate = false;
+	
+	private ArrayList<InstaImageVO> instaImageList;
 	
 	private volatile boolean done = false;
 
@@ -26,18 +33,47 @@ public class CrawlerExecutor implements Runnable {
 	
 	@Override
 	public void run() {
-		instaImage = crawler.location_post(location);
-		done = true;
-		synchronized (this) {
-			this.notifyAll();
+		logger.info("크롤링 시작 : {}", store_no);
+		if(isExisted == false || isRequiredUpdate == true) {
+			instaImageList = crawler.location_post(store_no, location_id);
+			done = true;
+			synchronized (this) {
+				this.notifyAll();
+			}
 		}
+		logger.info("크롤링 종료");
 	}
 	
-	public void setLocation(String location) {
-		this.location = location;
+	public void setStore_no(String store_no) {
+		this.store_no = store_no;
 	}
 	
-	public InstaImageVO getInstaImage() {
+	public void setLocation_id(String location_id) {
+		this.location_id = location_id;
+	}
+	
+	public void setIsRequiredUpdate(boolean isRequiredUpdate) {
+		this.isRequiredUpdate = isRequiredUpdate;
+	}
+	
+	public void setIsExisted(boolean isExisted) {
+		this.isExisted = isExisted;
+	}
+	
+	public boolean getIsRequiredUpdate() {
+		return isRequiredUpdate;
+	}
+
+	public String getStore_no() {
+		return store_no;
+	}
+	
+	public boolean getIsExisted() {
+		return isExisted;
+	}
+
+
+	public ArrayList<InstaImageVO> getInstaImageList() {
 		if(!done) {
 			synchronized (this) {
 				try {
@@ -47,9 +83,9 @@ public class CrawlerExecutor implements Runnable {
 				}
 			}
 		}
-		if(instaImage != null) {
-			logger.info("{}", instaImage);
-			return instaImage;
+		if(instaImageList != null) {
+			logger.info("{}", instaImageList);
+			return instaImageList;
 		} else {
 			return null;
 		}

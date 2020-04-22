@@ -25,7 +25,7 @@ top: 0;
 bottom:0; 
 margin-top:auto; 
 margin-bottom:auto;
-font-size:x-large;
+font-size:large;
 }
 </style>
 </head>
@@ -67,7 +67,6 @@ font-size:x-large;
 												      		</a>
 											      			<div class="carousel-caption d-none d-md-block">
 												        		<h5>${istore.instaStore.store_name}</h5>
-												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 												      		</div>
 												    	</div>
 													</c:when>
@@ -78,7 +77,6 @@ font-size:x-large;
 												      		</a>
 											      			<div class="carousel-caption d-none d-md-block">
 											      				<h5>${istore.instaStore.store_name}</h5>
-												        		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 												      		</div>
 												    	</div>
 													</c:otherwise>
@@ -106,7 +104,11 @@ font-size:x-large;
 			</div>
 			<div class="col-md-4" id="storesinfo">
 				<c:forEach var="istore" items="${istores}">
-					 <h1 class="mb-0">${istore.instaStore.store_name}</h1>
+					 <span class="mb-0" >
+						 <a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />' style="color:#FF8A00; font-size:40px">
+						 	${istore.instaStore.store_name}
+						 </a>
+					 </span>
 					 <hr>
 					 <div class="mb-1 text-muted">${istore.instaStore.store_cate1}</div>
 					 <p class="card-text mb-auto">${istore.instaStore.store_adr1}</p>

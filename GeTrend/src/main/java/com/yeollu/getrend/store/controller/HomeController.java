@@ -1,7 +1,6 @@
 package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yeollu.getrend.store.dao.RecommendDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
-import com.yeollu.getrend.store.service.RecommendServiceImpl;
 import com.yeollu.getrend.store.service.StoreServiceImpl;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
@@ -25,7 +22,6 @@ import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
-import com.yeollu.getrend.store.vo.RecommendVO;
 import com.yeollu.getrend.store.vo.ReqParmVO;
 import com.yeollu.getrend.store.vo.ScoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
@@ -40,37 +36,16 @@ public class HomeController {
 	
 	@Autowired
 	private StoreServiceImpl storeService;
-	
-	@Autowired
-	private RecommendDAO recommendDAO;
-	
-	@Autowired
-	private RecommendServiceImpl recommendService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpSession session) {
-		
-//		if(session.getAttribute("first_recommend") != null) {
-//			return "home";
-//		}
-//		
-//		RecommendVO recommend = new RecommendVO();
-//		recommend.setStore_adr("양림동");
-//		
-//		ArrayList<HashMap<String, Object>> first_recommendMapList = recommendDAO.selectRecommendStore("양림동");
-		
-		
-//		ArrayList<HashMap<String, String>> first_recommend = recommendService.generateInstaStoreInfo(recommend);
-		
-//		session.setAttribute("first_recommend", first_recommendMapList);
-		
+	public String home() {
 		
 		return "home";
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
-	public ArrayList<InstaStoreInfoVO> search(@RequestBody ReqParmVO reqParm, Model model) {
+	public ArrayList<InstaStoreInfoVO> search(@RequestBody ReqParmVO reqParm, HttpSession session) {
 		logger.info("검색 시작");
 		long startTime = System.currentTimeMillis();
 		
@@ -122,8 +97,8 @@ public class HomeController {
 		// 인스타그램 좋아요가 높은 순으로 재정렬
 		instaStoreInfoList = storeService.sortInstaStoreInfoList(instaStoreInfoList);
 		
-		// 모델에 저장
-		model.addAttribute("istores", instaStoreInfoList);
+		// 세션에 저장
+		session.setAttribute("istores", instaStoreInfoList);
 
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;

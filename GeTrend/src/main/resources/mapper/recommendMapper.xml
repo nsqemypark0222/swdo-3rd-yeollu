@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeollu.getrend.store.dao.RecommendMapper">
+
+<insert id="insertRecommend" parameterType="recommend">
+insert into
+	recommend (
+		store_adr
+		, store_cate1
+	) values (
+		#{store_adr}
+		, #{store_cate1}
+	)
+</insert>
+
+<select id="selectAllRecommend" resultType="recommend">
+select
+	store_adr
+	, store_cate1
+from
+	recommend
+</select>
+
+<select id="selectRecommendByStoreAdr" parameterType="string" resultType="recommend">
+select
+	store_adr
+	, store_cate1
+from
+	recommend
+where
+	store_adr = #{store_adr}
+</select>
+
+<select id="selectRecommendByStoreCate1" parameterType="string" resultType="recommend">
+select
+	store_adr
+	, store_cate1
+from
+	recommend
+where
+	store_cate1 = #{store_cate1}
+</select>
+
+<select id="selectRecommendStore" parameterType="string" resultType="hashmap">
+select
+	s.store_no
+	, s.store_name
+	, s.store_name2
+	, s.store_cate1
+	, s.store_cate2
+	, s.store_adr
+	, s.store_adr1
+	, s.store_adr2
+	, s.store_x
+	, s.store_y
+    , i.image_no
+    , i.image_type
+    , i.image_url
+    , i.image_like
+    , i.image_indate
+from
+	stores s
+    , insta_images i
+where
+	s.store_no = i.store_no
+    and s.store_adr = #{store_adr}
+order by
+	s.store_no asc
+</select>
+
+</mapper>
+

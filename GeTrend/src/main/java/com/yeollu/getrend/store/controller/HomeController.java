@@ -1,6 +1,7 @@
 package com.yeollu.getrend.store.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,14 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yeollu.getrend.store.dao.RecommendDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
-import com.yeollu.getrend.store.service.StoreService;
+import com.yeollu.getrend.store.service.RecommendServiceImpl;
+import com.yeollu.getrend.store.service.StoreServiceImpl;
 import com.yeollu.getrend.store.util.map.core.Polygon;
 import com.yeollu.getrend.store.util.map.model.Point;
 import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
+import com.yeollu.getrend.store.vo.RecommendVO;
 import com.yeollu.getrend.store.vo.ReqParmVO;
 import com.yeollu.getrend.store.vo.ScoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
@@ -35,10 +39,31 @@ public class HomeController {
 	private StoreDAO storeDAO;
 	
 	@Autowired
-	private StoreService storeService;
+	private StoreServiceImpl storeService;
+	
+	@Autowired
+	private RecommendDAO recommendDAO;
+	
+	@Autowired
+	private RecommendServiceImpl recommendService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpSession session, Model model) {
+	public String home(HttpSession session) {
+		
+//		if(session.getAttribute("first_recommend") != null) {
+//			return "home";
+//		}
+//		
+//		RecommendVO recommend = new RecommendVO();
+//		recommend.setStore_adr("양림동");
+//		
+//		ArrayList<HashMap<String, Object>> first_recommendMapList = recommendDAO.selectRecommendStore("양림동");
+		
+		
+//		ArrayList<HashMap<String, String>> first_recommend = recommendService.generateInstaStoreInfo(recommend);
+		
+//		session.setAttribute("first_recommend", first_recommendMapList);
+		
 		
 		return "home";
 	}
@@ -82,8 +107,10 @@ public class HomeController {
 		// 망고플레이트 정보 추가
 		ArrayList<MangoStoreInfoVO> mangoStoreInfoList = storeService.generateMangoStoreInfoList(instaStoreList, opentimeValues);
 		
-		// 좋아요와 별점을 기반으로 스코어가 높은 순으로 정렬
+		// 스코어 리스트 생성
 		ArrayList<ScoreVO> scoreList = storeService.generateScoreList(instaStoreList);
+		
+		// 좋아요와 별점을 기반으로 스코어가 높은 순으로 정렬
 		instaStoreList = storeService.sortInstaStoreList(instaStoreList, scoreList);
 		
 		// 인스타그램 크롤링 요청 및 인스타 이미지 저장

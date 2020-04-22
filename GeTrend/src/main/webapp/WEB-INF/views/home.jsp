@@ -498,7 +498,10 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	<!-- 로딩이미지 -->
 	<div class="wrap-loading display-none">
 	  	<div>
+	  		<img src="./resources/img/Loadingbar.gif"/>
+	  		<!--  
 	  		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" />
+	  		-->
 	  	</div>
 	</div>
 	

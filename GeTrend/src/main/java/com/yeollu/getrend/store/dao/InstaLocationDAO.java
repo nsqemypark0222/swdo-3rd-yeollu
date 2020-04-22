@@ -1,5 +1,7 @@
 package com.yeollu.getrend.store.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -54,7 +56,7 @@ public class InstaLocationDAO {
 	}
 	
 	public InstaLocationVO selectLocationByStoreNo(String store_no) {
-		InstaLocationVO instaLocation = new InstaLocationVO();
+		InstaLocationVO instaLocation = null;
 		
 		try {
 			InstaLocationMapper mapper = session.getMapper(InstaLocationMapper.class);

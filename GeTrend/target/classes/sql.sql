@@ -1,5 +1,6 @@
 drop sequence seq_insta_replys;
 drop sequence seq_searched_stores;
+drop sequence seq_insta_images;
 drop table searched_stores;
 drop table insta_locations;
 drop table mango_stores;
@@ -12,6 +13,7 @@ drop table stores;
 --drop table stores cascade constraints;
 drop table insta_replys;
 drop table insta_images;
+drop table recommend;
 
 
 
@@ -140,6 +142,34 @@ create table insta_images (
 
 create sequence seq_insta_images;
 
+create table recommend (
+    store_adr               varchar2(300)   not null
+    , store_cate1           varchar2(200)   not null
+    , recommend_indate      date            default sysdate
+    , constraint pk_recommend primary key (store_adr, store_cate1)
+);
+
+
+insert into recommend (store_adr, store_cate1) values ('양림동', '한식');
+insert into recommend (store_adr, store_cate1) values ('양림동', '양식');
+insert into recommend (store_adr, store_cate1) values ('양림동', '일식/수산물');
+insert into recommend (store_adr, store_cate1) values ('양림동', '중식');
+insert into recommend (store_adr, store_cate1) values ('양림동', '카페/디저트');
+insert into recommend (store_adr, store_cate1) values ('양림동', '치킨/피자/패스트푸드');
+
+insert into recommend (store_adr, store_cate1) values ('풍암동', '한식');
+insert into recommend (store_adr, store_cate1) values ('풍암동', '양식');
+insert into recommend (store_adr, store_cate1) values ('풍암동', '일식/수산물');
+insert into recommend (store_adr, store_cate1) values ('풍암동', '중식');
+insert into recommend (store_adr, store_cate1) values ('풍암동', '카페/디저트');
+insert into recommend (store_adr, store_cate1) values ('풍암동', '치킨/피자/패스트푸드');
+
+select
+    store_adr
+    , store_cate1
+from
+    recommend;
+
 commit;
 commit;
 commit;
@@ -227,15 +257,4 @@ where
     s.store_no = m.store_no
     and s.store_no = l.store_no;
 --------------------------------------------------------------------------------------------------------------------------------
-select
-    s.store_no as store_no
-    , count(l.user_email) as sum_of_like
-    , sum(r.reply_star) as sum_of_star
-from
-    stores s, likes l, insta_replys r
-where
-    s.store_no = l.store_no
-    and s.store_no = r.store_no
-group by
-    s.store_no;
 

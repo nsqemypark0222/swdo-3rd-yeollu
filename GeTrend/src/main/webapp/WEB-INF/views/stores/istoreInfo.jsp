@@ -30,6 +30,7 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
 	<div id="wrap">
+		<!-- 상세페이지 인스타 사진 carousel -->
 		<section id="banner">
 			<div id="carouselRecommendedStores" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
@@ -64,6 +65,9 @@
 			  	</a>
 		   </div>
 		</section>
+		<!-- 상세페이지 인스타 사진 carousel 끝-->
+		
+		<!-- 상세페이지 망고플레이트 가게 정보 -->
 		<section id="content1">
 		   <nav class="nav">
 			<hr>
@@ -75,6 +79,8 @@
 						  <td style="width :300px; height : 80px; border-bottom: 1px solid  #e9e9e9;">
 							<span style="font-size : 30px; color : #FF8A00;">${istore.instaStore.store_name}</span> / <span> ${scoreAvg}점</span>
 						  </td>
+						  
+						  <!-- 카카오링크 -->
 						  <td  style="border-bottom: 1px solid  #e9e9e9;">
 							<input type="hidden" value="${istore.instaStore.store_no}" id="store_no">							
 							<div id="kakao_link">
@@ -84,6 +90,8 @@
 								</a>
 							</div>
 						 </td>
+
+						  <!-- 가게 좋아요 버튼 -->
 						  <td  style="border-bottom: 1px solid  #e9e9e9; width : 70px;">
 						  <div id="like_div">
 								<c:if test="${!isExistedLike}">
@@ -92,10 +100,12 @@
 								<c:if test="${isExistedLike}">
 									<i class="fa fa-heart fa-3x" onclick="deleteLike();"style="cursor: pointer; color:rgba(255, 138, 0, 0.78);" data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>
 								</c:if>
-							</div>
+						   </div>
 						  </td>
 					   </tr>
 				    </table>
+				    
+				    <!-- 상세페이지 망고 플레이트 가게 정보 -->
 					<table class="store_table" >
 						<tr>
 							<td  class="store_table_td1">카테고리</td>
@@ -130,12 +140,16 @@
 				 </div>
 			   </div>
 			</nav>
+			
+			<!-- 상세 페이지 가게 지도 -->
 			<article class="article_right1">
 				<div id="map" style="width: 100%; height: 100%; background-color: none;">
 				</div>
 			</article>
 		</section>
-
+		<!-- 상세페이지 망고플레이트 가게 정보 끝-->
+		
+		<!-- 상세페이지 댓글 리스트 -->
 		<section id="content2">
 			<article class="article_box1">
 			  <div class="row"> <!-- print form -->
@@ -143,6 +157,7 @@
 				    <div id="reply_title" >
 				    	<h3 >댓글( ${replyCount} )</h3>
 				    </div>	
+				    <!-- 댓글 버튼 -->
 					<div id="reply_btn">	 
 						<a href="/getrend/stores/istoreinfo_reply?store_no=${istore.instaStore.store_no}&store_name=${istore.instaStore.store_name}">
 							<button type="button" class="btn btn-outline-warning">
@@ -194,6 +209,8 @@
 									 </tr>				
 								  </c:forEach>    								
 						   	 </table>
+						   	 
+						   	 <!-- 댓글 3개 초과 이면 더보기 버튼 생성 -->
 						   	 <c:if test="${fn:length(replyList) > 3}">
 							   	<div class="readAction">
 		    						<button id="readMoreBtn" class="btn btn-outline-secondary btn-lg" onclick="moreRead();"> 더보기 + </button>
@@ -245,6 +262,7 @@
 	     </div>
 	   </article>
 	 </section>
+	 <!-- 상세페이지 댓글 리스트 끝-->
    </div>
    
 	<footer>
@@ -252,6 +270,11 @@
 	</footer>
 
 <script type="text/javascript">
+<<<<<<< HEAD
+
+//가게 좋아요 
+=======
+>>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 function insertLike(){
 	var no = $("#store_no").val();
 		$.ajax({
@@ -265,7 +288,7 @@ function insertLike(){
 			error : function(){alert("실패");}
 			})
 }
-		
+//가게 좋아요 취소		
 function deleteLike(){
 	var no = $("#store_no").val();
 		$.ajax({
@@ -279,7 +302,12 @@ function deleteLike(){
 			error : function(){alert("실패");}
 			})
 }
+<<<<<<< HEAD
+
+//별점 png로 구현
+=======
 //별
+>>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 $(function(){
 	$(".starMake").each(function(index,item){
 		var star = $(this).text();
@@ -340,9 +368,19 @@ $(function(){
 		}
 	})
 })
+<<<<<<< HEAD
+
+//리플 삭제
 function deleteReply(reply_no,store_no){
 	location.href="/getrend/stores/deleteReply?reply_no=" + reply_no + "&store_no="+ store_no;
 }
+
+//더 보기 버튼
+=======
+function deleteReply(reply_no,store_no){
+	location.href="/getrend/stores/deleteReply?reply_no=" + reply_no + "&store_no="+ store_no;
+}
+>>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 function moreRead(){
 	if($("#replyTable02").css("display") == 'none'){
 		$("#readMoreBtn").css("display","none");

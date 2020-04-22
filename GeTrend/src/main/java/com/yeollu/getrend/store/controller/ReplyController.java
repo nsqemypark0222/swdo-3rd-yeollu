@@ -24,13 +24,7 @@ public class ReplyController {
 	@Autowired
 	private InstaReplyDAO dao;
 	
-	@RequestMapping(value = "/replyForm", method = RequestMethod.GET)
-	public String replyForm(HttpSession session) {
-		
-		return "/reply/replyForm";
-	}
-	
-	//등록
+	//댓글 등록
 	@RequestMapping(value = "/replyWrite", method = RequestMethod.POST)
 	public String replyWrite(InstaReplyVO reply, HttpSession session) {
 		logger.info("{}", reply);

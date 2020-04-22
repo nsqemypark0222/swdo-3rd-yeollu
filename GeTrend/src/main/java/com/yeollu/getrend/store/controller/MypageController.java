@@ -164,7 +164,7 @@ public class MypageController {
 	}
 	
 	
-	
+	//내 페이지 user_name 아닌 loginemail로 접속
 	@RequestMapping(value = "/mypageSession", method = RequestMethod.GET)
 	public String mypage(HttpSession session, Model model) {
 		

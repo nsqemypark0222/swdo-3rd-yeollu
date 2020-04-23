@@ -1,4 +1,33 @@
 @charset "UTF-8";
+<<<<<<< HEAD
+	@media (min-width: 992px) {
+  .animate {
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+  }
+}
+
+.navbar-brand{
+	flex-direction: row;
+	color: rgba(255, 138, 0, 0.78);
+	font-family: Prompt;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 90px;
+	line-height: 80px;
+	/* or 89% */
+	display: flex;
+	align-items: center;
+	text-align: center;
+	letter-spacing: -0.2em;
+	width: 300px;
+		
+}
+#navbar-brand{
+	color: rgba(255, 138, 0, 0.78);
+=======
 /* 여백 초기화 */
 body, div, ul, li, dl, dd, dt, ol, h1, h2, h3, h4, h5, h6, input, fieldset, legend, p, select, table, th, td, tr, textarea, button, form, figure, figcaption {margin:0; padding:0;}
 
@@ -46,9 +75,52 @@ body, input, textarea, select, button, table {font-family: 'Nanum Gothic', Apple
 	border: none;
 	outline : none;
 	font-size : 15px;
+>>>>>>> 6a1cc918c4d17a2087e8cdffc8508075327bba42
+}
+.navbar input[type='text']{
+	background-color: rgba(255, 138, 0, 0.78);
+	color:#FFFFFF;
+	width:450px;
+
+<<<<<<< HEAD
+}
+.navbar-light .navbar-brand {
+    color: rgba(255, 138, 0, 0.78);
+    /* margin-left: 14%; */
+}
+.navbar-brand:hover {
+    color: rgba(255, 138, 0, 0.78);
+}
+#title:hover{
+	    color: rgba(255, 138, 0, 0.78);
+}
+.form-inline{
+	margin-top: 20px;
+}
+
+.menu_list{
+  padding-top:30px; 
+  margin-left:20px;
+}
+.form-control{
+    margin-left:30px;
+
+}
+
+li:nth-of-type(n+10) { 
+	display: none;
+}
+
+.ui-autocomplete .highlight {
+	color: FF8A00;
 	z-index:900;
 }
 
+.profile {
+	border-radius: 60px;
+	width: 30px;
+	height: auto;
+=======
 #searchInput_img{
 	width : 25px;
 	top : 50%;
@@ -112,4 +184,5 @@ li:nth-of-type(n+10) {
 @media (max-width: 570px){
 	.header_logo{width : 40%;}
 	.header_menu{width : 60%;}
+>>>>>>> 6a1cc918c4d17a2087e8cdffc8508075327bba42
 }

@@ -1,20 +1,26 @@
 package com.yeollu.getrend.crawler;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +38,8 @@ public class instagram_Selenium_location_post3 {
 	//WebDriver
 	private WebDriver driver;
 	
-	private WebDriverWait wait;
+//	private WebDriverWait wait;
+	private FluentWait<WebDriver> wait;
 	
 	static {
 		String driverPath = PropertiesUtil.get("util", "CHROME_DRIVER");
@@ -83,7 +90,14 @@ public class instagram_Selenium_location_post3 {
 	public ArrayList<InstaImageVO> location_post(String store_no, String location_id) {
 		driver = new ChromeDriver(options);
 		logger.info("드라이버 실행 : {}", location_id);
-		wait = new WebDriverWait(driver, 4);
+//		wait = new WebDriverWait(driver, 4);
+		wait = new FluentWait<WebDriver>(driver)
+				.withTimeout(Duration.ofSeconds(10))
+				.pollingEvery(Duration.ofMillis(5000))
+				.ignoring(NoSuchElementException.class)
+				.ignoring(TimeoutException.class)
+				.ignoring(StaleElementReferenceException.class)
+				.ignoring(WebDriverException.class);
 		
 		ArrayList<InstaImageVO> instaImageList = new ArrayList<InstaImageVO>();
 		
@@ -169,8 +183,7 @@ public class instagram_Selenium_location_post3 {
 	       	System.out.println("======================================================");
 	       	 
 		} catch (TimeoutException e) {
-			logger.info("TimeoutException");
-			return instaImageList;
+			// ignore
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

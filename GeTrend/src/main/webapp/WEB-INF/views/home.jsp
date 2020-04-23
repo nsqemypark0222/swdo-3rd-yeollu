@@ -12,8 +12,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>[ Home | GeTrend ]</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing,services'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -25,12 +25,45 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'> 
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
 
+<style type="text/css">
+
+	@font-face { 
+		font-family: 'GmarketSansBold'; 
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff'); 
+		font-weight: normal; 
+		font-style: normal; 
+	}
+	
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'GmarketSansBold';
+	}
+	
+	hr {
+		background-color: #FF8A00;
+		width: 83%;
+		height: 3px;
+	}
+	
+	.recommend-container {
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+	
+	.recommend-title {
+		font-family: 'GmarketSansBold';
+		font-size: 50px;
+	}
+	
+</style>
+
 </head>
 <body>
 
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
+	
+	<hr />
 	
 	<div class="container-fluid">
 		<div class="row">
@@ -56,6 +89,10 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 										</div>
 										<!-- 음식 카테고리 모달 body -->
 	      								<div class="modal-body">
+<<<<<<< HEAD
+=======
+	      									<!-- <h3>음식 종류</h3> -->
+>>>>>>> 7a905e40fea384717b55d6a9327fbc572dd13791
 	           								<div class="form-check">
 				  								<label class="form-check-label">
 				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
@@ -192,7 +229,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 					      		</div>
 					    	</div>
 				    		<div class="carousel-item">
-				    			<a href="javascript:recommendByAccessLocation('양림동', '카페/디저트');">
+				    			<a href="javascript:recommendByAccessLocation('카페/디저트');">
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586846612/redluck_y0iqfn.jpg" class="d-block img-fluid" alt="양림동_카페/디저트">
 					      		</a>
 					      		<div class="carousel-caption d-none d-md-block">
@@ -316,14 +353,16 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		</div>
 	</div>
 	
-	<div class="container-fluid">
+	<hr />
+	
+	<div class="container-fluid recommend-container">
 		<div class="row">
 			<div class="col-md-1">
 			</div>
 			<div class="col-md-10">
 				<div class="row">
-					<div>
-						<h2>양림동 맛집 추천</h2>
+					<div class="recommend-title">
+						<p>양림동 맛집 추천</p>
 					</div>
 					<!-- 양림동 맛집 추천 시작 -->
 					<div id="carouselFirstRecommendedStores" class="carousel slide" data-ride="carousel" style="width: 100%; height: 400px;">
@@ -402,14 +441,16 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		</div>
 	</div>
 	
-	<div class="container-fluid">
+	<hr />
+	
+	<div class="container-fluid recommend-container">
 		<div class="row">
 			<div class="col-md-1">
 			</div>
 			<div class="col-md-10">
 				<div class="row">
-					<div>
-						<h2>풍암동 맛집 추천</h2>
+					<div class="recommend-title">
+						<p>풍암동 맛집 추천</p>
 					</div>
 					<!-- 풍암동 맛집 추천 시작 -->
 					<div id="carouselSecondRecommendedStores" class="carousel slide" data-ride="carousel" style="width: 100%; height: 400px;">
@@ -487,6 +528,8 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			</div>
 		</div>
 	</div>
+	
+	<hr />
 
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

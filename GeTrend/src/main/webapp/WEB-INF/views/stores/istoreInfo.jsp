@@ -270,11 +270,8 @@
 	</footer>
 
 <script type="text/javascript">
-<<<<<<< HEAD
 
 //가게 좋아요 
-=======
->>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 function insertLike(){
 	var no = $("#store_no").val();
 		$.ajax({
@@ -302,12 +299,8 @@ function deleteLike(){
 			error : function(){alert("실패");}
 			})
 }
-<<<<<<< HEAD
 
 //별점 png로 구현
-=======
-//별
->>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 $(function(){
 	$(".starMake").each(function(index,item){
 		var star = $(this).text();
@@ -368,7 +361,6 @@ $(function(){
 		}
 	})
 })
-<<<<<<< HEAD
 
 //리플 삭제
 function deleteReply(reply_no,store_no){
@@ -376,11 +368,7 @@ function deleteReply(reply_no,store_no){
 }
 
 //더 보기 버튼
-=======
-function deleteReply(reply_no,store_no){
-	location.href="/getrend/stores/deleteReply?reply_no=" + reply_no + "&store_no="+ store_no;
-}
->>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
+
 function moreRead(){
 	if($("#replyTable02").css("display") == 'none'){
 		$("#readMoreBtn").css("display","none");

@@ -83,9 +83,14 @@ public class UserController {
         String joinCode = String.valueOf(ran);
         session.setAttribute("joinCode", joinCode);
  
-        String subject = "회원가입 인증 코드 발급 안내 입니다.";
+        String subject = "[GeTrend] 회원가입 인증 코드 발급 안내 입니다.";
         StringBuilder sb = new StringBuilder();
-        sb.append("귀하의 인증 코드는 " + joinCode + " 입니다.");
+        sb.append("<div style='text-align:center;'>");
+        sb.append("<div style='display:inline-block;'>");
+        sb.append("<img src='https://ifh.cc/g/aj4tpl.png' width='400'><br><br>");
+        sb.append("<h1 class=\"display-4\">귀하의 인증 코드는 <span color='#FF8A00'>" + joinCode + "</span> 입니다.</h1>");
+        sb.append("</div>");
+        sb.append("</div>");
         String from = PropertiesUtil.get("mail", "mail_username");
         boolean result = mailService.send(subject, sb.toString(), from, user_email, null);
         if(result) {

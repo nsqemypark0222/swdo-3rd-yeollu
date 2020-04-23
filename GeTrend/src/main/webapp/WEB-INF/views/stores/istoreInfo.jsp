@@ -18,101 +18,6 @@
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-<<<<<<< HEAD
-
-</style>
-</head>
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
-	<header>
-		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-	</header>
-	
-	<div class="container">
-		<div class="row">
-	 		<!-- 이미지 슬라이더 위치  -->
-	 			<div id="carouselRecommendedStores" class="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-					    	<li data-target="#carouselRecommendedStores" data-slide-to="0" class="active"></li>
-					    	<li data-target="#carouselRecommendedStores" data-slide-to="1"></li>
-					    	<li data-target="#carouselRecommendedStores" data-slide-to="2"></li>
-					  	</ol>
-					  	<div class="row">
-						  	<div class="carousel-inner">
-						    	<div class="carousel-item active">
-					      				<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="1" end="7" step="3">
-											<img class="rounded img-fluid" src="${item.imgUrl}" class="d-block img-fluid" alt="...">
-										</c:forEach>
-					      			<div class="carousel-caption d-none d-md-block">
-						        		<h5>${istore.instaStore.store_name}</h5>
-						        		<p>Now Trend</p>
-						      		</div>
-						    	</div>
-					    		<div class="carousel-item">
-									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="2" end="8" step="3">
-											<img class="rounded img-fluid" src="${item.imgUrl}" class="d-block img-fluid" alt="...">
-									</c:forEach>					      		
-									<div class="carousel-caption d-none d-md-block">
-						        		<h5>${istore.instaStore.store_name}</h5>
-						        		<p>Now Trend</p>
-						      		</div>
-						    	</div>
-						    	<div class="carousel-item">
-									<c:forEach var="item" items="${istore.instaImage.postImgList}" begin="3" end="9" step="3">
-										<img class="rounded img-fluid" src="${item.imgUrl}">
-									</c:forEach>					      		
-									<div class="carousel-caption d-none d-md-block">
-						        		<h5>${istore.instaStore.store_name}</h5>
-						        		<p>Now Trend</p>
-						      		</div>
-						  		</div>
-						  	</div>
-					  	<a class="carousel-control-prev" href="#carouselRecommendedStores" role="button" data-slide="prev">
-					  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					  		<span class="sr-only">Previous</span>
-					  	</a>
-					  	<a class="carousel-control-next" href="#carouselRecommendedStores" role="button" data-slide="next">
-					    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					    	<span class="sr-only">Next</span>
-					  	</a>
-					</div>
-			</div>
-			
-				<div class="row">
-					<div class="col-md-3">
-						<h1>${istore.instaStore.store_name}</h1>
-					</div>
-					<div class="col-md-3">
-						<a id="like">
-							<i class="fas fa-heart fa-3x"></i>
-						</a>
-					</div>
-					<div class="col-md-3">	
-						<a href="https://map.kakao.com/link/to/${istore.instaStore.store_name},${istore.instaStore.store_y},${istore.instaStore.store_x}">
-							<i class="fas fa-map-marker-alt fa-3x"></i>
-						</a>
-					</div>
-					<div class="col-md-3">	
-						<a id="kakao-link-btn" href="javascript:sendLink()">
-							<i class="fas fa-share-alt fa-3x"></i>
-							<!-- <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/> -->
-						</a>
-					</div>	
-					</div>
-				</div>
-				<div class="row">
-					<div class="container">
-						<div class="row">
-							<div class="col-12">
-								<ul class="list-group">
-									<li class="list-group-item">${istore.instaStore.store_cate1}</li>
-									<li class="list-group-item">${istore.instaStore.store_adr1}</li>
-									<li class="list-group-item">${istore.mangoStoreInfo.mango_tel}</li>
-									<li class="list-group-item">${istore.mangoStoreInfo.mango_price}</li>
-									<li class="list-group-item">${istore.mangoStoreInfo.mango_parking}</li>
-									<li class="list-group-item">${istore.mangoStoreInfo.mango_start}</li>
-									<li class="list-group-item">${istore.mangoStoreInfo.mango_end}</li>
-								</ul>
-=======
 <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
 <script src='<c:url value="/resources/js/owl.carousel.min.js"/>'></script>
 <link href='<c:url value="/resources/css/owl.carousel.css"/>' rel="stylesheet" />
@@ -183,7 +88,6 @@
 									<i class="fas fa-share-alt fa-3x" data-toggle="tooltip" data-placement="top" title="SNS공유"></i>
 									<!-- <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/> -->
 								</a>
->>>>>>> 27b3b9400f8fe6e1752dc3d1397b41bb74154429
 							</div>
 						 </td>
 
@@ -241,75 +145,6 @@
 			<article class="article_right1">
 				<div id="map" style="width: 100%; height: 100%; background-color: none;">
 				</div>
-<<<<<<< HEAD
-				
-			</div>
-	
-		</div>
-	</div>
-	
-	<!-- 댓글 시작 -->
-	<div class="container">
-		<div class="row">
-	    <div class="col">
-			<form id="inputForm" >
-		    	<input type="hidden" id="store_no" name="store_no" value="${istore.instaStore.store_no}" />
-				<table class="table">
-					<tr>
-						<th>리뷰</th>
-						<th colspan="3">별점</th>
-					</tr>
-						
-					<tr>
-						<td>${sessionScope.loginname}</td>
-						<td>
-							<div class="starRev">
-							  <span class="starR1" value="0.5">별1_왼쪽</span>
-							  <span class="starR2" value="1">별1_오른쪽</span>
-							  <span class="starR1" value="1.5">별2_왼쪽</span>
-							  <span class="starR2" value="2">별2_오른쪽</span>
-							  <span class="starR1" value="2.5">별3_왼쪽</span>
-							  <span class="starR2" value="3">별3_오른쪽</span>
-							  <span class="starR1" value="3.5">별4_왼쪽</span>
-							  <span class="starR2" value="4">별4_오른쪽</span>
-							  <span class="starR1" value="4.5">별5_왼쪽</span>
-							  <span class="starR2" value="5">별5_오른쪽</span>
-							</div>
-						
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<textarea id="reply_contents" name="reply_contents" placeholder="내용 입력" style=" width:90%; resize:none;"></textarea>
-						</td>
-					
-						<td>
-							<input type="button" class="btn btn-warning" id="writeBtn" value="리뷰 등록">
-						</td>
-					</tr>
-				
-				</table>
-			</form>
-		</div>
-	</div> <!-- input form end -->
-	<hr>
-	
-		<div class="row"> <!-- print form -->
-			<div class="col">
-				<table class="table table-hover" id="printTable">
-			
-				</table>
-			</div>	
-		</div>
-		
-		
-		
-	</div>
-	
-	<form id="likeForm">
-		<input type="hidden" id="store_no" name="store_no" value="${istore.instaStore.store_no}" />
-	</form>
-=======
 			</article>
 		</section>
 		<!-- 상세페이지 망고플레이트 가게 정보 끝-->
@@ -430,17 +265,13 @@
 	 <!-- 상세페이지 댓글 리스트 끝-->
    </div>
    
->>>>>>> 27b3b9400f8fe6e1752dc3d1397b41bb74154429
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
 
 <script type="text/javascript">
-<<<<<<< HEAD
 
 //가게 좋아요 
-=======
->>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 function insertLike(){
 	var no = $("#store_no").val();
 		$.ajax({
@@ -468,12 +299,8 @@ function deleteLike(){
 			error : function(){alert("실패");}
 			})
 }
-<<<<<<< HEAD
 
 //별점 png로 구현
-=======
-//별
->>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
 $(function(){
 	$(".starMake").each(function(index,item){
 		var star = $(this).text();
@@ -534,7 +361,6 @@ $(function(){
 		}
 	})
 })
-<<<<<<< HEAD
 
 //리플 삭제
 function deleteReply(reply_no,store_no){
@@ -542,11 +368,7 @@ function deleteReply(reply_no,store_no){
 }
 
 //더 보기 버튼
-=======
-function deleteReply(reply_no,store_no){
-	location.href="/getrend/stores/deleteReply?reply_no=" + reply_no + "&store_no="+ store_no;
-}
->>>>>>> 7c95c6552248688866edd3ce4c1efe2bc4f034c0
+
 function moreRead(){
 	if($("#replyTable02").css("display") == 'none'){
 		$("#readMoreBtn").css("display","none");

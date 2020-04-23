@@ -89,7 +89,10 @@
 										</div>
 										<!-- 음식 카테고리 모달 body -->
 	      								<div class="modal-body">
+<<<<<<< HEAD
+=======
 	      									<!-- <h3>음식 종류</h3> -->
+>>>>>>> 7a905e40fea384717b55d6a9327fbc572dd13791
 	           								<div class="form-check">
 				  								<label class="form-check-label">
 				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
@@ -152,7 +155,6 @@
 										</div>
 										<!-- 영업 확인 모달 body -->
 	      								<div class="modal-body">
-	      									<h3>식당 영업 요일별 확인</h3>
 	           								<div class="form-check">
 				  								<label class="form-check-label">
 				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="일" checked="checked">일

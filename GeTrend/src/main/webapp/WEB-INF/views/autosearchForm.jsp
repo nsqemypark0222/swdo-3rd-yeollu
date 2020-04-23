@@ -68,7 +68,7 @@ font-size:large;
 														<c:when test="${status.index eq 1}">
 															<div class="carousel-item active">
 																<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
-													      			<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+													      			 <img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
 													      		</a>
 												      			<div class="carousel-caption d-none d-md-block">
 													        		<h5>${istore.instaStore.store_name}</h5>

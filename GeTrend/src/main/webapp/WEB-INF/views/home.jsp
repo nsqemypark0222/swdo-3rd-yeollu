@@ -40,7 +40,7 @@
 	
 	hr {
 		background-color: #FF8A00;
-		width: 80%;
+		width: 83%;
 		height: 3px;
 	}
 	

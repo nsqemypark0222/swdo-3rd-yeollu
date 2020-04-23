@@ -56,7 +56,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 										</div>
 										<!-- 음식 카테고리 모달 body -->
 	      								<div class="modal-body">
-	      									<h3>음식 종류</h3>
 	           								<div class="form-check">
 				  								<label class="form-check-label">
 				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
@@ -119,7 +118,6 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 										</div>
 										<!-- 영업 확인 모달 body -->
 	      								<div class="modal-body">
-	      									<h3>식당 영업 요일별 확인</h3>
 	           								<div class="form-check">
 				  								<label class="form-check-label">
 				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="일" checked="checked">일

@@ -26,4 +26,8 @@ public interface StoreService {
 																	, ArrayList<InstaImageVO> instaImageList);
 	
 	public ArrayList<InstaStoreInfoVO> sortInstaStoreInfoList(ArrayList<InstaStoreInfoVO> instaStoreInfoList);
+	
+	public InstaStoreInfoVO generateIStoreInfo(String store_no);
+	
+	public InstaStoreInfoVO updateIStoreInfo(String store_no);
 }

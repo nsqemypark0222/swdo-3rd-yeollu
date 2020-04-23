@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yeollu.getrend.store.dao.InstaImageDAO;
 import com.yeollu.getrend.store.dao.InstaReplyDAO;
@@ -19,6 +20,7 @@ import com.yeollu.getrend.store.dao.LikeDAO;
 import com.yeollu.getrend.store.dao.MangoStoreInfoDAO;
 import com.yeollu.getrend.store.dao.ScoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
+import com.yeollu.getrend.store.service.StoreServiceImpl;
 import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaReplyVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
@@ -52,23 +54,28 @@ public class StoreController {
 	@Autowired
 	private InstaImageDAO instaImageDAO;
 	
+	@Autowired
+	private StoreServiceImpl storeService;
+	
 	@RequestMapping(value = "/istoreInfo", method = RequestMethod.GET)
 	public String istoreInfo(String store_no, HttpSession session, Model model) {
 		logger.info("store_no : {}", store_no);
 		
-		InstaStoreVO instaStore = storeDAO.selectInstaStore(store_no);
+		InstaStoreInfoVO instaStoreInfo = storeService.generateIStoreInfo(store_no);
 		
-		ArrayList<InstaImageVO> instaImageList = instaImageDAO.selectInstaImageByStoreNo(store_no);
-		
-		MangoStoreInfoVO mangoStoreInfo = mangoStoreInfoDAO.selectMangoStoreInfoByStoreNo(store_no);
-		
-		ScoreVO score = scoreDAO.selectScoreByStoreNo(store_no);
-		
-		InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
-		instaStoreInfo.setInstaStore(instaStore);
-		instaStoreInfo.setInstaImageList(instaImageList);
-		instaStoreInfo.setMangoStoreInfo(mangoStoreInfo);
-		instaStoreInfo.setScore(score);
+//		InstaStoreVO instaStore = storeDAO.selectInstaStore(store_no);
+//		
+//		ArrayList<InstaImageVO> instaImageList = instaImageDAO.selectInstaImageByStoreNo(store_no);
+//		
+//		MangoStoreInfoVO mangoStoreInfo = mangoStoreInfoDAO.selectMangoStoreInfoByStoreNo(store_no);
+//		
+//		ScoreVO score = scoreDAO.selectScoreByStoreNo(store_no);
+//		
+//		InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
+//		instaStoreInfo.setInstaStore(instaStore);
+//		instaStoreInfo.setInstaImageList(instaImageList);
+//		instaStoreInfo.setMangoStoreInfo(mangoStoreInfo);
+//		instaStoreInfo.setScore(score);
 		
 		model.addAttribute("istore", instaStoreInfo);
 		
@@ -119,6 +126,17 @@ public class StoreController {
 		}
 		
 		return "redirect:istoreInfo?store_no=" + reply.getStore_no();
+	}
+	
+	@RequestMapping(value = "/updateData", method = RequestMethod.GET)
+	@ResponseBody
+	public InstaStoreInfoVO updateData(String store_no) {
+		logger.info("실시간 데이터 갱신 시작 : {}", store_no);
+		
+		InstaStoreInfoVO instaStoreInfo = storeService.updateIStoreInfo(store_no);
+		
+		logger.info("실시간 데이터 갱신 종료");
+		return instaStoreInfo;
 	}
 	
 }

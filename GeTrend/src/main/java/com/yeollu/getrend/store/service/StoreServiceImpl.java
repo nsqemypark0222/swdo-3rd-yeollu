@@ -262,4 +262,53 @@ public class StoreServiceImpl implements StoreService {
 		});
 		return instaStoreInfoList;
 	}
+	
+	@Override
+	public InstaStoreInfoVO generateIStoreInfo(String store_no) {
+		InstaStoreVO instaStore = storeDAO.selectInstaStore(store_no);
+		
+		ArrayList<InstaImageVO> instaImageList = instaImageDAO.selectInstaImageByStoreNo(store_no);
+		
+		MangoStoreInfoVO mangoStoreInfo = mangoStoreInfoDAO.selectMangoStoreInfoByStoreNo(store_no);
+		
+		ScoreVO score = scoreDAO.selectScoreByStoreNo(store_no);
+		
+		InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
+		instaStoreInfo.setInstaStore(instaStore);
+		instaStoreInfo.setInstaImageList(instaImageList);
+		instaStoreInfo.setMangoStoreInfo(mangoStoreInfo);
+		instaStoreInfo.setScore(score);
+		return instaStoreInfo;
+	}
+	
+	@Override
+	public InstaStoreInfoVO updateIStoreInfo(String store_no) {
+		
+		InstaStoreVO instaStore = storeDAO.selectInstaStore(store_no);
+		CrawlerExecutor crawlerExecutor = new CrawlerExecutor();
+		crawlerExecutor.setStore_no(instaStore.getStore_no());
+		crawlerExecutor.setLocation_id(instaStore.getLocation_id());
+		crawlerExecutor.setIsExisted(true);
+		crawlerExecutor.setIsRequiredUpdate(true);
+		new Thread(crawlerExecutor, "crawling :  " + instaStore.getLocation_id()).start();
+		
+		int cnt = instaImageDAO.deleteInstaImage(crawlerExecutor.getStore_no());
+		if(cnt > 0) {
+			logger.info("업데이트를 위한 삭제 성공");
+		} else {
+			logger.info("업데이트를 위한 삭제 실패");
+		}
+		
+		for(InstaImageVO instaImage : crawlerExecutor.getInstaImageList()) {
+			cnt = instaImageDAO.insertInstaImage(instaImage);
+			if(cnt > 0) {
+				logger.info("업데이트 성공");
+			} else {
+				logger.info("업데이트 실패");
+			}
+		}
+		CrawlerExecutor.killChromeDriver();
+		
+		return generateIStoreInfo(store_no);
+	}
 }

@@ -149,13 +149,15 @@
 		width : 310px;
 	}
 		
-		
-	#kakao_link, #like_div{
+	#realtime_update, #kakao_link, #like_div{
 		float : right;
+		text-align: center;
+		margin-left: 5px;
 	}
-	#kakao_link{
+	
+	/* #kakao_link{
 		padding-top : 5px;
-	}
+	} */
 
 	.reply_name a:hover{
 		color : rgba(255, 138, 0, 0.78);

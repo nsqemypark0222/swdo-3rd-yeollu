@@ -19,7 +19,72 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link href='<c:url value="/resources/css/userJoin.css"/>' rel="stylesheet" media="all">
+<style>
+body {
+	background-image : url("https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+	}
 
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: .75rem;
+}
+
+small{
+	margin-left: 10px;
+}
+
+.card{
+	border-radius : 1rem;
+}
+.btn-warning {
+    color: #ffffff;
+    background-color: #ffc107;
+    border-color: #ffc107;
+    border-radius:20px;
+    width: 100%;
+}
+
+.btn-outline-warning{
+	border-radius: 20px;	
+	width: 100%;
+}
+
+#joinForm div {
+    margin-bottom:9px;
+}
+
+#joinForm label {
+    display:inline-block; 
+    width:80%;
+    font-weight: bold;
+	border-radius:30px;
+}
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+  
+}
+
+.card-title{
+	margin-bottom: 1.5rem;
+}
+
+#joinForm input[type='text'], #joinForm input[type='email'], #joinForm input[type='password']{
+    border:#ccc 1px solid;
+    border-radius:30px;
+    width: 100%;
+	height: auto;
+}
+#joinForm input[type='submit'], #joinForm input[type='reset']{ 
+    padding: 12px ;
+    width: 100%;
+    height: auto;
+}
+
+</style>
 </head>
 <body>
 	<div class="container">
@@ -27,7 +92,7 @@
       		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         		<div class="card card-signin my-5">
           			<div class="card-body">
-              			<h2 class="card-title text-center">Sign In</h2>
+              			<h3 class="card-title text-center">회원 가입</h3>
 						<form class="join" 
 								action="<c:url value='join'/>" 
 								id="joinForm"

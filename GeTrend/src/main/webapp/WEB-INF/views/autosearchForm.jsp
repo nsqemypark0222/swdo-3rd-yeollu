@@ -22,15 +22,28 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 <style>
 #storesinfo{
-top: 0; 
-bottom:0; 
-margin-top:auto; 
-margin-bottom:auto;
-font-size:large;
+	top: 0; 
+	bottom:0; 
+	margin-top:auto; 
+	margin-bottom:auto;
+	font-size:large;
 }
+header{
+	background-color: #fff;
+	width : 100%;
+	position: fixed;
+	z-index : 6;
+}
+
+.shadow{
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
 </style>
 </head>
-<body>
+<body style="background-color : #fbfcfc;">
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
@@ -40,6 +53,7 @@ font-size:large;
 			<div class="col-md-2">
 			</div>
 				<div class="col-md-8">
+					<h3>검색 결과</h3>
 					<div class="istore-container scrollbar scrollbar-warning">
 						<c:choose>
 							<c:when test="${sessionScope.loginemail != null && istores != null}">
@@ -122,6 +136,22 @@ font-size:large;
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+//헤더 그림자
+$(function(){
+    var header = $('header');
+
+    $(window).scroll(function(e){
+        if(header.offset().top !== 0){
+            if(!header.hasClass('shadow')){
+                header.addClass('shadow');
+            }
+        }else{
+            header.removeClass('shadow');
+        }
+    });
+})
+</script>
 	
 </body>
 </html>

@@ -1,22 +1,15 @@
 @charset "UTF-8";
 
-       * {margin: 0; padding: 0;}
-	
-       #wrap{width: 1000px; margin: 0 auto;}
+    * {margin: 0; padding: 0;}
+       #wrap{width: 1000px;}
        #banner {width: 100%; height: 330px; text-align: center; margin-top : 20px;}     
        #carouselRecommendedStores{display: inline-block;}
        #content1 {width: 100%; overflow: hidden; }
-       #content1 .nav {float: left; width: 60%; height: 380px;}     
-       #content1 .article_right1 {float: left; width: 37%; height: 380px; background-color: #00a6fc;}
+       #content1 .nav {float: left; width: 60%; height: 390px;}     
+       #content1 .article_right1 {float: left; width: 37%; height: 390px; }
        
        #content2 {overflow: hidden;}
        #content2 .article_box1 {float: left; width: 100%;}
-       
-       #content3 {overflow: hidden; padding: 5%; background-color: #00a6fc;}
-       #content3 .article_square1 {float: left; width: 23%; margin: 1%; height: 200px; border-radius: 5%; background-color: #0076d9;}
-       #content3 .article_square2 {float: left; width: 23%; margin: 1%; height: 200px; border-radius: 5%; background-color: #0076d9;}
-       #content3 .article_square3 {float: left; width: 23%; margin: 1%; height: 200px; border-radius: 5%; background-color: #0076d9;}
-       #content3 .article_square4 {float: left; width: 23%; margin: 1%; height: 200px; border-radius: 5%; background-color: #0076d9;}
        
        /* 화면 너비 0 ~ 1200px */
        @media (max-width: 1240px){
@@ -162,4 +155,5 @@
 		border : none;
 	}
 	
+   
 		

@@ -9,9 +9,16 @@ a:hover {color: #2698cb;}
 /* 폰트 초기화 */
 body, input, textarea, select, button, table {font-family: 'Nanum Gothic', AppleSDGothicNeo-Regular,'Malgun Gothic','맑은 고딕',dotum,'돋움',sans-serif; color: #222; font-size: 13px; line-height: 1.5;}
 
+header{
+    border-bottom: 1px solid #e9e9e9;
+}
+
 .header_container{
 	width : 100%; 
+	
 }
+
+
 .header_logo{
 	width : 20%;
 	height : 100px;
@@ -47,6 +54,7 @@ body, input, textarea, select, button, table {font-family: 'Nanum Gothic', Apple
 	outline : none;
 	font-size : 15px;
 	z-index:900;
+	background: transparent;
 }
 
 #searchInput_img{
@@ -85,7 +93,7 @@ li:nth-of-type(n+10) {
 	color: orange;
 }
 
-@media(max-width: 1360px){
+ @media (max-width: 1240px){
 	.header_container{
 		width : 100%;
 

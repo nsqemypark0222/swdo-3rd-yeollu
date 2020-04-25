@@ -175,7 +175,7 @@
 		<div class="row main_title">
 			<div class="col">
 				<h1><img style="width : 80px;" src="/getrend/resources/img/search_logo.png"> 지금, 당신과 <span style="color:#ff8a00;">가장 가까운</span> 핫 플레이스</h1>
-				<h6>지도를 이용하여 현재 가장 인기 있는 가게를 실시간으로 검색해드립니다</h6>
+				<h6>지도를 이용하여 현재 가장 인기 있는 가게를 실시간으로 검색하세요</h6>
 			</div>
 		</div>
 		<div class="row">

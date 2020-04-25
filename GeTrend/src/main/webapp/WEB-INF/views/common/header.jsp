@@ -35,7 +35,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	    </div>
 	    <div class="header_search">
 	    	<div class="search_border" >
-  	 			<input type="text" id="searchInput"  name="searchInput" placeholder="검색어를 입력하세요" style="background: transparent;">
+  	 			<input type="text" id="searchInput"  name="searchInput" placeholder="관심있는 가게나 동네의 이름을 검색해보세요" style="background: transparent;">
 	 			<input type="image" id="searchInput_img" src="/getrend/resources/img/research.png">	 		
 	    	</div> 	
 	    </div>

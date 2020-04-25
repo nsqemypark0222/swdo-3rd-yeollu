@@ -6,9 +6,10 @@
 }
 
 body {
-  background: #FF8A00;
-  background: linear-gradient(to right, #ff890a, #ffc933);
+  /* background: #FF8A00; */
+  /* background: linear-gradient(to right, #ff890a, #ffc933); */
 }
+
 
 .btn-warning {
     color: #ffffff;

@@ -7,12 +7,18 @@
 .istore-container {
 	position: relative;
  	width: fit-content;
-	max-height: 800px;
+	max-height: 400px;
 	overflow-y: scroll;
 	margin-left: 15px;
-	margin-top: 3%;
+	margin-top : 5%;
 }
-
+.istore-container2 {
+	position: relative;
+ 	width: fit-content;
+	max-height: 400px;
+	margin-left: 15px;
+	margin-top : 5%;
+}
 .scrollbar {
 	float: left;
 	background: #fff;
@@ -86,19 +92,11 @@
   	text-align: center;
 }
 
-.carousel {
-	margin-top: 10px;
-}
-
 .carousel-item {
 	max-height: 400px;
 	overflow: hideen;
 }
 
-.carousel-item img {
-	max-height: initial;
-	margin-top: -15%;
-}
 
 @media (max-width: 767px) {
 
@@ -111,25 +109,29 @@
 		position: absolute;
 		top: 3%; 
 		left: 1%;
-		z-index: 10;
+		z-index: 2;
 	}
 	#opentime {
 		 position: absolute;
 		 top: 3%; 
 		 left: 25%; 
-		z-index: 400;
+		z-index: 2;
 	}
 	#selectOverlay {
 		position: absolute; 
 		top: 3%; 
 		left: 50%; 
-		z-index: 10;
+		z-index: 2;
 	}
 	#drawingMap {
 		position: absolute;
 		top: 3%; 
 		left: 75%; 
-		z-index: 10;
+		z-index: 2;
+	}
+	
+	.recommend_row{
+		width : 100%;
 	}
 }
 
@@ -144,25 +146,29 @@
 		position: absolute;
 		top: 3%; 
 		left: 1%;
-		z-index: 10;
+		z-index: 2;
 	}
 	#opentime {
 		position: absolute;
 		top: 3%; 
 		left: 25%; 
-		z-index: 10;
+		z-index: 2;
 	}
 	#selectOverlay {
 		position: absolute; 
 		top: 3%; 
 		left: 60%; 
-		z-index: 10;
+		z-index: 2;
 	}
 	#drawingMap {
 		position: absolute;
 		top: 3%; 
 		left: 85%; 
-		z-index: 10;
+		z-index: 2;
+	}
+	
+	.recommend_row{
+		width : 100%;
 	}
 }
 
@@ -176,25 +182,25 @@
 		position: absolute;
 		top: 3%; 
 		left: 1%;
-		z-index: 10;
+		z-index: 2;
 	}
 	#opentime {
 		position: absolute;
 		top: 3%; 
 		left: 20%; 
-		z-index: 10;
+		z-index: 2;
 	}
 	#selectOverlay {
 		position: absolute; 
 		top: 3%; 
 		left:70%; 
-		z-index: 10;
+		z-index: 2;
 	}
 	#drawingMap {
 		position: absolute;
 		top: 3%; 
 		left:88%; 
-		z-index: 10;
+		z-index: 2;
 	}
 }
 
@@ -208,25 +214,28 @@
 		position: absolute;
 		top: 3%; 
 		left: 1%;
-		z-index: 10;
+		z-index: 2;
 	}
 	#opentime {
 		position: absolute;
 		top: 3%; 
 		left: 14%; 
-		z-index: 10;
+		z-index: 2;
 	}
 	#selectOverlay {
 		position: absolute; 
 		top: 3%; 
 		left: 73%; 
-		z-index: 10;
+		z-index: 2;
 	}
 	#drawingMap {
 		position:absolute;
 		top: 3%; 
 		left:86%; 
-		z-index: 10;
+		z-index: 2;
+	}
+	.recommend_row{
+		width : 100%;
 	}
 }
 

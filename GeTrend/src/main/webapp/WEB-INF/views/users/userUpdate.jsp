@@ -20,13 +20,13 @@
 <link href='<c:url value="/resources/css/userUpdate.css"/>' rel="stylesheet" media="all">
 
 </head>
-<body>
+<body style="background : white;">
 	<div class="container">
     	<div class="row">
       		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         		<div class="card card-signin my-5">
           			<div class="card-body">
-            			<h5 class="card-title text-center">회원 수정</h5>
+        	  			<h3 class="card-title text-center">회원정보 수정</h3>
              			<form class="update" 
              					action="<c:url value='update'/>" 
              					id="updateForm" 
@@ -34,19 +34,15 @@
              					v-on:submit="updateUser"
              					enctype="multipart/form-data" >
              				
-             				<div class="contaniner-fluid text-center bg-sub">	
-								<p>${user.user_name}</p>
-							</div>
-							
 							<c:choose>
 								<c:when test="${user.user_profile == null}">
 									<div class="form-label-group text-center">
-										<img class="img-thumbnail rounded-circle" id="avatarPreview" alt="" />
+										<img class="img-thumbnail rounded-circle" id="avatarPreview" alt="" style="width : 142px;"/>
 									</div>
 								</c:when>
 								<c:otherwise>
 									<div class="form-label-group text-center">
-										<img class="img-thumbnail rounded-circle" id="avatarPreview" src="${user.user_profile}" />
+										<img class="img-thumbnail rounded-circle" id="avatarPreview" src="${user.user_profile}" style="width : 142px;" />
 									</div>
 								</c:otherwise>
 							</c:choose>
@@ -109,9 +105,9 @@
 		              		
 		              		<input type="hidden" id="user_type" name="user_type" v-model="user_type" />
 		              		
-		              		<button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">회원정보수정</button>
+		              		<button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">회원정보 수정</button>
 		              		<button class="btn btn-lg btn-warning btn-block text-uppercase" type="reset" id="cancel" >취소</button>
-		              		<button class="btn btn-lg btn-warning btn-block text-uppercase" type="reset" id="userDelete" >회원탈퇴</button>
+		              		<button class="btn btn-lg btn-warning btn-block text-uppercase" type="reset" id="userDelete" >회원 탈퇴</button>
 	          			</form>
 	          		</div>
 	        	</div>

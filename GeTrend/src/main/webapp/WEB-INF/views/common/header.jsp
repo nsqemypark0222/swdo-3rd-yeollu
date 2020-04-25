@@ -30,11 +30,11 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 			<div class="header_logo">
 		    	<a href="<c:url value='/'/>" >
 		    		<input type="image" class="header_img" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587709526/resources/header/headerlogo_y1hiyt.png"> 	
-		    	</a>
+		      	</a>
 		    </div>
 		    <div class="header_search">
 		    	<div class="search_border" >
-	  	 			<input type="text" id="searchInput"  name="searchInput" placeholder="검색어를 입력하세요">
+	  	 			<input type="text" id="searchInput"  name="searchInput" placeholder="관심있는 가게나 동네의 이름을 검색해보세요" style="background: transparent;">
 		 			<input type="image" id="searchInput_img" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587709563/resources/header/research_r8yfsu.png">	 		
 		    	</div> 	
 		    </div>
@@ -47,7 +47,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				    	<a href="<c:url value="/users/logout"/>">
 				        	LOGOUT
 				        </a>
-			            <a href="<c:url value='/users/userUpdate'/>">
+			               <a href="<c:url value='/users/userUpdate'/>">
 			               	<img class="header_profile" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587709608/resources/header/user_digv92.png" >
 				        </a>
 				    </c:when>
@@ -60,9 +60,11 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				        </a>
 					</c:otherwise>
 				</c:choose>
-		    </div>
+			</div>
 		</div>	 	  	
 	</div>	
+   	 
+	
 	
 <script type="text/javascript">
 	$(function() {

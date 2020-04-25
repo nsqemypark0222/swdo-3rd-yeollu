@@ -1,30 +1,45 @@
 
 
 @charset "UTF-8";
+header{
+	background-color: #fff;
+	width : 100%;
+	position: fixed;
+	z-index : 6;
+	}
 
+.shadow{
+	  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	}
+
+.container_profile{
+	width: 1000px; 
+	margin: 100px auto 0 auto;
+	background-color: #fff;
+	text-align : center;
+}	
 .mypage_profile{
-	position: relative;
+	position : inline-block;
+	text-align : center;
 	width: 900px;
 	height: 240px;
-	left: 100px;
-	background-color : beige;
+	margin : 0 auto;
 	border-radius : 10px;
+	
 }
 
 .mypage_profile_header_img{
-	position: absolute; 
 	border-radius:5px;
-	top:0; 
-	left: 0;
 	width: 100%;
 	height: 100%;
+	margin : 0 auto;
 }
 .mypage_profile_table{
-	position: absolute;
 	width: 120px;
-	height: 180px;
-	left: 390px;
-	top: 28px;
+	height: 210px;
+	margin : 0 auto;
 }
 
 .mypage_profile_user_name{
@@ -92,11 +107,10 @@
 }
 
 .mypage_buttons{
-	position: relative;
+	position : inline-block;
 	width: 900px;
 	height: 55px;
-	left: 100px;
-	top : 20px;
+	margin : 10px auto;
 }
 
 .mypage_button{
@@ -132,39 +146,27 @@
 }
 
 .mypage_list{
-	position: relative;
 	width: 900px;
 	height: 130px;
-	left: 100px;
-	top : 40px;
+	margin : 10px auto;
+	
 }
 
-.mapDiv{
-	position: relative;
-	width: 900px;
-	height : 300px;
-	left: 100px;
-	top: 20px;
-	background-color : gray;
-}
 
 .noReply{
-	position: relative;
-	margin : 100px 300px;
-
+	margin : 30px auto 100px auto;
 }
 
 .mypage_replies{
-	position: relative;
 	width: 900px;
-	left: 100px;
-	top:34px;
-
+	margin :  30px auto 100px auto;
+   border-top: 1px solid #e9e9e9;
+   padding-top : 60px;
 }
 .reply_cate_profile{
 	width: 55px;
 	height: 55px;
-	margin : 10px 10px;
+	margin : 10px auto;
 }
 
 .reply_cate_name{
@@ -187,7 +189,7 @@
 
 .reply_outer{
 	width : 720px;
-	margin-left : 70px;
+	margin-left : 10px;
 }
 .reply_inner01{
 	float : left;
@@ -196,6 +198,8 @@
 .reply_inner02{
 	float : left;
 	width : 85%;
+	text-align :left;
+	padding-left : 15px;
 }
 
 .readAction{
@@ -207,44 +211,26 @@
 
 
 @media(max-width: 1360px){
-	.container{
+	.container_profile{
 		width : 100%;
 	}
 }
 
 @media (max-width: 1100px){
 	.mypage_profile{width : 100%; left:0;}
-	.mypage_buttons{width : 100%; left:0;}
-	.mypage_list{width : 100%; left:0;}
+	.mypage_buttons{display:none;}
+	.mypage_list{display:none;}
+	.mypage_replies{width : 100%; left:0;}
+}
+
+
+      
+ /* 화면 너비 0 ~ 480px */
+ @media (max-width: 480px){
+     .mypage_profile{width : 100%; left:0;}
 	.mypage_replies{width : 100%; left:0;}
 }
 
 
 
-
-
-#scroll_box2{width: 900px; height: 420px; overflow-y: scroll; }
-#scroll_box2::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  border: 3px solid #fff;
-}
-#scroll_box2::-webkit-scrollbar-button:start:decrement,
-::-webkit-scrollbar-button:end:increment {
-  display: block;
-  height: 5px;
-  background: #fff;
-}
-#scroll_box2::-webkit-scrollbar-track {
-  background: #fff;
-  -webkit-border-radius: 10px;
-  border-radius:10px;
-}
-#scroll_box2::-webkit-scrollbar-thumb {
-  height: 50px;
-  width: 50px;
-  background: rgba(0,0,0,.2);
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
-}
 

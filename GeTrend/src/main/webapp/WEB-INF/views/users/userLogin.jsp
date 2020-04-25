@@ -15,9 +15,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 </head>
-
-<body style="background-color: #003049;">
-	<div class="container-fluid">
+<body style="background-color: #FF8A00;">
+	<div class="container-fluid" style="overflow-x: hidden;overflow-y: hidden;">
 		<div class="row no-gutter">
 			<div class="d-none d-md-flex col-md-4 col-lg-6 bg-image">
 		   		<div class="blob">

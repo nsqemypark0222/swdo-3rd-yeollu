@@ -18,17 +18,44 @@
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-<%-- <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
+
 <script src='<c:url value="/resources/js/owl.carousel.min.js"/>'></script>
 <link href='<c:url value="/resources/css/owl.carousel.css"/>' rel="stylesheet" />
-<link href='<c:url value="/resources/css/owl.theme.default.min.css"/>' rel="stylesheet" /> --%>
+<link href='<c:url value="/resources/css/owl.theme.default.min.css"/>' rel="stylesheet" />
 <link rel= "stylesheet" type="text/css" href='<c:url value="/resources/css/istoreInfo.css"/>'>
+
+<style>
+
+	#wrap{
+		background-color : #fff;
+		margin: 100px auto 0 auto;
+	}
+	header{
+		background-color: #fff;
+		width : 100%;
+		position: fixed;
+		z-index : 6;
+	}
+
+	.shadow{
+	  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	}
+
+</style>
+
 </head>
 
-<body>
+<body style="background-color : #f6f6f6;">
+
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
+	
+	<div class="shadow"></div>    	 
+	<div class="shadow-cover"></div> 
+	
 	<div id="wrap">
 		<!-- 상세페이지 인스타 사진 carousel -->
 		<section id="banner">
@@ -68,8 +95,8 @@
 		<!-- 상세페이지 인스타 사진 carousel 끝-->
 		
 		<!-- 상세페이지 망고플레이트 가게 정보 -->
-		<section id="content1">
-			<nav class="nav">
+		<section id="content1" >
+		   <nav class="nav">
 			<hr>
 				<div class="container">
 					<div class="row">
@@ -77,7 +104,7 @@
 				    		<table class="store_table">
 					   			<tr>
 						  			<td style="width: 70%; height: 80px; border-bottom: 1px solid  #e9e9e9;">
-										<span style="font-size : 30px; color : #FF8A00;">${istore.instaStore.store_name}</span> / <span> ${scoreAvg}점</span>
+										<span style="font-size : 30px; color : #FF8A00;">${istore.instaStore.store_name}</span> <span style="font-size : 25px;"> /별점 ${scoreAvg}점</span>
 						  			</td>
 						  			
 						  			<!-- 실시간 데이터 갱신 -->
@@ -393,6 +420,22 @@ function moreRead(){
 			},1000);	
 	}
 }
+
+
+//헤더 그림자
+$(function(){
+    var header = $('header');
+
+    $(window).scroll(function(e){
+        if(header.offset().top !== 0){
+            if(!header.hasClass('shadow')){
+                header.addClass('shadow');
+            }
+        }else{
+            header.removeClass('shadow');
+        }
+    });
+})
 </script>	
 
 

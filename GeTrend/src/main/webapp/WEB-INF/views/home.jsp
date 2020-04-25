@@ -476,7 +476,7 @@
 			<div class="col-md-10">
 				<div class="row recommend_row">
 					<div class="recommend-title">
-						<h4><img src="/getrend/resources/img/store_recommend.png" width="50">  오늘의 인기 동네</h4>
+						<h4><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782659/resources/home/store_recommend_x5vzsc.png" width="50">  오늘의 인기 동네</h4>
 						<h1 style="color:#ff8a00">#양림동</h1>
 					</div>
 					<!-- 양림동 맛집 추천 시작 -->
@@ -545,7 +545,7 @@
 			<div class="col-md-10">
 				<div class="row recommend_row">
 					<div class="recommend-title">
-						<h4><img src="/getrend/resources/img/store_recommend.png" width="50">  오늘의 추천 동네</h4>
+						<h4><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782659/resources/home/store_recommend_x5vzsc.png" width="50">  오늘의 추천 동네</h4>
 						<h1 style="color:#ff8a00">#풍암동</h1>
 					</div>
 					<!-- 풍암동 맛집 추천 시작 -->

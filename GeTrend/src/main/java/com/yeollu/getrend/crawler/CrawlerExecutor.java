@@ -13,7 +13,7 @@ public class CrawlerExecutor implements Runnable {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CrawlerExecutor.class);
 	
-	private instagram_Selenium_location_post3 crawler;
+	private InstagramLocationCrawler crawler;
 	
 	private String store_no;
 	
@@ -28,20 +28,23 @@ public class CrawlerExecutor implements Runnable {
 	private volatile boolean done = false;
 
 	public CrawlerExecutor() {
-		crawler = new instagram_Selenium_location_post3();
+		crawler = new InstagramLocationCrawler();
 	}
 	
 	@Override
 	public void run() {
-		logger.info("크롤링 시작 : {}", store_no);
+		logger.info("크롤링 : {}", store_no);
 		if(isExisted == false || isRequiredUpdate == true) {
 			instaImageList = crawler.location_post(store_no, location_id);
 			done = true;
 			synchronized (this) {
 				this.notifyAll();
 			}
+		} else if(isExisted == true && isRequiredUpdate == false) {
+			logger.info("존재하지만 업데이트 시기가 아님 : {}", store_no);
+		} else {
+			// ignore
 		}
-		logger.info("크롤링 종료");
 	}
 	
 	public void setStore_no(String store_no) {

@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>[ Join | GeTrend ]</title>
 <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <!-- jQuery library -->
@@ -18,12 +18,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 <link href='<c:url value="/resources/css/userJoin.css"/>' rel="stylesheet" media="all">
 
 </head>
 <body>
 	<div class="container">
-    	<div class="row">
+		<div class="row">
       		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         		<div class="card card-signin my-5">
           			<div class="card-body">

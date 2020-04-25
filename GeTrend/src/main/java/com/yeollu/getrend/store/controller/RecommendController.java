@@ -10,9 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.service.RecommendServiceImpl;
-import com.yeollu.getrend.store.service.StoreService;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.RecommendVO;
 

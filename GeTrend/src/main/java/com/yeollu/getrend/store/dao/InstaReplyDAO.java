@@ -11,6 +11,7 @@ import com.yeollu.getrend.store.vo.InstaReplyVO;
 
 @Repository
 public class InstaReplyDAO {
+	
 	@Autowired
 	private SqlSession session;
 	
@@ -89,6 +90,5 @@ public class InstaReplyDAO {
 		}
 		return cnt;
 	}
-	
 	
 }

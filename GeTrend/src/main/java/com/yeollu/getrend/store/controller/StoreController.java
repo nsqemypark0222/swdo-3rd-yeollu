@@ -21,13 +21,9 @@ import com.yeollu.getrend.store.dao.MangoStoreInfoDAO;
 import com.yeollu.getrend.store.dao.ScoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
 import com.yeollu.getrend.store.service.StoreServiceImpl;
-import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaReplyVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
-import com.yeollu.getrend.store.vo.InstaStoreVO;
 import com.yeollu.getrend.store.vo.LikeVO;
-import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
-import com.yeollu.getrend.store.vo.ScoreVO;
 
 @Controller
 @RequestMapping(value = "/stores")
@@ -99,7 +95,7 @@ public class StoreController {
 		model.addAttribute("isExistedLike", isExistedLike);
 		
 		//평균 별점
-		int scoreAvg = scoreDAO.scoreAvgByStoreno(store_no);
+		double scoreAvg = scoreDAO.scoreAvgByStoreno(store_no);
 		model.addAttribute("scoreAvg", scoreAvg);
 		
 
@@ -107,11 +103,11 @@ public class StoreController {
 	}
 	
 	//댓글 작성 jsp
-	@RequestMapping(value="istoreinfo_reply", method=RequestMethod.GET)
-	public String istoreinfo_reply(String store_name, String store_no, Model model) {
+	@RequestMapping(value="istoreinfoReply", method=RequestMethod.GET)
+	public String istoreinfoReply(String store_name, String store_no, Model model) {
 		model.addAttribute("store_name", store_name);
 		model.addAttribute("store_no",store_no);
-		return "stores/istoreInfo_reply";
+		return "stores/istoreinfoReply";
 	}
 	
 	//댓글삭제

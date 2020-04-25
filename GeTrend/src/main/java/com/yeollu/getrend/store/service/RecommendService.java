@@ -1,7 +1,6 @@
 package com.yeollu.getrend.store.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.RecommendVO;

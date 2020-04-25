@@ -1,17 +1,17 @@
-<!-- callback.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-<title>NaverLoginTest</title>
+<title>[ Naver Login | GeTrend ]</title>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 </head>
 <body>
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 	<script>
 		var naverLogin = new naver.LoginWithNaverId(
 			{
-				clientId: "mhTruKtoEj6RAeMJZQfY",
-				callbackUrl: "http://localhost:8880/getrend/user/callback",
-				isPopup: false,
+				clientId: '<spring:eval expression="@naver['CLIENT_ID']" />',
+				callbackUrl: '<spring:eval expression="@naver['CALLBACK_URL']" />',
+				isPopup: true,
 				callbackHandle: true
 			}
 		);
@@ -39,9 +39,6 @@
 						naverLogin.reprompt();
 						return;
 					} 
-					
-		  			
-				//	location.href = "http://localhost:8880/getrend/login?user_email=" + email + "&user_name="+;
 				} else {
 					console.log("callback 처리에 실패하였습니다.");
 				}

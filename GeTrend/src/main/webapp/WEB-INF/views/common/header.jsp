@@ -21,51 +21,48 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <link rel="stylesheet" href='<c:url value="/resources/css/header.css"/>'> 
-<title>Header</title>
   
 </head>	
 
 <body>
-<div class="header_container">
-	<div class="header_row">
-	  	<div class="header_logo">
-	      <a href="<c:url value='/'/>" >
-	    	<input type="image" class="header_img" src="/getrend/resources/img/headerlogo.png"> 	
-	      </a>
-	    </div>
-	    <div class="header_search">
-	    	<div class="search_border" >
-  	 			<input type="text" id="searchInput"  name="searchInput" placeholder="검색어를 입력하세요">
-	 			<input type="image" id="searchInput_img" src="/getrend/resources/img/research.png">	 		
-	    	</div> 	
-	    </div>
-	    <div class="header_menu">
-			<c:choose>
-				<c:when test="${sessionScope.loginemail != null}">
-					<a href="<c:url value="/mypage/mypageSession"/>">
-			    		MYPAGE
-		   		    </a>
-			    	<a href="<c:url value="/users/logout"/>">
-			        	LOGOUT
-			        </a>
-		               <a href="<c:url value='/users/userUpdate'/>">
-		               	<img class="header_profile" src="/getrend/resources/img/user.png" >
-			        </a>
-			    </c:when>
-				<c:otherwise>
-			        <a href="<c:url value="/users/userJoin"/>">
-			        	JOIN
-			        </a>
-			        <a href="<c:url value="/users/userLogin"/>">
-			        	LOGIN
-			        </a>
-				</c:otherwise>
-			</c:choose>
-		  </div>
-	</div>	 	  	
-</div>	
-    	 
-	
+	<div class="header_container">
+		<div class="header_row">
+			<div class="header_logo">
+		    	<a href="<c:url value='/'/>" >
+		    		<input type="image" class="header_img" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587709526/resources/header/headerlogo_y1hiyt.png"> 	
+		    	</a>
+		    </div>
+		    <div class="header_search">
+		    	<div class="search_border" >
+	  	 			<input type="text" id="searchInput"  name="searchInput" placeholder="검색어를 입력하세요">
+		 			<input type="image" id="searchInput_img" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587709563/resources/header/research_r8yfsu.png">	 		
+		    	</div> 	
+		    </div>
+		    <div class="header_menu">
+				<c:choose>
+					<c:when test="${sessionScope.loginemail != null}">
+						<a href="<c:url value="/mypage/mypageSession"/>">
+				    		MYPAGE
+			   		    </a>
+				    	<a href="<c:url value="/users/logout"/>">
+				        	LOGOUT
+				        </a>
+			            <a href="<c:url value='/users/userUpdate'/>">
+			               	<img class="header_profile" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587709608/resources/header/user_digv92.png" >
+				        </a>
+				    </c:when>
+					<c:otherwise>
+				        <a href="<c:url value="/users/userJoin"/>">
+				        	JOIN
+				        </a>
+				        <a href="<c:url value="/users/userLogin"/>">
+				        	LOGIN
+				        </a>
+					</c:otherwise>
+				</c:choose>
+		    </div>
+		</div>	 	  	
+	</div>	
 	
 <script type="text/javascript">
 	$(function() {
@@ -86,7 +83,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	           source : function( request, response ) {
 	               $.ajax({
 	                   type: 'get',
-	                   url: "<c:url value='/autocomplete/source'/>",
+	                   url: "<c:url value='/autoComplete/source'/>",
 	                   dataType: "json",
 	                   data: {"param" : $("#searchInput").val()},
 	                   success: function(data) {
@@ -118,14 +115,10 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 		$("#searchInput").keydown(function (key) {    	 
 	        if(key.keyCode == 13){
 	        	event.preventDefault();
-	        	$(location).attr('href', "<c:url value='/autoSearch?searchInput=" + $("#searchInput").val() + "'/>");
+	        	$(location).attr('href', "<c:url value='/keywordSearch?searchInput=" + $("#searchInput").val() + "'/>");
 	        };
 	    });
-
 	});
-
-
-	
 </script>
 </body>
 </html>

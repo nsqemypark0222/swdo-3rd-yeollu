@@ -5,23 +5,15 @@
 
 <mapper namespace="com.yeollu.getrend.store.dao.ScoreMapper">
 
-<select id="selectScoreByStoreNo" parameterType="string" resultType="score">
+<select id="selectCountLikeByStoreNo" parameterType="string" resultType="int">
 select
-	s.store_no as store_no
-	, count(l.user_email) as sum_of_like
-	, sum(r.reply_star) as sum_of_star
+	count(user_email) as sum_of_like
 from
-	stores s
-	, likes l
-	, insta_replys r
+	likes
 where
-	s.store_no = l.store_no
-	and s.store_no = r.store_no
-	and s.store_no = #{store_no}
-group by
-	s.store_no
+	store_no = #{store_no}
 </select>
-<select id="scoreAvgByStoreno" parameterType="string" resultType="int">
+<select id="scoreAvgByStoreno" parameterType="string" resultType="double">
 select
 	nvl(avg(reply_star),0) as avg_of_star
 from

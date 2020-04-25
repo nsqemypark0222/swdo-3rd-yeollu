@@ -7,8 +7,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<title>[ ${istore.instaStore.store_name} | GeTrend ]</title>
+<meta charset="UTF-8">
+<title>[ ${istore.instaStore.store_name} | GeTrend ]</title>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
@@ -18,11 +18,11 @@
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-<script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
+<%-- <script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
 <script src='<c:url value="/resources/js/owl.carousel.min.js"/>'></script>
 <link href='<c:url value="/resources/css/owl.carousel.css"/>' rel="stylesheet" />
-<link href='<c:url value="/resources/css/owl.theme.default.min.css"/>' rel="stylesheet" />
-<link rel= "stylesheet" type="text/css" href="../resources/css/istoreInfo.css">
+<link href='<c:url value="/resources/css/owl.theme.default.min.css"/>' rel="stylesheet" /> --%>
+<link rel= "stylesheet" type="text/css" href='<c:url value="/resources/css/istoreInfo.css"/>'>
 </head>
 
 <body>
@@ -168,7 +168,7 @@
 				    	</div>	
 				    	<!-- 댓글 버튼 -->
 						<div id="reply_btn">	 
-							<a href="/getrend/stores/istoreinfo_reply?store_no=${istore.instaStore.store_no}&store_name=${istore.instaStore.store_name}">
+							<a href='<c:url value="/stores/istoreInfo?store_no=${list.STORE_NO}&store_name=${istore.instaStore.store_name}" />'>
 								<button type="button" class="btn btn-outline-warning">
 									댓글 남기기
 								</button>
@@ -178,7 +178,7 @@
 							<c:choose>
 								<c:when test="${empty replyList}">
 									<div class="noReply">
-								  		<img src="/getrend/resources/img/noreply.png" style="display:inline-block; width : 100px;" alt="댓글없음"><br><br><br>
+								  		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587711990/resources/mypage/noreply_kaymuv.png" style="display:inline-block; width : 100px;" alt="댓글없음"><br><br><br>
 								  		<div style="display:inline-block;">
 								  			<h6>남긴 댓글이 아직 없습니다</h6>
 								  		</div>
@@ -191,18 +191,18 @@
 												<td>
 													<div class="reply_outer">						          
 														<div class="reply_inner01">	
-												   			<a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}">	          
+												   			<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'>    
 																<c:if test="${reply.USER_PROFILE != null}">
 													        		<img class="reply_cate_profile" src="${reply.USER_PROFILE}" alt="프로필 사진">
 													    		</c:if>
 													    		<c:if test="${reply.USER_PROFILE == null}">
-																	<img class="reply_cate_profile" src="<c:url value='/resources/img/user.png'/>" alt="프로필 사진">
+																	<img class="reply_cate_profile" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587709608/resources/header/user_digv92.png" alt="프로필 사진">
 													    		</c:if>
 															</a>	
 												 		</div>						          
 												 		<div class="reply_inner02">
 											       			<div class="reply_name">
-    											      			<a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}">
+    											      			<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'> 
 	        										   				${reply.USER_NAME}
     												  			</a> 								   
 											       			</div>
@@ -215,7 +215,7 @@
 													</div>
 													<c:if test="${reply.USER_EMAIL eq sessionScope.loginemail}">
 														<div class="deleteButton" style="float : right;">
-															<img style="width:15px; cursor: pointer;" src="/getrend/resources/img/delete.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${istore.instaStore.store_no}')">
+															<img style="width:15px; cursor: pointer;" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587711360/resources/mypage/delete_vxexcp.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${istore.instaStore.store_no}')">
 														</div> 
 													</c:if>
 												</td>
@@ -227,7 +227,7 @@
 							   	 	<c:if test="${fn:length(replyList) > 3}">
 								   		<div class="readAction">
 			    							<button id="readMoreBtn" class="btn btn-outline-secondary btn-lg" onclick="moreRead();"> 더보기 + </button>
-			    							<img id="readMoreSpin" src="/getrend/resources/img/Spinner.gif" style="display:none; width : 100px;">
+			    							<img id="readMoreSpin" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587712040/resources/mypage/Spinner_rx4yeu.gif" style="display:none; width : 100px;">
 			   							</div>
 							   	 	</c:if>
 		    						
@@ -242,7 +242,7 @@
 														        	<img class="reply_cate_profile" src="${reply.USER_PROFILE}" alt="프로필 사진">
 														    	</c:if>
 														    	<c:if test="${reply.USER_PROFILE == null}">
-																	<img class="reply_cate_profile" src="<c:url value='/resources/img/user.png'/>" alt="프로필 사진">
+																	<img class="reply_cate_profile" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587709608/resources/header/user_digv92.png" alt="프로필 사진">
 														    	</c:if>
 														 	</a>
 													 	</div>						          
@@ -261,7 +261,7 @@
 					    					 		</div>
 													<c:if test="${reply.USER_EMAIL eq sessionScope.loginemail}">
 														<div class="deleteButton" style="float : right;">
-															<img style="width:15px; cursor: pointer;" src="/getrend/resources/img/delete.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${istore.instaStore.store_no}')">
+															<img style="width:15px; cursor: pointer;" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587711360/resources/mypage/delete_vxexcp.png"  alt="삭제" onclick="return deleteReply('${reply.REPLY_NO}','${istore.instaStore.store_no}')">
 														</div> 
 													</c:if>
 												</td>
@@ -288,7 +288,7 @@
 function insertLike(){
 	var no = $("#store_no").val();
 		$.ajax({
-			url : "/getrend/likes/likeInsert",
+			url : "<c:url value='/likes/likeInsert' />",
 			type : "post",
 			data : {store_no : no},
 			success : function(){
@@ -302,7 +302,7 @@ function insertLike(){
 function deleteLike(){
 	var no = $("#store_no").val();
 		$.ajax({
-			url : "/getrend/likes/likeDelete",
+			url : "<c:url value='/likes/likeDelete' />",
 			type : "post",
 			data : {store_no : no},
 			success : function(){
@@ -318,58 +318,58 @@ $(function(){
 	$(".starMake").each(function(index,item){
 		var star = $(this).text();
 		
-		if(star == 0.5) $(this).html("<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>");
-		else if(star == 1) $(this).html("<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>");
+		if(star == 0.5) $(this).html("<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>");
+		else if(star == 1) $(this).html("<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>");
 		else if(star == 1.5) {
-			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-				temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>";
 				$(this).html(temp);
 		}
 		else if(star == 2) {
-			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			    temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			    temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
 			$(this).html(temp);
 		}
 		else if(star == 2.5) {
-			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			    temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-				temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			    temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>";
 			$(this).html(temp);
 		}
 		else if(star == 3) {
-			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-				temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-				temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
 			$(this).html(temp);
 		}
 		else if(star == 3.5) {
-			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>";
 			$(this).html(temp);
 		}
 		else if(star == 4) {
-			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
 			$(this).html(temp);
 		}
 		else if(star == 4.5) {
-			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star_off.png"/>' alt='☆'>";
+			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>";
 			$(this).html(temp);
 		}
 		else if(star == 5) {
-			var temp = "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
-			temp += "<img style='width:19px;' src='<c:url value="/resources/img/star.png"/>' alt='★'>";
+			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
 			$(this).html(temp);
 		}
 	})
@@ -377,7 +377,7 @@ $(function(){
 
 //리플 삭제
 function deleteReply(reply_no,store_no){
-	location.href="/getrend/stores/deleteReply?reply_no=" + reply_no + "&store_no="+ store_no;
+	location.href="<c:url value='/mypage/stores/deleteReply?reply_no=" + reply_no + "&store_no=" + store_no + "'/>";
 }
 
 //더 보기 버튼
@@ -400,9 +400,10 @@ function moreRead(){
 <script type='text/javascript'>
 	//<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
-  Kakao.init('<spring:eval expression="@kakao['KAKAOLOGIN_APPKEY']" />');
+	Kakao.init('<spring:eval expression="@kakao['KAKAOLOGIN_APPKEY']" />');
     // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
     function sendLink() {
+        
     	Kakao.Link.sendDefault({
         	objectType: 'location',
         	address: "${istore.instaStore.store_adr1}",
@@ -417,9 +418,9 @@ function moreRead(){
 				}
 			},
        		social: {
-          		likeCount: 286,
-          		commentCount: 45,
-          		sharedCount: 845
+          		likeCount: 0,
+          		commentCount: 0,
+          		sharedCount: 0
         	},
         	buttons: [
           		{
@@ -478,7 +479,7 @@ function moreRead(){
 					$('.fas.fa-sync-alt.fa-3x.fa-spin').removeClass('fa-spin');
 				},
 				success: function(result) {
-					alert("성공");
+					//alert("성공");
 					$("#banner").empty();
 					$("#content1").empty();
 
@@ -494,17 +495,17 @@ function moreRead(){
 						str_b += 	'<div class="carousel-inner">';
 						str_b += 		'<div class="carousel-item active">';
 						for(let i = 1; i < item.instaImageList.length - 1; i += 3) {
-							str_b += 		'<img class="postImg rounded img-fluid" src="' + item.instaImageList[i].image_url +  '" class="d-block img-fluid" alt="...">';
+							str_b += 		'<img class="postImg rounded img-fluid" src="' + item.instaImageList[i].image_url + '" class="d-block img-fluid" alt="...">';
 						}
 						str_b += 		'</div>';
 						str_b += 		'<div class="carousel-item">';
 						for(let i = 2; i < item.instaImageList.length - 1; i += 3) {
-							str_b += 		'<img class="postImg rounded img-fluid" src="' + item.instaImageList[i].image_url +  '" class="d-block img-fluid" alt="...">';
+							str_b += 		'<img class="postImg rounded img-fluid" src="' + item.instaImageList[i].image_url + '" class="d-block img-fluid" alt="...">';
 						}
 						str_b += 		'</div>';
 						str_b += 		'<div class="carousel-item">';
 						for(let i = 3; i < item.instaImageList.length - 1; i += 3) {
-							str_b += 	'<img class="postImg rounded img-fluid" src="' + item.instaImageList[i].image_url +  '" class="d-block img-fluid" alt="...">';
+							str_b += 		'<img class="postImg rounded img-fluid" src="' + item.instaImageList[i].image_url + '" class="d-block img-fluid" alt="...">';
 						}
 						str_b += 		'</div>';
 						str_b += 	'</div>';

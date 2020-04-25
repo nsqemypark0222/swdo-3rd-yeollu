@@ -3,7 +3,6 @@ package com.yeollu.getrend.store.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,7 @@ import com.yeollu.getrend.store.dao.InstaLocationDAO;
 import com.yeollu.getrend.store.dao.MangoStoreInfoDAO;
 import com.yeollu.getrend.store.dao.ScoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
-import com.yeollu.getrend.store.util.preprocess.core.QueryStringSender;
+import com.yeollu.getrend.store.util.preprocess.QueryStringSender;
 import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.store.vo.InstaLocationVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
@@ -100,21 +99,26 @@ public class StoreServiceImpl implements StoreService {
 	public ArrayList<ScoreVO> generateScoreList(ArrayList<InstaStoreVO> instaStoreList) {
 		ArrayList<ScoreVO> scoreList = new ArrayList<ScoreVO>();
 		for(InstaStoreVO instaStore : instaStoreList) {
-			ScoreVO score = scoreDAO.selectScoreByStoreNo(instaStore.getStore_no());
+			ScoreVO score = new ScoreVO();
+					
+			score = new ScoreVO();
+			score.setStore_no(instaStore.getStore_no());
+			score.setSum_of_like(scoreDAO.selectCountLikeByStoreNo(instaStore.getStore_no()));
+			score.setAvg_of_star(scoreDAO.scoreAvgByStoreno(instaStore.getStore_no()));
 			
-			if(score == null) {
-				score = new ScoreVO();
-				score.setStore_no(instaStore.getStore_no());
-				score.setSum_of_like(0);
-				score.setSum_of_star(0.0);
-			}
 			scoreList.add(score);
 		}
 		
 		Collections.sort(scoreList, new Comparator<ScoreVO>() {
 			public int compare(ScoreVO score1, ScoreVO score2) {
-				if((score1.getSum_of_like() * 100 + score1.getSum_of_like()) < (score2.getSum_of_like() * 100 + score2.getSum_of_like())) {
+				if(score1.getAvg_of_star() < score2.getAvg_of_star()) {
 					return 1;
+				} else if(score1.getAvg_of_star() == score2.getAvg_of_star()) {
+					if(score1.getSum_of_like() <= score2.getSum_of_like()) {
+						return 1;
+					} else {
+						return -1;
+					}
 				} else {
 					return -1;
 				}
@@ -271,7 +275,17 @@ public class StoreServiceImpl implements StoreService {
 		
 		MangoStoreInfoVO mangoStoreInfo = mangoStoreInfoDAO.selectMangoStoreInfoByStoreNo(store_no);
 		
-		ScoreVO score = scoreDAO.selectScoreByStoreNo(store_no);
+		ScoreVO score = new ScoreVO();
+		score.setStore_no(store_no);
+		score.setAvg_of_star(scoreDAO.scoreAvgByStoreno(store_no));
+		score.setSum_of_like(scoreDAO.selectCountLikeByStoreNo(store_no));
+		int sum = 0;
+		if(instaImageList != null) {
+			for(InstaImageVO instaImage : instaImageList) {
+				sum += instaImage.getImage_like();
+			}
+		}
+		score.setSum_of_insta_like(sum);
 		
 		InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
 		instaStoreInfo.setInstaStore(instaStore);

@@ -3,8 +3,6 @@ package com.yeollu.getrend.mango.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import com.yeollu.getrend.mango.service.MangoServiceImpl;

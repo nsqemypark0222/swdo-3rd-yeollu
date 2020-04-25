@@ -1,6 +1,5 @@
 package com.yeollu.getrend.crawler;
 
-
 import java.io.IOException;
 
 import org.slf4j.Logger;
@@ -13,7 +12,7 @@ public class CrawlerExecutorForMango implements Runnable {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CrawlerExecutorForMango.class);
 	
-	private mango_store_info2 crawler;
+	private MangoPlateCrawler crawler;
 	
 	private StoreVO store;
 	
@@ -22,7 +21,7 @@ public class CrawlerExecutorForMango implements Runnable {
 	private volatile boolean done = false;
 
 	public CrawlerExecutorForMango() {
-		crawler = new mango_store_info2();
+		crawler = new MangoPlateCrawler();
 	}
 	
 	@Override

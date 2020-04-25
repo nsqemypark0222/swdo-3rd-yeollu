@@ -147,6 +147,7 @@
 
 	.postImg{
 		width : 310px;
+		margin: 5px;
 	}
 		
 	#realtime_update, #kakao_link, #like_div{

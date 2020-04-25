@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<title>footer</title>
 <style>
 html,
 body {
@@ -42,14 +41,14 @@ body {
       		</div>
     	</div>
   	</div>
-<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-	<div class="container text-center">
-    	<small>
-    		Copyright &copy; Team Yeollu<br>
-     	   	광주광역시 광산구 무진대로 282, 7층<br>
-			대표: 박민열, email:Yeollu@gmail.com<br>
-  		</small>
-    </div>
-</footer>
+	<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+		<div class="container text-center">
+	    	<small>
+	    		Copyright &copy; Team Yeollu<br>
+	     	   	광주광역시 광산구 무진대로 282, 7층<br>
+				대표: 박민열, email:Yeollu@gmail.com<br>
+	  		</small>
+	    </div>
+	</footer>
 </body>
 </html>	

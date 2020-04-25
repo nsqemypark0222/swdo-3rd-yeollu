@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yeollu.getrend.crawler.CrawlerExecutor;
 import com.yeollu.getrend.crawler.CrawlerExecutorForMango;
 import com.yeollu.getrend.mango.dao.MangoDayDAO;
 import com.yeollu.getrend.mango.dao.MangoStoreDAO;
@@ -16,12 +15,9 @@ import com.yeollu.getrend.mango.dao.MangoTimeDAO;
 import com.yeollu.getrend.mango.vo.MangoDayVO;
 import com.yeollu.getrend.mango.vo.MangoStoreVO;
 import com.yeollu.getrend.mango.vo.MangoTimeVO;
-import com.yeollu.getrend.store.dao.InstaLocationDAO;
-import com.yeollu.getrend.store.dao.ScoreDAO;
 import com.yeollu.getrend.store.dao.StoreDAO;
-import com.yeollu.getrend.store.util.preprocess.core.DayOfTheWeekCategorizer;
-import com.yeollu.getrend.store.util.preprocess.core.TimeCategorizer;
-import com.yeollu.getrend.store.vo.InstaStoreVO;
+import com.yeollu.getrend.store.util.preprocess.DayOfTheWeekCategorizer;
+import com.yeollu.getrend.store.util.preprocess.TimeCategorizer;
 import com.yeollu.getrend.store.vo.StoreVO;
 
 @Service

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yeollu.getrend.user.vo.FollowVO;
-import com.yeollu.getrend.user.vo.UserVO;
 
 @Repository
 public class FollowDAO {
@@ -44,6 +43,7 @@ public class FollowDAO {
 			e.printStackTrace();
 		}return ck;
 	}
+	
 	public int countFollow(String user_email){
 		int cnt = 0;
 		try {
@@ -88,7 +88,7 @@ public class FollowDAO {
 		}
 		return list;
 	}
-	}
+}
 	
 
 

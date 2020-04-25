@@ -10,6 +10,7 @@ import com.yeollu.getrend.store.vo.InstaUserVO;
 
 @Repository
 public class InstaUserDAO {
+	
 	@Autowired
 	private SqlSession session;
 	

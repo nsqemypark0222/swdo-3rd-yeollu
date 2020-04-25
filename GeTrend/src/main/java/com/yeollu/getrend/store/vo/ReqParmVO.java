@@ -2,7 +2,7 @@ package com.yeollu.getrend.store.vo;
 
 import java.util.ArrayList;
 
-import com.yeollu.getrend.store.util.map.model.Point;
+import com.yeollu.getrend.store.util.map.Point;
 
 import lombok.Data;
 

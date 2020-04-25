@@ -1,11 +1,9 @@
 package com.yeollu.getrend.mango.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.yeollu.getrend.mango.vo.MangoDayVO;
 import com.yeollu.getrend.mango.vo.MangoStoreVO;
-import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
 
 public interface MangoStoreMapper {
 	public int insertMangoStore(MangoStoreVO mangoStore);

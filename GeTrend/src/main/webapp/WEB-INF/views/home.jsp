@@ -89,10 +89,8 @@
 										</div>
 										<!-- 음식 카테고리 모달 body -->
 	      								<div class="modal-body">
-<<<<<<< HEAD
-=======
+
 	      									<!-- <h3>음식 종류</h3> -->
->>>>>>> 7a905e40fea384717b55d6a9327fbc572dd13791
 	           								<div class="form-check">
 				  								<label class="form-check-label">
 				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
@@ -539,10 +537,7 @@
 	<!-- 로딩이미지 -->
 	<div class="wrap-loading display-none">
 	  	<div>
-	  		<img src="./resources/img/Loadingbar.gif"/>
-	  		<!--  
-	  		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1585986827/loader_sxmz3a.gif" />
-	  		-->
+	  		<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587731259/resources/home/Loadingbar_ykfxnr.gif"/>
 	  	</div>
 	</div>
 	
@@ -554,118 +549,116 @@
 	</div>
 
 <script>
-$(function() {
+	$(function() {
+		
+		function search(points) {
+			let categoryValues = [];
+			$("input[name=categotyChk]:checked").each(function() {
+				categoryValues.push($(this).val());
+			});
+	//		console.log(categoryValues);
+			let opentimeValues = [];
+			$("input[name=opentimeChk]:checked").each(function() {
+				opentimeValues.push($(this).val());
+			});
+	//		console.log(opentimeValues);
+			let reqParm = {
+				"points": points,
+				"categoryValues": categoryValues,
+				"opentimeValues": opentimeValues
+			};
+			$.ajax({
+				url: "<c:url value='/search' />",
+				type: "post",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify(reqParm),
+				dataType: "json",
+				beforeSend: function() {
+					$('.wrap-loading').removeClass('display-none');
+					$('.wrap-loading').on('scroll touchmove mousewheel', function(event) {
+						event.preventDefault();
+					  	event.stopPropagation();
+					  	return false;
+					});
+				},
+				complete: function() {
+					$('.wrap-loading').addClass('display-none');
+					$('.wrap-loading').off('scroll touchmove mousewheel');
+				},
+				success: function(result) {
+					alert("성공");
+					printMarker(result);
 	
-	function search(points) {
-		let categoryValues = [];
-		$("input[name=categotyChk]:checked").each(function() {
-			categoryValues.push($(this).val());
-		});
-//		console.log(categoryValues);
-		let opentimeValues = [];
-		$("input[name=opentimeChk]:checked").each(function() {
-			opentimeValues.push($(this).val());
-		});
-//		console.log(opentimeValues);
-		let reqParm = {
-			"points": points,
-			"categoryValues": categoryValues,
-			"opentimeValues": opentimeValues
-		};
-		$.ajax({
-			url: "<c:url value='/search' />",
-			type: "post",
-			contentType: "application/json; charset=utf-8",
-			data: JSON.stringify(reqParm),
-			dataType: "json",
-			beforeSend: function() {
-				$('.wrap-loading').removeClass('display-none');
-				$('.wrap-loading').on('scroll touchmove mousewheel', function(event) {
-					event.preventDefault();
-				  	event.stopPropagation();
-				  	return false;
-				});
-			},
-			complete: function() {
-				$('.wrap-loading').addClass('display-none');
-				$('.wrap-loading').off('scroll touchmove mousewheel');
-			},
-			success: function(result) {
-				alert("성공");
-				printMarker(result);
-
-				$(".istore-container").empty();
-
-				let str = "";
-				$(result).each(function(index, item) {
-					str += '<div id="carouselSearchedStores_' + item.instaStore.store_no + '" class="carousel slide" data-ride="carousel">';
-					str += 		'<ol class="carousel-indicators">';
-					for(let i = 0; i < item.instaImageList.length; i++) {
-						if(item.image_type !== 'profile' && item.instaImageList.length > 1) {
-							if(i === 1) {
-								str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" class="active" ></li>';
-							} else {
-								str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" ></li>';
+					$(".istore-container").empty();
+	
+					let str = "";
+					$(result).each(function(index, item) {
+						str += '<div id="carouselSearchedStores_' + item.instaStore.store_no + '" class="carousel slide" data-ride="carousel">';
+						str += 		'<ol class="carousel-indicators">';
+						for(let i = 0; i < item.instaImageList.length; i++) {
+							if(item.image_type !== 'profile' && item.instaImageList.length > 1) {
+								if(i === 1) {
+									str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" class="active" ></li>';
+								} else {
+									str += '<li data-target="#carouselSearchedStores_' + item.instaStore.store_no + '" data-slide-to="' + i + '" ></li>';
+								}
 							}
 						}
-					}
-					str += 		'</ol>';
-					str += 		'<div class="carousel-inner">';
-					for(let i = 0; i < item.instaImageList.length; i++) {
-						if(item.image_type !== 'profile' && item.instaImageList.length > 1) {
-							if(i === 1) {
-								str += '<div class="carousel-item active">';
-								str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
-								str +=			'<img src="' + item.instaImageList[i].image_url + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
-								str +=		'</a>';
-								str +=		'<div class="carousel-caption d-none d-md-block">';
-								str += 			'<h5>' + item.instaStore.store_name + '</h5>';
-								str +=		'</div>';
-					      		str += '</div>';
-							} else {
-								str += '<div class="carousel-item">';
-								str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
-								str +=			'<img src="' + item.instaImageList[i].image_url + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
-								str +=		'</a>';
-								str +=		'<div class="carousel-caption d-none d-md-block">';
-								str += 			'<h5>' + item.instaStore.store_name + '</h5>';
-								str +=		'</div>';
-					      		str += '</div>';
+						str += 		'</ol>';
+						str += 		'<div class="carousel-inner">';
+						for(let i = 0; i < item.instaImageList.length; i++) {
+							if(item.image_type !== 'profile' && item.instaImageList.length > 1) {
+								if(i === 1) {
+									str += '<div class="carousel-item active">';
+									str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
+									str +=			'<img src="' + item.instaImageList[i].image_url + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		'</a>';
+									str +=		'<div class="carousel-caption d-none d-md-block">';
+									str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+									str +=		'</div>';
+						      		str += '</div>';
+								} else {
+									str += '<div class="carousel-item">';
+									str +=		"<a href='" + '<c:url value="/stores/istoreInfo?store_no=' + item.instaStore.store_no + '" />' + "'>";
+									str +=			'<img src="' + item.instaImageList[i].image_url + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
+									str +=		'</a>';
+									str +=		'<div class="carousel-caption d-none d-md-block">';
+									str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+									str +=		'</div>';
+						      		str += '</div>';
+								}
 							}
 						}
-					}
-					str += 		'</div>';
-					str += 		'<a class="carousel-control-prev" href="#carouselSearchedStores_' + item.instaStore.store_no + '" role="button" data-slide="prev">';
-					str +=			'<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
-					str +=			'<span class="sr-only">Previous</span>';
-					str +=		'</a>';
-					str +=		'<a class="carousel-control-next" href="#carouselSearchedStores_' + item.instaStore.store_no + '" role="button" data-slide="next">';
-					str +=			'<span class="carousel-control-next-icon" aria-hidden="true"></span>';
-					str +=			'<span class="sr-only">Next</span>';
-					str +=		'</a>';
-					str += '</div>';
-				});
-				//console.log(str);
-				$(".istore-container").append(str);
-	        },
-	        error: function(request, status, error){
-	            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
-	        }
-		});
-	}
-	searchFunc = search;
-	
-});
+						str += 		'</div>';
+						str += 		'<a class="carousel-control-prev" href="#carouselSearchedStores_' + item.instaStore.store_no + '" role="button" data-slide="prev">';
+						str +=			'<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+						str +=			'<span class="sr-only">Previous</span>';
+						str +=		'</a>';
+						str +=		'<a class="carousel-control-next" href="#carouselSearchedStores_' + item.instaStore.store_no + '" role="button" data-slide="next">';
+						str +=			'<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+						str +=			'<span class="sr-only">Next</span>';
+						str +=		'</a>';
+						str += '</div>';
+					});
+					//console.log(str);
+					$(".istore-container").append(str);
+		        },
+		        error: function(request, status, error){
+		            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
+		        }
+			});
+		}
+		searchFunc = search;
+		
+	});
 
 	function search(points) {
 		searchFunc(points);
 	};
 	
-	
-	
 	const mapContainer = document.getElementById("map");
 	
-	mapOption = {
+	let mapOption = {
 			center: new kakao.maps.LatLng(35.15113, 126.924584),
 			level: 1 // 지도의 확대 레벨
 	};
@@ -773,7 +766,29 @@ $(function() {
 		const moveLatLng = new kakao.maps.LatLng(lat, lng);
 		map.panTo(moveLatLng);
 	};
-	
+
+	const setMapCenterByAccessLocation = () => {
+		if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				latitude = position.coords.latitude;
+			    longitude = position.coords.longitude;
+
+			    setCenter(latitude, longitude);
+
+				const customMarker = '<i class="fas fa-map-marker-alt fa-3x" style="color: rgba(255, 138, 0, 0.78);"></i>';
+
+				const maker_pos = new kakao.maps.LatLng(latitude, longitude);  
+
+				const customOverlay = new kakao.maps.CustomOverlay({
+					position: maker_pos,
+					content: customMarker   
+				});
+
+				customOverlay.setMap(map);
+			});
+		}
+	}
+
 	const recommendByAccessLocation = (category) => {
 		if(navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -804,6 +819,11 @@ $(function() {
 		$("#store_cate1").val(category);
 		$("#recommendForm").submit();
 	}
+
+	const init = () => {
+		setMapCenterByAccessLocation();
+	}
+	init();
 </script>
 </body>
 </html>

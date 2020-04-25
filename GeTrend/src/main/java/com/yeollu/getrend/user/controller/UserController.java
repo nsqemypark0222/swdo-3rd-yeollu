@@ -20,12 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.yeollu.getrend.user.dao.FollowDAO;
 import com.yeollu.getrend.user.dao.UserDAO;
-import com.yeollu.getrend.user.util.FileService;
 import com.yeollu.getrend.user.util.MailService;
 import com.yeollu.getrend.user.util.ProfileImageHandler;
-import com.yeollu.getrend.user.vo.FollowVO;
 import com.yeollu.getrend.user.vo.UserVO;
 import com.yeollu.getrend.util.PropertiesUtil;
 
@@ -37,7 +34,6 @@ public class UserController {
 	
 	@Autowired
 	private UserDAO dao;
-	
 	
 	@Autowired
 	BCryptPasswordEncoder passEncoder;
@@ -191,7 +187,7 @@ public class UserController {
 	//네이버 콜백
 	@RequestMapping(value = "/callback", method = RequestMethod.GET)
 	public String callback() {
-		logger.info("callback가는거");
+		logger.info("callback");
 		return "/users/callback";
 	}
 	//네이버로그인

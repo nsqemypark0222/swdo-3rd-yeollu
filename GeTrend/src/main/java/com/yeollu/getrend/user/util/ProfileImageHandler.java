@@ -1,7 +1,6 @@
 package com.yeollu.getrend.user.util;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
@@ -11,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Transformation;
-import com.cloudinary.transformation.Layer;
 import com.cloudinary.utils.ObjectUtils;
 import com.yeollu.getrend.util.PropertiesUtil;
 

@@ -1,7 +1,6 @@
 package com.yeollu.getrend.mango.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.yeollu.getrend.mango.vo.MangoDayVO;
 import com.yeollu.getrend.mango.vo.MangoStoreVO;
-import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
 
 @Repository
 public class MangoStoreDAO {

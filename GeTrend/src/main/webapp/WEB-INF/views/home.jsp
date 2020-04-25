@@ -167,14 +167,14 @@
 	<div class="shadow"></div>    	 
 	<div class="shadow-cover"></div> 
 	<a class="top_btn" style="display:scroll;position:fixed;  bottom:30px;right:20px; z-index:200;" href="#" title="맨 위로">
-		<img style="width:40px;"src="/getrend/resources/img/top.png">
+		<img style="width:40px;"src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782568/resources/home/top_boeuo8.png">
 	</a>
 	<div class="wrap">
 	<div class="container-fluid wrap_inner">
 		
 		<div class="row main_title">
 			<div class="col">
-				<h1><img style="width : 80px;" src="/getrend/resources/img/search_logo.png"> 지금, 당신과 <span style="color:#ff8a00;">가장 가까운</span> 핫 플레이스</h1>
+				<h1><img style="width : 80px;" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782568/resources/home/search_logo_cd0sdp.png"> 지금, 당신과 <span style="color:#ff8a00;">가장 가까운</span> 핫 플레이스</h1>
 				<h6>지도를 이용하여 현재 가장 인기 있는 가게를 실시간으로 검색하세요</h6>
 			</div>
 		</div>

@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
+
 .modal-title {
 	text-align: center;
 }
@@ -96,7 +98,12 @@
 	max-height: 400px;
 	overflow: hideen;
 }
-
+.form-check{
+	font-size: 20px;
+}
+#map,#category,#opentime,#selectOverlay,#drawingMap{
+	font-family: 'GmarketSansMedium';
+}
 
 @media (max-width: 767px) {
 

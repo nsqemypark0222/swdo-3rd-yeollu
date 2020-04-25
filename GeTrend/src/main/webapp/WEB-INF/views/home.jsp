@@ -242,7 +242,7 @@
 											</div>
 	      								</div>
 	      								<!-- 음식 카테고리 모달 footer -->
-	       								<div class="modal-footer">
+	       								<div class="modal-footer" id="modal-footer">
 	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
 	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
 	       								</div>

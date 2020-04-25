@@ -46,7 +46,7 @@
 </style>
 </head>
 
-<body style="background-color : #fbfcfc;">
+<body style="background-color : #f6f6f6;">
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>

@@ -174,7 +174,7 @@
 		
 		<div class="row main_title">
 			<div class="col">
-				<h1 style=""><img style="width : 80px;" src="/getrend/resources/img/search_logo.png"> 지금, 당신과 <span style="color:#ff8a00;">가장 가까운</span> 핫 플레이스</h1>
+				<h1><img style="width : 80px;" src="/getrend/resources/img/search_logo.png"> 지금, 당신과 <span style="color:#ff8a00;">가장 가까운</span> 핫 플레이스</h1>
 				<h6>지도를 이용하여 현재 가장 인기 있는 가게를 실시간으로 검색해드립니다</h6>
 			</div>
 		</div>
@@ -204,10 +204,7 @@
 										</div>
 										<!-- 음식 카테고리 모달 body -->
 	      								<div class="modal-body">
-<<<<<<< HEAD
-=======
 	      									<!-- <h3>음식 종류</h3> -->
->>>>>>> 7a905e40fea384717b55d6a9327fbc572dd13791
 	           								<div class="form-check">
 				  								<label class="form-check-label">
 				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
@@ -357,7 +354,7 @@
 												      			<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
 												      		</a>
 											      			<div class="carousel-caption d-none d-md-block">
-												        		<h5>${istore.instaStore.store_name}</h5>
+												        		<h1>${istore.instaStore.store_name}</h1>
 												      		</div>
 												    	</div>
 													</c:when>
@@ -367,7 +364,7 @@
 												      			<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
 												      		</a>
 											      			<div class="carousel-caption d-none d-md-block">
-											      				<h5>${istore.instaStore.store_name}</h5>
+											      				<h1>${istore.instaStore.store_name}</h1>
 												      		</div>
 												    	</div>
 													</c:otherwise>
@@ -905,6 +902,8 @@ $(function() {
 	            header.removeClass('shadow');
 	            $(".top_btn").css("display","none");
 	            $(".header_search").css("display","none");
+
+
 	        }
 	      
 	    });

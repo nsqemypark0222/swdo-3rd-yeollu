@@ -667,7 +667,7 @@
 					$('.wrap-loading').off('scroll touchmove mousewheel');
 				},
 				success: function(result) {
-					alert("성공");
+					//alert("성공");
 					printMarker(result);
 	
 					$(".istore-container").empty();

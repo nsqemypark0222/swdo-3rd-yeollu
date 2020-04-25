@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <!-- 반응형 웹 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>[ Search | GeTrend ]</title>
+<title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
@@ -21,106 +21,159 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 <style>
+
 #storesinfo{
 	top: 0; 
-	bottom: 0; 
-	margin-top: auto; 
-	margin-bottom: auto;
-	font-size: large;
+	bottom:0; 
+	margin-top:auto; 
+	margin-bottom:auto;
+	font-size:large;
 }
+header{
+	background-color: #fff;
+	width : 100%;
+	position: fixed;
+	z-index : 6;
+}
+
+.shadow{
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+.row_margin{
+	margin-top : 130px;
+	padding-bottom : 30px;
+}
+
 </style>
 </head>
-<body>
+<body style="background-color : #f6f6f6;">
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
 	
-	<div class="container">
+	
+	<div class="container-fluid" style="background:#fff; margin-bottom:10px;">	
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col">
+			</div>		
+		</div>
+		<div class="row row_margin"> 
+			<div class="col-md-3">				
 			</div>
-			<div class="col-md-8">
-				<div class="istore-container scrollbar scrollbar-warning">
-					<c:choose>
-						<c:when test="${sessionScope.loginemail != null && istores != null}">
-							<c:forEach var="istore" items="${istores}">
-								<div class="row mb-3 rounded" style="background-color:#f7f3c8;">
-							    	<div class="col-md-6">
-										<div id="carouselSearchedStores_${istore.instaStore.store_no}" class="carousel slide" data-ride="carousel">
-											<ol class="carousel-indicators">
-												<c:forEach var="item" items="${istore.instaImageList}" varStatus="status">
-													<c:if test="${item.image_type != 'profile' and fn:length(istore.instaImageList) > 1}">
-														<c:choose>
-															<c:when test="${status.index eq 1}">
-																<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" class="active" ></li>
-															</c:when>
-															<c:otherwise>
-																<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" ></li>
-															</c:otherwise>
-														</c:choose>
-													</c:if>
-												</c:forEach>
-											</ol>
-											<div class="carousel-inner">
-												<c:forEach var="item" items="${istore.instaImageList}" varStatus="status">
-													<c:if test="${item.image_type != 'profile' and fn:length(istore.instaImageList) > 1}">
-														<c:choose>
-															<c:when test="${status.index eq 1}">
-																<div class="carousel-item active">
-																	<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
-													      			 	<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
-													      			</a>
-													      			<div class="carousel-caption d-none d-md-block">
-														        		<h5>${istore.instaStore.store_name}</h5>
-														      		</div>
-													    		</div>
-															</c:when>
-															<c:otherwise>
-																<div class="carousel-item">
-																	<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
-														      			<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
-														      		</a>
-													      			<div class="carousel-caption d-none d-md-block">
-													      				<h5>${istore.instaStore.store_name}</h5>
-														      		</div>
-														    	</div>
-															</c:otherwise>
-														</c:choose>
-													</c:if>
-												</c:forEach>
-											</div>
-											<a class="carousel-control-prev" href="#carouselSearchedStores_${istore.instaStore.store_no}" role="button" data-slide="prev">
-										  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-										  		<span class="sr-only">Previous</span>
-										  	</a>
-										  	<a class="carousel-control-next" href="#carouselSearchedStores_${istore.instaStore.store_no}" role="button" data-slide="next">
-										    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-										    	<span class="sr-only">Next</span>
-										  	</a>
+			<div class="col-md-6">
+				<h5><img src="/getrend/resources/img/store_recommend.png" width="50">  KEYWORD SEARCH</h5>
+				<h3 style="margin-top : 10px; color : #ff8a00;">${searchInput} 인기 검색 순위</h3>
+			</div>
+			<div class="col-md-4">				
+			</div>	
+		</div>
+	
+	</div>
+
+	<div class="container-fluid" style="margin-bottom : 100px;">	
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+				<div class="col-md-6" style="background:#fff;">
+					<div class="istore-container scrollbar scrollbar-warning" style="margin : 10px;">
+						<c:choose>
+							<c:when test="${sessionScope.loginemail != null && istores != null}">
+								<c:forEach var="istore" items="${istores}">
+								  <div class="row mb-3 rounded" style="background-color:#f7f3c8;">
+								   <div class="col-md-6">
+									<div id="carouselSearchedStores_${istore.instaStore.store_no}" class="carousel slide" data-ride="carousel">
+										<ol class="carousel-indicators">
+											<c:forEach var="item" items="${istore.instaImageList}" varStatus="status">
+												<c:if test="${item.image_type != 'profile' and fn:length(istore.instaImageList) > 1}">
+													<c:choose>
+														<c:when test="${status.index eq 1}">
+															<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" class="active" ></li>
+														</c:when>
+														<c:otherwise>
+															<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" ></li>
+														</c:otherwise>
+													</c:choose>
+												</c:if>
+											</c:forEach>
+										</ol>
+										<div class="carousel-inner">
+											<c:forEach var="item" items="${istore.instaImageList}" varStatus="status">
+												<c:if test="${item.image_type != 'profile' and fn:length(istore.instaImageList) > 1}">
+													<c:choose>
+														<c:when test="${status.index eq 1}">
+															<div class="carousel-item active">
+																<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
+													      			 <img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+													      		</a>
+													    	</div>
+														</c:when>
+														<c:otherwise>
+															<div class="carousel-item">
+																<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
+													      			<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
+													      		</a>
+													    	</div>
+														</c:otherwise>
+													</c:choose>
+												</c:if>
+											</c:forEach>
 										</div>
-							    	</div>
-								 	<div class="col-md-6" id="storesinfo">
-										<span class="mb-0" >
-											<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />' style="color:#00233D; font-size:40px; font-weight:bold;">
-										 		${istore.instaStore.store_name}
-										 	</a>
-									 	</span>
-									 	<hr>
-									 	<div class="mb-1 text-muted">${istore.instaStore.store_cate1}</div>
-									 	<p class="card-text mb-auto">${istore.instaStore.store_adr1}</p>
+										<a class="carousel-control-prev" href="#carouselSearchedStores_${istore.instaStore.store_no}" role="button" data-slide="prev">
+									  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									  		<span class="sr-only">Previous</span>
+									  	</a>
+									  	<a class="carousel-control-next" href="#carouselSearchedStores_${istore.instaStore.store_no}" role="button" data-slide="next">
+									    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									    	<span class="sr-only">Next</span>
+									  	</a>
 									</div>
 								</div>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<h2>검색결과가 없습니다.</h2>
-						</c:otherwise>
-					</c:choose>
+								 <div class="col-md-6" id="storesinfo">
+										 <span class="mb-0" >
+											 <a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />' style="color:#00233D; font-size:40px; font-weight:bold;">
+											 	${istore.instaStore.store_name}
+											 </a>
+										 </span>
+										 <hr>
+										 <div class="mb-1 text-muted">${istore.instaStore.store_cate1}</div>
+										 <p class="card-text mb-auto">${istore.instaStore.store_adr1}</p>
+								</div>
+								</div>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+							 <h2>검색결과가 없습니다.</h2>
+							</c:otherwise>
+						</c:choose>
+					</div>
 				</div>
-			</div>
-			<div class="col-md-2">
+			<div class="col-md-4">
 			</div>
 		</div>
 	</div>
+	
+	<footer>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	</footer>	
+	
+<script type="text/javascript">
+//헤더 그림자
+$(function(){
+    var header = $('header');
+
+    $(window).scroll(function(e){
+        if(header.offset().top !== 0){
+            if(!header.hasClass('shadow')){
+                header.addClass('shadow');
+            }
+        }else{
+            header.removeClass('shadow');
+        }
+    });
+})
+</script>
+	
 </body>
 </html>

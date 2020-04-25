@@ -131,6 +131,7 @@ public class SearchController {
 
 		// 모델에 저장
 		model.addAttribute("istores", instaStoreInfoList);
+		model.addAttribute("searchInput", searchInput);
 		
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;

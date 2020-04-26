@@ -32,50 +32,52 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-md-9 col-lg-8 mx-auto">
-								<h2 class="login-heading mb-4">LOGIN</h2>
-								<form action="login" 
-						 			method="post"
-						 			id="loginForm"
-						 			v-on:submit="login" >
-							 		<div class="form-label-group">
-					                	<input type="email" 
-					                			id="user_email" 
-					                			name="user_email" 
-					                			class="form-control"  
-					                			v-model="user_email" 
-		                						ref="user_email"
-					                			required autofocus>
-					                	<label for="inputEmail">E-mail address</label>
-					                	<small>{{ emailValidation }}</small>
-					                </div>
-					                
-					                <div class="form-label-group">
-					                	<input type="password" 
-					                			name="user_pw" 
-					                			id="user_pw" 
-					                			class="form-control" 
-					                			v-model="user_pw" 
-		                						ref="user_pw"
-					                			required>
-					                	<label for="inputPassword">Password</label>
-					                	<small>{{ passwordValidation }}</small>
-					                </div>
-					                
-					                 <div class="custom-control custom-checkbox mb-3">
-					                	<input type="checkbox" 
-					                			class="custom-control-input" 
-					                			id="remember" 
-					                			name="remember" 
-					                			value="1">
-					                	<label class="custom-control-label" for="remember">Remember E-mail</label>
-					                	
-					                	<a id="linkjoin" href="<c:url value='userJoin'/>">회원가입</a>
-					                </div>
-					                
-					                <button class="btn btn-lg btn-warning btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" >Sign in</button>
-							 	</form>
-								
-								<div id="socialbtn" class="row">
+								<!-- 로그인 폼 시작 -->
+								<div class="card card-signin my-5" id="card">
+				          			<div class="card-body">
+				        	  			<h2 class="card-title text-center">LOGIN</h2>
+						        	  			<form action="login" 
+								 			method="post"
+								 			id="loginForm"
+								 			v-on:submit="login" >
+									 		<div class="form-label-group">
+							                	<input type="email" 
+							                			id="user_email" 
+							                			name="user_email" 
+							                			class="form-control"  
+							                			v-model="user_email" 
+				                						ref="user_email"
+							                			required autofocus>
+							                	<label for="inputEmail">E-mail address</label>
+							                	<small>{{ emailValidation }}</small>
+							                </div>
+							                
+							                <div class="form-label-group">
+							                	<input type="password" 
+							                			name="user_pw" 
+							                			id="user_pw" 
+							                			class="form-control" 
+							                			v-model="user_pw" 
+				                						ref="user_pw"
+							                			required>
+							                	<label for="inputPassword">Password</label>
+							                	<small>{{ passwordValidation }}</small>
+							                </div>
+							                
+							                 <div class="custom-control custom-checkbox mb-3">
+							                	<input type="checkbox" 
+							                			class="custom-control-input" 
+							                			id="remember" 
+							                			name="remember" 
+							                			value="1">
+							                	<label class="custom-control-label" for="remember">Remember E-mail</label>
+							                	
+							                	<a id="linkjoin" href="<c:url value='userJoin'/>">회원가입</a>
+							                </div>
+							                
+							                <button class="btn btn-lg btn-warning btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" >Sign in</button>
+									 	</form>
+											<div id="socialbtn" class="row">
 					            	<div id="kakaoIdLogin" class="col">
 					            		<a id="kakao-custom-login-btn">
 					            			<img class="img-fluid center-block" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587739756/resources/login/kakao_login_btn_s6yxjh.png">
@@ -87,6 +89,9 @@
 					            		</a>
 					            	</div>
 					            </div>
+				        	  		</div>
+				        	  	</div>		
+							
 							</div>
 						</div>
 					</div>

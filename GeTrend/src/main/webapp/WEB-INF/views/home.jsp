@@ -25,138 +25,6 @@
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'> 
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
 
-<style type="text/css">
-
-	@font-face { 
-		font-family: 'GmarketSansBold'; 
-		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff'); 
-		font-weight: normal; 
-		font-style: normal; 
-	}
-	
-	h1, h2, h3, h4, h5, h6 {
-		font-family: 'GmarketSansBold';
-	}
-	
-	hr {
-		background-color: #FF8A00;
-		width: 82%;
-		height: 3px;
-	}
-	
-	.recommend-container {
-		margin-top: 100px;
-		margin-bottom: 30px;
-		
-	}
-	
-	.recommend-title {
-		font-family: 'GmarketSansBold';
-		margin-top : 20px; 
-		margin-bottom : 40px; 
-		text-align : center;
-		width:100%;
-	}
-	
-	.recommend_row{
-		width :100%; 
-		margin : 0 auto;
-	}
-	
-	.recommend_list{
-		width : 100%;
-		text-align : center;
-	}
-	.img_div_list{
-		float : left;
-		width : 31.3%;
-		margin-right : 2%;
-		margin-bottom : 2%;
-	}
-	.img_div_list h4{
-		margin-top : 12px;
-	}
-	.search_logo_div{
-		width : 100%;
-		height : 470px;
-		float : right;
-		background-color: #ffc;
-		margin-left : 10px;
-	}
-	
-	header{
-		background-color: transparent;
-		width : 100%;
-		position: fixed;
-		z-index : 6;
-		border : none !important;
-	}
-
-	.shadow{
-	  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-	  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-	  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-	  background-color : #fff;
-	}
-	
-	.wrap{
-		position : relative;
-		margin-bottom : 200px;
-		background-color : #fff; 
-	}
-	.main_title{
-		padding-top : 130px;
-		padding-bottom : 50px;
-		background-color : #ffc;
-		text-align : center;
-	}
-	
-	.top_btn{
-		display : none;
-		transition:display .2s ease;
-	}
-	.wrap_inner2{
-		margin-top: 4px;
-	    margin-bottom: 100px;
-	}
-	.map_title{
-		border-bottom : #FF8A00 3px solid;
-		text-align : center;
-		margin-top : 10px;
-		margin-bottom : 20px;
-	}
-
-	
-	.carousel-item img {
-	max-height: initial;
-}
-
-.carousel-caption{
-	bottom : 35% !important;
-}
-	/*이미지 확대 효과*/
-	.sample_image { overflow: hidden; }
-	.sample_image  img {
-    -webkit-transform:scale(1);
-    -moz-transform:scale(1);
-    -ms-transform:scale(1); 
-    -o-transform:scale(1);  
-    transform:scale(1);
-    -webkit-transition:.3s;
-    -moz-transition:.3s;
-    -ms-transition:.3s;
-    -o-transition:.3s;
-    transition:.3s;
-}
-.sample_image:hover img {
-    -webkit-transform:scale(1.2);
-    -moz-transform:scale(1.2);
-    -ms-transform:scale(1.2);   
-    -o-transform:scale(1.2);
-    transform:scale(1.2);
-}
-	
-</style>
 
 </head>
 <body>
@@ -242,7 +110,7 @@
 											</div>
 	      								</div>
 	      								<!-- 음식 카테고리 모달 footer -->
-	       								<div class="modal-footer">
+	       								<div class="modal-footer" id="modal-footer">
 	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
 	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
 	       								</div>
@@ -423,7 +291,7 @@
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/cafe2_z7fkaj.png" class="d-block img-fluid" alt="양림동_카페/디저트">
 					      		</a>
 					      		</div>
-					        		<h4>카페/디저트 TOP 5</h4>
+					        		<h4>카페 TOP 5</h4>
 					    	</div>
 				    		<div class="img_div_list">
 				    		   <div class="sample_image">
@@ -439,7 +307,7 @@
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/jap3_em0iwh.png" class="d-block img-fluid" alt="양림동_일식/수산물">
 					      		</a>
 					      		</div>
-					        		<h4>일식/수산물 TOP 5</h4>
+					        		<h4>일식 TOP 5</h4>
 					  		</div>
 							<div class="img_div_list">
 							   <div class="sample_image">
@@ -455,7 +323,7 @@
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/fast3_lezgih.png" class="d-block img-fluid" alt="양림동_치킨/피자/패스트푸드">
 					      		</a>
 					      	   </div>
-					        		<h4>치킨/피자/패스트푸드 TOP 5</h4>
+					        		<h4>치킨/피자 TOP 5</h4>
 					  		</div>
 					  </div>
 					<!-- 양림동 맛집 추천 종료 -->
@@ -492,7 +360,7 @@
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/cafe3_peglab.png"   class="d-block img-fluid" alt="풍암동_카페/디저트">
 					      		</a>
 					      		</div>
-					        		<h4>카페/디저트 TOP 5</h4>
+					        		<h4>카페 TOP 5</h4>
 					    	</div>
 				    		<div class="img_div_list">
 				    		   <div class="sample_image">
@@ -508,7 +376,7 @@
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800183/resources/dish/jap1_rq6cyb.png"   class="d-block img-fluid" alt="풍암동_일식/수산물">
 					      		</a>
 					      		</div>
-					        		<h4>일식/수산물 TOP 5</h4>
+					        		<h4>일식 TOP 5</h4>
 					  		</div>
 							<div class="img_div_list">
 							   <div class="sample_image">
@@ -524,7 +392,7 @@
 					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/fast1_bofnhr.png" class="d-block img-fluid" alt="풍암동_치킨/피자/패스트푸드">
 					      		</a>
 					      	  </div>
-					        		<h4>치킨/피자/패스트푸드 TOP 5</h4>
+					        		<h4>치킨/피자 TOP 5</h4>
 					  		</div>
 					  </div>
 					<!-- 풍암동 맛집 추천 종료 -->
@@ -841,18 +709,21 @@
 	//스크롤 시 헤더 그림자 & 배경 색
 	$(function(){
 	    var header = $('header');
-	    $(".header_search").css("display","none");
 	    $(window).scroll(function(e){
 	        if(header.offset().top !== 0){
 	            if(!header.hasClass('shadow')){
 	                header.addClass('shadow');
 	                $(".top_btn").css("display","block");
-	            $(".header_search").css("display","block");
 	            }
 	        }else{
 	            header.removeClass('shadow');
 	            $(".top_btn").css("display","none");
+<<<<<<< HEAD
 	            $(".header_search").css("display","none");
+=======
+
+
+>>>>>>> b880b99caa823565f4801a9ce45b7f6edc63584a
 	        }
 	    });
 	});

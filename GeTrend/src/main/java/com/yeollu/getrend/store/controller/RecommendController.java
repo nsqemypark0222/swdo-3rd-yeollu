@@ -45,6 +45,6 @@ public class RecommendController {
 		
 		logger.info("추천 종료");
 		
-		return "/autosearchForm";
+		return "/searchForm";
 	}
 }

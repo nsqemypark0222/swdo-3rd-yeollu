@@ -103,11 +103,11 @@ public class StoreController {
 	}
 	
 	//댓글 작성 jsp
-	@RequestMapping(value="istoreinfoReply", method=RequestMethod.GET)
+	@RequestMapping(value="/istoreinfoReply", method=RequestMethod.GET)
 	public String istoreinfoReply(String store_name, String store_no, Model model) {
 		model.addAttribute("store_name", store_name);
 		model.addAttribute("store_no",store_no);
-		return "stores/istoreinfoReply";
+		return "/stores/istoreInfoReply";
 	}
 	
 	//댓글삭제

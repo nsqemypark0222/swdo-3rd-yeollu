@@ -22,6 +22,8 @@
 	header .header_search, header .header_menu{display : none;}		
     wrap{width: 800px; margin: 100px auto; text-align: center;}
 	#banner {width: 100%; height: 400px;   display: inline-block;}
+	
+	#wrap {width: 100%; margin: 100px auto; text-align: center;}
         
 	/* 화면 너비 0 ~ 1200px */
 	@media (max-width: 1240px){

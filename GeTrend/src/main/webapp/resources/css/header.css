@@ -97,28 +97,31 @@ li:nth-of-type(n+10) {
 	color: orange;
 }
 
- @media (max-width: 1390px){
+ @media (max-width: 1300px){
 	.header_container{
 		width : 100%;
+
 	}
-	.header_search{display:none;}
+	.header_search{padding-left : 50px;}
 	.header_profile{display:none;}
+	
 }
 
 @media (max-width: 1200px){
-	.header_logo{width : 20%;}
+	.header_search{display:none;}
+	.header_logo{width : 70%;}
 	.header_menu{width : 30%;}
 }
-@media (max-width:1005px){
-	.header_logo{width : 20%;}
+@media (max-width: 1000px){
+	.header_logo{width : 60%;}
 	.header_menu{width : 40%;}
 }
 
-@media (max-width: 756px){
-	.header_logo{width : 20%;}
+@media (max-width: 760px){
+	.header_logo{width : 50%;}
 	.header_menu{width : 50%;}
 }
 @media (max-width: 610px){
-	.header_logo{width : 20%;}
+	.header_logo{width : 40%;}
 	.header_menu{width : 60%;}
 }

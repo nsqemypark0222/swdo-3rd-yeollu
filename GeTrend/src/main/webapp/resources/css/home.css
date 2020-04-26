@@ -9,17 +9,18 @@
 .istore-container {
 	position: relative;
  	width: fit-content;
-	max-height: 400px;
+	max-height: 500px;
+	overflow-y: scroll;
 	margin-left: 15px;
 	margin-top : 5%;
 }
-/* .istore-container2 {
+.istore-container2 {
 	position: relative;
  	width: fit-content;
-	max-height: 400px;
+	max-height: 500px;
 	margin-left: 15px;
 	margin-top : 5%;
-} */
+}
 .scrollbar {
 	float: left;
 	background: #fff;
@@ -108,7 +109,8 @@
 
 	#map {
 		width: 100%; 
-		height: 350px; 
+		height: 400px; 
+/* 		height: 350px;  */
 		margin-top: 8%; 
 	}
 	#category {
@@ -145,7 +147,7 @@
 
 	#map {
 		width: 100%; 
-		height: 400px; 
+		height: 500px; 
 		margin-top: 3%; 
 	}	
 	#category {
@@ -178,48 +180,10 @@
 	}
 }
 
-
-
-
-@media (min-width: 800px) {
-	#map {
-		width: 100%; 
-		height: 300px; 
-		margin-top:5%; 
-	}
-	#category {
-		position: absolute;
-		top: 3%; 
-		left: 1%;
-		z-index: 2;
-	}
-	#opentime {
-		position: absolute;
-		top: 3%; 
-		left: 20%; 
-		z-index: 2;
-	}
-	#selectOverlay {
-		position: absolute; 
-		top: 3%; 
-		left:70%; 
-		z-index: 2;
-	}
-	#drawingMap {
-		position: absolute;
-		top: 3%; 
-		left:88%; 
-		z-index: 2;
-	}
-	
-	.recommend_row{
-		width : 100%;
-	}
-}
 @media (min-width: 992px) {
 	#map {
 		width: 850px; 
-		height: 330px; 
+		height: 500px; 
 		margin-top:5%; 
 	}
 	#category {
@@ -245,48 +209,13 @@
 		top: 3%; 
 		left:88%; 
 		z-index: 2;
-	}
-}
-
-@media (min-width: 1100px) {
-	#map {
-		width: 960px; 
-		height: 350px; 
-		margin-top: 3%;
-	}
-	#category {
-		position: absolute;
-		top: 3%; 
-		left: 1%;
-		z-index: 2;
-	}
-	#opentime {
-		position: absolute;
-		top: 3%; 
-		left: 14%; 
-		z-index: 2;
-	}
-	#selectOverlay {
-		position: absolute; 
-		top: 3%; 
-		left: 73%; 
-		z-index: 2;
-	}
-	#drawingMap {
-		position:absolute;
-		top: 3%; 
-		left:86%; 
-		z-index: 2;
-	}
-	.recommend_row{
-		width : 100%;
 	}
 }
 
 @media (min-width: 1200px) {
 	#map {
 		width: 960px; 
-		height: 360px; 
+		height: 500px; 
 		margin-top: 3%;
 	}
 	#category {
@@ -316,41 +245,144 @@
 	.recommend_row{
 		width : 100%;
 	}
-}
-
-
-@media (min-width: 1300px) {
-	#map {
-		width: 960px; 
-		height: 400px; 
-		margin-top: 3%;
-	}
-	#category {
-		position: absolute;
-		top: 3%; 
-		left: 1%;
-		z-index: 2;
-	}
-	#opentime {
-		position: absolute;
-		top: 3%; 
-		left: 14%; 
-		z-index: 2;
-	}
-	#selectOverlay {
-		position: absolute; 
-		top: 3%; 
-		left: 73%; 
-		z-index: 2;
-	}
-	#drawingMap {
-		position:absolute;
-		top: 3%; 
-		left:86%; 
-		z-index: 2;
-	}
-	.recommend_row{
-		width : 100%;
-	}
-}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@font-face { 
+		font-family: 'GmarketSansBold'; 
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff'); 
+		font-weight: normal; 
+		font-style: normal; 
+	}
+	
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'GmarketSansBold';
+	}
+	
+	hr {
+		background-color: #FF8A00;
+		width: 82%;
+		height: 3px;
+	}
+	
+	.recommend-container {
+		margin-top: 5px;
+		margin-bottom: 50px;
+	}
+	
+	.recommend-title {
+		font-family: 'GmarketSansBold';
+		margin-top : 20px; 
+		margin-bottom : 40px; 
+		text-align : center;
+		width:100%;
+	}
+	
+	.recommend_row{
+		width :100%; 
+		margin : 0 auto;
+	}
+	
+	.recommend_list{
+		width : 100%;
+		text-align : center;
+	}
+	.img_div_list{
+		float : left;
+		width : 31.3%;
+		margin-right : 2%;
+		margin-bottom : 2%;
+	}
+	.img_div_list h4{
+		margin-top : 12px;
+	}
+	.search_logo_div{
+		width : 100%;
+		height : 470px;
+		float : right;
+		background-color: #ffc;
+		margin-left : 10px;
+	}
+	
+	header{
+		background-color: transparent;
+		width : 100%;
+		position: fixed;
+		z-index : 6;
+		border : none !important;
+	}
+
+	.shadow{
+	  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	  background-color : #fff;
+	}
+	
+	.wrap{
+		position : relative;
+		margin-bottom : 200px;
+		background-color : #fff; 
+	}
+	.main_title{
+		padding-top : 130px;
+		padding-bottom : 50px;
+		background-color : #ffc;
+		text-align : center;
+	}
+	
+	.top_btn{
+		display : none;
+		transition:display .2s ease;
+	}
+	.wrap_inner2{
+		margin-top: 4px;
+	    margin-bottom: 100px;
+	}
+	.map_title{
+		border-bottom : #FF8A00 3px solid;
+		text-align : center;
+		margin-top : 10px;
+		margin-bottom : 20px;
+	}
+
+	
+	.carousel-item img {
+	max-height: initial;
+}
+
+.carousel-caption{
+	bottom : 35% !important;
+}
+	/*이미지 확대 효과*/
+	.sample_image { overflow: hidden; }
+	.sample_image  img {
+    -webkit-transform:scale(1);
+    -moz-transform:scale(1);
+    -ms-transform:scale(1); 
+    -o-transform:scale(1);  
+    transform:scale(1);
+    -webkit-transition:.3s;
+    -moz-transition:.3s;
+    -ms-transition:.3s;
+    -o-transition:.3s;
+    transition:.3s;
+}
+.sample_image:hover img {
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -ms-transform:scale(1.2);   
+    -o-transform:scale(1.2);
+    transform:scale(1.2);
+}
+}
+

@@ -21,7 +21,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <link rel="stylesheet" href='<c:url value="/resources/css/header.css"/>'> 
-
 </head>	
 
 <body>

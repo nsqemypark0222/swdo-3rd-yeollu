@@ -25,7 +25,6 @@
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'> 
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
 
-
 </head>
 <body>
 
@@ -46,7 +45,7 @@
 				<h6>지도를 이용하여 현재 가장 인기 있는 가게를 실시간으로 검색하세요</h6>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" style="margin-top: 50px;">
 			<div class="col-md-1">
 			</div>
 			<div class="col-md-6">
@@ -193,67 +192,83 @@
 			<div class="col-md-4">
 				<div class="row wrap_inner2">
 					<c:choose>
-						<c:when test="${sessionScope.loginemail != null && istores != null}">
-							<div class="istore-container">
-								<h3 class="map_title">지도로 찾은 인기 가게</h3>
-									<c:forEach var="istore" items="${istores}">
-										<div id="carouselSearchedStores_${istore.instaStore.store_no}" class="carousel slide" data-ride="carousel">
-											<ol class="carousel-indicators">
-												<c:forEach var="item" items="${istore.instaImageList}" varStatus="status">
-													<c:if test="${item.image_type != 'profile' and fn:length(istore.instaImageList) > 1}">
-														<c:choose>
-															<c:when test="${status.index eq 1}">
-																<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" class="active" ></li>
-															</c:when>
-															<c:otherwise>
-																<li data-target="#carouselSearchedStores_${istore.instaStore.store_no}" data-slide-to="${status.index}" ></li>
-															</c:otherwise>
-														</c:choose>
-													</c:if>
-												</c:forEach>
-											</ol>
-											<div class="carousel-inner">
-												<c:forEach var="item" items="${istore.instaImageList}" varStatus="status">
-													<c:if test="${item.image_type != 'profile' and fn:length(istore.instaImageList) > 1}">
-														<c:choose>
-															<c:when test="${status.index eq 1}">
-																<div class="carousel-item active">
-																	<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
-														      			<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
-														      		</a>
-													      			<div class="carousel-caption d-none d-md-block">
-														        		<h1>${istore.instaStore.store_name}</h1>
-														      		</div>
-														    	</div>
-															</c:when>
-															<c:otherwise>
-																<div class="carousel-item">
-																	<a href='<c:url value="/stores/istoreInfo?store_no=${istore.instaStore.store_no}" />'>
-														      			<img src="${item.image_url}" alt="${istore.instaStore.store_no}" class="d-block img-fluid" >
-														      		</a>
-													      			<div class="carousel-caption d-none d-md-block">
-													      				<h1>${istore.instaStore.store_name}</h1>
-														      		</div>
-														    	</div>
-															</c:otherwise>
-														</c:choose>
-													</c:if>
-												</c:forEach>
-											</div>
-											<a class="carousel-control-prev" href="#carouselSearchedStores_${istore.instaStore.store_no}" role="button" data-slide="prev">
-										  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-										  		<span class="sr-only">Previous</span>
-										  	</a>
-										  	<a class="carousel-control-next" href="#carouselSearchedStores_${istore.instaStore.store_no}" role="button" data-slide="next">
-										    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-										    	<span class="sr-only">Next</span>
-										  	</a>
-										</div>
-									</c:forEach>
+						<c:when test="${sessionScope.loginemail != null}">
+							<div class="istore-container2">
+								<h3 class="map_title">현재 내 주위의 인기 가게</h3>
+							 	<!-- 내 주변 추천 시작 -->
+								<div id="carouselRecommendedStores" class="carousel slide" data-ride="carousel">
+									<ol class="carousel-indicators">
+								    	<li data-target="#carouselRecommendedStores" data-slide-to="0" class="active"></li>
+								    	<li data-target="#carouselRecommendedStores" data-slide-to="1"></li>
+								    	<li data-target="#carouselRecommendedStores" data-slide-to="2"></li>
+								    	<li data-target="#carouselRecommendedStores" data-slide-to="3"></li>
+								    	<li data-target="#carouselRecommendedStores" data-slide-to="4"></li>
+								    	<li data-target="#carouselRecommendedStores" data-slide-to="5"></li>
+								  	</ol>
+								  	<div class="carousel-inner">
+								    	<div class="carousel-item active">
+								    		<a href="javascript:recommendByAccessLocation('양식');">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
+								      		</a>
+							      			<div class="carousel-caption d-none d-md-block">
+								        		<h1>양식 TOP 5</h1>
+								      		</div>
+								    	</div>
+							    		<div class="carousel-item">
+							    			<a href="javascript:recommendByAccessLocation('카페/디저트');">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="양림동_카페/디저트">
+								      		</a>
+								      		<div class="carousel-caption d-none d-md-block">
+								        		<h2>카페 TOP 5</h2>
+								      		</div>
+								    	</div>
+								    	<div class="carousel-item">
+								    		<a href="javascript:recommendByAccessLocation('한식');">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
+								      		</a>
+							      			<div class="carousel-caption d-none d-md-block">
+								        		<h1>한식 TOP 5</h1>
+								      		</div>
+								    	</div>
+								    	<div class="carousel-item">
+								    		<a href="javascript:recommendByAccessLocation('일식/수산물');">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
+								      		</a>
+							      			<div class="carousel-caption d-none d-md-block">
+								        		<h2>일식/수산물 TOP 5</h2>
+								      		</div>
+								    	</div>
+								    	<div class="carousel-item">
+								    		<a href="javascript:recommendByAccessLocation('중식');">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
+								      		</a>
+							      			<div class="carousel-caption d-none d-md-block">
+								        		<h1>중식 TOP 5</h1>
+								      		</div>
+								    	</div>
+								    	<div class="carousel-item">
+								    		<a href="javascript:recommendByAccessLocation('치킨/피자/패스트푸드');">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
+								      		</a>
+							      			<div class="carousel-caption d-none d-md-block">
+								        		<h2>치킨/피자 TOP 5</h2>
+								      		</div>
+								    	</div>
+								  	</div>
+								  	<a class="carousel-control-prev" href="#carouselRecommendedStores" role="button" data-slide="prev">
+								  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								  		<span class="sr-only">Previous</span>
+								  	</a>
+								  	<a class="carousel-control-next" href="#carouselRecommendedStores" role="button" data-slide="next">
+								    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								    	<span class="sr-only">Next</span>
+								  	</a>
 								</div>
-							</c:when>
+								<!-- 내 주변 추천 종료 -->
+							</div>
+						</c:when>
 						<c:otherwise>
-						
+							
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -272,7 +287,7 @@
 			<div class="col-md-10">
 				<div class="row recommend_row">
 					<div class="recommend-title">
-						<h4><img src="" width="50">  오늘의 인기 동네</h4>
+						<h4><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782659/resources/home/store_recommend_x5vzsc.png" width="50">  오늘의 인기 동네</h4>
 						<h1 style="color:#ff8a00">#양림동</h1>
 					</div>
 					<!-- 양림동 맛집 추천 시작 -->
@@ -280,7 +295,7 @@
 							<div class="img_div_list">
 							   <div class="sample_image">
 					    		<a href="javascript:recommend('양림동', '양식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800183/resources/dish/dish3_y1l4eq.png" class="d-block img-fluid" alt="양림동_양식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="양림동_양식">
 					      		</a>
 					      		</div>
 					        		<h4>양식 TOP 5</h4>
@@ -288,7 +303,7 @@
 				    		<div class="img_div_list">
 				    		   <div class="sample_image">
 				    			<a href="javascript:recommend('양림동', '카페/디저트');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/cafe2_z7fkaj.png" class="d-block img-fluid" alt="양림동_카페/디저트">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776555/ariel-kwon-OvqJ4LaLo20-unsplash_ebjrxe.jpg" class="d-block img-fluid" alt="양림동_카페/디저트">
 					      		</a>
 					      		</div>
 					        		<h4>카페 TOP 5</h4>
@@ -296,7 +311,7 @@
 				    		<div class="img_div_list">
 				    		   <div class="sample_image">
 					    		<a href="javascript:recommend('양림동', '한식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/kor1_a2qyi4.png" class="d-block img-fluid" alt="양림동_한식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529638/jakub-kapusnak-4f4YZfDMLeU-unsplash_e7of7o.jpg" class="d-block img-fluid" alt="양림동_한식">
 					      		</a>
 					      		</div>
 					        		<h4>한식 TOP 5</h4>
@@ -304,7 +319,7 @@
 					  		<div class="img_div_list">
 					  		   <div class="sample_image">
 					    		<a href="javascript:recommend('양림동', '일식/수산물');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/jap3_em0iwh.png" class="d-block img-fluid" alt="양림동_일식/수산물">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530818/choi-ben-PRM1RuIIQvI-unsplash_m382ma.jpg" class="d-block img-fluid" alt="양림동_일식/수산물">
 					      		</a>
 					      		</div>
 					        		<h4>일식 TOP 5</h4>
@@ -312,7 +327,7 @@
 							<div class="img_div_list">
 							   <div class="sample_image">
 					    		<a href="javascript:recommend('양림동', '중식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/ch1_xekqg0.png" class="d-block img-fluid" alt="양림동_중식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="양림동_중식">
 					      		</a>
 					      		</div>
 					        		<h4>중식 TOP 5</h4>
@@ -320,7 +335,7 @@
 					  		<div class="img_div_list">
 					  		   <div class="sample_image">
 					    		<a href="javascript:recommend('양림동', '치킨/피자/패스트푸드');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/fast3_lezgih.png" class="d-block img-fluid" alt="양림동_치킨/피자/패스트푸드">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530823/jonathan-borba-8l8Yl2ruUsg-unsplash_zceo5s.jpg" class="d-block img-fluid" alt="양림동_치킨/피자/패스트푸드">
 					      		</a>
 					      	   </div>
 					        		<h4>치킨/피자 TOP 5</h4>
@@ -341,7 +356,7 @@
 			<div class="col-md-10">
 				<div class="row recommend_row">
 					<div class="recommend-title">
-						<h4><img src="" width="50">  오늘의 추천 동네</h4>
+						<h4><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782659/resources/home/store_recommend_x5vzsc.png" width="50">  오늘의 추천 동네</h4>
 						<h1 style="color:#ff8a00">#풍암동</h1>
 					</div>
 					<!-- 풍암동 맛집 추천 시작 -->
@@ -349,7 +364,7 @@
 							<div class="img_div_list">
 							   <div class="sample_image">
 					    		<a href="javascript:recommend('풍암동', '양식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800180/resources/dish/dish1_w2jwux.png" class="d-block img-fluid" alt="풍암동_양식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="풍암동_양식">
 					      		</a>
 					      		</div>
 					        		<h4>양식 TOP 5</h4>
@@ -357,15 +372,15 @@
 				    		<div class="img_div_list">
 				    		   <div class="sample_image">
 				    			<a href="javascript:recommend('풍암동', '카페/디저트');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/cafe3_peglab.png"   class="d-block img-fluid" alt="풍암동_카페/디저트">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776555/ariel-kwon-OvqJ4LaLo20-unsplash_ebjrxe.jpg"   class="d-block img-fluid" alt="풍암동_카페/디저트">
 					      		</a>
 					      		</div>
-					        		<h4>카페 TOP 5</h4>
+					        		<h4>카페/디저트 TOP 5</h4>
 					    	</div>
 				    		<div class="img_div_list">
 				    		   <div class="sample_image">
 					    		<a href="javascript:recommend('풍암동', '한식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/kor3_xd6mcx.png" class="d-block img-fluid" alt="풍암동_한식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529638/jakub-kapusnak-4f4YZfDMLeU-unsplash_e7of7o.jpg" class="d-block img-fluid" alt="풍암동_한식">
 					      		</a>
 					      		</div>
 					        		<h4>한식 TOP 5</h4>
@@ -373,7 +388,7 @@
 					  		<div class="img_div_list">
 					  		   <div class="sample_image">
 					    		<a href="javascript:recommend('풍암동', '일식/수산물');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800183/resources/dish/jap1_rq6cyb.png"   class="d-block img-fluid" alt="풍암동_일식/수산물">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530818/choi-ben-PRM1RuIIQvI-unsplash_m382ma.jpg"   class="d-block img-fluid" alt="풍암동_일식/수산물">
 					      		</a>
 					      		</div>
 					        		<h4>일식 TOP 5</h4>
@@ -381,7 +396,7 @@
 							<div class="img_div_list">
 							   <div class="sample_image">
 					    		<a href="javascript:recommend('풍암동', '중식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800744/resources/dish/ch3_ynwhot.png" class="d-block img-fluid" alt="풍암동_중식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="풍암동_중식">
 					      		</a>
 					        	</div>
 					        		<h4>중식 TOP 5</h4>
@@ -389,7 +404,7 @@
 					  		<div class="img_div_list">
 					      	  <div class="sample_image">
 					    		<a href="javascript:recommend('풍암동', '치킨/피자/패스트푸드');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/fast1_bofnhr.png" class="d-block img-fluid" alt="풍암동_치킨/피자/패스트푸드">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="풍암동_치킨/피자/패스트푸드">
 					      		</a>
 					      	  </div>
 					        		<h4>치킨/피자 TOP 5</h4>
@@ -466,6 +481,7 @@
 					//alert("성공");
 					printMarker(result);
 
+					$(".istore-container2").empty();
 					$(".istore-container").empty();
 	
 					let str = "";
@@ -492,7 +508,7 @@
 									str +=			'<img src="' + item.instaImageList[i].image_url + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
 									str +=		'</a>';
 									str +=		'<div class="carousel-caption d-none d-md-block">';
-									str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+									str += 			'<h1>' + item.instaStore.store_name + '</h5>';
 									str +=		'</div>';
 						      		str += '</div>';
 								} else {
@@ -501,7 +517,7 @@
 									str +=			'<img src="' + item.instaImageList[i].image_url + '" alt="' + item.instaStore.store_no + '" class="d-block img-fluid" >';
 									str +=		'</a>';
 									str +=		'<div class="carousel-caption d-none d-md-block">';
-									str += 			'<h5>' + item.instaStore.store_name + '</h5>';
+									str += 			'<h1>' + item.instaStore.store_name + '</h5>';
 									str +=		'</div>';
 						      		str += '</div>';
 								}
@@ -519,10 +535,11 @@
 						str += '</div>';
 					});
 					//console.log(str);
+					$(".istore-container2").addClass("istore-container");
+					$(".istore-container2").removeClass("istore-container2");
+					$(".istore-container").addClass("scrollbar");
+					$(".istore-container").addClass("scrollbar-warning");
 					$(".istore-container").append(str);
-					$('.istore-container').css('overflow-y','scroll');
-					$('.istore-container').addClass("scrollbar");
-					$('.istore-container').addClass("scrollbar-warning");
 		        },
 		        error: function(request, status, error){
 		            alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
@@ -718,14 +735,12 @@
 	        }else{
 	            header.removeClass('shadow');
 	            $(".top_btn").css("display","none");
-<<<<<<< HEAD
-	            $(".header_search").css("display","none");
-=======
 
 
->>>>>>> b880b99caa823565f4801a9ce45b7f6edc63584a
 	        }
+	      
 	    });
+
 	});
 </script>
 </body>

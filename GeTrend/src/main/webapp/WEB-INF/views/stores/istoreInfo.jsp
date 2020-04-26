@@ -204,7 +204,7 @@
 				    	</div>	
 				    	<!-- 댓글 버튼 -->
 						<div id="reply_btn">	 
-							<a href='<c:url value="/stores/istoreInfo?store_no=${list.STORE_NO}&store_name=${istore.instaStore.store_name}" />'>
+							<a href='<c:url value="/stores/istoreinfoReply?store_no=${istore.instaStore.store_no}&store_name=${istore.instaStore.store_name}" />'>
 								<button type="button" class="btn btn-outline-warning">
 									댓글 남기기
 								</button>
@@ -273,7 +273,7 @@
 												<td>
 													<div class="reply_outer">						          
 														<div class="reply_inner01">
-													  		<a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}">		          
+													  		<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'>	          
 																<c:if test="${reply.USER_PROFILE != null}">
 														        	<img class="reply_cate_profile" src="${reply.USER_PROFILE}" alt="프로필 사진">
 														    	</c:if>
@@ -284,7 +284,7 @@
 													 	</div>						          
 														<div class="reply_inner02">
 															<div class="reply_name">
-	    											      		<a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}">
+	    											      		<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'>
 		        										   			${reply.USER_NAME}
 	    												  		</a> 								   
 												       		</div>
@@ -413,7 +413,7 @@ $(function(){
 
 //리플 삭제
 function deleteReply(reply_no,store_no){
-	location.href="<c:url value='/mypage/stores/deleteReply?reply_no=" + reply_no + "&store_no=" + store_no + "'/>";
+	location.href="<c:url value='/stores/deleteReply?reply_no=" + reply_no + "&store_no=" + store_no + "'/>";
 }
 
 //더 보기 버튼

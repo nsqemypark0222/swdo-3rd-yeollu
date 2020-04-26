@@ -8,17 +8,16 @@
 	position: relative;
  	width: fit-content;
 	max-height: 400px;
-	overflow-y: scroll;
 	margin-left: 15px;
 	margin-top : 5%;
 }
-.istore-container2 {
+/* .istore-container2 {
 	position: relative;
  	width: fit-content;
 	max-height: 400px;
 	margin-left: 15px;
 	margin-top : 5%;
-}
+} */
 .scrollbar {
 	float: left;
 	background: #fff;

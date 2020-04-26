@@ -103,7 +103,7 @@
 				  		<div class="col">
 				    		<table class="store_table">
 					   			<tr>
-						  			<td style="width: 70%; height: 80px; border-bottom: 1px solid  #e9e9e9;">
+						  			<td style="width: 60%; height: 80px; border-bottom: 1px solid  #e9e9e9;">
 										<span style="font-size : 30px; color : #FF8A00;">${istore.instaStore.store_name}</span> <span style="font-size : 25px;"> /별점 ${scoreAvg}점</span>
 						  			</td>
 						  			
@@ -115,7 +115,16 @@
 											</a>
 										</div>
 						 			</td>
-						  
+						 			
+						  			<!-- 인스타그램 장소 검색 페이지 -->
+						  			<td style="border-bottom: 1px solid  #e9e9e9; width: 10%; height: 80px;">
+										<div id="goto_instagram">
+											<a id="goto_instagram-btn" href="https://www.instagram.com/explore/locations/${istore.instaStore.location_id}">
+												<i class="fab fa-instagram fa-3x" data-toggle="tooltip"  data-placement="top" title="인스타그램"></i>
+											</a>
+										</div>
+						 			</td>
+						 			
 						  			<!-- 카카오링크 -->
 						  			<td style="border-bottom: 1px solid  #e9e9e9; width: 10%; height: 80px;">
 										<input type="hidden" value="${istore.instaStore.store_no}" id="store_no">							

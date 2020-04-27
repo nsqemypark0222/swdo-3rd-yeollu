@@ -208,7 +208,7 @@
 								  	<div class="carousel-inner">
 								    	<div class="carousel-item active">
 								    		<a href="javascript:recommendByAccessLocation('양식');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800180/resources/dish/dish1_w2jwux.png" class="d-block img-fluid" alt="...">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
 								      		</a>
 							      			<div class="carousel-caption d-none d-md-block">
 								        		<h1>양식 TOP 5</h1>
@@ -216,7 +216,7 @@
 								    	</div>
 							    		<div class="carousel-item">
 							    			<a href="javascript:recommendByAccessLocation('카페/디저트');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/cafe1_qqgcz4.png" class="d-block img-fluid" alt="양림동_카페/디저트">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="양림동_카페/디저트">
 								      		</a>
 								      		<div class="carousel-caption d-none d-md-block">
 								        		<h2>카페 TOP 5</h2>
@@ -224,7 +224,7 @@
 								    	</div>
 								    	<div class="carousel-item">
 								    		<a href="javascript:recommendByAccessLocation('한식');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/kor1_a2qyi4.png" class="d-block img-fluid" alt="...">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
 								      		</a>
 							      			<div class="carousel-caption d-none d-md-block">
 								        		<h1>한식 TOP 5</h1>
@@ -232,7 +232,7 @@
 								    	</div>
 								    	<div class="carousel-item">
 								    		<a href="javascript:recommendByAccessLocation('일식/수산물');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800183/resources/dish/jap1_rq6cyb.png" class="d-block img-fluid" alt="...">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
 								      		</a>
 							      			<div class="carousel-caption d-none d-md-block">
 								        		<h2>일식/수산물 TOP 5</h2>
@@ -240,7 +240,7 @@
 								    	</div>
 								    	<div class="carousel-item">
 								    		<a href="javascript:recommendByAccessLocation('중식');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/ch1_xekqg0.png" class="d-block img-fluid" alt="...">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
 								      		</a>
 							      			<div class="carousel-caption d-none d-md-block">
 								        		<h1>중식 TOP 5</h1>
@@ -248,7 +248,7 @@
 								    	</div>
 								    	<div class="carousel-item">
 								    		<a href="javascript:recommendByAccessLocation('치킨/피자/패스트푸드');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/fast1_bofnhr.png" class="d-block img-fluid" alt="...">
+								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
 								      		</a>
 							      			<div class="carousel-caption d-none d-md-block">
 								        		<h2>치킨/피자 TOP 5</h2>
@@ -295,7 +295,7 @@
 							<div class="img_div_list">
 							   <div class="sample_image">
 					    		<a href="javascript:recommend('양림동', '양식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800183/resources/dish/dish2_oopyvm.png" class="d-block img-fluid" alt="양림동_양식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="양림동_양식">
 					      		</a>
 					      		</div>
 					        		<h4>양식 TOP 5</h4>
@@ -303,7 +303,7 @@
 				    		<div class="img_div_list">
 				    		   <div class="sample_image">
 				    			<a href="javascript:recommend('양림동', '카페/디저트');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/cafe2_z7fkaj.png" class="d-block img-fluid" alt="양림동_카페/디저트">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776555/ariel-kwon-OvqJ4LaLo20-unsplash_ebjrxe.jpg" class="d-block img-fluid" alt="양림동_카페/디저트">
 					      		</a>
 					      		</div>
 					        		<h4>카페 TOP 5</h4>
@@ -311,7 +311,7 @@
 				    		<div class="img_div_list">
 				    		   <div class="sample_image">
 					    		<a href="javascript:recommend('양림동', '한식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800180/resources/dish/kor2_ns9kqd.png" class="d-block img-fluid" alt="양림동_한식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529638/jakub-kapusnak-4f4YZfDMLeU-unsplash_e7of7o.jpg" class="d-block img-fluid" alt="양림동_한식">
 					      		</a>
 					      		</div>
 					        		<h4>한식 TOP 5</h4>
@@ -319,7 +319,7 @@
 					  		<div class="img_div_list">
 					  		   <div class="sample_image">
 					    		<a href="javascript:recommend('양림동', '일식/수산물');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800183/resources/dish/jap2_npwtlt.png" class="d-block img-fluid" alt="양림동_일식/수산물">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530818/choi-ben-PRM1RuIIQvI-unsplash_m382ma.jpg" class="d-block img-fluid" alt="양림동_일식/수산물">
 					      		</a>
 					      		</div>
 					        		<h4>일식 TOP 5</h4>
@@ -327,7 +327,7 @@
 							<div class="img_div_list">
 							   <div class="sample_image">
 					    		<a href="javascript:recommend('양림동', '중식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/ch2_nrkbpd.png" class="d-block img-fluid" alt="양림동_중식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="양림동_중식">
 					      		</a>
 					      		</div>
 					        		<h4>중식 TOP 5</h4>
@@ -335,7 +335,7 @@
 					  		<div class="img_div_list">
 					  		   <div class="sample_image">
 					    		<a href="javascript:recommend('양림동', '치킨/피자/패스트푸드');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/fast2_hyy4cd.png" class="d-block img-fluid" alt="양림동_치킨/피자/패스트푸드">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530823/jonathan-borba-8l8Yl2ruUsg-unsplash_zceo5s.jpg" class="d-block img-fluid" alt="양림동_치킨/피자/패스트푸드">
 					      		</a>
 					      	   </div>
 					        		<h4>치킨/피자 TOP 5</h4>
@@ -364,7 +364,7 @@
 							<div class="img_div_list">
 							   <div class="sample_image">
 					    		<a href="javascript:recommend('풍암동', '양식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800183/resources/dish/dish3_y1l4eq.png" class="d-block img-fluid" alt="풍암동_양식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="풍암동_양식">
 					      		</a>
 					      		</div>
 					        		<h4>양식 TOP 5</h4>
@@ -372,7 +372,7 @@
 				    		<div class="img_div_list">
 				    		   <div class="sample_image">
 				    			<a href="javascript:recommend('풍암동', '카페/디저트');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/cafe3_peglab.png"   class="d-block img-fluid" alt="풍암동_카페/디저트">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776555/ariel-kwon-OvqJ4LaLo20-unsplash_ebjrxe.jpg"   class="d-block img-fluid" alt="풍암동_카페/디저트">
 					      		</a>
 					      		</div>
 					        		<h4>카페/디저트 TOP 5</h4>
@@ -380,7 +380,7 @@
 				    		<div class="img_div_list">
 				    		   <div class="sample_image">
 					    		<a href="javascript:recommend('풍암동', '한식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800181/resources/dish/kor3_xd6mcx.png" class="d-block img-fluid" alt="풍암동_한식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529638/jakub-kapusnak-4f4YZfDMLeU-unsplash_e7of7o.jpg" class="d-block img-fluid" alt="풍암동_한식">
 					      		</a>
 					      		</div>
 					        		<h4>한식 TOP 5</h4>
@@ -388,7 +388,7 @@
 					  		<div class="img_div_list">
 					  		   <div class="sample_image">
 					    		<a href="javascript:recommend('풍암동', '일식/수산물');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/jap3_em0iwh.png"   class="d-block img-fluid" alt="풍암동_일식/수산물">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530818/choi-ben-PRM1RuIIQvI-unsplash_m382ma.jpg"   class="d-block img-fluid" alt="풍암동_일식/수산물">
 					      		</a>
 					      		</div>
 					        		<h4>일식 TOP 5</h4>
@@ -396,7 +396,7 @@
 							<div class="img_div_list">
 							   <div class="sample_image">
 					    		<a href="javascript:recommend('풍암동', '중식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800744/resources/dish/ch3_ynwhot.png" class="d-block img-fluid" alt="풍암동_중식">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="풍암동_중식">
 					      		</a>
 					        	</div>
 					        		<h4>중식 TOP 5</h4>
@@ -404,7 +404,7 @@
 					  		<div class="img_div_list">
 					      	  <div class="sample_image">
 					    		<a href="javascript:recommend('풍암동', '치킨/피자/패스트푸드');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587800182/resources/dish/fast3_lezgih.png" class="d-block img-fluid" alt="풍암동_치킨/피자/패스트푸드">
+					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="풍암동_치킨/피자/패스트푸드">
 					      		</a>
 					      	  </div>
 					        		<h4>치킨/피자 TOP 5</h4>
@@ -557,7 +557,7 @@
 	const mapContainer = document.getElementById("map");
 	
 	let mapOption = {
-			center: new kakao.maps.LatLng(35.15113, 126.924584),
+			center: new kakao.maps.LatLng(35.168306, 126.81425000000002),
 			level: 1 // 지도의 확대 레벨
 	};
 	
@@ -654,16 +654,6 @@
 		}
 		search(points);
 	};
-	   
-	const setCenter = (lat, lng) => {
-		const moveLatLng = new kakao.maps.LatLng(lat, lng);
-		map.setCenter(moveLatLng);
-	};
-	   
-	 const panTo = (lat, lng) => {
-		const moveLatLng = new kakao.maps.LatLng(lat, lng);
-		map.panTo(moveLatLng);
-	};
 
 	const setMapCenterByAccessLocation = () => {
 		if(navigator.geolocation) {
@@ -671,7 +661,7 @@
 				latitude = position.coords.latitude;
 			    longitude = position.coords.longitude;
 
-			    setCenter(latitude, longitude);
+			    map.setCenter(new kakao.maps.LatLng(latitude, longitude));
 
 				const customMarker = '<i class="fas fa-map-marker-alt fa-3x" style="color: rgba(255, 138, 0, 0.78);"></i>';
 

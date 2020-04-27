@@ -47,7 +47,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				        	LOGOUT
 				        </a>
 			            <a href="<c:url value='/users/userUpdate'/>">
-			            	<img class="header_profile" src="${sessionScope.loginprofile}" >
+			            	<img class="header_profile rounded-circle" src="${sessionScope.loginprofile}" >
 				        </a>
 				    </c:when>
 					<c:otherwise>

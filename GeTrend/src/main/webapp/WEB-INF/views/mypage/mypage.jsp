@@ -711,7 +711,6 @@
 		}
 	}
 
-	//console.log("${user.user_email}");
 	likeStore("${user.user_email}");
 	</script>
 </body>

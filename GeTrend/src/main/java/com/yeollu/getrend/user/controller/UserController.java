@@ -285,7 +285,7 @@ public class UserController {
 	public String update(UserVO user, HttpSession session, MultipartFile userAvatar){
 		logger.info("회원정보 수정 시작");
 		if(!userAvatar.isEmpty()) {
-			logger.info("유저 아바타 있음");
+			logger.info("업로드할 유저 아바타 있음");
 			UserVO _user = dao.selectEmail(user.getUser_email());
 			if(!(_user.getUser_profile() == null || _user.getUser_profile().equals(""))) {
 				ProfileImageHandler profileImageHandler = new ProfileImageHandler();
@@ -309,7 +309,8 @@ public class UserController {
 				logger.info("이미지 추가 실패");
 			}
 		} else {
-			logger.info("유저 아바타 없음");
+			logger.info("업로드할 유저 아바타 없음");
+			user.setUser_profile(dao.selectEmail(user.getUser_email()).getUser_profile());
 		}
 		logger.info("{}", user);
 		
@@ -331,7 +332,7 @@ public class UserController {
 			logger.info("수정성공");
 			session.setAttribute("loginname", user.getUser_name());
 			session.setAttribute("loginprofile", user.getUser_profile());
-		}else {
+		} else {
 			logger.info("수정실패");
 		}
 		return "redirect:/";
@@ -361,14 +362,6 @@ public class UserController {
 		}
 		return "redirect:/";
 	}
-	
-
-
-	
-	
-	
-	
-	
 	
 		//인스타 스토어 이동 테스트 
 		@RequestMapping(value="/istore_test", method=RequestMethod.GET)

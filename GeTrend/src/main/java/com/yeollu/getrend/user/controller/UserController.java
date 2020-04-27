@@ -172,6 +172,7 @@ public class UserController {
 				UserVO joineduser = dao.selectEmail(Kakaoemail);
 				session.setAttribute("loginemail",joineduser.getUser_email());
 				session.setAttribute("loginname",joineduser.getUser_name());
+				session.setAttribute("loginprofile", joineduser.getUser_profile());
 			}
 			else {
 				logger.info("가입 실패");
@@ -180,6 +181,7 @@ public class UserController {
 		} else {
 			session.setAttribute("loginemail",Kakaouser.getUser_email());
 			session.setAttribute("loginname",Kakaouser.getUser_name());
+			session.setAttribute("loginprofile", Kakaouser.getUser_profile());
 		}
 		return "redirect:/";
 	}
@@ -210,6 +212,7 @@ public class UserController {
 				UserVO joineduser = dao.selectEmail(Naveremail);
 				session.setAttribute("loginemail",joineduser.getUser_email());
 				session.setAttribute("loginname",joineduser.getUser_name());
+				session.setAttribute("loginprofile", joineduser.getUser_profile());
 			}
 			else {
 				logger.info("가입 실패");
@@ -218,6 +221,7 @@ public class UserController {
 		}else {
 			session.setAttribute("loginemail", Naveruser.getUser_email());
 			session.setAttribute("loginname",Naveruser.getUser_name());
+			session.setAttribute("loginprofile", Naveruser.getUser_profile());
 		}
 		
 		return "redirect:/";
@@ -235,6 +239,7 @@ public class UserController {
 			if(passEncoder.matches(user.getUser_pw(), newUser.getUser_pw())) {
 				session.setAttribute("loginemail", newUser.getUser_email());
 				session.setAttribute("loginname",newUser.getUser_name());
+				session.setAttribute("loginprofile", newUser.getUser_profile());
 				if(remember != null && remember.equals("1")) {
 					Cookie cookie = new Cookie("remail", user.getUser_email());
 					cookie.setMaxAge(60*60*24*7);
@@ -325,6 +330,7 @@ public class UserController {
 		if(cnt>0) {
 			logger.info("수정성공");
 			session.setAttribute("loginname", user.getUser_name());
+			session.setAttribute("loginprofile", user.getUser_profile());
 		}else {
 			logger.info("수정실패");
 		}
@@ -337,6 +343,7 @@ public class UserController {
 		
 		session.removeAttribute("loginemail");
 		session.removeAttribute("loginname");
+		session.removeAttribute("loginprofile");
 		
 		UserVO user = dao.selectEmail(user_email);
 		String publicId = user.getUser_profileId();

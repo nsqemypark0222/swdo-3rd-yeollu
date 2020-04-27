@@ -46,8 +46,8 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				    	<a href="<c:url value="/users/logout"/>">
 				        	LOGOUT
 				        </a>
-			               <a href="<c:url value='/users/userUpdate'/>">
-			               	<img class="header_profile" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587709608/resources/header/user_digv92.png" >
+			            <a href="<c:url value='/users/userUpdate'/>">
+			            	<img class="header_profile" src="${sessionScope.loginprofile}" >
 				        </a>
 				    </c:when>
 					<c:otherwise>

@@ -21,7 +21,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
 
-
 <link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'> 
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
 
@@ -31,400 +30,395 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
+	
 	<div class="shadow"></div>    	 
 	<div class="shadow-cover"></div> 
 	<a class="top_btn" style="display:scroll;position:fixed;  bottom:30px;right:20px; z-index:200;" href="#" title="맨 위로">
 		<img style="width:40px;"src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782568/resources/home/top_boeuo8.png">
 	</a>
+	
 	<div class="wrap">
-	<div class="container-fluid wrap_inner">
-		
-		<div class="row main_title">
-			<div class="col">
-				<h1><img style="width : 80px;" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782568/resources/home/search_logo_cd0sdp.png"> 지금, 당신과 <span style="color:#ff8a00;">가장 가까운</span> 핫 플레이스</h1>
-				<h6>지도를 이용하여 현재 가장 인기 있는 가게를 실시간으로 검색하세요</h6>
-			</div>
-		</div>
-		<div class="row" style="margin-top: 50px;">
-			<div class="col-md-1">
-			</div>
-			<div class="col-md-6">
-				<div class="row wrap_inner2">
-					<!-- map 시작 -->
-					<div>
-						
-					</div>
-					<div id="map">
-						<div class="btn-modal">
-							<!-- 지도 위의 버튼 1 음식 카테고리 -->
-							<!-- Button trigger modal -->
-							<button type="button" id="category" class="btn btn-dark" data-toggle="modal" data-target="#categoryModal">카테고리</button>
-							
-							<!-- CategoryModal -->
-							<div class="modal fade" id="categoryModal">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<!-- 음식 카테고리 모달 header -->
-										<div class="modal-header">
-											<h4 class="modal-title">음식 카테고리</h4>
-	           								<button type="button" class="close" data-dismiss="modal">&times;</button>
-										</div>
-										<!-- 음식 카테고리 모달 body -->
-	      								<div class="modal-body">
-	      									<!-- <h3>음식 종류</h3> -->
-	           								<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
-				 								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="양식" checked="checked">양식
-				  								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="일식/수산물" checked="checked">일식/수산물
-				  								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="중식" checked="checked">중식
-				  								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="카페/디저트" checked="checked">카페/디저트
-				  								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="치킨/피자/패스트푸드" checked="checked">치킨/피자/패스트푸드
-				  								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="categotyChk" value="기타" checked="checked">기타
-				  								</label>
-											</div>
-	      								</div>
-	      								<!-- 음식 카테고리 모달 footer -->
-	       								<div class="modal-footer" id="modal-footer">
-	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
-	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
-	       								</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="btn-modal">
-							<!-- 지도 위의 버튼 2 음식 카테고리 -->
-							<!-- Button trigger modal -->
-							<button type="button" id="opentime" class="btn btn-warning" data-toggle="modal" data-target="#opentimeModal">영업 확인</button>
-							
-							<!-- CategoryModal -->
-							<div class="modal fade" id="opentimeModal">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<!-- 영업 확인 모달 header -->
-										<div class="modal-header">
-											<h4 class="modal-title">영업 확인</h4>
-	           								<button type="button" class="close" data-dismiss="modal">&times;</button>
-										</div>
-										<!-- 영업 확인 모달 body -->
-	      								<div class="modal-body">
-	           								<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="일" checked="checked">일
-				 								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="월" checked="checked">월
-				  								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="화" checked="checked">화
-				  								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="수" checked="checked">수
-				  								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="목" checked="checked">목
-				  								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="금" checked="checked">금
-				  								</label>
-											</div>
-											<div class="form-check">
-				  								<label class="form-check-label">
-				    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="토" checked="checked">토
-				  								</label>
-											</div>
-	      								</div>
-	      								<!-- 영업 확인 모달 footer -->
-	       								<div class="modal-footer">
-	       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
-	        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
-	       								</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-    	 				<button type="button" class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')" value="on">
-    	 				범위 선택</button>
-    					<button type="button" class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
-    					조회 하기</button>
-					</div>
-					<!-- map 종료 -->
+		<div class="container-fluid wrap_inner">
+			<div class="row main_title">
+				<div class="col">
+					<h1><img style="width : 80px;" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782568/resources/home/search_logo_cd0sdp.png"> 지금, 당신과 <span style="color:#ff8a00;">가장 가까운</span> 핫 플레이스</h1>
+					<h6>지도를 이용하여 현재 가장 인기 있는 가게를 실시간으로 검색하세요</h6>
 				</div>
 			</div>
+			<div class="row" style="margin-top: 50px;">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-6">
+					<div class="row wrap_inner2">
+						<!-- map 시작 -->
+						<div id="map">
+							<div class="btn-modal">
+								<!-- 지도 위의 버튼 1 음식 카테고리 -->
+								<!-- Button trigger modal -->
+								<button type="button" id="category" class="btn btn-dark" data-toggle="modal" data-target="#categoryModal">카테고리</button>
+							
+								<!-- CategoryModal -->
+								<div class="modal fade" id="categoryModal">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<!-- 음식 카테고리 모달 header -->
+											<div class="modal-header">
+												<h4 class="modal-title">음식 카테고리</h4>
+	           									<button type="button" class="close" data-dismiss="modal">&times;</button>
+											</div>
+											<!-- 음식 카테고리 모달 body -->
+	      									<div class="modal-body">
+	      										<!-- <h3>음식 종류</h3> -->
+	           									<div class="form-check">
+				  									<label class="form-check-label">
+				    									<input type="checkbox" class="form-check-input" name="categotyChk" value="한식" checked="checked">한식
+				 									</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="양식" checked="checked">양식
+					  								</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="일식/수산물" checked="checked">일식/수산물
+					  								</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="중식" checked="checked">중식
+					  								</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="카페/디저트" checked="checked">카페/디저트
+					  								</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="치킨/피자/패스트푸드" checked="checked">치킨/피자/패스트푸드
+					  								</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="categotyChk" value="기타" checked="checked">기타
+					  								</label>
+												</div>
+		      								</div>
+		      								<!-- 음식 카테고리 모달 footer -->
+		       								<div class="modal-footer" id="modal-footer">
+		       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+		        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
+		       								</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+							<div class="btn-modal">
+								<!-- 지도 위의 버튼 2 음식 카테고리 -->
+								<!-- Button trigger modal -->
+								<button type="button" id="opentime" class="btn btn-warning" data-toggle="modal" data-target="#opentimeModal">영업 확인</button>
+								
+								<!-- CategoryModal -->
+								<div class="modal fade" id="opentimeModal">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<!-- 영업 확인 모달 header -->
+											<div class="modal-header">
+												<h4 class="modal-title">영업 확인</h4>
+		           								<button type="button" class="close" data-dismiss="modal">&times;</button>
+											</div>
+											<!-- 영업 확인 모달 body -->
+		      								<div class="modal-body">
+		           								<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="일" checked="checked">일
+					 								</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="월" checked="checked">월
+					  								</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="화" checked="checked">화
+					  								</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="수" checked="checked">수
+					  								</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="목" checked="checked">목
+					  								</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="금" checked="checked">금
+					  								</label>
+												</div>
+												<div class="form-check">
+					  								<label class="form-check-label">
+					    								<input type="checkbox" class="form-check-input" name="opentimeChk" value="토" checked="checked">토
+					  								</label>
+												</div>
+		      								</div>
+		      								<!-- 영업 확인 모달 footer -->
+		       								<div class="modal-footer">
+		       									<button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+		        								<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
+		       								</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+	    	 				<button type="button" class="btn btn-dark" id="selectOverlay" onclick="selectOverlay('POLYGON')" value="on">
+	    	 				범위 선택</button>
+	    					<button type="button" class="btn btn-warning" id="drawingMap"  onclick="getDataFromDrawingMap()">	
+	    					조회 하기</button>
+						</div>
+						<!-- map 종료 -->
+					</div>
+				</div>
 			
-			<div class="col-md-4">
-				<div class="row wrap_inner2">
-					<c:choose>
-						<c:when test="${sessionScope.loginemail != null}">
-							<div class="istore-container2">
-								<h3 class="map_title">현재 내 주위의 인기 가게</h3>
-							 	<!-- 내 주변 추천 시작 -->
-								<div id="carouselRecommendedStores" class="carousel slide" data-ride="carousel">
-									<ol class="carousel-indicators">
-								    	<li data-target="#carouselRecommendedStores" data-slide-to="0" class="active"></li>
-								    	<li data-target="#carouselRecommendedStores" data-slide-to="1"></li>
-								    	<li data-target="#carouselRecommendedStores" data-slide-to="2"></li>
-								    	<li data-target="#carouselRecommendedStores" data-slide-to="3"></li>
-								    	<li data-target="#carouselRecommendedStores" data-slide-to="4"></li>
-								    	<li data-target="#carouselRecommendedStores" data-slide-to="5"></li>
-								  	</ol>
-								  	<div class="carousel-inner">
-								    	<div class="carousel-item active">
-								    		<a href="javascript:recommendByAccessLocation('양식');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
-								      		</a>
-							      			<div class="carousel-caption d-none d-md-block">
-								        		<h1>양식 TOP 5</h1>
-								      		</div>
-								    	</div>
-							    		<div class="carousel-item">
-							    			<a href="javascript:recommendByAccessLocation('카페/디저트');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="양림동_카페/디저트">
-								      		</a>
-								      		<div class="carousel-caption d-none d-md-block">
-								        		<h2>카페 TOP 5</h2>
-								      		</div>
-								    	</div>
-								    	<div class="carousel-item">
-								    		<a href="javascript:recommendByAccessLocation('한식');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
-								      		</a>
-							      			<div class="carousel-caption d-none d-md-block">
-								        		<h1>한식 TOP 5</h1>
-								      		</div>
-								    	</div>
-								    	<div class="carousel-item">
-								    		<a href="javascript:recommendByAccessLocation('일식/수산물');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
-								      		</a>
-							      			<div class="carousel-caption d-none d-md-block">
-								        		<h2>일식/수산물 TOP 5</h2>
-								      		</div>
-								    	</div>
-								    	<div class="carousel-item">
-								    		<a href="javascript:recommendByAccessLocation('중식');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
-								      		</a>
-							      			<div class="carousel-caption d-none d-md-block">
-								        		<h1>중식 TOP 5</h1>
-								      		</div>
-								    	</div>
-								    	<div class="carousel-item">
-								    		<a href="javascript:recommendByAccessLocation('치킨/피자/패스트푸드');">
-								      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
-								      		</a>
-							      			<div class="carousel-caption d-none d-md-block">
-								        		<h2>치킨/피자 TOP 5</h2>
-								      		</div>
-								    	</div>
-								  	</div>
-								  	<a class="carousel-control-prev" href="#carouselRecommendedStores" role="button" data-slide="prev">
-								  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								  		<span class="sr-only">Previous</span>
-								  	</a>
-								  	<a class="carousel-control-next" href="#carouselRecommendedStores" role="button" data-slide="next">
-								    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								    	<span class="sr-only">Next</span>
-								  	</a>
+				<div class="col-md-4">
+					<div class="row wrap_inner2">
+						<c:choose>
+							<c:when test="${sessionScope.loginemail != null}">
+								<div class="istore-container2">
+									<h3 class="map_title">현재 내 주위의 인기 가게</h3>
+								 	<!-- 내 주변 추천 시작 -->
+									<div id="carouselRecommendedStores" class="carousel slide" data-ride="carousel">
+										<ol class="carousel-indicators">
+									    	<li data-target="#carouselRecommendedStores" data-slide-to="0" class="active"></li>
+									    	<li data-target="#carouselRecommendedStores" data-slide-to="1"></li>
+									    	<li data-target="#carouselRecommendedStores" data-slide-to="2"></li>
+									    	<li data-target="#carouselRecommendedStores" data-slide-to="3"></li>
+									    	<li data-target="#carouselRecommendedStores" data-slide-to="4"></li>
+									    	<li data-target="#carouselRecommendedStores" data-slide-to="5"></li>
+									  	</ol>
+									  	<div class="carousel-inner">
+									    	<div class="carousel-item active">
+									    		<a href="javascript:recommendByAccessLocation('양식');">
+									      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
+									      		</a>
+								      			<div class="carousel-caption d-none d-md-block">
+									        		<h1>양식 TOP 5</h1>
+									      		</div>
+									    	</div>
+								    		<div class="carousel-item">
+								    			<a href="javascript:recommendByAccessLocation('카페/디저트');">
+									      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="양림동_카페/디저트">
+									      		</a>
+									      		<div class="carousel-caption d-none d-md-block">
+									        		<h2>카페 TOP 5</h2>
+									      		</div>
+									    	</div>
+									    	<div class="carousel-item">
+									    		<a href="javascript:recommendByAccessLocation('한식');">
+									      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
+									      		</a>
+								      			<div class="carousel-caption d-none d-md-block">
+									        		<h1>한식 TOP 5</h1>
+									      		</div>
+									    	</div>
+									    	<div class="carousel-item">
+									    		<a href="javascript:recommendByAccessLocation('일식/수산물');">
+									      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
+									      		</a>
+								      			<div class="carousel-caption d-none d-md-block">
+									        		<h2>일식/수산물 TOP 5</h2>
+									      		</div>
+									    	</div>
+									    	<div class="carousel-item">
+									    		<a href="javascript:recommendByAccessLocation('중식');">
+									      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
+									      		</a>
+								      			<div class="carousel-caption d-none d-md-block">
+									        		<h1>중식 TOP 5</h1>
+									      		</div>
+									    	</div>
+									    	<div class="carousel-item">
+									    		<a href="javascript:recommendByAccessLocation('치킨/피자/패스트푸드');">
+									      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="...">
+									      		</a>
+								      			<div class="carousel-caption d-none d-md-block">
+									        		<h2>치킨/피자 TOP 5</h2>
+									      		</div>
+									    	</div>
+									  	</div>
+									  	<a class="carousel-control-prev" href="#carouselRecommendedStores" role="button" data-slide="prev">
+									  		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									  		<span class="sr-only">Previous</span>
+									  	</a>
+									  	<a class="carousel-control-next" href="#carouselRecommendedStores" role="button" data-slide="next">
+									    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									    	<span class="sr-only">Next</span>
+									  	</a>
+									</div>
+									<!-- 내 주변 추천 종료 -->
 								</div>
-								<!-- 내 주변 추천 종료 -->
-							</div>
-						</c:when>
-						<c:otherwise>
-							
-						</c:otherwise>
-					</c:choose>
+							</c:when>
+							<c:otherwise>
+								
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+				<div class="col-md-1">
 				</div>
 			</div>
-			<div class="col-md-1">
-			</div>
 		</div>
-	</div>
 	
 
 	
-	<div class="container-fluid recommend-container">
-		<div class="row">
-			<div class="col-md-1">
-			</div>
-			<div class="col-md-10">
-				<div class="row recommend_row">
-					<div class="recommend-title">
-						<h4><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782659/resources/home/store_recommend_x5vzsc.png" width="50">  오늘의 인기 동네</h4>
-						<h1 style="color:#ff8a00">#양림동</h1>
+		<div class="container-fluid recommend-container">
+			<div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-10">
+					<div class="row recommend_row">
+						<div class="recommend-title">
+							<h4><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782659/resources/home/store_recommend_x5vzsc.png" width="50">  오늘의 인기 동네</h4>
+							<h1 style="color:#ff8a00">#양림동</h1>
+						</div>
+						<!-- 양림동 맛집 추천 시작 -->
+							<div class="recommend_list">
+								<div class="img_div_list">
+								   <div class="sample_image">
+						    		<a href="javascript:recommend('양림동', '양식');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="양림동_양식">
+						      		</a>
+						      		</div>
+						        		<h4>양식 TOP 5</h4>
+						    	</div>
+					    		<div class="img_div_list">
+					    		   <div class="sample_image">
+					    			<a href="javascript:recommend('양림동', '카페/디저트');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776555/ariel-kwon-OvqJ4LaLo20-unsplash_ebjrxe.jpg" class="d-block img-fluid" alt="양림동_카페/디저트">
+						      		</a>
+						      		</div>
+						        		<h4>카페 TOP 5</h4>
+						    	</div>
+					    		<div class="img_div_list">
+					    		   <div class="sample_image">
+						    		<a href="javascript:recommend('양림동', '한식');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529638/jakub-kapusnak-4f4YZfDMLeU-unsplash_e7of7o.jpg" class="d-block img-fluid" alt="양림동_한식">
+						      		</a>
+						      		</div>
+						        		<h4>한식 TOP 5</h4>
+						  		</div>
+						  		<div class="img_div_list">
+						  		   <div class="sample_image">
+						    		<a href="javascript:recommend('양림동', '일식/수산물');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530818/choi-ben-PRM1RuIIQvI-unsplash_m382ma.jpg" class="d-block img-fluid" alt="양림동_일식/수산물">
+						      		</a>
+						      		</div>
+						        		<h4>일식 TOP 5</h4>
+						  		</div>
+								<div class="img_div_list">
+								   <div class="sample_image">
+						    		<a href="javascript:recommend('양림동', '중식');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="양림동_중식">
+						      		</a>
+						      		</div>
+						        		<h4>중식 TOP 5</h4>
+						  		</div>
+						  		<div class="img_div_list">
+						  		   <div class="sample_image">
+						    		<a href="javascript:recommend('양림동', '치킨/피자/패스트푸드');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530823/jonathan-borba-8l8Yl2ruUsg-unsplash_zceo5s.jpg" class="d-block img-fluid" alt="양림동_치킨/피자/패스트푸드">
+						      		</a>
+						      	   </div>
+						        		<h4>치킨/피자 TOP 5</h4>
+						  		</div>
+						  </div>
+						<!-- 양림동 맛집 추천 종료 -->
 					</div>
-					<!-- 양림동 맛집 추천 시작 -->
+				</div>
+				<div class="col-md-1">
+				</div>
+			</div>
+		</div>
+		
+		<div class="container-fluid recommend-container">
+			<div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-10">
+					<div class="row recommend_row">
+						<div class="recommend-title">
+							<h4><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782659/resources/home/store_recommend_x5vzsc.png" width="50">  오늘의 추천 동네</h4>
+							<h1 style="color:#ff8a00">#풍암동</h1>
+						</div>
+						<!-- 풍암동 맛집 추천 시작 -->
 						<div class="recommend_list">
-							<div class="img_div_list">
-							   <div class="sample_image">
-					    		<a href="javascript:recommend('양림동', '양식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="양림동_양식">
-					      		</a>
-					      		</div>
-					        		<h4>양식 TOP 5</h4>
-					    	</div>
-				    		<div class="img_div_list">
-				    		   <div class="sample_image">
-				    			<a href="javascript:recommend('양림동', '카페/디저트');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776555/ariel-kwon-OvqJ4LaLo20-unsplash_ebjrxe.jpg" class="d-block img-fluid" alt="양림동_카페/디저트">
-					      		</a>
-					      		</div>
-					        		<h4>카페 TOP 5</h4>
-					    	</div>
-				    		<div class="img_div_list">
-				    		   <div class="sample_image">
-					    		<a href="javascript:recommend('양림동', '한식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529638/jakub-kapusnak-4f4YZfDMLeU-unsplash_e7of7o.jpg" class="d-block img-fluid" alt="양림동_한식">
-					      		</a>
-					      		</div>
-					        		<h4>한식 TOP 5</h4>
-					  		</div>
-					  		<div class="img_div_list">
-					  		   <div class="sample_image">
-					    		<a href="javascript:recommend('양림동', '일식/수산물');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530818/choi-ben-PRM1RuIIQvI-unsplash_m382ma.jpg" class="d-block img-fluid" alt="양림동_일식/수산물">
-					      		</a>
-					      		</div>
-					        		<h4>일식 TOP 5</h4>
-					  		</div>
-							<div class="img_div_list">
-							   <div class="sample_image">
-					    		<a href="javascript:recommend('양림동', '중식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="양림동_중식">
-					      		</a>
-					      		</div>
-					        		<h4>중식 TOP 5</h4>
-					  		</div>
-					  		<div class="img_div_list">
-					  		   <div class="sample_image">
-					    		<a href="javascript:recommend('양림동', '치킨/피자/패스트푸드');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530823/jonathan-borba-8l8Yl2ruUsg-unsplash_zceo5s.jpg" class="d-block img-fluid" alt="양림동_치킨/피자/패스트푸드">
-					      		</a>
-					      	   </div>
-					        		<h4>치킨/피자 TOP 5</h4>
-					  		</div>
-					  </div>
-					<!-- 양림동 맛집 추천 종료 -->
-				</div>
-			</div>
-			<div class="col-md-1">
-			</div>
-		</div>
-	</div>
-	
-	<div class="container-fluid recommend-container">
-		<div class="row">
-			<div class="col-md-1">
-			</div>
-			<div class="col-md-10">
-				<div class="row recommend_row">
-					<div class="recommend-title">
-						<h4><img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587782659/resources/home/store_recommend_x5vzsc.png" width="50">  오늘의 추천 동네</h4>
-						<h1 style="color:#ff8a00">#풍암동</h1>
+								<div class="img_div_list">
+								   <div class="sample_image">
+						    		<a href="javascript:recommend('풍암동', '양식');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="풍암동_양식">
+						      		</a>
+						      		</div>
+						        		<h4>양식 TOP 5</h4>
+						    	</div>
+					    		<div class="img_div_list">
+					    		   <div class="sample_image">
+					    			<a href="javascript:recommend('풍암동', '카페/디저트');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776555/ariel-kwon-OvqJ4LaLo20-unsplash_ebjrxe.jpg"   class="d-block img-fluid" alt="풍암동_카페/디저트">
+						      		</a>
+						      		</div>
+						        		<h4>카페/디저트 TOP 5</h4>
+						    	</div>
+					    		<div class="img_div_list">
+					    		   <div class="sample_image">
+						    		<a href="javascript:recommend('풍암동', '한식');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529638/jakub-kapusnak-4f4YZfDMLeU-unsplash_e7of7o.jpg" class="d-block img-fluid" alt="풍암동_한식">
+						      		</a>
+						      		</div>
+						        		<h4>한식 TOP 5</h4>
+						  		</div>
+						  		<div class="img_div_list">
+						  		   <div class="sample_image">
+						    		<a href="javascript:recommend('풍암동', '일식/수산물');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530818/choi-ben-PRM1RuIIQvI-unsplash_m382ma.jpg"   class="d-block img-fluid" alt="풍암동_일식/수산물">
+						      		</a>
+						      		</div>
+						        		<h4>일식 TOP 5</h4>
+						  		</div>
+								<div class="img_div_list">
+								   <div class="sample_image">
+						    		<a href="javascript:recommend('풍암동', '중식');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="풍암동_중식">
+						      		</a>
+						        	</div>
+						        		<h4>중식 TOP 5</h4>
+						  		</div>
+						  		<div class="img_div_list">
+						      	  <div class="sample_image">
+						    		<a href="javascript:recommend('풍암동', '치킨/피자/패스트푸드');">
+						      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="풍암동_치킨/피자/패스트푸드">
+						      		</a>
+						      	  </div>
+						        		<h4>치킨/피자 TOP 5</h4>
+						  		</div>
+						  </div>
+						<!-- 풍암동 맛집 추천 종료 -->
 					</div>
-					<!-- 풍암동 맛집 추천 시작 -->
-					<div class="recommend_list">
-							<div class="img_div_list">
-							   <div class="sample_image">
-					    		<a href="javascript:recommend('풍암동', '양식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg" class="d-block img-fluid" alt="풍암동_양식">
-					      		</a>
-					      		</div>
-					        		<h4>양식 TOP 5</h4>
-					    	</div>
-				    		<div class="img_div_list">
-				    		   <div class="sample_image">
-				    			<a href="javascript:recommend('풍암동', '카페/디저트');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1586776555/ariel-kwon-OvqJ4LaLo20-unsplash_ebjrxe.jpg"   class="d-block img-fluid" alt="풍암동_카페/디저트">
-					      		</a>
-					      		</div>
-					        		<h4>카페/디저트 TOP 5</h4>
-					    	</div>
-				    		<div class="img_div_list">
-				    		   <div class="sample_image">
-					    		<a href="javascript:recommend('풍암동', '한식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529638/jakub-kapusnak-4f4YZfDMLeU-unsplash_e7of7o.jpg" class="d-block img-fluid" alt="풍암동_한식">
-					      		</a>
-					      		</div>
-					        		<h4>한식 TOP 5</h4>
-					  		</div>
-					  		<div class="img_div_list">
-					  		   <div class="sample_image">
-					    		<a href="javascript:recommend('풍암동', '일식/수산물');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530818/choi-ben-PRM1RuIIQvI-unsplash_m382ma.jpg"   class="d-block img-fluid" alt="풍암동_일식/수산물">
-					      		</a>
-					      		</div>
-					        		<h4>일식 TOP 5</h4>
-					  		</div>
-							<div class="img_div_list">
-							   <div class="sample_image">
-					    		<a href="javascript:recommend('풍암동', '중식');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="풍암동_중식">
-					      		</a>
-					        	</div>
-					        		<h4>중식 TOP 5</h4>
-					  		</div>
-					  		<div class="img_div_list">
-					      	  <div class="sample_image">
-					    		<a href="javascript:recommend('풍암동', '치킨/피자/패스트푸드');">
-					      			<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587530809/yeh-xintong-qd9NpQKmC2c-unsplash_t82cnq.jpg" class="d-block img-fluid" alt="풍암동_치킨/피자/패스트푸드">
-					      		</a>
-					      	  </div>
-					        		<h4>치킨/피자 TOP 5</h4>
-					  		</div>
-					  </div>
-					<!-- 풍암동 맛집 추천 종료 -->
 				</div>
-			</div>
-			<div class="col-md-1">
+				<div class="col-md-1">
+				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-	
-
 
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
-
 
 	<!-- 로딩이미지 -->
 	<div class="wrap-loading display-none">
@@ -448,12 +442,10 @@
 			$("input[name=categotyChk]:checked").each(function() {
 				categoryValues.push($(this).val());
 			});
-	//		console.log(categoryValues);
 			let opentimeValues = [];
 			$("input[name=opentimeChk]:checked").each(function() {
 				opentimeValues.push($(this).val());
 			});
-	//		console.log(opentimeValues);
 			let reqParm = {
 				"points": points,
 				"categoryValues": categoryValues,
@@ -547,7 +539,20 @@
 			});
 		}
 		searchFunc = search;
-		
+
+		//스크롤 시 헤더 그림자 & 배경 색
+		var header = $('header');
+	    $(window).scroll(function(e) {
+	        if(header.offset().top !== 0) {
+	            if(!header.hasClass('shadow')) {
+	                header.addClass('shadow');
+	                $(".top_btn").css("display","block");
+	            }
+	        } else {
+	            header.removeClass('shadow');
+	            $(".top_btn").css("display","none");
+	        }
+	    });
 	});
 
 	function search(points) {
@@ -712,26 +717,6 @@
 		setMapCenterByAccessLocation();
 	}
 	init();
-	
-	//스크롤 시 헤더 그림자 & 배경 색
-	$(function(){
-	    var header = $('header');
-	    $(window).scroll(function(e){
-	        if(header.offset().top !== 0){
-	            if(!header.hasClass('shadow')){
-	                header.addClass('shadow');
-	                $(".top_btn").css("display","block");
-	            }
-	        }else{
-	            header.removeClass('shadow');
-	            $(".top_btn").css("display","none");
-
-
-	        }
-	      
-	    });
-
-	});
 </script>
 </body>
 </html>

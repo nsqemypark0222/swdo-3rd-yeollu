@@ -134,4 +134,3 @@ select count(*) from stores;
 select count(*) from mango_stores;
 select count(*) from mango_days;
 select count(*) from mango_times;
-

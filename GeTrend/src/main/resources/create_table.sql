@@ -21,6 +21,7 @@ create table users(
     , user_type             varchar2(10)
     , user_profile          varchar2(1000)
     , user_profileId        varchar2(50)
+    , constraint unique_users unique(user_name)
 );
 
 create table stores(
@@ -134,4 +135,3 @@ select count(*) from stores;
 select count(*) from mango_stores;
 select count(*) from mango_days;
 select count(*) from mango_times;
-

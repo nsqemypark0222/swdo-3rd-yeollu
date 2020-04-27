@@ -1,5 +1,7 @@
 package com.yeollu.getrend.user.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -43,17 +45,16 @@ public class MypageController {
 	
 	//mypage
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String mypage(String user_name, String user_email, HttpSession session, Model model) {
-		
-		String _user_email = (String)session.getAttribute("loginemail");		
+	public String mypage(String user_name, HttpSession session, Model model) {
+		String user_email = (String)session.getAttribute("loginemail");		
 		//내 프로필
-		if(user_name.equals(userDAO.selectEmail(_user_email).getUser_name())) {
+		if(user_name.equals(userDAO.selectEmail(user_email).getUser_name())) {
 			logger.info("내 프로필");
-			model.addAttribute("user", userDAO.selectEmail(_user_email));
-			model.addAttribute("like", likeDAO.likeStoreCountByEmail(_user_email));
-			model.addAttribute("follow", followDAO.countFollow(_user_email));
-			model.addAttribute("follower", followDAO.countFollower(_user_email));
-			ArrayList<HashMap<String, Object>> likeList = likeDAO.likeSelectByEmail(_user_email);
+			model.addAttribute("user", userDAO.selectEmail(user_email));
+			model.addAttribute("like", likeDAO.likeStoreCountByEmail(user_email));
+			model.addAttribute("follow", followDAO.countFollow(user_email));
+			model.addAttribute("follower", followDAO.countFollower(user_email));
+			ArrayList<HashMap<String, Object>> likeList = likeDAO.likeSelectByEmail(user_email);
 
 			for (HashMap<String, Object> hashMap : likeList) {		
 				//category 구분
@@ -70,7 +71,7 @@ public class MypageController {
 			model.addAttribute("likeList", likeList);
 			
 			
-			ArrayList<HashMap<String, Object>> replyList = replyDAO.replyListByEmail(_user_email);
+			ArrayList<HashMap<String, Object>> replyList = replyDAO.replyListByEmail(user_email);
 			
 			for (HashMap<String, Object> hashMap : replyList) {
 				//좋아요한 가게인지 확인
@@ -98,9 +99,9 @@ public class MypageController {
 		//남 프로필	
 		}else {
 			logger.info("남 프로필");
-			//UserVO user = userDAO.selectName(user_name);
-			UserVO user = userDAO.selectEmail(user_email);
+			UserVO user = userDAO.selectName(user_name);
 			model.addAttribute("user", user);
+			logger.info("user : {}", user);
 			model.addAttribute("like", likeDAO.likeStoreCountByEmail(user.getUser_email()));
 			model.addAttribute("follow", followDAO.countFollow(user.getUser_email()));
 			model.addAttribute("follower", followDAO.countFollower(user.getUser_email()));
@@ -271,7 +272,13 @@ public class MypageController {
 		} else {
 			logger.info("댓글 삭제 실패");
 		}
+		String _user_name = "";
+		try {
+			_user_name = URLEncoder.encode(user_name,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			_user_name = userDAO.selectEmail(user_email).getUser_name();
+		}
 		
-		return "redirect:mypage?user_name=" + user_name;
+		return "redirect:mypage?user_name=" + _user_name;
 	}
 }

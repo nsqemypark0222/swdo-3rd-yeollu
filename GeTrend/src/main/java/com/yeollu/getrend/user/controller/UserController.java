@@ -137,51 +137,66 @@ public class UserController {
 	public String join(UserVO user) {
 		logger.info("회원가입");
 		
-		String inputPw = user.getUser_pw();
-		String pw = passEncoder.encode(inputPw);
-		user.setUser_pw(pw);
-		logger.info(inputPw);
-		logger.info(pw);
-		
-		user.setUser_type("LOCAL");
-		int cnt = dao.join(user);
-		if(cnt>0) logger.info("가입 성공");
-		else logger.info("가입 실패");
-		
-		return "redirect:/";
-	}
-	//카카오 로그인
-	@RequestMapping(value="/kakaoLogin", method=RequestMethod.POST)
-	public String kakaoLogin(UserVO user, HttpSession session) {
-		String Kakaoemail = user.getUser_email();
-		UserVO Kakaouser = dao.selectEmail(Kakaoemail);
-		logger.info("{}",user);
-		logger.info("{}",Kakaouser);
-		if(Kakaouser == null) {
-			user.setUser_type("KAKAO");
-			
+		if(dao.isExistedUserName(user.getUser_name())) {
+			// 유저 이름 이미 존재
+		} else {
 			String inputPw = user.getUser_pw();
 			String pw = passEncoder.encode(inputPw);
 			user.setUser_pw(pw);
 			logger.info(inputPw);
 			logger.info(pw);
-			
+			user.setUser_type("LOCAL");
 			int cnt = dao.join(user);
-			if(cnt>0) {
+			if(cnt > 0) {
 				logger.info("가입 성공");
-				UserVO joineduser = dao.selectEmail(Kakaoemail);
-				session.setAttribute("loginemail",joineduser.getUser_email());
-				session.setAttribute("loginname",joineduser.getUser_name());
-				session.setAttribute("loginprofile", joineduser.getUser_profile());
+				return "redirect:/";
 			}
 			else {
 				logger.info("가입 실패");
-				return "redirect:/users/userLogin";
 			}
+		}
+		return "redirect:/users/userJoin";
+	}
+	//카카오 로그인
+	@RequestMapping(value="/kakaoLogin", method=RequestMethod.POST)
+	public String kakaoLogin(UserVO user, HttpSession session) {
+		if(dao.isExistedUserName(user.getUser_name())) {
+			UserVO _user = dao.selectName(user.getUser_name());
+			session.setAttribute("loginemail", _user.getUser_email());
+			session.setAttribute("loginname", _user.getUser_name());
+			session.setAttribute("loginprofile", _user.getUser_profile());
 		} else {
-			session.setAttribute("loginemail",Kakaouser.getUser_email());
-			session.setAttribute("loginname",Kakaouser.getUser_name());
-			session.setAttribute("loginprofile", Kakaouser.getUser_profile());
+			String Kakaoemail = user.getUser_email();
+			UserVO Kakaouser = dao.selectEmail(Kakaoemail);
+			logger.info("{}",user);
+			logger.info("{}",Kakaouser);
+			if(Kakaouser == null) {
+				user.setUser_type("KAKAO");
+				user.setUser_name(user.getUser_name() + "K");
+				
+				String inputPw = user.getUser_pw();
+				String pw = passEncoder.encode(inputPw);
+				user.setUser_pw(pw);
+				logger.info(inputPw);
+				logger.info(pw);
+				
+				int cnt = dao.join(user);
+				if(cnt>0) {
+					logger.info("가입 성공");
+					UserVO joineduser = dao.selectEmail(Kakaoemail);
+					session.setAttribute("loginemail",joineduser.getUser_email());
+					session.setAttribute("loginname",joineduser.getUser_name());
+					session.setAttribute("loginprofile", joineduser.getUser_profile());
+				}
+				else {
+					logger.info("가입 실패");
+					return "redirect:/users/userLogin";
+				}
+			} else {
+				session.setAttribute("loginemail",Kakaouser.getUser_email());
+				session.setAttribute("loginname",Kakaouser.getUser_name());
+				session.setAttribute("loginprofile", Kakaouser.getUser_profile());
+			}
 		}
 		return "redirect:/";
 	}
@@ -195,33 +210,41 @@ public class UserController {
 	//네이버로그인
 	@RequestMapping(value="/naverLogin", method=RequestMethod.POST)
 	public String naverLogin(UserVO user, HttpSession session) {
-		String Naveremail = user.getUser_email();
-		UserVO Naveruser = dao.selectEmail(Naveremail);
-		if(Naveruser == null) {
-			user.setUser_type("NAVER");
-			
-			String inputPw = user.getUser_pw();
-			String pw = passEncoder.encode(inputPw);
-			user.setUser_pw(pw);
-			logger.info(inputPw);
-			logger.info(pw);
-			
-			int cnt = dao.join(user);
-			if(cnt>0) {
-				logger.info("가입 성공");
-				UserVO joineduser = dao.selectEmail(Naveremail);
-				session.setAttribute("loginemail",joineduser.getUser_email());
-				session.setAttribute("loginname",joineduser.getUser_name());
-				session.setAttribute("loginprofile", joineduser.getUser_profile());
+		if(dao.isExistedUserName(user.getUser_name())) {
+			UserVO _user = dao.selectName(user.getUser_name());
+			session.setAttribute("loginemail", _user.getUser_email());
+			session.setAttribute("loginname", _user.getUser_name());
+			session.setAttribute("loginprofile", _user.getUser_profile());
+		} else {
+			String Naveremail = user.getUser_email();
+			UserVO Naveruser = dao.selectEmail(Naveremail);
+			if(Naveruser == null) {
+				user.setUser_type("NAVER");
+				user.setUser_name(user.getUser_name() + "N");
+				
+				String inputPw = user.getUser_pw();
+				String pw = passEncoder.encode(inputPw);
+				user.setUser_pw(pw);
+				logger.info(inputPw);
+				logger.info(pw);
+				
+				int cnt = dao.join(user);
+				if(cnt>0) {
+					logger.info("가입 성공");
+					UserVO joineduser = dao.selectEmail(Naveremail);
+					session.setAttribute("loginemail",joineduser.getUser_email());
+					session.setAttribute("loginname",joineduser.getUser_name());
+					session.setAttribute("loginprofile", joineduser.getUser_profile());
+				}
+				else {
+					logger.info("가입 실패");
+					return "redirect:/users/userLogin";
+				}
+			}else {
+				session.setAttribute("loginemail", Naveruser.getUser_email());
+				session.setAttribute("loginname",Naveruser.getUser_name());
+				session.setAttribute("loginprofile", Naveruser.getUser_profile());
 			}
-			else {
-				logger.info("가입 실패");
-				return "redirect:/users/userLogin";
-			}
-		}else {
-			session.setAttribute("loginemail", Naveruser.getUser_email());
-			session.setAttribute("loginname",Naveruser.getUser_name());
-			session.setAttribute("loginprofile", Naveruser.getUser_profile());
 		}
 		
 		return "redirect:/";
@@ -284,6 +307,12 @@ public class UserController {
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(UserVO user, HttpSession session, MultipartFile userAvatar){
 		logger.info("회원정보 수정 시작");
+		if(!user.getUser_name().equals(session.getAttribute("loginname")) && dao.isExistedUserName(user.getUser_name())) {
+			logger.info("수정실패");
+			return "redirect:/users/userUpdate";
+		}
+		
+		
 		if(!userAvatar.isEmpty()) {
 			logger.info("업로드할 유저 아바타 있음");
 			UserVO _user = dao.selectEmail(user.getUser_email());
@@ -334,6 +363,7 @@ public class UserController {
 			session.setAttribute("loginprofile", user.getUser_profile());
 		} else {
 			logger.info("수정실패");
+			return "redirect:/users/userUpdate";
 		}
 		return "redirect:/";
 	}

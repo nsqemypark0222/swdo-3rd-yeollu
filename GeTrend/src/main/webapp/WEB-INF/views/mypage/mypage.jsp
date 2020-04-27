@@ -711,7 +711,6 @@
 		}
 	}
 
-	likeStore("${user.user_email}");
 	</script>
 </body>
 </html>

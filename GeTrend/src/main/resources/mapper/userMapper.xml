@@ -87,5 +87,16 @@ where
 	user_name =#{user_name}
 </select>
 
+<select id="isExistedUserName" parameterType="string" resultType="string">
+<![CDATA[
+select
+	decode(count(*), 0, 'false', 'true') as result
+from
+	users
+where
+	user_name = #{user_name}
+]]>
+</select>
+
 </mapper>
 

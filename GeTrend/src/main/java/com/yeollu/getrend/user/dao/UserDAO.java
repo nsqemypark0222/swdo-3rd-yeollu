@@ -73,4 +73,19 @@ public class UserDAO {
 			e.printStackTrace();
 		}return user;
 	}
+	
+	public boolean isExistedUserName(String user_name) {
+		boolean result = false;
+		
+		try {
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			if(mapper.isExistedUserName(user_name).equals("true")) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

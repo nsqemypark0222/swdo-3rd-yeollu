@@ -172,7 +172,7 @@ public class UserController {
 			logger.info("{}",Kakaouser);
 			if(Kakaouser == null) {
 				user.setUser_type("KAKAO");
-				user.setUser_name(user.getUser_name() + "_KAKAO");
+				user.setUser_name(user.getUser_name() + "K");
 				
 				String inputPw = user.getUser_pw();
 				String pw = passEncoder.encode(inputPw);
@@ -220,7 +220,7 @@ public class UserController {
 			UserVO Naveruser = dao.selectEmail(Naveremail);
 			if(Naveruser == null) {
 				user.setUser_type("NAVER");
-				user.setUser_name(user.getUser_name() + "_NAVER");
+				user.setUser_name(user.getUser_name() + "N");
 				
 				String inputPw = user.getUser_pw();
 				String pw = passEncoder.encode(inputPw);

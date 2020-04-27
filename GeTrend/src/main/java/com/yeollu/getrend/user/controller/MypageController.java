@@ -1,5 +1,7 @@
 package com.yeollu.getrend.user.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -270,7 +272,13 @@ public class MypageController {
 		} else {
 			logger.info("댓글 삭제 실패");
 		}
+		String _user_name = "";
+		try {
+			_user_name = URLEncoder.encode(user_name,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			_user_name = userDAO.selectEmail(user_email).getUser_name();
+		}
 		
-		return "redirect:mypage?user_name=" + user_name;
+		return "redirect:mypage?user_name=" + _user_name;
 	}
 }

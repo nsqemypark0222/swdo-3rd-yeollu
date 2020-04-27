@@ -227,7 +227,7 @@
 												<td>
 													<div class="reply_outer">						          
 														<div class="reply_inner01">	
-												   			<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'>    
+												   			<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'>
 																<c:if test="${reply.USER_PROFILE != null}">
 													        		<img class="reply_cate_profile" src="${reply.USER_PROFILE}" alt="프로필 사진">
 													    		</c:if>
@@ -238,7 +238,7 @@
 												 		</div>						          
 												 		<div class="reply_inner02">
 											       			<div class="reply_name">
-    											      			<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'> 
+    											      			<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'>
 	        										   				${reply.USER_NAME}
     												  			</a> 								   
 											       			</div>

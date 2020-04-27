@@ -417,7 +417,6 @@ function deleteReply(reply_no,store_no){
 }
 
 //더 보기 버튼
-
 function moreRead(){
 	if($("#replyTable02").css("display") == 'none'){
 		$("#readMoreBtn").css("display","none");
@@ -432,15 +431,15 @@ function moreRead(){
 
 
 //헤더 그림자
-$(function(){
+$(function() {
     var header = $('header');
 
-    $(window).scroll(function(e){
-        if(header.offset().top !== 0){
+    $(window).scroll(function(e) {
+        if(header.offset().top !== 0) {
             if(!header.hasClass('shadow')){
                 header.addClass('shadow');
             }
-        }else{
+        } else {
             header.removeClass('shadow');
         }
     });

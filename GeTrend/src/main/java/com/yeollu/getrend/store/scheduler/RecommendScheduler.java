@@ -16,7 +16,8 @@ public class RecommendScheduler {
 	@Autowired
 	private RecommendController recommendController;
 	
-	@Scheduled(fixedDelay = 86400000)
+//	@Scheduled(fixedDelay = 86400000)
+	@Scheduled(cron = "0 0 0/6 * * *")
 	public void executeJob() {
 		
 		logger.info("--------------------------------------------------------------------------추천 스케줄러 시작");

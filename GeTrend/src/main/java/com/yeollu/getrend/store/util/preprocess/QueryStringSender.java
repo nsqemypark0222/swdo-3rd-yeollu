@@ -52,7 +52,6 @@ public class QueryStringSender {
 						double dist = LocationDistance
 												.haversine(store.getStore_x(), store.getStore_y(), location.getDouble("lng"), location.getDouble("lat"));
 						if(dist < 0.1) {
-//							return location.getString("pk");
 							distMap.put(location.getString("pk"), new Double(dist));
 						}
 					}

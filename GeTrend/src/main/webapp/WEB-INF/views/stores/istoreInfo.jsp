@@ -104,7 +104,7 @@
 				    		<table class="store_table">
 					   			<tr>
 						  			<td style="width: 60%; height: 80px; border-bottom: 1px solid  #e9e9e9;">
-										<span style="font-size : 30px; color : #FF8A00;">${istore.instaStore.store_name}</span> <span style="font-size : 25px;"> /별점 ${scoreAvg}점</span>
+										<span style="font-size : 30px; color : #FF8A00;">${istore.instaStore.store_name}</span> <span style="font-size : 25px;"> /별점 ${Math.round(scoreAvg*10)/10.0}점</span>
 						  			</td>
 						  			
 						  			<!-- 실시간 데이터 갱신 -->

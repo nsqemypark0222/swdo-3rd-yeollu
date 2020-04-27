@@ -121,11 +121,9 @@ $(function(){
 	$("#cancel").click(function() {
 		$(location).attr('href', "<c:url value='/'/>");
 	});
-
 	$("#userDelete").click(function() {
 		$(location).attr('href', "<c:url value='deleteUser'/>" + "?user_email=" + $("#user_email").val());
 	});
-
 	$("#userAvatar").change(function(event) {
 		var files = event.target.files;
 		var filesArr = Array.prototype.slice.call(files);

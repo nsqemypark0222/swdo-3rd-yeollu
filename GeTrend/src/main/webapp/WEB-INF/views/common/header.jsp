@@ -47,7 +47,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				        	LOGOUT
 				        </a>
 			            <a href="<c:url value='/users/userUpdate'/>">
-			            	<img class="header_profile" src="${sessionScope.loginprofile}" >
+			            	<img class="header_profile rounded-circle" src="${sessionScope.loginprofile}" >
 				        </a>
 				    </c:when>
 					<c:otherwise>
@@ -67,7 +67,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	
 <script type="text/javascript">
 	$(function() {
-
 		function highlightText(text, $node) {
 			var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
 			while ((matchIndex = currentNode.data.toLowerCase().indexOf(searchText)) >= 0) {
@@ -79,7 +78,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				newSpanNode.appendChild(newTextNode);
 			}
 		}
-
 		$("#searchInput").autocomplete({
 	           source : function( request, response ) {
 	               $.ajax({
@@ -112,7 +110,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 			highlightText(this.term, $a);
 			return $("<li></li>").append($a).appendTo(ul);
 		};
-
 		$("#searchInput").keydown(function (key) {    	 
 	        if(key.keyCode == 13){
 	        	event.preventDefault();

@@ -1,5 +1,8 @@
 package com.yeollu.getrend.user.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -40,7 +43,15 @@ public class FollowController {
 		int cnt = dao.insertFollow(follow);
 		logger.info("{}",cnt);
 		UserVO user = userDAO.selectEmail(follow.getFollows_following());
-		return "redirect:mypage/mypage?user_name=" + user.getUser_name();
+		logger.info("{}", user);
+		String _user_name = "";
+		try {
+			_user_name = URLEncoder.encode(user.getUser_name(),"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			_user_name = userDAO.selectEmail(user_email).getUser_name();
+		}
+
+		return "redirect:mypage/mypage?user_name=" + _user_name;
 	}
 	//follow 취소
 	@RequestMapping(value = "/deleteFollow", method = RequestMethod.GET)
@@ -53,7 +64,15 @@ public class FollowController {
 		int cnt = dao.deleteFollow(follow);
 		logger.info("{}",cnt);
 		UserVO user = userDAO.selectEmail(follow.getFollows_following());
-		return "redirect:mypage/mypage?user_name=" + user.getUser_name();
+		logger.info("{}", user);
+		String _user_name = "";
+		try {
+			_user_name = URLEncoder.encode(user.getUser_name(),"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			_user_name = userDAO.selectEmail(user_email).getUser_name();
+		}
+
+		return "redirect:mypage/mypage?user_name=" + _user_name;
 	}
 	
 

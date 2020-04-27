@@ -509,7 +509,7 @@
 	})
 	
 	
-	/*
+	
 	function leftArrow(){
 		var rightPos = $('#scroll_box').scrollLeft();
 		$("#scroll_box").animate({scrollLeft: rightPos - 270}, 200);
@@ -519,7 +519,7 @@
 		var leftPos = $('#scroll_box').scrollLeft();
 		$("#scroll_box").animate({scrollLeft: leftPos + 270}, 200);
 	}
-	*/
+	
 	
 	
 	//관심있는가게, 팔로우, 팔로워 버튼 on / off
@@ -710,6 +710,9 @@
 			}, 1000);
 		}
 	}
+
+	//console.log("${user.user_email}");
+	likeStore("${user.user_email}");
 	</script>
 </body>
 </html>

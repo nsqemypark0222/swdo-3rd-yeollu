@@ -24,7 +24,7 @@ public class AutoCompleteController {
 
 	@RequestMapping(value = "/source", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String source(String param) {    
+	public String source(String param) {
 	    logger.info("param {}", param);
 	    ArrayList<String> array = new ArrayList<String>();
 		array.addAll(storeDAO.autoStoreCate2_01());

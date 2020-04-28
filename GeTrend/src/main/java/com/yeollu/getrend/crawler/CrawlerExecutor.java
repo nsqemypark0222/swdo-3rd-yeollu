@@ -33,15 +33,15 @@ public class CrawlerExecutor implements Runnable {
 	
 	@Override
 	public void run() {
-		logger.info("크롤링 : {}", store_no);
 		if(isExisted == false || isRequiredUpdate == true) {
+			logger.info("크롤링 : {}", store_no);
 			instaImageList = crawler.location_post(store_no, location_id);
 			done = true;
 			synchronized (this) {
 				this.notifyAll();
 			}
 		} else if(isExisted == true && isRequiredUpdate == false) {
-			logger.info("존재하지만 업데이트 시기가 아님 : {}", store_no);
+			logger.info("업데이트 할 필요가 없음 : {}", store_no);
 		} else {
 			// ignore
 		}
@@ -93,6 +93,7 @@ public class CrawlerExecutor implements Runnable {
 			return null;
 		}
 	}
+	
 	
 	public static void killChromeDriver() {
 		try {

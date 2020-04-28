@@ -90,8 +90,7 @@ public class SearchController {
 		// 인스타그램 좋아요가 높은 순으로 재정렬
 		instaStoreInfoList = storeService.sortInstaStoreInfoList(instaStoreInfoList);
 		
-		// 세션에 저장
-		session.setAttribute("istores", instaStoreInfoList);
+		//session.setAttribute("istores", instaStoreInfoList);
 
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;

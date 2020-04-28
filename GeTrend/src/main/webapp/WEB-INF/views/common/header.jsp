@@ -21,7 +21,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <link rel="stylesheet" href='<c:url value="/resources/css/header.css"/>'> 
-  
 </head>	
 
 <body>
@@ -47,8 +46,8 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				    	<a href="<c:url value="/users/logout"/>">
 				        	LOGOUT
 				        </a>
-			               <a href="<c:url value='/users/userUpdate'/>">
-			               	<img class="header_profile" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587709608/resources/header/user_digv92.png" >
+			            <a href="<c:url value='/users/userUpdate'/>">
+			            	<img class="header_profile rounded-circle" src="${sessionScope.loginprofile}" >
 				        </a>
 				    </c:when>
 					<c:otherwise>
@@ -68,7 +67,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	
 <script type="text/javascript">
 	$(function() {
-
 		function highlightText(text, $node) {
 			var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
 			while ((matchIndex = currentNode.data.toLowerCase().indexOf(searchText)) >= 0) {
@@ -80,7 +78,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				newSpanNode.appendChild(newTextNode);
 			}
 		}
-
 		$("#searchInput").autocomplete({
 	           source : function( request, response ) {
 	               $.ajax({
@@ -113,7 +110,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 			highlightText(this.term, $a);
 			return $("<li></li>").append($a).appendTo(ul);
 		};
-
 		$("#searchInput").keydown(function (key) {    	 
 	        if(key.keyCode == 13){
 	        	event.preventDefault();

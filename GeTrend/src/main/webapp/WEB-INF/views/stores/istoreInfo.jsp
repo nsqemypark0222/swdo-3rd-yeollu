@@ -103,8 +103,8 @@
 				  		<div class="col">
 				    		<table class="store_table">
 					   			<tr>
-						  			<td style="width: 70%; height: 80px; border-bottom: 1px solid  #e9e9e9;">
-										<span style="font-size : 30px; color : #FF8A00;">${istore.instaStore.store_name}</span> <span style="font-size : 25px;"> /별점 ${scoreAvg}점</span>
+						  			<td style="width: 60%; height: 80px; border-bottom: 1px solid  #e9e9e9;">
+										<span style="font-size : 30px; color : #FF8A00;">${istore.instaStore.store_name}</span> <span style="font-size : 25px;"> /별점 ${Math.round(scoreAvg*10)/10.0}점</span>
 						  			</td>
 						  			
 						  			<!-- 실시간 데이터 갱신 -->
@@ -115,7 +115,16 @@
 											</a>
 										</div>
 						 			</td>
-						  
+						 			
+						  			<!-- 인스타그램 장소 검색 페이지 -->
+						  			<td style="border-bottom: 1px solid  #e9e9e9; width: 10%; height: 80px;">
+										<div id="goto_instagram">
+											<a id="goto_instagram-btn" href="https://www.instagram.com/explore/locations/${istore.instaStore.location_id}">
+												<i class="fab fa-instagram fa-3x" data-toggle="tooltip"  data-placement="top" title="인스타그램"></i>
+											</a>
+										</div>
+						 			</td>
+						 			
 						  			<!-- 카카오링크 -->
 						  			<td style="border-bottom: 1px solid  #e9e9e9; width: 10%; height: 80px;">
 										<input type="hidden" value="${istore.instaStore.store_no}" id="store_no">							
@@ -195,7 +204,7 @@
 				    	</div>	
 				    	<!-- 댓글 버튼 -->
 						<div id="reply_btn">	 
-							<a href='<c:url value="/stores/istoreInfo?store_no=${list.STORE_NO}&store_name=${istore.instaStore.store_name}" />'>
+							<a href='<c:url value="/stores/istoreinfoReply?store_no=${istore.instaStore.store_no}&store_name=${istore.instaStore.store_name}" />'>
 								<button type="button" class="btn btn-outline-warning">
 									댓글 남기기
 								</button>
@@ -218,7 +227,7 @@
 												<td>
 													<div class="reply_outer">						          
 														<div class="reply_inner01">	
-												   			<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'>    
+												   			<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'>
 																<c:if test="${reply.USER_PROFILE != null}">
 													        		<img class="reply_cate_profile" src="${reply.USER_PROFILE}" alt="프로필 사진">
 													    		</c:if>
@@ -229,7 +238,7 @@
 												 		</div>						          
 												 		<div class="reply_inner02">
 											       			<div class="reply_name">
-    											      			<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'> 
+    											      			<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'>
 	        										   				${reply.USER_NAME}
     												  			</a> 								   
 											       			</div>
@@ -264,7 +273,7 @@
 												<td>
 													<div class="reply_outer">						          
 														<div class="reply_inner01">
-													  		<a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}">		          
+													  		<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'>	          
 																<c:if test="${reply.USER_PROFILE != null}">
 														        	<img class="reply_cate_profile" src="${reply.USER_PROFILE}" alt="프로필 사진">
 														    	</c:if>
@@ -275,7 +284,7 @@
 													 	</div>						          
 														<div class="reply_inner02">
 															<div class="reply_name">
-	    											      		<a href="/getrend/mypage/mypage?user_name=${reply.USER_NAME}">
+	    											      		<a href='<c:url value="/mypage/mypage?user_name=${reply.USER_NAME}" />'>
 		        										   			${reply.USER_NAME}
 	    												  		</a> 								   
 												       		</div>
@@ -404,11 +413,10 @@ $(function(){
 
 //리플 삭제
 function deleteReply(reply_no,store_no){
-	location.href="<c:url value='/mypage/stores/deleteReply?reply_no=" + reply_no + "&store_no=" + store_no + "'/>";
+	location.href="<c:url value='/stores/deleteReply?reply_no=" + reply_no + "&store_no=" + store_no + "'/>";
 }
 
 //더 보기 버튼
-
 function moreRead(){
 	if($("#replyTable02").css("display") == 'none'){
 		$("#readMoreBtn").css("display","none");
@@ -423,15 +431,15 @@ function moreRead(){
 
 
 //헤더 그림자
-$(function(){
+$(function() {
     var header = $('header');
 
-    $(window).scroll(function(e){
-        if(header.offset().top !== 0){
+    $(window).scroll(function(e) {
+        if(header.offset().top !== 0) {
             if(!header.hasClass('shadow')){
                 header.addClass('shadow');
             }
-        }else{
+        } else {
             header.removeClass('shadow');
         }
     });

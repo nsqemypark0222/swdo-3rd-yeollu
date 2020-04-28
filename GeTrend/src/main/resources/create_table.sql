@@ -12,6 +12,7 @@ drop table recommend;
 drop table users;
 drop table stores;
 --drop table stores cascade constraints;
+--drop table users cascade constraints;
 
 create table users(
     user_email              varchar2(50)            primary key
@@ -20,6 +21,7 @@ create table users(
     , user_type             varchar2(10)
     , user_profile          varchar2(1000)
     , user_profileId        varchar2(50)
+    , constraint unique_users unique(user_name)
 );
 
 create table stores(
@@ -62,7 +64,7 @@ create table follows (
     , follows_following     varchar2(50)            not null
     , follows_indate        date                    default sysdate
     , constraint pk_follows primary key (user_email, follows_following)
-    , constraint fk1_follows foreign key (user_email) references users(user_email)
+    , constraint fk1_follows foreign key (user_email) references users(user_email) on delete cascade
 );
 
 create table likes (
@@ -70,7 +72,7 @@ create table likes (
     , store_no 		        varchar2(200)           not null
     , likes_indate          date                    default sysdate
     , constraint pk_likes primary key (user_email, store_no)
-    , constraint fk1_likes foreign key (user_email) references users(user_email)
+    , constraint fk1_likes foreign key (user_email) references users(user_email) on delete cascade
     , constraint fk2_likes foreign key (store_no) references stores(store_no)
 );
 
@@ -83,7 +85,8 @@ reply_no 		number 	primary key
 ,reply_contents 	varchar2(1000)
 ,reply_star	 number
 ,reply_indate	 date default sysdate
-,constraint fk_insta_replys foreign key (store_no) references stores(store_no)
+,constraint fk1_insta_replys foreign key (store_no) references stores(store_no)
+,constraint fk2_insta_replys foreign key (user_email) references users(user_email) on delete cascade
 );
 
 create table mango_days (
@@ -132,4 +135,3 @@ select count(*) from stores;
 select count(*) from mango_stores;
 select count(*) from mango_days;
 select count(*) from mango_times;
-

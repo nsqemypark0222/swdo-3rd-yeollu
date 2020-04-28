@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
+@font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
 html, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -22,15 +22,16 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-family: 'GmarketSansMedium';
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-/* body {
-	line-height: 1;
-} */
+#card{
+	border-radius:20px;
+}
 .btn-warning {
     color: #ffffff;
     background-color: #ffc107;
@@ -200,7 +201,7 @@ small{
 }
 #linkjoin{
 	float:right;
-	color : #f7f3c8;
+	color : #ffa840;
 }
 #login{
 	background-color:#ffc107;
@@ -228,6 +229,8 @@ h1 {
   font-weight: bold !important;
   letter-spacing: 2px;
   font-family: 'Prompt', sans-serif;
+  font-style: normal;
+  font-weight: normal;
   text-transform: uppercase;
   padding-left: 40px;
   display: flex;
@@ -236,10 +239,10 @@ h1 {
   text-shadow: 15px 5px 4px rgba(0, 0, 0, 0.25);
 }
 h2,small{
-	 color: white;
+	 color: black;
 }
 label{
-	color:#f7f3c8;
+	color:#ffa840;
 }
 .blob {
   position: absolute;

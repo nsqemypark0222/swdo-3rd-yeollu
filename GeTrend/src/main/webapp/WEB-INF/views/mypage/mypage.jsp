@@ -202,7 +202,7 @@
 						<c:when test="${empty replyList}">
 							<div class="noReply">
 								<div style="position:relative;">
-									<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587711990/resources/mypage/noreply_kaymuv.png" style="position:relative; width : 100px; left:100px;" alt="댓글없음"><br><br><br>
+									<img src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587711990/resources/mypage/noreply_kaymuv.png" style="position:relative; width : 100px;" alt="댓글없음"><br><br><br>
 							 		<div style="text-align : center;">
 							 			<h6>남긴 댓글이 아직 없습니다</h6>
 							 		</div>
@@ -509,7 +509,7 @@
 	})
 	
 	
-	/*
+	
 	function leftArrow(){
 		var rightPos = $('#scroll_box').scrollLeft();
 		$("#scroll_box").animate({scrollLeft: rightPos - 270}, 200);
@@ -519,7 +519,7 @@
 		var leftPos = $('#scroll_box').scrollLeft();
 		$("#scroll_box").animate({scrollLeft: leftPos + 270}, 200);
 	}
-	*/
+	
 	
 	
 	//관심있는가게, 팔로우, 팔로워 버튼 on / off
@@ -710,6 +710,7 @@
 			}, 1000);
 		}
 	}
+
 	</script>
 </body>
 </html>

@@ -9,4 +9,5 @@ public interface UserMapper {
 	public int deleteUser(String user_email);
 	public UserVO selectEmail(String user_email) ;
 	public UserVO selectName(String user_name) ;
+	public String isExistedUserName(String user_name);
 }

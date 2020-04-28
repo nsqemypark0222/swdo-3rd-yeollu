@@ -1,5 +1,7 @@
 package com.yeollu.getrend.user.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -44,7 +46,6 @@ public class MypageController {
 	//mypage
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypage(String user_name, HttpSession session, Model model) {
-		
 		String user_email = (String)session.getAttribute("loginemail");		
 		//내 프로필
 		if(user_name.equals(userDAO.selectEmail(user_email).getUser_name())) {
@@ -100,6 +101,7 @@ public class MypageController {
 			logger.info("남 프로필");
 			UserVO user = userDAO.selectName(user_name);
 			model.addAttribute("user", user);
+			logger.info("user : {}", user);
 			model.addAttribute("like", likeDAO.likeStoreCountByEmail(user.getUser_email()));
 			model.addAttribute("follow", followDAO.countFollow(user.getUser_email()));
 			model.addAttribute("follower", followDAO.countFollower(user.getUser_email()));
@@ -270,7 +272,13 @@ public class MypageController {
 		} else {
 			logger.info("댓글 삭제 실패");
 		}
+		String _user_name = "";
+		try {
+			_user_name = URLEncoder.encode(user_name,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			_user_name = userDAO.selectEmail(user_email).getUser_name();
+		}
 		
-		return "redirect:mypage?user_name=" + user_name;
+		return "redirect:mypage?user_name=" + _user_name;
 	}
 }

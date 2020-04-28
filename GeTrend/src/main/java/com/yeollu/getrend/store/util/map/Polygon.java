@@ -24,16 +24,16 @@ public class Polygon {
         }
         boolean flag = false;
 
-        for (int i = 0, j = size - 1; i < size; i++) {
-            Point iPoint = pointList.get(i);
-            Point jPoint = pointList.get(j);
+        for (int cur = 0, prev = size - 1; cur < size; cur++) {
+            Point curPoint = pointList.get(cur);
+            Point prevPoint = pointList.get(prev);
 
-            if (iPoint.getY() < y && jPoint.getY() >= y || jPoint.getY() < y && iPoint.getY() >= y) {
-                if (iPoint.getX() + (y - iPoint.getY()) / (jPoint.getY() - iPoint.getY()) * (jPoint.getX() - iPoint.getX()) < x) {
+            if (curPoint.getY() < y && prevPoint.getY() >= y || prevPoint.getY() < y && curPoint.getY() >= y) {
+                if (curPoint.getX() + (y - curPoint.getY()) / (prevPoint.getY() - curPoint.getY()) * (prevPoint.getX() - curPoint.getX()) < x) {
                     flag = !flag;
                 }
             }
-            j = i;
+            prev = cur;
         }
         return flag;
     }

@@ -28,9 +28,4 @@ public class Point {
     public void setY(double y) {
         this.y = y;
     }
-
-    @Override
-    public String toString() {
-        return "위도 : " + getX() + ", 경도 : " + getY();
-    }
 }

@@ -18,21 +18,50 @@ import com.yeollu.getrend.user.vo.FollowVO;
 import com.yeollu.getrend.user.vo.UserVO;
 
 
+/**
+ * @Class 	: FollowController.java
+ * @Package	: com.yeollu.getrend.user.controller
+ * @Project : GeTrend
+ * @Author	: 오선미, 조은채
+ * @Since	: 2020. 3. 31.
+ * @Version	: 1.0
+ * @Desc	: 팔로우 관련 작업을 수행한다.
+ */
 @Controller
 public class FollowController {
 	
+	/**
+	 * Fields
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(FollowController.class);
-	
 	@Autowired
 	private FollowDAO dao;
 	@Autowired
 	private UserDAO userDAO;
+	
+	/**
+	 * @Method	: follow
+	 * @Return	: String
+	 * @Author	: 오선미, 조은채
+	 * @Since	: 2020. 3. 31.
+	 * @Version	: 1.0
+	 * @Desc	: follow.jsp로 페이지를 전환한다.
+	 */
 	@RequestMapping(value = "/users/follow", method = RequestMethod.GET)
-	public String follow() {
+	public String getFollow() {
 		return "/users/follow";
 	}
 	
-	//follow
+	/**
+	 * @Method	: follow
+	 * @Return	: String
+	 * @Author	: 오선미, 조은채
+	 * @Since	: 2020. 3. 31.
+	 * @Version	: 1.0
+	 * @Desc	: 팔로우를 추가한다.
+	 * @param follow
+	 * @param session
+	 */
 	@RequestMapping(value = "/insertFollow", method = RequestMethod.GET)
 	public String follow(FollowVO follow, HttpSession session) {
 		logger.info("insertFollow");
@@ -53,7 +82,17 @@ public class FollowController {
 
 		return "redirect:mypage/mypage?user_name=" + _user_name;
 	}
-	//follow 취소
+	
+	/**
+	 * @Method	: deleteFollow
+	 * @Return	: String
+	 * @Author	: 오선미, 조은채
+	 * @Since	: 2020. 3. 31.
+	 * @Version	: 1.0
+	 * @Desc	: 팔로우를 취소한다.
+	 * @param follow
+	 * @param session
+	 */
 	@RequestMapping(value = "/deleteFollow", method = RequestMethod.GET)
 	public String deleteFollow(FollowVO follow,HttpSession session) {
 		logger.info("deleteFollow");
@@ -66,6 +105,7 @@ public class FollowController {
 		UserVO user = userDAO.selectEmail(follow.getFollows_following());
 		logger.info("{}", user);
 		String _user_name = "";
+		
 		try {
 			_user_name = URLEncoder.encode(user.getUser_name(),"UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -74,7 +114,4 @@ public class FollowController {
 
 		return "redirect:mypage/mypage?user_name=" + _user_name;
 	}
-	
-
-	
 }

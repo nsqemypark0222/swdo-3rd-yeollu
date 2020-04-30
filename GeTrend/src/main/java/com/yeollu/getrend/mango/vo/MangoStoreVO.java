@@ -2,6 +2,15 @@ package com.yeollu.getrend.mango.vo;
 
 import lombok.Data;
 
+/**
+ * @Class 	: MangoStoreVO.java
+ * @Package	: com.yeollu.getrend.mango.vo
+ * @Project : GeTrend
+ * @Author	: 박민열
+ * @Since	: 2020. 4. 19.
+ * @Version	: 1.0
+ * @Desc	: mango_stores 테이블의 VO 역할을 수행한다.
+ */
 @Data
 public class MangoStoreVO {
 	private String store_no;

@@ -2,6 +2,15 @@ package com.yeollu.getrend.store.vo;
 
 import lombok.Data;
 
+/**
+ * @Class 	: InstaStoreVO.java
+ * @Package	: com.yeollu.getrend.store.vo
+ * @Project : GeTrend
+ * @Author	: 박민열
+ * @Since	: 2020. 3. 26.
+ * @Version	: 1.0
+ * @Desc	: InstaStoreVO 역할을 수행한다
+ */
 @Data
 public class InstaStoreVO {
 	private String store_no;

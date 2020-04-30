@@ -1,4 +1,10 @@
-
+/**
+ * @File 	: reply.css
+ * @Project : GeTrend
+ * @Author	: 문지연
+ * @Since	: 2020. 3. 27.
+ * @Version	: 1.0
+*/
 
 @charset "UTF-8";
 
@@ -22,3 +28,53 @@
 	}
 	.starR1.on{background-position:0 0;}
 	.starR2.on{background-position:-15px 0;}
+	
+	* {margin: 0; padding: 0;}
+	header{height : 100px;}
+	header .header_search, header .header_menu{display : none;}		
+    wrap{width: 800px; margin: 100px auto; text-align: center;}
+	#banner {width: 100%; height: 400px;   display: inline-block;}
+	
+	#wrap {width: 100%; margin: 100px auto; text-align: center;}
+        
+	/* 화면 너비 0 ~ 1200px */
+	@media (max-width: 1240px){
+		#wrap {width: 100%; margin: 100px auto; text-align: center;}
+	}
+        
+	/* 화면 너비 0 ~ 768px */
+	@media (max-width: 768px){
+    	#banner{width : 100%;} 
+        .text_wrap{width : 98%}
+        #reply_contents{width : 95%;}
+	}
+        
+	/* 화면 너비 0 ~ 480px */
+	@media (max-width: 480px){
+		#banner{width : 100%; } 
+		.text_wrap{width : 98%}
+		#reply_contents{width : 95%;}
+	}
+		    
+	.starRev {
+		display: inline-block;
+		margin: 10px auto;
+	}
+	
+	.text_wrap{
+	 	display: inline-block;
+	    border: 1px solid #DBDBDB;
+	    border-radius: 3px;
+	    box-sizing: border-box;
+	    padding: 16px;
+	
+	}
+	
+	#err{
+		height : 20px;
+	}
+	
+	.btn_wrap{
+		display: inline-block;
+	 	margin: 20px auto;
+	}

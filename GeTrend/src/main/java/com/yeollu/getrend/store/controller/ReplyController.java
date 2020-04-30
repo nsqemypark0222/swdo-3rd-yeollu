@@ -12,15 +12,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.yeollu.getrend.store.dao.InstaReplyDAO;
 import com.yeollu.getrend.store.vo.InstaReplyVO;
 
+/**
+ * @Class 	: ReplyController.java
+ * @Package	: com.yeollu.getrend.store.controller
+ * @Project : GeTrend
+ * @Author	: 오선미, 조은채
+ * @Since	: 2020. 3. 26.
+ * @Version	: 1.0
+ * @Desc	: 댓글 관련 작업을 제어한다.
+ */
 @Controller
 @RequestMapping(value="/reply")
 public class ReplyController {
-	private static final Logger logger = LoggerFactory.getLogger(ReplyController.class);
 	
+	/**
+	 * Fields
+	 */
+	private static final Logger logger = LoggerFactory.getLogger(ReplyController.class);
 	@Autowired
 	private InstaReplyDAO dao;
 	
-	//댓글 등록
+	/**
+	 * @Method	: replyWrite
+	 * @Return	: String
+	 * @Author	: 오선미, 조은채
+	 * @Since	: 2020. 3. 26.
+	 * @Version	: 1.0
+	 * @Desc	: 댓글을 등록한다.
+	 * @param reply
+	 * @param session
+	 */
 	@RequestMapping(value = "/replyWrite", method = RequestMethod.POST)
 	public String replyWrite(InstaReplyVO reply, HttpSession session) {
 		logger.info("{}", reply);

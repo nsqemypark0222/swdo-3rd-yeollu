@@ -27,16 +27,24 @@ import com.yeollu.getrend.store.util.preprocess.StringPreprocessor;
 import com.yeollu.getrend.store.vo.InstaImageVO;
 import com.yeollu.getrend.util.PropertiesUtil;
 
+/**
+ * @Class 	: InstagramLocationCrawler.java
+ * @Package	: com.yeollu.getrend.crawler
+ * @Project : GeTrend
+ * @Author	: 조은채
+ * @Since	: 2020. 3. 26.
+ * @Version	: 1.0
+ * @Desc	: 인스타그램 웹 크롤링 작업을 수행한다.
+ */
 public class InstagramLocationCrawler {
 	
+	
+	/**
+	 * Fields
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(InstagramLocationCrawler.class);
-	
 	private static ChromeOptions options;
-	
-	//WebDriver
 	private WebDriver driver;
-	
-//	private WebDriverWait wait;
 	private FluentWait<WebDriver> wait;
 	
 	static {
@@ -81,11 +89,24 @@ public class InstagramLocationCrawler {
 		capabilities.setCapability("pageLoadStrategy", "none");
 	}
 	
+	/**
+	 * Constructor
+	 */
 	public InstagramLocationCrawler() {
 
 	}
 		
-	public ArrayList<InstaImageVO> location_post(String store_no, String location_id) {
+	/**
+	 * @Method	: crawl
+	 * @Return	: ArrayList<InstaImageVO>
+	 * @Author	: 조은채
+	 * @Since	: 2020. 3. 26.
+	 * @Version	: 1.0
+	 * @Desc	: 매개변수로 넘겨받은 location_id를 이용해 인스타그램 웹 크롤링 작업을 수행한다.
+	 * @param store_no
+	 * @param location_id
+	 */
+	public ArrayList<InstaImageVO> crawl(String store_no, String location_id) {
 		driver = new ChromeDriver(options);
 		logger.info("드라이버 실행 : {}", location_id);
 //		wait = new WebDriverWait(driver, 4);

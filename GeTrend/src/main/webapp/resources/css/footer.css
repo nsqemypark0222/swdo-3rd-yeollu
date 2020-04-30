@@ -1,0 +1,22 @@
+/**
+ * @File 	: footer.css
+ * @Project : GeTrend
+ * @Author	: 문지연
+ * @Since	: 2020. 3. 27.
+ * @Version	: 1.0
+*/
+
+@charset "UTF-8";
+
+html,
+body {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}

@@ -25,56 +25,50 @@ import com.yeollu.getrend.store.vo.InstaReplyVO;
 import com.yeollu.getrend.store.vo.InstaStoreInfoVO;
 import com.yeollu.getrend.store.vo.LikeVO;
 
+/**
+ * @Class 	: StoreController.java
+ * @Package	: com.yeollu.getrend.store.controller
+ * @Project : GeTrend
+ * @Author	: 박민열
+ * @Since	: 2020. 3. 12.
+ * @Version	: 1.0
+ * @Desc	: 가게 정보 관련 작업을 제어한다.
+ */
 @Controller
 @RequestMapping(value = "/stores")
 public class StoreController {
 	
+	/**
+	 * Fields
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
-	
 	@Autowired
 	private InstaReplyDAO replyDAO;
-	
 	@Autowired
 	private LikeDAO likeDAO;
-	
-	@Autowired
-	private StoreDAO storeDAO;
-	
-	@Autowired
-	private MangoStoreInfoDAO mangoStoreInfoDAO;
-	
 	@Autowired
 	private ScoreDAO scoreDAO;
-	
-	//상세 페이지
-	@Autowired
-	private InstaImageDAO instaImageDAO;
-	
 	@Autowired
 	private StoreServiceImpl storeService;
 	
+	/**
+	 * @Method	: istoreInfo
+	 * @Return	: String
+	 * @Author	: 오선미, 조은채
+	 * @Since	: 2020. 3. 26.
+	 * @Version	: 1.0
+	 * @Desc	: 가게 정보, 댓글, 좋아요, 별점을 조회해 객체를 생성해 모델에 저장한후 istoreInfo.jsp로 페이지를 전환한다.
+	 * @param store_no
+	 * @param session
+	 * @param model
+	 */
 	@RequestMapping(value = "/istoreInfo", method = RequestMethod.GET)
 	public String istoreInfo(String store_no, HttpSession session, Model model) {
 		logger.info("store_no : {}", store_no);
 		
-		InstaStoreInfoVO instaStoreInfo = storeService.generateIStoreInfo(store_no);
-		
-//		InstaStoreVO instaStore = storeDAO.selectInstaStore(store_no);
-//		
-//		ArrayList<InstaImageVO> instaImageList = instaImageDAO.selectInstaImageByStoreNo(store_no);
-//		
-//		MangoStoreInfoVO mangoStoreInfo = mangoStoreInfoDAO.selectMangoStoreInfoByStoreNo(store_no);
-//		
-//		ScoreVO score = scoreDAO.selectScoreByStoreNo(store_no);
-//		
-//		InstaStoreInfoVO instaStoreInfo = new InstaStoreInfoVO();
-//		instaStoreInfo.setInstaStore(instaStore);
-//		instaStoreInfo.setInstaImageList(instaImageList);
-//		instaStoreInfo.setMangoStoreInfo(mangoStoreInfo);
-//		instaStoreInfo.setScore(score);
+		InstaStoreInfoVO instaStoreInfo = storeService.generateInstaStoreInfo(store_no);
 		
 		model.addAttribute("istore", instaStoreInfo);
-		
 
         //댓글 리스트
 	    String loginemail = (String)session.getAttribute("loginemail");
@@ -95,14 +89,24 @@ public class StoreController {
 		model.addAttribute("isExistedLike", isExistedLike);
 		
 		//평균 별점
-		double scoreAvg = scoreDAO.scoreAvgByStoreno(store_no);
+		double scoreAvg = scoreDAO.scoreAvgByStoreNo(store_no);
 		model.addAttribute("scoreAvg", scoreAvg);
-		
 
 		return "/stores/istoreInfo";
 	}
 	
 	//댓글 작성 jsp
+	/**
+	 * @Method	: istoreinfoReply
+	 * @Return	: String
+	 * @Author	: 오선미, 조은채
+	 * @Since	: 2020. 3. 26.
+	 * @Version	: 1.0
+	 * @Desc	: 댓글 작성을 위해 istoreInfoReply.jsp로 페이지를 전환한다.
+	 * @param store_name
+	 * @param store_no
+	 * @param model
+	 */
 	@RequestMapping(value="/istoreinfoReply", method=RequestMethod.GET)
 	public String istoreinfoReply(String store_name, String store_no, Model model) {
 		model.addAttribute("store_name", store_name);
@@ -111,6 +115,15 @@ public class StoreController {
 	}
 	
 	//댓글삭제
+	/**
+	 * @Method	: deleteReply
+	 * @Return	: String
+	 * @Author	: 오선미, 조은채
+	 * @Since	: 2020. 3. 26.
+	 * @Version	: 1.0
+	 * @Desc	:
+	 * @param reply
+	 */
 	@RequestMapping(value = "/deleteReply", method = RequestMethod.GET)
 	public String deleteReply(InstaReplyVO reply) {
 		logger.info("{}", reply);
@@ -124,12 +137,21 @@ public class StoreController {
 		return "redirect:istoreInfo?store_no=" + reply.getStore_no();
 	}
 	
+	/**
+	 * @Method	: updateData
+	 * @Return	: InstaStoreInfoVO
+	 * @Author	: 박민열, 문지연
+	 * @Since	: 2020. 4. 05.
+	 * @Version	: 1.0
+	 * @Desc	: 실시간으로 데이터를 갱신한다.
+	 * @param store_no
+	 */
 	@RequestMapping(value = "/updateData", method = RequestMethod.GET)
 	@ResponseBody
 	public InstaStoreInfoVO updateData(String store_no) {
 		logger.info("실시간 데이터 갱신 시작 : {}", store_no);
 		
-		InstaStoreInfoVO instaStoreInfo = storeService.updateIStoreInfo(store_no);
+		InstaStoreInfoVO instaStoreInfo = storeService.updateInstaStoreInfo(store_no);
 		
 		logger.info("실시간 데이터 갱신 종료");
 		return instaStoreInfo;

@@ -1,3 +1,13 @@
+<!-- 
+/**
+ * @File 	: istoreInfo.jsp
+ * @Project : GeTrend
+ * @Author	: 조은채, 오선미, 문지연
+ * @Since	: 2020. 3. 26.
+ * @Version	: 1.0
+*/
+ -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,47 +16,32 @@
 
 <!DOCTYPE html>
 <html lang="ko">
+
+<!-- Header Start -->
 <head>
 <meta charset="UTF-8">
 <title>[ ${istore.instaStore.store_name} | GeTrend ]</title>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
-<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
 
+<!-- jQuery and Bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
+<!-- Fontawesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" 
+	crossorigin="anonymous">
+<!-- KAKAO MAP API -->
 <script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
-
-<script src='<c:url value="/resources/js/owl.carousel.min.js"/>'></script>
-<link href='<c:url value="/resources/css/owl.carousel.css"/>' rel="stylesheet" />
-<link href='<c:url value="/resources/css/owl.theme.default.min.css"/>' rel="stylesheet" />
+<!-- jQuery BlockUI -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+<!-- IstoreI CSS -->
 <link rel= "stylesheet" type="text/css" href='<c:url value="/resources/css/istoreInfo.css"/>'>
-
-<style>
-
-	#wrap{
-		background-color : #fff;
-		margin: 100px auto 0 auto;
-	}
-	header{
-		background-color: #fff;
-		width : 100%;
-		position: fixed;
-		z-index : 6;
-	}
-
-	.shadow{
-	  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-	  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-	  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-	}
-
-</style>
-
 </head>
+<!-- Header End -->
 
+<!-- Body Start -->
 <body style="background-color : #f6f6f6;">
 
 	<header>
@@ -96,7 +91,7 @@
 		
 		<!-- 상세페이지 망고플레이트 가게 정보 -->
 		<section id="content1" >
-		   <nav class="nav">
+			<nav class="nav">
 			<hr>
 				<div class="container">
 					<div class="row">
@@ -317,138 +312,140 @@
 	<footer>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
+
+<!-- Script Start -->
+<script>
+	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 	
-<script type="text/javascript">
-
-//가게 좋아요 
-function insertLike(){
-	var no = $("#store_no").val();
-		$.ajax({
-			url : "<c:url value='/likes/likeInsert' />",
-			type : "post",
-			data : {store_no : no},
-			success : function(){
-			var temp = '<i class="fa fa-heart fa-3x" onclick="deleteLike();"style="cursor: pointer; color:rgba(255, 138, 0, 0.78);" data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>';
-			 $("#like_div").html(temp);   
+	//가게 좋아요 
+	function insertLike(){
+		var no = $("#store_no").val();
+			$.ajax({
+				url : "<c:url value='/likes/likeInsert' />",
+				type : "post",
+				data : {store_no : no},
+				success : function(){
+					var temp = '<i class="fa fa-heart fa-3x" onclick="deleteLike();"style="cursor: pointer; color:rgba(255, 138, 0, 0.78);" data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>';
+					$("#like_div").html(temp);   
 				},
-			error : function(){alert("실패");}
-			})
-}
-//가게 좋아요 취소		
-function deleteLike(){
-	var no = $("#store_no").val();
-		$.ajax({
-			url : "<c:url value='/likes/likeDelete' />",
-			type : "post",
-			data : {store_no : no},
-			success : function(){
-			var temp = '<i class="fa fa-heart fa-3x"onclick="insertLike();" style="cursor: pointer; color:#d3d3d3;" data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>';
-			 $("#like_div").html(temp);   
-				},
-			error : function(){alert("실패");}
-			})
-}
-
-//별점 png로 구현
-$(function(){
-	$(".starMake").each(function(index,item){
-		var star = $(this).text();
-		
-		if(star == 0.5) $(this).html("<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>");
-		else if(star == 1) $(this).html("<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>");
-		else if(star == 1.5) {
-			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				error : function(){alert("실패");}
+			});
+	}
+	
+	//가게 좋아요 취소		
+	function deleteLike(){
+		var no = $("#store_no").val();
+			$.ajax({
+				url : "<c:url value='/likes/likeDelete' />",
+				type : "post",
+				data : {store_no : no},
+				success : function(){
+				var temp = '<i class="fa fa-heart fa-3x"onclick="insertLike();" style="cursor: pointer; color:#d3d3d3;" data-toggle="tooltip" data-placement="top" title="관심있는 가게"></i>';
+				 $("#like_div").html(temp);   
+					},
+				error : function(){alert("실패");}
+				})
+	}
+	
+	//별점 png로 구현
+	$(function(){
+		$(".starMake").each(function(index,item){
+			var star = $(this).text();
+			
+			if(star == 0.5) $(this).html("<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>");
+			else if(star == 1) $(this).html("<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>");
+			else if(star == 1.5) {
+				var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+					temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>";
+					$(this).html(temp);
+			}
+			else if(star == 2) {
+				var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				    temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				$(this).html(temp);
+			}
+			else if(star == 2.5) {
+				var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				    temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+					temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>";
+				$(this).html(temp);
+			}
+			else if(star == 3) {
+				var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+					temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+					temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				$(this).html(temp);
+			}
+			else if(star == 3.5) {
+				var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
 				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>";
 				$(this).html(temp);
-		}
-		else if(star == 2) {
-			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			    temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			$(this).html(temp);
-		}
-		else if(star == 2.5) {
-			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			    temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+			}
+			else if(star == 4) {
+				var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				$(this).html(temp);
+			}
+			else if(star == 4.5) {
+				var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
 				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>";
-			$(this).html(temp);
-		}
-		else if(star == 3) {
-			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				$(this).html(temp);
+			}
+			else if(star == 5) {
+				var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
 				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
 				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			$(this).html(temp);
-		}
-		else if(star == 3.5) {
-			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>";
-			$(this).html(temp);
-		}
-		else if(star == 4) {
-			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			$(this).html(temp);
-		}
-		else if(star == 4.5) {
-			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710144/resources/mypage/star_off_wpebpm.png' alt='☆'>";
-			$(this).html(temp);
-		}
-		else if(star == 5) {
-			var temp = "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
-			$(this).html(temp);
-		}
-	})
-})
-
-//리플 삭제
-function deleteReply(reply_no,store_no){
-	location.href="<c:url value='/stores/deleteReply?reply_no=" + reply_no + "&store_no=" + store_no + "'/>";
-}
-
-//더 보기 버튼
-function moreRead(){
-	if($("#replyTable02").css("display") == 'none'){
-		$("#readMoreBtn").css("display","none");
-		$("#readMoreSpin").css("display","");
-		setTimeout(function(){ 
-			$("#readMoreSpin").css("display","none");
-			$("#replyTable01").css("display","none");
-			$("#replyTable02").css("display","");	
-			},1000);	
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
+				$(this).html(temp);
+			}
+		});
+	});
+	
+	//리플 삭제
+	function deleteReply(reply_no,store_no){
+		location.href="<c:url value='/stores/deleteReply?reply_no=" + reply_no + "&store_no=" + store_no + "'/>";
 	}
-}
-
-
-//헤더 그림자
-$(function() {
-    var header = $('header');
-
-    $(window).scroll(function(e) {
-        if(header.offset().top !== 0) {
-            if(!header.hasClass('shadow')){
-                header.addClass('shadow');
-            }
-        } else {
-            header.removeClass('shadow');
-        }
-    });
-})
+	
+	//더 보기 버튼
+	function moreRead(){
+		if($("#replyTable02").css("display") == 'none'){
+			$("#readMoreBtn").css("display","none");
+			$("#readMoreSpin").css("display","");
+			setTimeout(function(){ 
+				$("#readMoreSpin").css("display","none");
+				$("#replyTable01").css("display","none");
+				$("#replyTable02").css("display","");	
+				},1000);	
+		}
+	}
+	
+	//헤더 그림자
+	$(function() {
+	    var header = $('header');
+	
+	    $(window).scroll(function(e) {
+	        if(header.offset().top !== 0) {
+	            if(!header.hasClass('shadow')){
+	                header.addClass('shadow');
+	            }
+	        } else {
+	            header.removeClass('shadow');
+	        }
+	    });
+	});
 </script>	
 
 
 
-<script type='text/javascript'>
+<script>
 	//<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
 	Kakao.init('<spring:eval expression="@kakao['KAKAOLOGIN_APPKEY']" />');
@@ -586,6 +583,13 @@ $(function() {
 						str_c += 							'</div>';
 						str_c += 						'</td>';
 						str_c += 						'<td style="border-bottom: 1px solid  #e9e9e9; width: 10%; height: 80px;">';
+						str_c += 							'<div id="goto_instagram">';
+						str_c += 								'<a id="goto_instagram-btn" href="https://www.instagram.com/explore/locations/' + item.instaStore.location_id + '">';
+						str_c += 									'<i class="fab fa-instagram fa-3x" data-toggle="tooltip"  data-placement="top" title="인스타그램"></i>';
+						str_c += 								'</a>';
+						str_c += 							'</div>';
+						str_c += 						'</td>';
+						str_c += 						'<td style="border-bottom: 1px solid  #e9e9e9; width: 10%; height: 80px;">';
 						str_c += 							'<input type="hidden" value="' + item.instaStore.store_no + '" id="store_no">';
 						str_c += 							'<div id="kakao_link">';
 						str_c += 								'<a id="kakao-link-btn" href="javascript:sendLink();">';
@@ -684,4 +688,5 @@ $(function() {
 </script>
 
 </body>
+<!-- Body End -->
 </html>

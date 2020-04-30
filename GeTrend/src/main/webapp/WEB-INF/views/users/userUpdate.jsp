@@ -1,25 +1,41 @@
+<!-- 
+/**
+ * @File 	: userUpdate.jsp
+ * @Project : GeTrend
+ * @Author	: 오선미, 문지연
+ * @Since	: 2020. 3. 12.
+ * @Version	: 1.0
+*/
+ -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
 <!DOCTYPE html>
 <html>
+
+<!-- Header Start -->
 <head>
 <meta charset="UTF-8">
 <title>[ Update | GeTrend ]</title>
-<script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<!-- jQuery library -->
+<!-- Vue.js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<link href='<c:url value="/resources/css/userUpdate.css"/>' rel="stylesheet" media="all">
 
+<!-- jQuery and Bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<!-- UserUpdate CSS -->
+<link href='<c:url value="/resources/css/userUpdate.css"/>' rel="stylesheet" media="all">
 </head>
+<!-- Header End -->
+
+<!-- Body Start -->
 <body style="background : white;">
 	<div class="container">
     	<div class="row">
@@ -114,8 +130,8 @@
 	      	</div>
     	</div>
 	</div>
-</body>
-
+	
+<!-- Script Start -->
 <script>
 $(function(){
 	$("#cancel").click(function() {
@@ -142,6 +158,7 @@ $(function(){
 	});
 });
 </script>
+
 <script>
 	const updateForm = new Vue({
 		el: "#updateForm",
@@ -185,6 +202,8 @@ $(function(){
 			}
 		}
 	});
- 
 </script>
+<!-- Script End -->
+</body>
+<!-- Body End -->
 </html>

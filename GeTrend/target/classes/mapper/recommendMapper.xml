@@ -6,6 +6,7 @@
 <mapper namespace="com.yeollu.getrend.store.dao.RecommendMapper">
 
 <insert id="insertRecommend" parameterType="recommend">
+<![CDATA[
 insert into
 	recommend (
 		store_adr
@@ -14,17 +15,21 @@ insert into
 		#{store_adr}
 		, #{store_cate1}
 	)
+]]>
 </insert>
 
 <select id="selectAllRecommend" resultType="recommend">
+<![CDATA[
 select
 	store_adr
 	, store_cate1
 from
 	recommend
+]]>	
 </select>
 
 <select id="selectRecommendByStoreAdr" parameterType="string" resultType="recommend">
+<![CDATA[
 select
 	store_adr
 	, store_cate1
@@ -32,9 +37,11 @@ from
 	recommend
 where
 	store_adr = #{store_adr}
+]]>	
 </select>
 
 <select id="selectRecommendByStoreCate1" parameterType="string" resultType="recommend">
+<![CDATA[
 select
 	store_adr
 	, store_cate1
@@ -42,9 +49,11 @@ from
 	recommend
 where
 	store_cate1 = #{store_cate1}
+]]>	
 </select>
 
 <select id="selectRecommendStore" parameterType="string" resultType="hashmap">
+<![CDATA[
 select
 	s.store_no
 	, s.store_name
@@ -69,6 +78,7 @@ where
     and s.store_adr = #{store_adr}
 order by
 	s.store_no asc
+]]>	
 </select>
 
 </mapper>

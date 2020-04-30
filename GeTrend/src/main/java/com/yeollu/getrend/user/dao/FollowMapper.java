@@ -5,8 +5,16 @@ import java.util.HashMap;
 
 import com.yeollu.getrend.user.vo.FollowVO;
 
+/**
+ * @Class 	: FollowMapper.java
+ * @Package	: com.yeollu.getrend.user.dao
+ * @Project : GeTrend
+ * @Author	: 오선미, 조은채
+ * @Since	: 2020. 3. 31.
+ * @Version	: 1.0
+ * @Desc	: follows 테이블의 Mapper interface 역할을 수행한다.
+ */
 public interface FollowMapper {
-
 	public int insertFollow(FollowVO follow);
 	public int deleteFollow(FollowVO follow);
 	public int checkFollow(FollowVO follow);

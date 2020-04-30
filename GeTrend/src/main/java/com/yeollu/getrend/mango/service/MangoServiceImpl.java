@@ -20,23 +20,40 @@ import com.yeollu.getrend.store.util.preprocess.DayOfTheWeekCategorizer;
 import com.yeollu.getrend.store.util.preprocess.TimeCategorizer;
 import com.yeollu.getrend.store.vo.StoreVO;
 
+/**
+ * @Class 	: MangoServiceImpl.java
+ * @Package	: com.yeollu.getrend.mango.service
+ * @Project : GeTrend
+ * @Author	: 박민열
+ * @Since	: 2020. 4. 19.
+ * @Version	: 1.0
+ * @Desc	: 망고플레이트 웹 크롤링을 수행한 후 관련 테이블들을 갱신한다.
+ */
 @Service
 public class MangoServiceImpl implements MangoService {
 	
+	/**
+	 * Fields
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(MangoServiceImpl.class);
-	
 	@Autowired
 	private StoreDAO storeDAO;
-	
 	@Autowired
 	private MangoStoreDAO mangoStoreDAO;
-	
 	@Autowired
 	private MangoDayDAO mangoDayDAO;
-	
 	@Autowired
 	private MangoTimeDAO mangoTimeDAO;
 
+	/**
+	 * Overriding
+	 * @Method	: updateMangoStores
+	 * @Return	: ArrayList<MangoStoreVO>
+	 * @Author	: 박민열
+	 * @Since	: 2020. 4. 19.
+	 * @Version	: 1.0
+	 * @Desc	: 망고플레이트 웹 크롤링 작업을 수행한 후 mango_stores 테이블을 갱신한다.
+	 */
 	@Override
 	public ArrayList<MangoStoreVO> updateMangoStores() {
 		logger.info("망고 스토어 업데이트 시작");
@@ -72,6 +89,16 @@ public class MangoServiceImpl implements MangoService {
 		return mangoStoreList;
 	}
 
+	/**
+	 * Overriding
+	 * @Method	: updateMangoDays
+	 * @Return	: void
+	 * @Author	: 박민열
+	 * @Since	: 2020. 4. 19.
+	 * @Version	: 1.0
+	 * @Desc	: mango_days 테이블을 갱신한다.
+	 * @param mangoStoreList
+	 */
 	@Override
 	public void updateMangoDays(ArrayList<MangoStoreVO> mangoStoreList) {
 		logger.info("망고 데이 업데이트 시작");
@@ -98,6 +125,16 @@ public class MangoServiceImpl implements MangoService {
 		logger.info("망고 데이 업데이트 종료");
 	}
 	
+	/**
+	 * Overriding
+	 * @Method	: updateMangoTimes
+	 * @Return	: void
+	 * @Author	: 박민열
+	 * @Since	: 2020. 4. 19.
+	 * @Version	: 1.0
+	 * @Desc	: mango_times 테이블을 갱신한다.
+	 * @param mangoStoreList
+	 */
 	@Override
 	public void updateMangoTimes(ArrayList<MangoStoreVO> mangoStoreList) {
 		logger.info("망고 타임 업데이트 시작");

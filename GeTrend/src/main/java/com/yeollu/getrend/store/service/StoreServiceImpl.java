@@ -24,27 +24,44 @@ import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
 import com.yeollu.getrend.store.vo.ScoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
+/**
+ * @Class 	: StoreServiceImpl.java
+ * @Package	: com.yeollu.getrend.store.service
+ * @Project : GeTrend
+ * @Author	: 박민열
+ * @Since	: 2020. 3. 23.
+ * @Version	: 1.0
+ * @Desc	: 가게 정보 관련 작업을 수행한다. 
+ */
 @Service
 public class StoreServiceImpl implements StoreService {
+	
+	/**
+	 * Fields
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(StoreServiceImpl.class);
-	
 	private static final int MAX_SIZE_OF_LIST = 5;
-	
 	@Autowired
 	private StoreDAO storeDAO;
-
 	@Autowired
 	private InstaLocationDAO instaLocationDAO;
-	
 	@Autowired
 	private MangoStoreInfoDAO mangoStoreInfoDAO;
-	
 	@Autowired
 	private ScoreDAO scoreDAO;
-	
 	@Autowired
 	private InstaImageDAO instaImageDAO;
 
+	/**
+	 * Overriding
+	 * @Method	: generateInstaStoreList
+	 * @Return	: ArrayList<InstaStoreVO>
+	 * @Author	: 박민열
+	 * @Since	: 2020. 3. 23.
+	 * @Version	: 1.0
+	 * @Desc	: 인스타 가게 리스트를 생성해 반환한다.
+	 * @param storeList
+	 */
 	@Override
 	public ArrayList<InstaStoreVO> generateInstaStoreList(ArrayList<StoreVO> storeList) {
 		ArrayList<InstaStoreVO> instaStoreList = new ArrayList<InstaStoreVO>();
@@ -80,6 +97,17 @@ public class StoreServiceImpl implements StoreService {
 		return instaStoreList;
 	}
 	
+	/**
+	 * Overriding
+	 * @Method	: generateMangoStoreInfoList
+	 * @Return	: ArrayList<MangoStoreInfoVO>
+	 * @Author	: 박민열
+	 * @Since	: 2020. 3. 23.
+	 * @Version	: 1.0
+	 * @Desc	: 망고 플레이트에서 수집한 가게 정보가 담긴 리스트를 생성해 반환한다.
+	 * @param instaStoreList
+	 * @param opentimeValues
+	 */
 	@Override
 	public ArrayList<MangoStoreInfoVO> generateMangoStoreInfoList(ArrayList<InstaStoreVO> instaStoreList, ArrayList<String> opentimeValues) {
 		ArrayList<MangoStoreInfoVO> mangoStoreInfoList = new ArrayList<MangoStoreInfoVO>();
@@ -95,6 +123,16 @@ public class StoreServiceImpl implements StoreService {
 		return mangoStoreInfoList;
 	}
 	
+	/**
+	 * Overriding
+	 * @Method	: generateScoreList
+	 * @Return	: ArrayList<ScoreVO>
+	 * @Author	: 박민열
+	 * @Since	: 2020. 3. 23.
+	 * @Version	: 1.0
+	 * @Desc	: 점수 리스트를 생성해 정렬하여 반환한다.
+	 * @param instaStoreList
+	 */
 	@Override
 	public ArrayList<ScoreVO> generateScoreList(ArrayList<InstaStoreVO> instaStoreList) {
 		ArrayList<ScoreVO> scoreList = new ArrayList<ScoreVO>();
@@ -104,7 +142,7 @@ public class StoreServiceImpl implements StoreService {
 			score = new ScoreVO();
 			score.setStore_no(instaStore.getStore_no());
 			score.setSum_of_like(scoreDAO.selectCountLikeByStoreNo(instaStore.getStore_no()));
-			score.setAvg_of_star(scoreDAO.scoreAvgByStoreno(instaStore.getStore_no()));
+			score.setAvg_of_star(scoreDAO.scoreAvgByStoreNo(instaStore.getStore_no()));
 			
 			scoreList.add(score);
 		}
@@ -128,6 +166,17 @@ public class StoreServiceImpl implements StoreService {
 		return scoreList;
 	}
 	
+	/**
+	 * Overriding
+	 * @Method	: sortInstaStoreList
+	 * @Return	: ArrayList<InstaStoreVO> 
+	 * @Author	: 박민열
+	 * @Since	: 2020. 3. 23.
+	 * @Version	: 1.0
+	 * @Desc	: 인스타 가게 리스트와 점수 리스트를 입력받아 정렬해 MAX_SIZE_OF_LIST만큼 반환한다.
+	 * @param instaStoreList
+	 * @param scoreList
+	 */
 	@Override
 	public ArrayList<InstaStoreVO> sortInstaStoreList(ArrayList<InstaStoreVO> instaStoreList, ArrayList<ScoreVO> scoreList) {
 		ArrayList<InstaStoreVO> _instaStoreList = new ArrayList<InstaStoreVO>();
@@ -147,6 +196,16 @@ public class StoreServiceImpl implements StoreService {
 		return instaStoreList;
 	}
 	
+	/**
+	 * Overriding
+	 * @Method	: requestCrawling
+	 * @Return	: ArrayList<InstaImageVO>
+	 * @Author	: 박민열
+	 * @Since	: 2020. 3. 23.
+	 * @Version	: 1.0
+	 * @Desc	: 크롤링을 요청해 인스타 이미지 리스트를 생성해 반환한다.
+	 * @param instaStoreList
+	 */
 	@Override
 	public ArrayList<InstaImageVO> requestCrawling(ArrayList<InstaStoreVO> instaStoreList) {
 		ArrayList<InstaImageVO> instaImageList = new ArrayList<InstaImageVO>();
@@ -208,6 +267,19 @@ public class StoreServiceImpl implements StoreService {
 		return instaImageList;
 	}
 	
+	/**
+	 * Overriding
+	 * @Method	: generateInstaStoreInfoList
+	 * @Return	: ArrayList<InstaStoreInfoVO>
+	 * @Author	: 박민열
+	 * @Since	: 2020. 3. 23.
+	 * @Version	: 1.0
+	 * @Desc	: 최종 객체 리스트를 생성해 반환한다.
+	 * @param instaStoreList
+	 * @param mangoStoreInfoList
+	 * @param scoreList
+	 * @param instaImageList
+	 */
 	@Override
 	public ArrayList<InstaStoreInfoVO> generateInstaStoreInfoList(ArrayList<InstaStoreVO> instaStoreList,
 			ArrayList<MangoStoreInfoVO> mangoStoreInfoList, ArrayList<ScoreVO> scoreList,
@@ -240,6 +312,16 @@ public class StoreServiceImpl implements StoreService {
 		return instaStoreInfoList;
 	}
 	
+	/**
+	 * Overriding
+	 * @Method	: sortInstaStoreInfoList
+	 * @Return	: ArrayList<InstaStoreInfoVO>
+	 * @Author	: 박민열
+	 * @Since	: 2020. 3. 23.
+	 * @Version	: 1.0
+	 * @Desc	: 최종 객체 리스트를 정렬해 반환한다.
+	 * @param instaStoreInfoList
+	 */
 	@Override
 	public ArrayList<InstaStoreInfoVO> sortInstaStoreInfoList(ArrayList<InstaStoreInfoVO> instaStoreInfoList) {
 		for(InstaStoreInfoVO instaStoreInfo : instaStoreInfoList) {
@@ -267,8 +349,18 @@ public class StoreServiceImpl implements StoreService {
 		return instaStoreInfoList;
 	}
 	
+	/**
+	 * Overriding
+	 * @Method	: generateInstaStoreInfo
+	 * @Return	: InstaStoreInfoVO
+	 * @Author	: 박민열, 문지연
+	 * @Since	: 2020. 4. 05.
+	 * @Version	: 1.0
+	 * @Desc	: 실시간 갱신된 객체를 생성해 반환한다.
+	 * @param store_no
+	 */
 	@Override
-	public InstaStoreInfoVO generateIStoreInfo(String store_no) {
+	public InstaStoreInfoVO generateInstaStoreInfo(String store_no) {
 		InstaStoreVO instaStore = storeDAO.selectInstaStore(store_no);
 		
 		ArrayList<InstaImageVO> instaImageList = instaImageDAO.selectInstaImageByStoreNo(store_no);
@@ -277,7 +369,7 @@ public class StoreServiceImpl implements StoreService {
 		
 		ScoreVO score = new ScoreVO();
 		score.setStore_no(store_no);
-		score.setAvg_of_star(scoreDAO.scoreAvgByStoreno(store_no));
+		score.setAvg_of_star(scoreDAO.scoreAvgByStoreNo(store_no));
 		score.setSum_of_like(scoreDAO.selectCountLikeByStoreNo(store_no));
 		int sum = 0;
 		if(instaImageList != null) {
@@ -295,8 +387,18 @@ public class StoreServiceImpl implements StoreService {
 		return instaStoreInfo;
 	}
 	
+	/**
+	 * Overriding
+	 * @Method	: updateInstaStoreInfo
+	 * @Return	: InstaStoreInfoVO
+	 * @Author	: 박민열, 문지연
+	 * @Since	: 2020. 4. 05.
+	 * @Version	: 1.0
+	 * @Desc	: 크롤링을 요청해 실시간으로 데이터를 갱신한다.
+	 * @param store_no
+	 */
 	@Override
-	public InstaStoreInfoVO updateIStoreInfo(String store_no) {
+	public InstaStoreInfoVO updateInstaStoreInfo(String store_no) {
 		
 		InstaStoreVO instaStore = storeDAO.selectInstaStore(store_no);
 		CrawlerExecutor crawlerExecutor = new CrawlerExecutor();
@@ -323,6 +425,6 @@ public class StoreServiceImpl implements StoreService {
 		}
 		CrawlerExecutor.killChromeDriver();
 		
-		return generateIStoreInfo(store_no);
+		return generateInstaStoreInfo(store_no);
 	}
 }

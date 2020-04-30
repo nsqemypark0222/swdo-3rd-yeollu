@@ -5,63 +5,88 @@
 
 <mapper namespace="com.yeollu.getrend.user.dao.UserMapper">
 <insert id="join" parameterType="user">
+<![CDATA[
 insert into 
 	users (
 		user_email
 		, user_pw
 		, user_name
 		, user_type
+]]>	
 		<if test="user_profile != null and user_profileId != null">
+<![CDATA[		
 		, user_profile
 		, user_profileId
+]]>		
 		</if>
+<![CDATA[		
 	) values (
 		#{user_email}
 		, #{user_pw}
 		, #{user_name}
 		, #{user_type}
+]]>		
 		<if test="user_profile != null and user_profileId != null">
+<![CDATA[		
 		, #{user_profile}
 		, #{user_profileId}
+]]>		
 		</if>
+<![CDATA[		
 	)
+]]>	
 </insert>
 
 <update id="updateUser" parameterType="user">
+<![CDATA[
 update
 	users
 set
 	user_pw =#{user_pw}
 	, user_name =#{user_name}
+]]>		
 	<if test="user_profile != null and user_profileId != null">
+<![CDATA[	
 	, user_profile = #{user_profile}
 	, user_profileId = #{user_profileId}
+]]>		
 	</if>
+<![CDATA[	
 where
 	user_email = #{user_email}
+]]>		
 </update>
 
 <update id="updateSocialUser" parameterType="user">
+<![CDATA[
 update
 	users
 set
 	user_name = #{user_name}
+]]>	
 	<if test="user_profile != null and user_profileId != null">
+<![CDATA[	
 	, user_profile = #{user_profile}
 	, user_profileId = #{user_profileId}
+]]>	
 	</if>
+<![CDATA[	
 where
 	user_email = #{user_email}
+]]>	
 </update>
 
 <delete id="deleteUser" parameterType="string">
+<![CDATA[
 delete from
 	users
 where
 	user_email =#{user_email}
+]]>		
 </delete>
 
 <select id="selectEmail" parameterType="string" resultType="user">
+<![CDATA[
 select
 	user_email
 	,user_pw
@@ -73,9 +98,11 @@ from
 	users
 where
 	user_email =#{user_email}
+]]>	
 </select>
 
 <select id="selectName" parameterType="string" resultType="user">
+<![CDATA[
 select
 	user_email
 	,user_name
@@ -84,7 +111,8 @@ select
 from
 	users
 where
-	user_name =#{user_name}
+	user_name =#{user_name}	
+]]>	
 </select>
 
 <select id="isExistedUserName" parameterType="string" resultType="string">

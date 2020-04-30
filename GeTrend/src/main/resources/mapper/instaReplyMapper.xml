@@ -5,6 +5,7 @@
 
 <mapper namespace="com.yeollu.getrend.store.dao.InstaReplyMapper">
 <insert id="replyWrite" parameterType="reply">
+<![CDATA[
 insert into
 	insta_replys(
 		reply_no
@@ -19,16 +20,20 @@ insert into
 		,#{reply_contents}
 		,to_number(#{reply_star})
 	)
+]]>
 </insert>
 
 <delete id="replyRemove" parameterType="reply">
+<![CDATA[
 delete
 	insta_replys
 where
 	reply_no = #{reply_no}
+]]>
 </delete>
 
 <select id="replyList" parameterType="reply" resultType="hashmap">
+<![CDATA[
 select
 	r.reply_no as reply_no
 	,r.store_no as store_no 
@@ -45,9 +50,11 @@ where
 	and r.store_no = #{store_no}
 order by
 	r.reply_indate desc
+]]>
 </select>
 	
 <select id="replyListByEmail" parameterType="string" resultType="hashmap">
+<![CDATA[
 select
 	r.reply_no as reply_no
 	,s.store_no as store_no 
@@ -72,9 +79,11 @@ and
 	r.user_email = #{user_email}
 order by
 	r.reply_no desc	
+]]>
 </select>
 
 <select id="replyListByFollow" parameterType="string" resultType="hashmap">
+<![CDATA[
 select
 	r.reply_no as reply_no
 	,s.store_no as store_no 
@@ -96,9 +105,11 @@ and
 	r.user_email in (select follows_following from follows where user_email = #{user_email})
 order by
 	r.reply_no desc
+]]>
 </select>
 
 <select id="replyListByLikedStore" parameterType="string" resultType="hashmap">
+<![CDATA[
 select
 	r.reply_no as reply_no
 	,s.store_no as store_no 
@@ -122,15 +133,18 @@ and
 	r.user_email = #{user_email}
 order by
 	r.reply_no desc
+]]>
 </select>  
 
 <select id="replyCountByStoreno" parameterType="string" resultType="int">
+<![CDATA[
 select
 	count(*)
 from
 	insta_replys
 where
 	store_no = #{store_no}
+]]>
 </select>
 
 

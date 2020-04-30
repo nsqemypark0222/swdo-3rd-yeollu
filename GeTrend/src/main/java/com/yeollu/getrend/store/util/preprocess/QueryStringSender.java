@@ -18,10 +18,31 @@ import com.yeollu.getrend.store.util.json.JsonReader;
 import com.yeollu.getrend.store.util.map.LocationDistance;
 import com.yeollu.getrend.store.vo.StoreVO;
 
+/**
+ * @Class 	: QueryStringSender.java
+ * @Package	: com.yeollu.getrend.store.util.preprocess
+ * @Project : GeTrend
+ * @Author	: 박민열
+ * @Since	: 2020. 3. 23.
+ * @Version	: 1.0
+ * @Desc	: 인스타그램에 쿼리스트링을 보내 필요한 정보를 찾아낸다.
+ */
 public class QueryStringSender {
 	
+	/**
+	 * Fields
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(QueryStringSender.class);
 	
+	/**
+	 * @Method	: send
+	 * @Return	: String
+	 * @Author	: 박민열
+	 * @Since	: 2020. 3. 23.
+	 * @Version	: 1.0
+	 * @Desc	: 인스타그램에 쿼리스트링을 보내 결과값에서 필요한 location_id를 찾아 반환한다.
+	 * @param store
+	 */
 	public static String send(StoreVO store) {
 		String storeName = "";
 		String url = "";
@@ -72,6 +93,15 @@ public class QueryStringSender {
 		return null;
 	}
 	
+	/**
+	 * @Method	: sortMap
+	 * @Return	: List<String>
+	 * @Author	: 박민열
+	 * @Since	: 2020. 3. 23.
+	 * @Version	: 1.0
+	 * @Desc	: 맵의 요소를 값에 따라 정렬한다.
+	 * @param map
+	 */
 	public static List<String> sortMap(final Map<String, Double> map) {
 		List<String> list = new ArrayList<String>();
 		list.addAll(map.keySet());

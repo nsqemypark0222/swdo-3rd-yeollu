@@ -25,16 +25,23 @@ import com.yeollu.getrend.mango.vo.MangoStoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 import com.yeollu.getrend.util.PropertiesUtil;
 
+/**
+ * @Class 	: MangoPlateCrawler.java
+ * @Package	: com.yeollu.getrend.crawler
+ * @Project : GeTrend
+ * @Author	: 조은채
+ * @Since	: 2020. 3. 29.
+ * @Version	: 1.0
+ * @Desc	: 망고플레이트 웹 크롤링 작업을 수행한다.
+ */
 public class MangoPlateCrawler {
 	
+	/**
+	 * Fields
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(MangoPlateCrawler.class);
-	
 	private static ChromeOptions options;
-	
-	//WebDriver
 	private WebDriver driver;
-	
-//	private WebDriverWait wait;
 	private FluentWait<WebDriver> wait;
 	
 	static {
@@ -77,9 +84,17 @@ public class MangoPlateCrawler {
 		capabilities.setCapability("pageLoadStrategy", "none");
 	}
 
+	/**
+	 * @Method	: crawl
+	 * @Return	: MangoStoreVO
+	 * @Author	: 조은채
+	 * @Since	: 2020. 3. 29.
+	 * @Version	: 1.0
+	 * @Desc	: 매개변수로 넘겨받은 store의 가게 이름을 이용해 망고플레이트 웹 크롤링 작업을 수행한다.
+	 * @param store
+	 */
 	public MangoStoreVO crawl(StoreVO store) {
 	    driver = new ChromeDriver(options);  
-//		wait = new WebDriverWait(driver, 4);
 	    wait = new FluentWait<WebDriver>(driver)
 				.withTimeout(Duration.ofSeconds(10))
 				.pollingEvery(Duration.ofMillis(5000))

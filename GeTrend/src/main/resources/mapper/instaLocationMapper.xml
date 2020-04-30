@@ -6,6 +6,7 @@
 <mapper namespace="com.yeollu.getrend.store.dao.InstaLocationMapper">
 
 <insert id="insertInstaLocation" parameterType="instaLocation">
+<![CDATA[
 insert into 
 	insta_locations (
 		location_id
@@ -14,25 +15,31 @@ insert into
 		#{location_id}
 		, #{store_no}
 	)
+]]>
 </insert>
 
 <select id="countInstaLocations" resultType="int">
+<![CDATA[
 select
 	count(*)
 from
 	insta_locations
+]]>
 </select>
 
 <select id="isExistedInstaLocation" parameterType="string" resultType="string">
+<![CDATA[
 select
 	decode(count(*), 0, 'false', 'true') as result
 from
 	insta_locations
 where
 	location_id = #{location_id}
+]]>
 </select>
 
 <select id="selectLocationByStoreNo" parameterType="string" resultType="instaLocation">
+<![CDATA[
 select
     l.store_no as store_no
     , l.location_id as location_id
@@ -45,6 +52,7 @@ where
 group by
     l.store_no
     , l.location_id
+]]>
 </select>
 
 </mapper>

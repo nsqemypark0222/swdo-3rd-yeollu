@@ -17,24 +17,53 @@ import com.yeollu.getrend.store.vo.RecommendVO;
 import com.yeollu.getrend.store.vo.ScoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
+/**
+ * @Class 	: RecommendServiceImpl.java
+ * @Package	: com.yeollu.getrend.store.service
+ * @Project : GeTrend
+ * @Author	: 박민열
+ * @Since	: 2020. 4. 19.
+ * @Version	: 1.0
+ * @Desc	: 가게 추천을 위한 데이터베이스 갱신과 조회를 수행한다.
+ */
 @Service
 public class RecommendServiceImpl implements RecommendService {
-	private static final Logger logger = LoggerFactory.getLogger(RecommendServiceImpl.class);
 	
+	/**
+	 * Fields
+	 */
+	private static final Logger logger = LoggerFactory.getLogger(RecommendServiceImpl.class);
 	@Autowired
 	private StoreDAO storeDAO;
-	
 	@Autowired
 	private StoreServiceImpl storeService;
-	
 	@Autowired
 	private RecommendDAO recommendDAO;
 	
+	/**
+	 * Overriding
+	 * @Method	: selectAllRecommendList
+	 * @Return	: ArrayList<RecommendVO>
+	 * @Author	: 박민열
+	 * @Since	: 2020. 4. 19.
+	 * @Version	: 1.0
+	 * @Desc	: 모든 추천 리스트를 반환한다.
+	 */
 	@Override
 	public ArrayList<RecommendVO> selectAllRecommendList() {
 		return recommendDAO.selectAllRecommend();
 	}
 	
+	/**
+	 * Overriding
+	 * @Method	: updateRecommendStores
+	 * @Return	: void
+	 * @Author	: 박민열
+	 * @Since	: 2020. 4. 19.
+	 * @Version	: 1.0
+	 * @Desc	: 추천 리스트를 갱신 한다.
+	 * @param recommend
+	 */
 	@Override
 	public void updateRecommendStores(RecommendVO recommend) {
 		logger.info("추천 업데이트 시작 : {}, {}", recommend.getStore_adr(), recommend.getStore_cate1());
@@ -53,6 +82,16 @@ public class RecommendServiceImpl implements RecommendService {
 		logger.info("추천 업데이트 종료");
 	}
 	
+	/**
+	 * Overriding
+	 * @Method	: generateInstaStoreInfo
+	 * @Return	: ArrayList<InstaStoreInfoVO>
+	 * @Author	: 박민열
+	 * @Since	: 2020. 4. 19.
+	 * @Version	: 1.0
+	 * @Desc	: 추천 데이터를 통해 추천 가게의 객체 리스트를 생성해 반환한다.
+	 * @param recommend
+	 */
 	@Override
 	public ArrayList<InstaStoreInfoVO> generateInstaStoreInfo(RecommendVO recommend) {
 		logger.info("추천 조회 시작");

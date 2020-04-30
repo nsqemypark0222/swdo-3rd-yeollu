@@ -13,15 +13,35 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.yeollu.getrend.store.dao.StoreDAO;
 
+/**
+ * @Class 	: AutoCompleteController.java
+ * @Package	: com.yeollu.getrend.store.controller
+ * @Project : GeTrend
+ * @Author	: 조은채
+ * @Since	: 2020. 3. 29.
+ * @Version	: 1.0
+ * @Desc	: 검색어 자동완성 기능을 수행한다.
+ */
 @Controller
 @RequestMapping(value="/autoComplete")
 public class AutoCompleteController {
 	
+	/**
+	 * Fields
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(AutoCompleteController.class);
-	
 	@Autowired
 	private StoreDAO storeDAO;
 
+	/**
+	 * @Method	: source
+	 * @Return	: String
+	 * @Author	: 조은채
+	 * @Since	: 2020. 3. 29.
+	 * @Version	: 1.0
+	 * @Desc	: 입력 받은 문자열을 데이터베이스에 조회해 검색된 목록을 반환한다.
+	 * @param param
+	 */
 	@RequestMapping(value = "/source", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String source(String param) {

@@ -1,3 +1,13 @@
+<!-- 
+/**
+ * @File 	: header.jsp
+ * @Project : GeTrend
+ * @Author	: 문지연
+ * @Since	: 2020. 3. 12.
+ * @Version	: 1.0
+*/
+ -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -5,24 +15,29 @@
     
 <!DOCTYPE html>
 <html>
+
+<!-- Header Start -->
 <head>
 <meta charset="UTF-8">
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- jQuery and Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- Fontawesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
-integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" 
+	crossorigin="anonymous">
+<!-- jQuery UI -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- jQuery BlockUI -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+<!-- Header CSS -->
 <link rel="stylesheet" href='<c:url value="/resources/css/header.css"/>'> 
-</head>	
+</head>
+<!-- Header End -->
 
+<!-- Body Start -->
 <body>
 	<div class="header_container">
 		<div class="header_row">
@@ -62,10 +77,11 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 			</div>
 		</div>	 	  	
 	</div>	
-   	 
+
+<!-- Script Start -->	
+<script>
+	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 	
-	
-<script type="text/javascript">
 	$(function() {
 		function highlightText(text, $node) {
 			var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
@@ -78,34 +94,33 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				newSpanNode.appendChild(newTextNode);
 			}
 		}
+		
 		$("#searchInput").autocomplete({
-	           source : function( request, response ) {
-	               $.ajax({
-	                   type: 'get',
-	                   url: "<c:url value='/autoComplete/source'/>",
-	                   dataType: "json",
-	                   data: {"param" : $("#searchInput").val()},
-	                   success: function(data) {
-	                       response(
-	                           $.map(data, function(item) {    
-	                               return {
-	                                   label: item,   
-	                                   value: item,    
-	                                   test : item+"test"   
-	                               }
-	                           })
-	                       );
-	                   }          
-	              });
-	           }, 
-	           
-	       focus : function(event, ui) {   
-	           return false;
-	       },
-	       minLength: 1,
-	       autoFocus: false
-//	       delay: 500
-	       }).data("ui-autocomplete")._renderItem = function(ul, item) {
+			source : function( request, response ) {
+				$.ajax({
+					type: 'get',
+					url: "<c:url value='/autoComplete/source'/>",
+					dataType: "json",
+					data: {"param" : $("#searchInput").val()},
+					success: function(data) {
+						response($.map(data, function(item) {
+							return {
+								label: item,
+								value: item,
+								test : item+"test"
+								}
+							})
+						);
+					}
+				});
+			},
+			focus : function(event, ui) {
+				return false;
+			},
+			minLength: 1,
+			autoFocus: false
+//			delay: 500
+		}).data("ui-autocomplete")._renderItem = function(ul, item) {
 			var $a = $("<h6></h6>").text(item.value);
 			highlightText(this.term, $a);
 			return $("<li></li>").append($a).appendTo(ul);
@@ -118,5 +133,8 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	    });
 	});
 </script>
+<!-- Script End -->
 </body>
+<!-- Body End -->
+
 </html>

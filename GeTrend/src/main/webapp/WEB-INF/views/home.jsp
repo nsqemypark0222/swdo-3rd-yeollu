@@ -1,3 +1,13 @@
+<!-- 
+/**
+ * @File 	: home.jsp
+ * @Project : GeTrend
+ * @Author	: 박민열, 문지연, 조은채
+ * @Since	: 2020. 3. 12.
+ * @Version	: 1.0
+*/
+ -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,25 +16,30 @@
 
 <!DOCTYPE html>
 <html>
+
+<!-- Header Start -->
 <head>
 <meta charset="UTF-8">
-<!-- 반응형 웹 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>[ Home | GeTrend ]</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	crossorigin="anonymous"></script>
-<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing,services'></script>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- jQuery and Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
-
-<link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'> 
+<!-- KAKAO MAP API -->
+<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing,services'></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!-- jQuery BlockUI -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+<!-- Home CSS -->
+<link rel="stylesheet" href='<c:url value="/resources/css/home.css"/>'>
+<!-- Loading CSS -->
 <link rel="stylesheet" href='<c:url value="/resources/css/loading.css"/>'>
-
 </head>
+<!-- Header End -->
+
+<!-- Body Start -->
 <body>
 
 	<header>
@@ -275,8 +290,6 @@
 			</div>
 		</div>
 	
-
-	
 		<div class="container-fluid recommend-container">
 			<div class="row">
 				<div class="col-md-1">
@@ -433,21 +446,21 @@
 			<input type="hidden" id="store_cate1" name="store_cate1" />
 		</form>
 	</div>
-
+	
+<!-- Script Start -->
 <script>
+	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+	
 	$(function() {
-		
 		function search(points) {
 			let categoryValues = [];
 			$("input[name=categotyChk]:checked").each(function() {
 				categoryValues.push($(this).val());
 			});
-	//		console.log(categoryValues);
 			let opentimeValues = [];
 			$("input[name=opentimeChk]:checked").each(function() {
 				opentimeValues.push($(this).val());
 			});
-	//		console.log(opentimeValues);
 			let reqParm = {
 				"points": points,
 				"categoryValues": categoryValues,
@@ -527,7 +540,6 @@
 						str +=		'</a>';
 						str += '</div>';
 					});
-					//console.log(str);
 					$(".istore-container2").addClass("istore-container");
 					$(".istore-container2").removeClass("istore-container2");
 					$(".istore-container").addClass("scrollbar");
@@ -646,7 +658,8 @@
 		}
 		search(points);
 	};
-	   
+
+	// 맵의 중심 좌표를 현재 접속 위치로 설정
 	const setMapCenterByAccessLocation = () => {
 		if(navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -664,6 +677,7 @@
 			});
 		}
 	}
+	
 	const recommendByAccessLocation = (category) => {
 		if(navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -686,6 +700,7 @@
 			});
 		}
 	}
+	
 	const recommend = (adr, category) => {
 		console.log(adr);
 		console.log(category);
@@ -693,6 +708,7 @@
 		$("#store_cate1").val(category);
 		$("#recommendForm").submit();
 	}
+	
 	const init = () => {
 		setMapCenterByAccessLocation();
 	}
@@ -715,5 +731,7 @@
 	    });
 	});
 </script>
+<!-- Script End -->
 </body>
+<!-- Body End -->
 </html>

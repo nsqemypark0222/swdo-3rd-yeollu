@@ -1,20 +1,48 @@
+<!-- 
+/**
+ * @File 	: userLogin.jsp
+ * @Project : GeTrend
+ * @Author	: 오선미, 문지연
+ * @Since	: 2020. 3. 12.
+ * @Version	: 1.0
+*/
+ -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <!DOCTYPE html>
 <html>
+
+<!-- Header Start -->
 <head>
 <meta charset="UTF-8">
 <title>[ Login | GeTrend ]</title>
-<script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
-<link rel="stylesheet" href='<c:url value="/resources/css/login.css"/>'>
-<link rel="stylesheet" href='<c:url value="/resources/css/bootstrap.min.css"/>'>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<!-- Vue.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
+<!-- jQuery and Bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<!-- Kakao Login API -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<!-- Naver Login API -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+
+<!-- UserLogin CSS -->
+<link rel="stylesheet" href='<c:url value="/resources/css/login.css"/>'>
 </head>
+<!-- Header End -->
+
+<!-- Body Start -->
 <body style="background-color: #FF8A00;">
 	<div class="container-fluid" style="overflow-x: hidden;overflow-y: hidden;">
 		<div class="row no-gutter">
@@ -108,6 +136,7 @@
 		
 	<a href="http://developers.kakao.com/logout"></a>
 	
+<!-- Script Start -->	
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId(
 			{
@@ -203,5 +232,7 @@ $(function(){
 		}
 	});
 </script>
+<!-- Script End -->
 </body>
+<!-- Body End -->
 </html>

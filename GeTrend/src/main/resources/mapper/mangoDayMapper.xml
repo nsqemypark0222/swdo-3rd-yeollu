@@ -6,6 +6,7 @@
 <mapper namespace="com.yeollu.getrend.mango.dao.MangoDayMapper">
 
 <insert id="insertMangoDay" parameterType="mangoDay">
+<![CDATA[
 insert into 
 	mango_days (
 		store_no
@@ -28,9 +29,11 @@ insert into
 		, #{mango_sat}
 		, to_date(#{mango_indate}, 'YYYY-MM-DD HH24:MI:SS')
 	)	
+]]>
 </insert>
 
 <update id="updateMangoDay" parameterType="mangoDay">
+<![CDATA[
 update
 	mango_days
 set
@@ -44,6 +47,7 @@ set
 	, mango_indate = sysdate
 where
 	store_no = #{store_no}
+]]>	
 </update>
 
 </mapper>

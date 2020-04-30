@@ -1,3 +1,13 @@
+<!-- 
+/**
+ * @File 	: mypage.jsp
+ * @Project : GeTrend
+ * @Author	: 조은채, 오선미, 문지연
+ * @Since	: 2020. 3. 31.
+ * @Version	: 1.0
+*/
+ -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -5,20 +15,24 @@
 
 <!DOCTYPE html>
 <html>
+
+<!-- Header Start -->
 <head>
 <meta charset="UTF-8">
-<title>[ MyPage | GeTrend ]</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>[ MyPage | GeTrend ]</title>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!-- jQuery and Bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
+<!-- Mypage CSS -->
 <link rel="stylesheet" href='<c:url value="/resources/css/mypage.css"/>'>
-
-
-
 </head>
+<!-- Header End -->
+
+<!-- Body Start -->
 <body style="background-color : #fbfcfc;">
 
 	<header>
@@ -112,7 +126,7 @@
 				</div>
 			</div>
 		</div>
-	
+		
 		<!-- 버튼 디폴트 ; 관심있는 가게 리스트 -->
 		<div class="row">
 			<div class="col">
@@ -281,8 +295,8 @@
 									</table>
 									<c:if test="${fn:length(replyList) > 3}">
 								   		<div class="readAction">
-			    							<button id="readMoreBtn" class="btn btn-outline-secondary btn-lg" onclick="moreRead();"> 더보기 + </button>
-			    							<img id="readMoreSpin" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587712040/resources/mypage/Spinner_rx4yeu.gif" style="display:none; width : 100px;">
+			    							<button id="readMoreBtn" class="btn btn-outline-secondary btn-lg" onclick="moreRead();" style="margin-right: 180px;"> 더보기 + </button>
+			    							<img id="readMoreSpin" src="https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587712040/resources/mypage/Spinner_rx4yeu.gif" style="display:none; width : 100px; margin-right: 180px;">
 		    							</div>
 	    							</c:if>
 	    							
@@ -349,8 +363,8 @@
 													</c:if>
 												</td>	
 											</tr>
-										</c:forEach>    								
-							   	 </table>		
+										</c:forEach>
+									</table>		
 						    	</div>
 							</div>				    
 						</c:otherwise>
@@ -419,21 +433,22 @@
 	<footer>
 			<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>
-	
-	<script type="text/javascript">
+
+<!-- Script Start -->
+<script>
 	//헤더 그림자
 	$(function(){
-	  var header = $('header');
-	  $(window).scroll(function(e){
-	      if(header.offset().top !== 0){
-	          if(!header.hasClass('shadow')){
-	              header.addClass('shadow');
-	          }
-	      }else{
-	          header.removeClass('shadow');
-	      }
-	  });
-	});
+		var header = $('header');
+	  	$(window).scroll(function(e){
+		  	if(header.offset().top !== 0){
+			  	if(!header.hasClass('shadow')){
+				  	header.addClass('shadow');
+	          	}
+	      	}else{
+		      	header.removeClass('shadow');
+	      	}
+      	});
+   	});
 	
 	//팔로우 추가
 	function insertFollow(follows_following){
@@ -505,22 +520,18 @@
 					temp += "<img style='width:19px;' src='https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587710218/resources/mypage/star_wzffnm.png' alt='★'>";
 				$(this).html(temp);
 			}
-		})
-	})
-	
-	
+		});
+	});
 	
 	function leftArrow(){
 		var rightPos = $('#scroll_box').scrollLeft();
 		$("#scroll_box").animate({scrollLeft: rightPos - 270}, 200);
-	
 	}
+	
 	function rightArrow(){
 		var leftPos = $('#scroll_box').scrollLeft();
 		$("#scroll_box").animate({scrollLeft: leftPos + 270}, 200);
 	}
-	
-	
 	
 	//관심있는가게, 팔로우, 팔로워 버튼 on / off
 	$(function() {
@@ -533,6 +544,7 @@
 	         if( $('.button-class3').hasClass('btn_on') ) $('.button-class3').removeClass('btn_on');
 	         if( !$('.button-class3').hasClass('btn_off') ) $('.button-class3').addClass('btn_off');	
 	    });
+	    
 	    $('.button-class2').click(function(){
 	    	 if( $(this).hasClass('btn_off') ) $(this).removeClass('btn_off');
 	         if( !$(this).hasClass('btn_on') ) $(this).addClass('btn_on');
@@ -550,7 +562,6 @@
 	        if( $('.button-class2').hasClass('btn_on') ) $('.button-class2').removeClass('btn_on');
 	        if( !$('.button-class2').hasClass('btn_off') ) $('.button-class2').addClass('btn_off');	
 	    });
-	
 	});
 	
 	//관심있는 가게 리스트 
@@ -697,7 +708,6 @@
 		location.href="<c:url value='/mypage/deleteReply?reply_no=" + no + "&user_name=" + user_name + "'/>";
 	}
 	
-	
 	//더보기 버튼
 	function moreRead(){
 		if($("#replyTable02").css("display") == 'none') {
@@ -710,7 +720,9 @@
 			}, 1000);
 		}
 	}
-
-	</script>
+</script>
+<!-- Script End -->
 </body>
+<!-- Body End -->
+
 </html>

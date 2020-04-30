@@ -25,25 +25,43 @@ import com.yeollu.getrend.user.dao.UserDAO;
 import com.yeollu.getrend.user.vo.FollowVO;
 import com.yeollu.getrend.user.vo.UserVO;
 
+/**
+ * @Class 	: MypageController.java
+ * @Package	: com.yeollu.getrend.user.controller
+ * @Project : GeTrend
+ * @Author	: 조은채
+ * @Since	: 2020. 3. 31.
+ * @Version	: 1.0
+ * @Desc	: 마이페이지 관련 작업을 수행한다.
+ */
 @Controller
 @RequestMapping(value="/mypage")
 public class MypageController {
 	
+	/**
+	 * Fields
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
-	
 	@Autowired
 	private UserDAO userDAO;
-	
 	@Autowired
 	private InstaReplyDAO replyDAO;
-	
 	@Autowired
 	private LikeDAO likeDAO;
-	
 	@Autowired
 	private FollowDAO followDAO;
 	
-	//mypage
+	/**
+	 * @Method	: mypage
+	 * @Return	: String
+	 * @Author	: 조은채
+	 * @Since	: 2020. 3. 31.
+	 * @Version	: 1.0
+	 * @Desc	: 마이페이지를 구성하는 정보를 모델에 저장한 후 페이지를 전환한다.
+	 * @param user_name
+	 * @param session
+	 * @param model
+	 */
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypage(String user_name, HttpSession session, Model model) {
 		String user_email = (String)session.getAttribute("loginemail");		
@@ -55,7 +73,7 @@ public class MypageController {
 			model.addAttribute("follow", followDAO.countFollow(user_email));
 			model.addAttribute("follower", followDAO.countFollower(user_email));
 			ArrayList<HashMap<String, Object>> likeList = likeDAO.likeSelectByEmail(user_email);
-
+			
 			for (HashMap<String, Object> hashMap : likeList) {		
 				//category 구분
 				switch ((String)hashMap.get("STORE_CATE1")) {
@@ -105,8 +123,8 @@ public class MypageController {
 			model.addAttribute("like", likeDAO.likeStoreCountByEmail(user.getUser_email()));
 			model.addAttribute("follow", followDAO.countFollow(user.getUser_email()));
 			model.addAttribute("follower", followDAO.countFollower(user.getUser_email()));
-			ArrayList<HashMap<String, Object>> likeList = likeDAO.likeSelectByEmail(user_email);
-
+			ArrayList<HashMap<String, Object>> likeList = likeDAO.likeSelectByEmail(user.getUser_email());
+			
 			for (HashMap<String, Object> hashMap : likeList) {		
 				//category 구분
 				switch ((String)hashMap.get("STORE_CATE1")) {
@@ -131,7 +149,6 @@ public class MypageController {
 				if(likeCheck == 1) hashMap.put("LIKE", true);
 				else hashMap.put("LIKE", false);
 				
-				
 				//category 구분
 				switch ((String)hashMap.get("STORE_CATE1")) {
 				case "한식": 	case "닭/오리요리": case "별식/퓨전요리":case "분식": hashMap.put("CATE1", "korean.png"); hashMap.put("CATE2", "한식");break;
@@ -155,13 +172,20 @@ public class MypageController {
 			}else {
 				model.addAttribute("following", false);
 			}
-			
 		}
 		return "mypage/mypage";
 	}
 	
-	
-	//내 페이지 user_name 아닌 loginemail로 접속
+	/**
+	 * @Method	: mypage
+	 * @Return	: String
+	 * @Author	: 조은채
+	 * @Since	: 2020. 3. 31.
+	 * @Version	: 1.0
+	 * @Desc	: user_name이 아님 loginemail로 접속했을 때의 마이페이지를 구성하는 정보를 모델에 저장한 후 페이지를 전환한다.
+	 * @param session
+	 * @param model
+	 */
 	@RequestMapping(value = "/mypageSession", method = RequestMethod.GET)
 	public String mypage(HttpSession session, Model model) {
 		
@@ -187,7 +211,6 @@ public class MypageController {
 		}	
 		model.addAttribute("likeList", likeList);
 		
-		
 		ArrayList<HashMap<String, Object>> replyList = replyDAO.replyListByEmail(user_email);
 		for (HashMap<String, Object> hashMap : replyList) {
 			//좋아요한 가게인지 확인
@@ -197,8 +220,6 @@ public class MypageController {
 			int likeCheck = likeDAO.likeSelectByEmailStoreno(like);
 			if(likeCheck == 1) hashMap.put("LIKE", true);
 			else hashMap.put("LIKE", false);
-			
-			
 			
 			//category 구분
 			switch ((String)hashMap.get("STORE_CATE1")) {
@@ -216,10 +237,17 @@ public class MypageController {
 		return "mypage/mypage";
 	}
 	
-
-	
-	
-	//follows_following을 구독하는 사람 리스트
+	/**
+	 * @Method	: followerList
+	 * @Return	: ArrayList<HashMap<String,Object>>
+	 * @Author	: 조은채
+	 * @Since	: 2020. 3. 31.
+	 * @Version	: 1.0
+	 * @Desc	: follows_following을 구독하는 사람 리스트를 반환한다.
+	 * @param follows_following
+	 * @param session
+	 * @param model
+	 */
 	@RequestMapping(value = "/followerList", method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<HashMap<String, Object>> followerList(String follows_following, HttpSession session, Model model) {
@@ -228,7 +256,17 @@ public class MypageController {
 		return list;
 	}
 	
-	//user_email이 구독하는 사람 리스트
+	/**
+	 * @Method	: followList
+	 * @Return	: ArrayList<HashMap<String,Object>>
+	 * @Author	: 조은채
+	 * @Since	: 2020. 3. 31.
+	 * @Version	: 1.0
+	 * @Desc	: user_email이 구독하는 사람 리스트를 반환한다.
+	 * @param user_email
+	 * @param session
+	 * @param model
+	 */
 	@RequestMapping(value = "/followList", method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<HashMap<String, Object>> followList(String user_email, HttpSession session, Model model) {
@@ -237,7 +275,17 @@ public class MypageController {
 		return list;
 	}
 	
-	//user_email이 구독하는 가게 리스트
+	/**
+	 * @Method	: likeStoreList
+	 * @Return	: ArrayList<HashMap<String,Object>>
+	 * @Author	: 조은채
+	 * @Since	: 2020. 3. 31.
+	 * @Version	: 1.0
+	 * @Desc	: user_email이 구독하는 가게 리스트를 반환한다.
+	 * @param user_email
+	 * @param session
+	 * @param model
+	 */
 	@RequestMapping(value = "/likeStoreList", method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<HashMap<String, Object>> likeStoreList(String user_email, HttpSession session, Model model) {
@@ -258,9 +306,17 @@ public class MypageController {
 		return list;
 	}
 	
-	
-	
-	//댓글삭제
+	/**
+	 * @Method	: deleteReply
+	 * @Return	: String
+	 * @Author	: 조은채
+	 * @Since	: 2020. 3. 31.
+	 * @Version	: 1.0
+	 * @Desc	: 댓글을 삭제한다.
+	 * @param reply
+	 * @param user_name
+	 * @param session
+	 */
 	@RequestMapping(value = "/deleteReply", method = RequestMethod.GET)
 	public String deleteReply(InstaReplyVO reply, String user_name, HttpSession session) {
 		logger.info("{}", reply);
@@ -278,7 +334,6 @@ public class MypageController {
 		} catch (UnsupportedEncodingException e) {
 			_user_name = userDAO.selectEmail(user_email).getUser_name();
 		}
-		
 		return "redirect:mypage?user_name=" + _user_name;
 	}
 }

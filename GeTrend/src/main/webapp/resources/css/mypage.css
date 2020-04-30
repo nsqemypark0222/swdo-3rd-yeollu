@@ -1,4 +1,10 @@
-
+/**
+ * @File 	: mypage.css
+ * @Project : GeTrend
+ * @Author	: 문지연
+ * @Since	: 2020. 3. 27.
+ * @Version	: 1.0
+*/
 
 @charset "UTF-8";
 header{
@@ -160,8 +166,8 @@ header{
 .mypage_replies{
 	width: 900px;
 	margin :  30px auto 100px auto;
-   border-top: 1px solid #e9e9e9;
-   padding-top : 60px;
+   	border-top: 1px solid #e9e9e9;
+   	padding-top : 60px;
 }
 .reply_cate_profile{
 	width: 55px;

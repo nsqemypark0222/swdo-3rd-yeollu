@@ -6,6 +6,7 @@
 <mapper namespace="com.yeollu.getrend.store.dao.StoreMapper">
 
 <select id="selectAllStores" resultType="store">
+<![CDATA[
 select
 	store_no
 	, store_name
@@ -21,9 +22,11 @@ from
 	stores
 order by
 	store_no asc
+]]>	
 </select>
 
 <select id="selectStoresWithMangoStores" resultType="store">
+<![CDATA[
 select
 	s.store_no
 	, s.store_name
@@ -49,9 +52,11 @@ where
 	or mango_holiday is not null)
 order by
 	s.store_no asc
+]]>		
 </select>
 
 <select id="searchStoresByTerm" parameterType="string" resultType="store">
+<![CDATA[
 select
 	store_no
 	, store_name
@@ -75,9 +80,11 @@ where
 	or store_adr2 like '%' || #{term} || '%'
 order by
 	store_no asc
+]]>	
 </select>
 
 <select id="selectStoresByStoreAdr" parameterType="string" resultType="store">
+<![CDATA[
 select
 	store_no
 	, store_name
@@ -95,9 +102,11 @@ where
 	store_adr = #{store_adr}
 order by
 	store_no asc
+]]>	
 </select>
 
 <select id="selectStoresByStoreCate1" parameterType="list" resultType="store">
+<![CDATA[
 select
 	store_no
 	, store_name
@@ -111,20 +120,28 @@ select
 	, store_y
 from
 	stores
+]]>	
 <choose>
 	<when test="list.size != 0">
+<![CDATA[	
 where
 	store_cate1 in
+]]>	
 	<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+<![CDATA[	
 		#{item}
+]]>		
 	</foreach>
 	</when>
 </choose>
+<![CDATA[
 order by
 	store_no asc
+]]>
 </select>
 
 <select id="selectStoresByStoreAdrAndStoreCate1" parameterType="hashmap" resultType="store">
+<![CDATA[
 select
 	store_no
 	, store_name
@@ -143,9 +160,11 @@ where
 	and store_cate1 = #{store_cate1}
 order by
 	store_no asc
+]]>	
 </select>
 
 <select id="selectInstaStore" parameterType="string" resultType="instaStore">
+<![CDATA[
 select
 	s.store_no
 	, s.store_name
@@ -163,35 +182,43 @@ from
 where
 	s.store_no = l.store_no
 	and s.store_no = #{store_no}
+]]>	
 </select>
 
 
 <select id="autoStoreName" resultType="string">
+<![CDATA[
 select
 	distinct store_name
 from
 	stores
+]]>	
 </select>
 
 
 <select id="autoStoreAdr" resultType="string">
+<![CDATA[
 select 
 	distinct store_adr
 from stores
+]]>
 </select>
 
 
 <select id="autoStoreCate2_01" resultType="string">
+<![CDATA[
 select 
 	distinct store_cate2 
 from 
 	stores 
 where 
 	instr(store_cate2,'/') = 0
+]]>	
 </select>
 
 
 <select id="autoStoreCate2_02" resultType="string">
+<![CDATA[
 select 
 	distinct substr(store_cate2,1,instr(store_cate2,'/',1)-1)
 from 
@@ -200,10 +227,12 @@ where
 	instr(store_cate2,'/') != 0 
 and 
 	(instr(store_cate2,'/') = instr(store_cate2,'/',-1))
+]]>	
 </select>
 
 
 <select id="autoStoreCate2_03" resultType="string">
+<![CDATA[
 select 
 	distinct substr(store_cate2,instr(store_cate2,'/',-1)+1)
 from 
@@ -212,10 +241,8 @@ where
 	instr(store_cate2,'/') != 0 
 and 
 	(instr(store_cate2,'/') = instr(store_cate2,'/',-1))
+]]>		
 </select>
-
-
-
 
 </mapper>
 

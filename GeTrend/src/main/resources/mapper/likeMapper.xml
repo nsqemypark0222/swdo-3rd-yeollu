@@ -6,6 +6,7 @@
 <mapper namespace="com.yeollu.getrend.store.dao.LikeMapper">
 
 <insert id="likeInsert" parameterType="like">
+<![CDATA[
 insert into 
 	likes (
 		store_no
@@ -14,18 +15,22 @@ insert into
 		#{store_no}
 		,#{user_email}
 	)
+]]>	
 </insert>
 
 <delete id="likeDelete">
+<![CDATA[
 delete from
 	likes
 where
 	store_no = #{store_no}
 and
 	user_email = #{user_email}
+]]>		
 </delete>
 
 <select id="likeSelectByEmail" parameterType="string" resultType="hashmap">
+<![CDATA[
 select
 	s.store_no as store_no
 	,s.store_name as store_name
@@ -40,9 +45,11 @@ and
 	l.user_email = #{user_email}
 order by
 	l.likes_indate desc
+]]>
 </select>
 
 <select id="likeSelectByEmailStoreno" parameterType="like" resultType="int">
+<![CDATA[
 select
 	count(*)
 from
@@ -51,18 +58,22 @@ where
 	user_email = #{user_email}	
 and
 	store_no = #{store_no}
+]]>	
 </select>
 
 <select id="likeStoreCountByEmail" parameterType="string" resultType="int">
+<![CDATA[
 select
 	count(store_no)
 from
 	likes
 where
-	user_email = #{user_email}	
+	user_email = #{user_email}
+]]>		
 </select>
 
 <select id="isExistedLike" parameterType="like" resultType="string">
+<![CDATA[
 select
 	decode(count(*), 0, 'false', 'true') as result
 from
@@ -70,6 +81,7 @@ from
 where
 	user_email = #{user_email}
 	and store_no = #{store_no}
+]]>		
 </select>
 
 </mapper>

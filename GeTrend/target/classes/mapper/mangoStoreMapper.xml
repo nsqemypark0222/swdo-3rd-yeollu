@@ -6,6 +6,7 @@
 <mapper namespace="com.yeollu.getrend.mango.dao.MangoStoreMapper">
 
 <insert id="insertMangoStore" parameterType="mangoStore">
+<![CDATA[
 insert into 
 	mango_stores (
 		store_no
@@ -28,9 +29,11 @@ insert into
 		, #{mango_last_order}
 		, #{mango_holiday}
 	)
+]]>
 </insert>
 
 <select id="selectAllMangoStores" resultType="mangoStore">
+<![CDATA[
 select
 	store_no
 	, mango_tel
@@ -44,9 +47,11 @@ select
 	, mango_indate
 from
 	mango_stores
+]]>	
 </select>
 
 <select id="selectMangoStoreByStoreNo" parameterType="string" resultType="mangoStore">
+<![CDATA[
 select
 	store_no
 	, mango_tel
@@ -62,9 +67,11 @@ from
 	mango_stores
 where
 	store_no = #{store_no}
+]]>		
 </select>
 
 <select id="selectMangoStoreByMangoDay" parameterType="mangoDay" resultType="mangoStore">
+<![CDATA[
 select
 	m.store_no
 	, m.mango_tel
@@ -87,30 +94,46 @@ from
 	mango_stores m, mango_days d
 where
 	m.store_no = d.store_no
+]]>	
 	<if test="mango_sun != null">
+<![CDATA[	
 	and d.mango_sun = #{mango_sun}
+]]>		
 	</if>
 	<if test="mango_mon != null">
+<![CDATA[	
 	and d.mango_mon = #{mango_mon}
+]]>		
 	</if>
 	<if test="mango_tue != null">
+<![CDATA[	
 	and d.mango_tue = #{mango_tue}
+]]>		
 	</if>
 	<if test="mango_wed != null">
+<![CDATA[	
 	and d.mango_wed = #{mango_wed}
+]]>		
 	</if>
 	<if test="mango_thu != null">
+<![CDATA[	
 	and d.mango_thu = #{mango_thu}
+]]>		
 	</if>
 	<if test="mango_fri != null">
+<![CDATA[	
 	and d.mango_fri = #{mango_fri}
+]]>		
 	</if>
 	<if test="mango_sat != null">
+<![CDATA[	
 	and d.mango_sat = #{mango_sat}
+]]>		
 	</if>
 </select>
 
 <update id="updateMangoStore" parameterType="mangoStore">
+<![CDATA[
 update
 	mango_stores
 set
@@ -125,6 +148,7 @@ set
 	, mango_indate = sysdate
 where
 	store_no = #{store_no}
+]]>	
 </update>
 
 </mapper>

@@ -9,12 +9,33 @@ import org.springframework.stereotype.Repository;
 
 import com.yeollu.getrend.store.vo.MangoStoreInfoVO;
 
+/**
+ * @Class 	: MangoStoreInfoDAO.java
+ * @Package	: com.yeollu.getrend.store.dao
+ * @Project : GeTrend
+ * @Author	: 조은채, 박민열
+ * @Since	: 2020. 3. 26.
+ * @Version	: 1.0
+ * @Desc	: mango_stores 테이블에 접근하여 관련 작업을 수행한다.
+ */
 @Repository
 public class MangoStoreInfoDAO {
 	
+	/**
+	 * Fields
+	 */
 	@Autowired
 	private SqlSession session;
 
+	/**
+	 * @Method	: selectMangoStoreInfoByStoreNo
+	 * @Return	: MangoStoreInfoVO
+	 * @Author	: 조은채, 박민열
+	 * @Since	: 2020. 3. 26.
+	 * @Version	: 1.0
+	 * @Desc	: mango_stores 테이블에서 store_no로 데이터를 조회한다.
+	 * @param store_no
+	 */
 	public MangoStoreInfoVO selectMangoStoreInfoByStoreNo(String store_no) {
 		MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
 		try {
@@ -26,6 +47,16 @@ public class MangoStoreInfoDAO {
 		return mangoStoreInfo;
 	}
 	
+	/**
+	 * @Method	: selectMangoStoreInfoByStoreNoAndDays
+	 * @Return	: MangoStoreInfoVO
+	 * @Author	: 조은채, 박민열
+	 * @Since	: 2020. 3. 26.
+	 * @Version	: 1.0
+	 * @Desc	: mango_stores 테이블에서 날짜와 시간으로 데이터를 조회한다.
+	 * @param store_no
+	 * @param opentimeValues
+	 */
 	public MangoStoreInfoVO selectMangoStoreInfoByStoreNoAndDays(String store_no, ArrayList<String> opentimeValues) {
 		MangoStoreInfoVO mangoStoreInfo = new MangoStoreInfoVO();
 		HashMap<String, String> map = new HashMap<String, String>();

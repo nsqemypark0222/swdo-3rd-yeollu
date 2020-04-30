@@ -26,38 +26,80 @@ import com.yeollu.getrend.user.util.ProfileImageHandler;
 import com.yeollu.getrend.user.vo.UserVO;
 import com.yeollu.getrend.util.PropertiesUtil;
 
+/**
+ * @Class 	: UserController.java
+ * @Package	: com.yeollu.getrend.user.controller
+ * @Project : GeTrend
+ * @Author	: 오선미
+ * @Since	: 2020. 3. 12.
+ * @Version	: 1.0
+ * @Desc	: 회원 정보 관련 작업을 수행한다.
+ */
 @Controller
 @RequestMapping(value = "/users")
 public class UserController {
 	
+	/**
+	 * Fields
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-	
 	@Autowired
 	private UserDAO dao;
-	
 	@Autowired
-	BCryptPasswordEncoder passEncoder;
-	
+	private BCryptPasswordEncoder passEncoder;
 	@Inject
 	private MailService mailService;
 	
-	
+	/**
+	 * @Method	: setMailService
+	 * @Return	: void
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 21.
+	 * @Version	: 1.0
+	 * @Desc	: Setter
+	 * @param mailService
+	 */
 	public void setMailService(MailService mailService) {
 		this.mailService = mailService;
 	}
-	//회원가입 페이지 이동
+	
+	/**
+	 * @Method	: userJoin
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 12.
+	 * @Version	: 1.0
+	 * @Desc	: userJoin.jsp로 페이지를 전환한다.
+	 */
 	@RequestMapping(value="/userJoin", method=RequestMethod.GET)
 	public String userJoin() {
 		logger.info("회원가입페이지");
 		return "/users/userJoin";
 	}
 	
+	/**
+	 * @Method	: kakaoshare
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 24.
+	 * @Version	: 1.0
+	 * @Desc	: kakaoshare.jsp로 페이지를 전환한다.
+	 */
 	@RequestMapping(value="/kakaoshare", method=RequestMethod.GET)
 	public String kakaoshare() {
 		logger.info("카카오 공유하기");
 		return "/users/kakaoshare";
 	}
-	//회원가입 이메일 중복확인
+	
+	/**
+	 * @Method	: emailCheck
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 12.
+	 * @Version	: 1.0
+	 * @Desc	: 회원가입 중 이메일의 중복을 확인한다.
+	 * @param user_email
+	 */
 	@RequestMapping(value="/emailCheck",method=RequestMethod.GET)
 	@ResponseBody
 	public String emailCheck(String user_email) {
@@ -70,7 +112,16 @@ public class UserController {
 		return result;
 	}
 	
-	// 회원가입 이메일 인증
+    /**
+     * @Method	: sendMailAuth
+     * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 21.
+     * @Version	: 1.0
+     * @Desc	: 회원가입 중 인증 코드를 이메일로 보낸다.
+     * @param session
+     * @param user_email
+     */
     @RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
     @ResponseBody
     public String sendMailAuth(HttpSession session, @RequestParam String user_email) {
@@ -96,7 +147,17 @@ public class UserController {
         	return "fail";
         }
     }
-    //회원가입 인증 코드 확인
+    
+    /**
+     * @Method	: joinCodeCheck
+     * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 21.
+     * @Version	: 1.0
+     * @Desc	: 회원가입 중 인증 코드를 확인한다.
+     * @param session
+     * @param joinCode
+     */
     @RequestMapping(value = "/joinCodeCheck", method = RequestMethod.POST)
     @ResponseBody
     public String joinCodeCheck(HttpSession session, @RequestParam String joinCode) {
@@ -113,7 +174,17 @@ public class UserController {
         	return "fail";
         }
     }
-    //로컬 로그인페이지 이동 쿠키저장
+    
+	/**
+	 * @Method	: userLogin
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 12.
+	 * @Version	: 1.0
+	 * @Desc	: 쿠키에 이메일을 저장한 후 userLogin.jsp로 페이지를 전환한다.
+	 * @param request
+	 * @param model
+	 */
 	@RequestMapping(value="/userLogin", method=RequestMethod.GET)
 	public String userLogin(HttpServletRequest request,Model model) {
 		logger.info("로그인페이지");
@@ -132,7 +203,15 @@ public class UserController {
 	}
 	
 	
-	//회원가입
+	/**
+	 * @Method	: join
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 12.
+	 * @Version	: 1.0
+	 * @Desc	: 회원 가입을 수행한다.
+	 * @param user
+	 */
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(UserVO user) {
 		logger.info("회원가입");
@@ -157,7 +236,17 @@ public class UserController {
 		}
 		return "redirect:/users/userJoin";
 	}
-	//카카오 로그인
+	
+	/**
+	 * @Method	: kakaoLogin
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 17.
+	 * @Version	: 1.0
+	 * @Desc	: 카카오 로그인을 수행한다.
+	 * @param user
+	 * @param session
+	 */
 	@RequestMapping(value="/kakaoLogin", method=RequestMethod.POST)
 	public String kakaoLogin(UserVO user, HttpSession session) {
 		if(dao.isExistedUserName(user.getUser_name())) {
@@ -201,13 +290,32 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	//네이버 콜백
+	/**
+	 * @Method	: callback
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 18.
+	 * @Version	: 1.0
+	 * @Desc	: 네이버 로그인 콜백을 수행하기 위해 callback.jsp로 페이지를 전환한다.
+	 * @return
+	 */
 	@RequestMapping(value = "/callback", method = RequestMethod.GET)
 	public String callback() {
 		logger.info("callback");
 		return "/users/callback";
 	}
+	
 	//네이버로그인
+	/**
+	 * @Method	: naverLogin
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 18.
+	 * @Version	: 1.0
+	 * @Desc	: 네이버 로그인을 수행한다.
+	 * @param user
+	 * @param session
+	 */
 	@RequestMapping(value="/naverLogin", method=RequestMethod.POST)
 	public String naverLogin(UserVO user, HttpSession session) {
 		if(dao.isExistedUserName(user.getUser_name())) {
@@ -249,7 +357,21 @@ public class UserController {
 		
 		return "redirect:/";
 	}
+	
 	//로컬 로그인 
+	/**
+	 * @Method	: login
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 12.
+	 * @Version	: 1.0
+	 * @Desc	: 로컬 로그인을 수행한다.
+	 * @param user
+	 * @param remember
+	 * @param session
+	 * @param response
+	 * @param model
+	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(UserVO user, String remember, 
 			HttpSession session, HttpServletResponse response, Model model) {
@@ -283,7 +405,16 @@ public class UserController {
 		logger.info("로그인 성공");
 		return "redirect:/";
 	}
-	//로그아웃
+	
+	/**
+	 * @Method	: logout
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 12.
+	 * @Version	: 1.0
+	 * @Desc	: 로그아웃을 수행한다.
+	 * @param session
+	 */
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginemail");
@@ -292,7 +423,18 @@ public class UserController {
 		logger.info("로그아웃");
 		return "redirect:/";
 	}
-	//회원정보 수정 페이지 이동
+	
+	/**
+	 * @Method	: userUpdate
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 12.
+	 * @Version	: 1.0
+	 * @Desc	: 회원정보 수정을 위해 userUpdate.jsp로 페이지를 전환한다.
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/userUpdate", method=RequestMethod.GET)
 	public String userUpdate(HttpSession session, Model model) {
 		logger.info("회원정보수정 페이지");
@@ -303,7 +445,18 @@ public class UserController {
 		logger.info("user_email {}",user_email);
 		return "/users/userUpdate";
 	}
-	//회원정보 수정
+	
+	/**
+	 * @Method	: update
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 12.
+	 * @Version	: 1.0
+	 * @Desc	: 회원정보를 수정한다.
+	 * @param user
+	 * @param session
+	 * @param userAvatar
+	 */
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(UserVO user, HttpSession session, MultipartFile userAvatar){
 		logger.info("회원정보 수정 시작");
@@ -311,7 +464,6 @@ public class UserController {
 			logger.info("수정실패");
 			return "redirect:/users/userUpdate";
 		}
-		
 		
 		if(!userAvatar.isEmpty()) {
 			logger.info("업로드할 유저 아바타 있음");
@@ -343,7 +495,6 @@ public class UserController {
 		}
 		logger.info("{}", user);
 		
-		
 		int cnt = 0;
 		if(user.getUser_type().equals("LOCAL")) {
 			String inputPw = user.getUser_pw();
@@ -368,7 +519,16 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	//회원탈퇴 
+	/**
+	 * @Method	: deleteUser
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 3. 12.
+	 * @Version	: 1.0
+	 * @Desc	: 회원 탈퇴를 수행한다.
+	 * @param user_email
+	 * @param session
+	 */
 	@RequestMapping(value="deleteUser", method=RequestMethod.GET)
 	public String deleteUser(String user_email, HttpSession session) {
 		
@@ -392,11 +552,4 @@ public class UserController {
 		}
 		return "redirect:/";
 	}
-	
-		//인스타 스토어 이동 테스트 
-		@RequestMapping(value="/istore_test", method=RequestMethod.GET)
-		public String istore_test() {
-			logger.info("인스타 스토어 이동 테스트 ");
-			return "/users/istore_test";
-		}
 }

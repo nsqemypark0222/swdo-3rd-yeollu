@@ -6,20 +6,25 @@
 <mapper namespace="com.yeollu.getrend.store.dao.ScoreMapper">
 
 <select id="selectCountLikeByStoreNo" parameterType="string" resultType="int">
+<![CDATA[
 select
 	count(user_email) as sum_of_like
 from
 	likes
 where
 	store_no = #{store_no}
+]]>
 </select>
-<select id="scoreAvgByStoreno" parameterType="string" resultType="double">
+
+<select id="scoreAvgByStoreNo" parameterType="string" resultType="double">
+<![CDATA[
 select
 	nvl(avg(reply_star),0) as avg_of_star
 from
 	insta_replys
 where
 	store_no = #{store_no}
+]]>	
 </select>
 
 </mapper>

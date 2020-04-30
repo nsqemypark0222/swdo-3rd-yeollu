@@ -1,3 +1,13 @@
+<!-- 
+/**
+ * @File 	: searchForm.jsp
+ * @Project : GeTrend
+ * @Author	: 오선미
+ * @Since	: 2020. 4. 11.
+ * @Version	: 1.0
+*/
+ -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,53 +16,28 @@
 
 <!DOCTYPE html>
 <html>
+
+<!-- Header Start -->
 <head>
 <meta charset="UTF-8">
-<!-- 반응형 웹 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>[ ${searchInput} | GeTrend ]</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-<script type="text/javascript" src='//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@kakao['KAKAOMAP_APPKEY']" />&libraries=drawing,services'></script>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- jQuery and Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
-<style>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-#storesinfo{
-	top: 0; 
-	bottom:0; 
-	margin-top:auto; 
-	margin-bottom:auto;
-	font-size:large;
-}
-header{
-	background-color: #fff;
-	width : 100%;
-	position: fixed;
-	z-index : 6;
-}
-
-.shadow{
-  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-.row_margin{
-	margin-top : 130px;
-	padding-bottom : 30px;
-}
-
-</style>
+<!-- SearchForm CSS -->
+<link rel="stylesheet" href='<c:url value="/resources/css/searchForm.css"/>'>
 </head>
+<!-- Header End -->
+
+<!-- Body Start -->
 <body style="background-color : #f6f6f6;">
 	<header>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	</header>
-	
 	
 	<div class="container-fluid" style="background:#fff; margin-bottom:10px;">	
 		<div class="row">
@@ -69,9 +54,8 @@ header{
 			<div class="col-md-4">				
 			</div>	
 		</div>
-	
 	</div>
-
+	
 	<div class="container-fluid" style="margin-bottom : 100px;">	
 		<div class="row">
 			<div class="col-md-3">
@@ -79,7 +63,7 @@ header{
 			<div class="col-md-6" style="background:#fff;">
 				<div class="istore-container scrollbar scrollbar-warning" style="margin : 10px;">
 					<c:choose>
-						<c:when test="${sessionScope.loginemail != null && istores != null}">
+						<c:when test="${sessionScope.loginemail != null && not empty istores}">
 							<c:forEach var="istore" items="${istores}">
 								<div class="row mb-3 rounded" style="background-color:#f7f3c8;">
 							   		<div class="col-md-6">
@@ -144,7 +128,7 @@ header{
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-						 <h2>검색결과가 없습니다.</h2>
+							<h2>검색결과가 없습니다.</h2>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -158,21 +142,24 @@ header{
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</footer>	
 	
-<script type="text/javascript">
-//헤더 그림자
-$(function() {
-    var header = $('header');
-
-    $(window).scroll(function(e) {
-    	if(header.offset().top !== 0) {
-            if(!header.hasClass('shadow')) {
-                header.addClass('shadow');
-            }
-        } else {
-            header.removeClass('shadow');
-        }
-    });
-});
+<!-- Script Start -->
+<script>
+	//헤더 그림자
+	$(function() {
+	    var header = $('header');
+	
+	    $(window).scroll(function(e) {
+	    	if(header.offset().top !== 0) {
+	            if(!header.hasClass('shadow')) {
+	                header.addClass('shadow');
+	            }
+	        } else {
+	            header.removeClass('shadow');
+	        }
+	    });
+	});
 </script>
+<!-- Script End -->
 </body>
+<!-- Body End -->
 </html>

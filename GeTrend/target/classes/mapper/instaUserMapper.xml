@@ -6,6 +6,7 @@
 <mapper namespace="com.yeollu.getrend.store.dao.InstaUserMapper">
 
 <insert id="insertInstaUser" parameterType="instaUser">
+<![CDATA[
 insert into 
 	insta_users (
 		insta_id
@@ -16,10 +17,12 @@ insert into
 		, #{store_no}
 		, #{profile_pic_url}
 	)
+]]>
 </insert>
 
 <insert id="insertInstaUserList" parameterType="java.util.List">
 <foreach collection="list" item="item" open="insert all" close="select * from dual" separator=" ">
+<![CDATA[
 	into insta_users (
 		insta_id
 		, store_no
@@ -29,19 +32,23 @@ insert into
 		, #{item.store_no}
 		, #{item.profile_pic_url}
 	)
+]]>
 </foreach>
 </insert>
 
 <select id="isExistedInstaUserId" parameterType="string" resultType="string">
+<![CDATA[
 select
 	decode(count(*), 0, 'false', 'true') as result
 from
 	insta_users
 where
 	store_no = #{store_no}
+]]>
 </select>
 
 <select id="selectInstaUserById" parameterType="string" resultType="instaUser">
+<![CDATA[
 select
 	insta_id
 	, store_no
@@ -50,6 +57,7 @@ from
 	insta_users
 where
 	insta_id = #{insta_id}
+]]>	
 </select>
 
 </mapper>

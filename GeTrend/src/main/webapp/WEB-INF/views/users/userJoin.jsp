@@ -1,93 +1,42 @@
+<!-- 
+/**
+ * @File 	: userJoin.jsp
+ * @Project : GeTrend
+ * @Author	: 오선미, 문지연
+ * @Since	: 2020. 3. 12.
+ * @Version	: 1.0
+*/
+ -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+
+<!-- Header Start -->
 <head>
 <meta charset="UTF-8">
 <title>[ Join | GeTrend ]</title>
-<script src='<c:url value="/resources/js/jquery-3.4.1.js"/>'></script>
+<!-- Vue.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<!-- jQuery library -->
+<!-- jQuery and Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+<!-- UserJoin CSS -->
 <link href='<c:url value="/resources/css/userJoin.css"/>' rel="stylesheet" media="all">
-<style>
-body {
-	background-image : url("https://res.cloudinary.com/dw5oh4ebf/image/upload/v1587529393/lily-banse--YHSwy6uqvk-unsplash_tsdfpg.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-	}
-
-:root {
-  --input-padding-x: 1.5rem;
-  --input-padding-y: .75rem;
-}
-
-small{
-	margin-left: 10px;
-}
-
-.card{
-	border-radius : 1rem;
-}
-.btn-warning {
-    color: #ffffff;
-    background-color: #ffc107;
-    border-color: #ffc107;
-    border-radius:20px;
-    width: 100%;
-}
-
-.btn-outline-warning{
-	border-radius: 20px;	
-	width: 100%;
-}
-
-#joinForm div {
-    margin-bottom:9px;
-}
-
-#joinForm label {
-    display:inline-block; 
-    width:80%;
-    font-weight: bold;
-	border-radius:30px;
-}
-.card-body {
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    min-height: 1px;
-    padding: 1.25rem;
-  
-}
-
-.card-title{
-	margin-bottom: 1.5rem;
-}
-
-#joinForm input[type='text'], #joinForm input[type='email'], #joinForm input[type='password']{
-    border:#ccc 1px solid;
-    border-radius:30px;
-    width: 100%;
-	height: auto;
-}
-#joinForm input[type='submit'], #joinForm input[type='reset']{ 
-    padding: 12px ;
-    width: 100%;
-    height: auto;
-}
-
-</style>
 </head>
+<!-- Header End -->
+
+<!-- Body Start -->
 <body>
+
 	<div class="container">
 		<div class="row">
       		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -196,6 +145,8 @@ small{
 			</div>
 		</div>
 	</div>
+	
+<!-- Script Start -->
 <script>
 $(function(){
 	$("#cancel").click(function() {
@@ -325,5 +276,7 @@ $(function(){
 		}
 	});
 </script>
+<!-- Script End -->
 </body>
+<!-- Body End -->
 </html>

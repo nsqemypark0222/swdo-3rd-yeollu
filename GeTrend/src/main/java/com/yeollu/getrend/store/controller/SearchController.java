@@ -26,19 +26,39 @@ import com.yeollu.getrend.store.vo.ReqParmVO;
 import com.yeollu.getrend.store.vo.ScoreVO;
 import com.yeollu.getrend.store.vo.StoreVO;
 
+/**
+ * @Class 	: SearchController.java
+ * @Package	: com.yeollu.getrend.store.controller
+ * @Project : GeTrend
+ * @Author	: 박민열
+ * @Since	: 2020. 3. 12.
+ * @Version	: 1.0
+ * @Desc	: 검색 관련 작업을 제어한다.
+ */
 @Controller
 public class SearchController {
-	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 	
+	/**
+	 * Fields
+	 */
+	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 	@Autowired
 	private StoreDAO storeDAO;
-	
 	@Autowired
 	private StoreService storeService;
 	
+	/**
+	 * @Method	: search
+	 * @Return	: ArrayList<InstaStoreInfoVO>
+	 * @Author	: 박민열
+	 * @Since	: 2020. 3. 12.
+	 * @Version	: 1.0
+	 * @Desc	: ReqParmVO를 입력받아 요청 받은 객체 리스트를 생성하여 반환한다.
+	 * @param reqParm
+	 */
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
-	public ArrayList<InstaStoreInfoVO> search(@RequestBody ReqParmVO reqParm, HttpSession session) {
+	public ArrayList<InstaStoreInfoVO> search(@RequestBody ReqParmVO reqParm) {
 		logger.info("검색 시작");
 		long startTime = System.currentTimeMillis();
 		
@@ -90,8 +110,6 @@ public class SearchController {
 		// 인스타그램 좋아요가 높은 순으로 재정렬
 		instaStoreInfoList = storeService.sortInstaStoreInfoList(instaStoreInfoList);
 		
-		//session.setAttribute("istores", instaStoreInfoList);
-
 		long endTime = System.currentTimeMillis();
 		long diff = (endTime - startTime) / 1000;
 		logger.info("걸린 시간 : {}", diff);
@@ -100,6 +118,16 @@ public class SearchController {
 		return instaStoreInfoList;
 	}
 	
+	/**
+	 * @Method	: keywordSearch
+	 * @Return	: String
+	 * @Author	: 오선미
+	 * @Since	: 2020. 4. 11.
+	 * @Version	: 1.0
+	 * @Desc	: 텍스트로 키워드를 입력받아 객체 리스트를 생성해 모델에 저장한후 searchForm.jsp로 페이지를 전환한다.
+	 * @param searchInput
+	 * @param model
+	 */
 	@RequestMapping(value = "/keywordSearch", method = RequestMethod.GET)
 	public String keywordSearch(String searchInput, Model model) {
 		logger.info(searchInput);
